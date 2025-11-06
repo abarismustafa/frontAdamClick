@@ -416,15 +416,15 @@ function Checkout() {
       const firstItem = diliveryAdd[0];
       setSelectedAddressId(String(firstItem._id));
       setSelectedData(firstItem);
-      // const clone = { ...formData, btype: "both", bcountry: firstItem?.country, bstate: firstItem?.state, bcity: firstItem?.city, bzip: firstItem?.zip, baddressLine1: firstItem?.addressLine1, baddressLine2: "", blandmark: firstItem?.landmark, bprovince: firstItem?.province, bfirstname: firstItem?.firstname, blastname: firstItem?.lastname, bcompany: firstItem?.company, bdeliveryType: firstItem?.deliveryType, bemail: firstItem?.email, bmobile: firstItem?.phone, user_gst: firstItem?.user_gst, }
-      // setFormData(clone)
+      const clone = { ...formData, btype: firstItem?.type, bcountry: firstItem?.country, bstate: firstItem?.state, bcity: firstItem?.city, bzip: firstItem?.zip, baddressLine1: firstItem?.addressLine1, baddressLine2: "", blandmark: firstItem?.landmark, bprovince: firstItem?.province, bfirstname: firstItem?.firstname, blastname: firstItem?.lastname, bcompany: firstItem?.company, bdeliveryType: firstItem?.deliveryType, bemail: firstItem?.email, bmobile: firstItem?.phone, user_gst: firstItem?.user_gst, }
+      setFormData(clone)
     }
   }, [diliveryAdd]);
 
   const handleSelect = (item) => {
     setSelectedAddressId(String(item?._id));
     setSelectedData(item);
-    const clone = { ...formData, btype: "both3", bcountry: item?.country, bstate: item?.state, bcity: item?.city, bzip: item?.zip, baddressLine1: item?.addressLine1, baddressLine2: "", blandmark: item?.landmark, bprovince: item?.province, bfirstname: item?.firstname, blastname: item?.lastname, bcompany: item?.company, bdeliveryType: item?.deliveryType, bemail: item?.email, bmobile: item?.phone, user_gst: item?.user_gst, }
+    const clone = { ...formData, btype: item?.type, bcountry: item?.country, bstate: item?.state, bcity: item?.city, bzip: item?.zip, baddressLine1: item?.addressLine1, baddressLine2: "", blandmark: item?.landmark, bprovince: item?.province, bfirstname: item?.firstname, blastname: item?.lastname, bcompany: item?.company, bdeliveryType: item?.deliveryType, bemail: item?.email, bmobile: item?.phone, user_gst: item?.user_gst, }
     // console.log('lkjl', clone);
     // console.log(item);
     setFormData(clone)

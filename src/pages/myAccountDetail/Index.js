@@ -410,6 +410,8 @@ function MyAccountDetail() {
                           </Link>
                         </td> */}
 
+
+
                         <td
                           style={{ textAlign: "right", paddingRight: "20px" }}
                         >
@@ -427,34 +429,147 @@ function MyAccountDetail() {
                         <td className="text-nowrap">{item?.deliveryType}</td>
                         {/* <td>---</td> */}
                         {/* <td>{item?.products[0]?.deliveryType} {item?.products[0]?.pickupPoints?.pickupPoint_name}</td> */}
-                        <td>
-                          <Button
-                            variant=""
-                            className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
-                            style={{ backgroundColor: "#6f42c1", color: "#fff" }}
-                            onClick={() => returnOrder(item?._id)}
-                          >
-                            <MdAssignmentReturn size={18} />
-                            <span>Return Your Order</span>
-                          </Button>
-                          {/* <Button
-                            variant=""
-                            className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
-                            style={{ backgroundColor: "#28a745", color: "#fff" }}
-                            onClick={() => reOorder(item)}
-                          >
-                            <MdReplay size={18} />
-                            <span>Re-Order</span>
-                          </Button> */}
-                          <Button
-                            variant=""
-                            className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
-                            style={{ backgroundColor: "#dc3545", color: "#fff" }}
-                            onClick={() => sendValues(item)}
-                          >
-                            <MdCancel size={18} />
-                            <span>Cancel Order</span>
-                          </Button>
+
+
+                        <td style={{ width: "220px" }}>
+
+
+                          {(() => {
+                            const status = item?.status?.[0]?.orderStatusName;
+
+                            // Common styling
+                            const iconSize = 24;
+                            const baseStyle = {
+                              backgroundColor: "#007bff",
+                              color: "#fff",
+                              fontWeight: 500,
+                              border: "none",
+                            };
+                            const disabledStyle = {
+                              backgroundColor: "#d6d6d6",
+                              color: "#6c757d",
+                              cursor: "not-allowed",
+                              opacity: 1,
+                              border: "none",
+                            };
+
+                            const btnClass =
+                              "w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-3 py-2";
+
+                            // ✅ Pending / Processing / Ready to Ship
+
+                            if (["Pending", "Processing", "Ready to ship"].includes(status)) {
+                              return (
+                                <>
+
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                    onClick={() => returnOrder(item?._id)}
+                                  >
+                                    <MdAssignmentReturn size={iconSize} />
+                                    <span>No Actions Available</span>
+                                  </Button>
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                    onClick={() => sendValues(item)}
+                                  >
+                                    <MdCancel size={iconSize} />
+                                    <span>Cancel Order</span>
+                                  </Button>
+
+                                  <Button className={btnClass} style={baseStyle}>
+                                    <MdSupportAgent size={iconSize} />
+                                    <span>Contact Support</span>
+                                  </Button>
+
+                                  <Button
+                                    className={btnClass}
+                                    style={disabledStyle}
+                                    disabled
+                                    onClick={() => idGet(item)}
+                                  >
+                                    <HiOutlineDocumentText size={iconSize} />
+                                    <span>Print Invoice</span>
+                                  </Button>
+                                </>
+                              );
+                            }
+
+                            // ✅ Order In Transit
+                            if (["Order In Transit"].includes(status)) {
+                              return (
+                                <>
+                                  <Button className={btnClass} style={baseStyle}>
+                                    <FaMapMarkedAlt size={iconSize} />
+                                    <span>Track Your Order</span>
+                                  </Button>
+
+                                  <Button className={btnClass} style={baseStyle}>
+                                    <MdSupportAgent size={iconSize} />
+                                    <span>Contact Support</span>
+                                  </Button>
+
+                                  <Button className={btnClass} style={disabledStyle} disabled>
+                                    <HiOutlineDocumentText size={iconSize} />
+                                    <span>Print Invoice</span>
+                                  </Button>
+                                </>
+                              );
+                            }
+
+                            // ✅ Delivered
+                            if (["Delivered"].includes(status)) {
+                              return (
+                                <>
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                    onClick={() => returnOrder(item?._id)}
+                                  >
+                                    <MdAssignmentReturn size={iconSize} />
+                                    <span>Return Your Order</span>
+                                  </Button>
+
+                                  <Button className={btnClass} style={baseStyle}>
+                                    <MdSupportAgent size={iconSize} />
+                                    <span>Contact Support</span>
+                                  </Button>
+
+                                  <Button className={btnClass} style={baseStyle}>
+                                    <HiOutlineDocumentText size={iconSize} />
+                                    <span>Print Invoice</span>
+                                  </Button>
+
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                    onClick={() => reOorder(item)}
+                                  >
+                                    <MdReplay size={iconSize} />
+                                    <span>Re-Order</span>
+                                  </Button>
+
+                                  <Button className={btnClass} style={baseStyle}>
+                                    <MdRateReview size={iconSize} />
+                                    <span>Product Review</span>
+                                  </Button>
+                                </>
+                              );
+                            }
+
+                            // ✅ Default (no action)
+                            return (
+                              <Button className={btnClass} style={disabledStyle} disabled>
+                                <MdBlock size={iconSize} />
+                                <span>No Actions Available</span>
+                              </Button>
+                            );
+                          })()}
+                        </td>
+                        {/* <td style={{ width: "210px" }}>
+                          
                           {(() => {
                             const status = item?.status?.[0]?.orderStatusName;
 
@@ -464,7 +579,7 @@ function MyAccountDetail() {
                                 <>
                                   <Button
                                     variant=""
-                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#dc3545", color: "#fff" }}
                                     onClick={() => sendValues(item)}
                                   >
@@ -474,7 +589,7 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#007bff", color: "#fff" }}
                                   >
                                     <MdSupportAgent size={18} />
@@ -483,7 +598,7 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#6c757d", color: "#fff", opacity: 0.6 }}
                                     disabled
                                     onClick={() => idGet(item)}
@@ -501,7 +616,7 @@ function MyAccountDetail() {
                                 <>
                                   <Button
                                     variant=""
-                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#fd7e14", color: "#fff" }}
                                   >
                                     <FaMapMarkedAlt size={18} />
@@ -510,7 +625,7 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#007bff", color: "#fff" }}
                                   >
                                     <MdSupportAgent size={18} />
@@ -519,7 +634,7 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#6c757d", color: "#fff", opacity: 0.6 }}
                                     disabled
                                   >
@@ -537,9 +652,9 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#6f42c1", color: "#fff" }}
-                                    onClick={() => returnOrder("r")}
+                                    onClick={() => returnOrder(item?._id)}
                                   >
                                     <MdAssignmentReturn size={18} />
                                     <span>Return Your Order</span>
@@ -547,7 +662,7 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#007bff", color: "#fff" }}
                                   >
                                     <MdSupportAgent size={18} />
@@ -556,7 +671,7 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#6c757d", color: "#fff" }}
                                   >
                                     <HiOutlineDocumentText size={18} />
@@ -565,7 +680,7 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#28a745", color: "#fff" }}
                                     onClick={() => reOorder(item)}
                                   >
@@ -575,7 +690,7 @@ function MyAccountDetail() {
 
                                   <Button
                                     variant=""
-                                    className="w-100 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                    className="w-100 tableCommonBtn d-flex align-items-center  gap-2"
                                     style={{ backgroundColor: "#ffc107", color: "#000" }}
                                   >
                                     <MdRateReview size={18} />
@@ -589,7 +704,7 @@ function MyAccountDetail() {
                             return (
                               <Button
                                 variant=""
-                                className="w-100 tableCommonBtn d-flex align-items-center justify-content-center gap-2"
+                                className="w-100 tableCommonBtn d-flex align-items-center  gap-2"
                                 style={{ backgroundColor: "#6c757d", color: "#fff", opacity: 0.6 }}
                                 disabled
                               >
@@ -598,7 +713,7 @@ function MyAccountDetail() {
                               </Button>
                             );
                           })()}
-                        </td>
+                        </td> */}
                       </tr>
                     );
                   })

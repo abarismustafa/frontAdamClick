@@ -8,9 +8,21 @@ import axios from "axios";
 import { base_url } from "../../server";
 
 const LoginAllPage = ({ isOpen, onClose, BuyNowItem }) => {
+
+
+
+
     const [isOtpStep, setIsOtpStep] = useState(false);
     const [otp, setOtp] = useState("");
-    const [loginForm, setLoginForm] = useState({ mobileNumber: "", countryCode: "+91" });
+    const [loginForm, setLoginForm] = useState({
+        mobileNumber: "",
+        countryCode: "+91",
+        browser: "",
+        long: "",
+        lat: "",
+        address: "",
+        platform: "",
+    });
     const [gmailData, setGmailData] = useState();
     const [isGoogleLogin, setIsGoogleLogin] = useState(false);
     const [form] = Form.useForm();
@@ -21,7 +33,51 @@ const LoginAllPage = ({ isOpen, onClose, BuyNowItem }) => {
 
     const [loginFormStatus, { data, isSuccess, isLoading }] = useSetLoginMutation();
 
-    console.log(data);
+    // console.log(data);
+
+    useEffect(() => {
+        if (isOpen) {
+            const browser = navigator.userAgent;
+            const platform = navigator.platform;
+
+            setLoginForm((prev) => ({
+                ...prev,
+                browser,
+                platform,
+            }));
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const lat = position.coords.latitude;
+                        const long = position.coords.longitude;
+
+                        try {
+                            const res = await fetch(
+                                `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`
+                            );
+                            const data = await res.json();
+                            const address = data.display_name || "Address not found";
+
+                            setLoginForm((prev) => ({
+                                ...prev,
+                                lat,
+                                long,
+                                address,
+                            }));
+                        } catch (error) {
+                            console.error("Failed to fetch address:", error);
+                        }
+                    },
+                    (err) => {
+                        console.warn("Location access denied:", err);
+                    }
+                );
+            } else {
+                console.warn("Geolocation not supported by this browser.");
+            }
+        }
+    }, [isOpen]);
 
 
     // Handle input changes
@@ -97,10 +153,12 @@ const LoginAllPage = ({ isOpen, onClose, BuyNowItem }) => {
             message.warning("Enter OTP first");
             return;
         }
-        loginFormStatus({
-            mobile: loginForm.countryCode + loginForm.mobileNumber,
-            otp
-        });
+        const clone = { ...loginForm, mobile: loginForm.countryCode + loginForm.mobileNumber, otp }
+        loginFormStatus(clone)
+        // loginFormStatus({
+        //     mobile: loginForm.countryCode + loginForm.mobileNumber,
+        //     otp
+        // });
     };
 
     // Google login handler
