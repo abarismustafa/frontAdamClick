@@ -9607,3 +9607,14 @@ tbody tr td .modle-modle .svg {
   top: 10px;
   background-color: #fff;
 }
+
+.tableCommonBtn {
+  border-radius: 8px !important;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.tableCommonBtn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
