@@ -110,15 +110,18 @@ function ProductDetail() {
     const userId = userid ? userid : null;
 
     try {
-      let user
+      let user;
       if (params?.var) {
-        user = await axios.get(`${baseUrl}product/public/${params._id}/${params.var}`, {
-          withCredentials: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        user = await axios.get(
+          `${baseUrl}product/public/${params._id}/${params.var}`,
+          {
+            withCredentials: true,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
       } else {
         user = await axios.get(`${baseUrl}product/public/${params._id}`, {
           withCredentials: true,
@@ -128,7 +131,6 @@ function ProductDetail() {
           },
         });
       }
-
 
       setData(user.data.product);
       getFilterd(user?.data.product?.category_id[0]?.uid);
@@ -371,8 +373,7 @@ function ProductDetail() {
   const navigate = useNavigate();
   const [count1, setCount1] = useState(0);
   const BuyNowItem = (item) => {
-
-    const isLogin = window.localStorage.getItem('isLogin') === 'true';
+    const isLogin = window.localStorage.getItem("isLogin") === "true";
 
     if (!isLogin) {
       setIsModalOpen(true);
@@ -489,9 +490,6 @@ function ProductDetail() {
     sliderRef.current.slickGoTo(index);
   };
 
-
-
-
   const tabsData = [
     {
       _id: "1",
@@ -522,13 +520,16 @@ function ProductDetail() {
       <h2>How to Use</h2>
       <p>Use twice a day for best results. Apply evenly on clean skin.</p>
     `,
-    }
+    },
   ];
 
   const [activeTab, setActiveTab] = useState(null);
   // const [activeTab, setActiveTab] = useState(data?.description_tabs[0]?._id);
   useEffect(() => {
-    if (Array.isArray(data?.description_tabs) && data.description_tabs.length > 0) {
+    if (
+      Array.isArray(data?.description_tabs) &&
+      data.description_tabs.length > 0
+    ) {
       setActiveTab(data.description_tabs[0]?._id);
     } else {
       setActiveTab(null);
@@ -650,12 +651,12 @@ function ProductDetail() {
             <span className="visually-hidden">Loading...</span>
           </div>      
         </div>} */}
-        <div className="container">
+        <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-7 col-md-12">
+            <div className="col-lg-6 col-md-6">
               <div className="SelectImageSec row">
                 {!isMobile && (
-                  <div className="SelectImg col-lg-2">
+                  <div className="SelectImg col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     {data && (
                       <SelectImageSlider
                         productData={mergsData}
@@ -666,11 +667,11 @@ function ProductDetail() {
                 )}
 
                 <div
-                  className="product-details-image col-lg-10"
+                  className="product-details-image col-lg-10 col-md-10 col-sm-10 col-xs-10"
                   style={!isMobile ? { zIndex: "10" } : { zIndex: "0" }}
                 >
                   {isMobile && (
-                    <div className="mobileBanner ">
+                    <div className="mobileBanner">
                       <Slider {...settings} ref={sliderRef}>
                         {!!mergsData?.length &&
                           mergsData.map((item, index) => {
@@ -759,10 +760,10 @@ function ProductDetail() {
                     </button>
                   </div> */}
 
-
                   <div className="product-add-to-cart addToCart picture">
                     {(() => {
-                      const rawStatus = data?.variations?.[0]?.display_status || "";
+                      const rawStatus =
+                        data?.variations?.[0]?.display_status || "";
                       const status = rawStatus
                         .replace(/\u00A0/g, " ")
                         .trim()
@@ -770,28 +771,41 @@ function ProductDetail() {
                         .replace(/[-_]/g, " ");
 
                       const isDisabled =
-                        status.includes("coming soon") || status.includes("out of stock") || isAddCartLoading;
+                        status.includes("coming soon") ||
+                        status.includes("out of stock") ||
+                        isAddCartLoading;
 
-                      console.log("STATUS CHECK:", { rawStatus, parsed: status, isDisabled });
+                      console.log("STATUS CHECK:", {
+                        rawStatus,
+                        parsed: status,
+                        isDisabled,
+                      });
 
                       return (
                         <>
                           <button
                             type="button"
-                            className={classnames("default-btn cart btn-row", { disabled: isDisabled })}
+                            className={classnames("default-btn cart btn-row", {
+                              disabled: isDisabled,
+                            })}
                             disabled={isDisabled}
                             onClick={() => {
-                              if (!isDisabled) handleAddCart(data?.product?.uid);
+                              if (!isDisabled)
+                                handleAddCart(data?.product?.uid);
                             }}
                           >
                             <FiShoppingCart className="svg-icon" />
                             {t("Add to Cart")}
-                            {isAddCartLoading && <Spinner animation="border" className="spinner" />}
+                            {isAddCartLoading && (
+                              <Spinner animation="border" className="spinner" />
+                            )}
                           </button>
 
                           <button
                             type="button"
-                            className={classnames("default-btn cart", { disabled: isDisabled })}
+                            className={classnames("default-btn cart", {
+                              disabled: isDisabled,
+                            })}
                             disabled={isDisabled}
                             onClick={() => {
                               if (!isDisabled) BuyNowItem(data);
@@ -928,7 +942,7 @@ function ProductDetail() {
               </div>
             </div>
 
-            <div className="col-lg-5 col-md-12">
+            <div className="col-lg-6 col-md-6">
               <ProductDetailContent
                 t={t}
                 count1={count1}
@@ -960,7 +974,9 @@ function ProductDetail() {
                     {data?.description_tabs?.map((tab, index) => (
                       <li
                         key={tab._id}
-                        className={`tab-item ${activeTab === tab._id ? "active" : ""}`}
+                        className={`tab-item ${
+                          activeTab === tab._id ? "active" : ""
+                        }`}
                         onClick={() => handleTabClick(tab._id, index)}
                       >
                         {tab.title}
@@ -976,7 +992,9 @@ function ProductDetail() {
                       key={tab._id}
                       id={tab._id}
                       ref={(el) => (sectionRefs.current[index] = el)}
-                      className={`tab-section ${activeTab === tab._id ? "visible" : ""}`}
+                      className={`tab-section ${
+                        activeTab === tab._id ? "visible" : ""
+                      }`}
                     >
                       <div
                         className="tab-inner"
@@ -991,7 +1009,6 @@ function ProductDetail() {
                           style={{ maxHeight: "400px", width: "300px", marginRight: "10px" }}
                         />
                       ))} */}
-
                     </section>
                   ))}
                 </div>
