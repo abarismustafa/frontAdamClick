@@ -1,0 +1,133 @@
+.product-details-area {
+    padding: 30px 0 0;
+}
+
+.SelectImg {
+    width: 70px;
+}
+.product-details-image {
+    /* flex: 1; */
+}
+
+.product-details-image img{
+    /* box-shadow: 0 0 8px 0 rgb(7 7 7 / 10%); */
+
+}
+.product-add-to-cart.addToCart {
+    column-gap: 15px;
+    /* justify-content: center; */
+    margin-bottom: 20px;
+    display: flex;
+}
+.product-add-to-cart.addToCart .buy svg{
+  color: #b0247a;
+}
+.product-add-to-cart.addToCart .buy {
+    background: #ffffff;
+    color: #b0247a;
+    box-shadow: 0 0 8px 0 rgb(7 7 7 / 10%);
+}
+/* .product-add-to-cart.addToCart .buy:hover {
+    color: #242424;
+    border: 2px solid #b0247a;
+}
+
+.product-add-to-cart.addToCart .cart{
+    border:2px solid #b0247a;
+
+} 
+.product-add-to-cart.addToCart .cart:hover {
+    color: #242424;
+    background: transparent;
+    border:2px solid #b0247a;
+}*/
+
+/* swipper */
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.mySwiper2 {
+  height: 80%;
+  width: 100%;
+}
+
+.mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 480px) {
+  .product-add-to-cart.addToCart {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    justify-content: center;
+    z-index: 11;
+    margin: 0;
+    padding: 6px ;
+  }
+  .product-add-to-cart.addToCart button {
+    width: 100%;
+    justify-content: center;
+  }
+}

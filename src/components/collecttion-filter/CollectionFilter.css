@@ -1,0 +1,82 @@
+.collectionFilter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    background: #edf1f0;
+    margin: 0 0 15px;
+    border-radius: 10px;
+}
+
+.collectionFilterItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 20px;
+}
+
+.collectionFilterList ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    column-gap: 10px;
+}
+
+.totalProducts h6 {
+    color: #464646;
+    margin: 0;
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.collectionFilterSort select {
+    height: 40px;
+    color: #464646;
+    font-weight: 400;
+    width: 200px;
+    border: 0;
+    padding: 0 5px;
+    font-size: 15px;
+    background-color: #edf1f0;
+}
+
+.collectionFilterSort select option {
+    text-transform: capitalize;
+}
+
+.collectionFilterList ul li .grid-view-btn {
+    background: #b0247a;
+    font-weight: 600;
+    border-radius: 10px;
+    width: 35px;
+    height: 35px;
+    color: #ffffff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    border: 0;
+    justify-content: center;
+    transition: .4s ease-in-out;
+}
+
+.collectionFilterList ul li .grid-view-btn:hover {
+    background-color: #2a2a2a;
+    color: #ffffff;
+}
+
+@media (max-width: 767px) {
+    .collectionFilter {
+        margin-top: 30px !important;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .collectionFilter {
+        flex-wrap: wrap;
+        justify-content: center !important;
+        row-gap: 15px;
+    }
+}

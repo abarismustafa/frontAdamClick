@@ -1,0 +1,88 @@
+.otp-login-btn {
+    background-color: #d63384;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+    transition: 0.3s;
+}
+
+.otp-login-btn:hover {
+    background-color: #c2185b;
+}
+
+/* Modal custom styling */
+.otp-modal .ant-modal-content {
+    border-radius: 10px;
+    padding: 25px 30px;
+}
+
+.otp-modal .ant-modal-header {
+    border-bottom: none;
+    text-align: center;
+}
+
+.otp-modal .ant-modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* Inputs */
+.otp-modal input {
+    border-radius: 5px;
+}
+
+/* "Remember Me" and "Forgot Password" */
+.remember-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.remember-row label {
+    font-size: 14px;
+    color: #555;
+}
+
+.forgot-link {
+    font-size: 14px;
+    text-decoration: none;
+    color: #d63384;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Buttons inside modal */
+.pink-btn {
+    background-color: #d63384 !important;
+    border: none !important;
+    height: 42px;
+    font-weight: 600;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.pink-btn:hover {
+    background-color: #c2185b !important;
+}
+
+.pink-btn:disabled {
+    background-color: #ccc !important;
+    /* gray */
+    cursor: not-allowed;
+    color: #888 !important;
+}
+
+.ant-modal-wrap .otp-modal {
+    width: 367px !important;
+}

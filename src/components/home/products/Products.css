@@ -1,0 +1,204 @@
+.featuredContent h5.productsSection {
+    padding: 20px 0;
+    border: 1px solid #ededed;
+}
+
+
+.featuredImg,
+.featuredFigure {
+    position: relative;
+    overflow: hidden;
+}
+
+
+.d-flex h6 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+.featuredImg a {
+    overflow: hidden;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.featuredImg a img {
+    transition: .4s ease-in-out;
+    border-radius: 10px;
+}
+
+.featuredImg.featured a img {
+    /* height: 220px;
+    object-fit: cover; */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.featuredInfo:hover {
+    transform: translateY(-15px);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.featuredImg:hover img {
+    transform: scale(1.1);
+}
+
+.bannerItem img {
+    height: 100%;
+    width: 100%;
+}
+
+.featuredImg:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #1111119e;
+    z-index: 1;
+    display: none;
+}
+
+
+
+.hotList {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.hotList li a {
+    display: inline-block;
+    padding: 4px 6px;
+    width: 43px;
+    color: #333;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.hotList li:last-child a {
+    background-color: #242424;
+    color: #fff;
+}
+
+
+.featuredContent h6 {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #878787;
+    display: none;
+}
+
+.featuredContent h5 {
+    text-transform: capitalize;
+    font-size: 18px;
+    font-weight: 500;
+    height: 40px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Limits the text to 2 lines */
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.featuredContent h5 a {
+    color: #111111;
+    font-size: 18px;
+    text-overflow: ellipsis;
+    display: initial;
+}
+
+.featuredContent .rating svg {
+    color: #b0247a;
+}
+
+.featuredOption select {
+    background: #bdbdbd;
+    width: 120px;
+    height: 30px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 1px solid #b1b1b1;
+    font-size: 13px;
+    display: none;
+}
+
+.rateDigit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    margin: 0 0 10px;
+}
+
+.rateDigit .cross {
+    text-decoration: line-through;
+    color: #878787;
+    font-size: 16px;
+    background: red;
+    border-radius: 3px;
+    color: #fff;
+    padding: 0 5px;
+}
+
+.rateDigit .currentPrice {
+    font-size: 16px;
+    background: #333;
+    border-radius: 3px;
+    color: #fff;
+    padding: 0 5px;
+}
+
+@media (max-width: 991px) {
+    .fisherman-content {
+        text-align: center;
+    }
+
+    .brandsItem ul {
+        flex-wrap: wrap;
+        row-gap: 15px;
+        justify-content: center;
+    }
+
+    .brandsItem ul li {
+        width: 20%;
+    }
+
+    .featuredContent h5 a {
+        color: #3a70b3;
+    }
+}
+
+@media (max-width: 767px) {
+    .brandsItem ul li {
+        width: 47%;
+    }
+
+    .brandsItem ul li a {
+        display: flex;
+        justify-content: center;
+    }
+
+    .featuredContent h5 a {
+        font-size: 13px;
+    }
+
+    .featuredImg.featured a img {
+        object-fit: contain;
+        height: 130px;
+    }
+}

@@ -1,0 +1,17 @@
+.left_aside {
+    background: #fff;
+    border: 1px solid #ebedf2;
+    border-radius: 4px;
+    box-shadow: 0 0 13px 0 rgba(82,63,105,.05);
+    flex: 0 0 265px;
+    max-width: 265px;
+}
+.profile {
+    background-color: #124a2f!important;
+    padding: 1.5rem!important;
+    margin-bottom: 1.5rem!important;
+    font-size: 13px;
+    color: white;
+    font-weight: 400;
+}
+

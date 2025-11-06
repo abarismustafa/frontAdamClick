@@ -1,0 +1,285 @@
+.searchIcons {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.searchIcon {
+    width: 50px;
+    background: #edf1f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchSec {
+    padding: 10px 0;
+    position: relative;
+    transition: .4s ease-in-out;
+}
+
+.sticky.active.searchSec {
+    padding: 10px 0 5px;
+}
+
+.searchItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Bar Start */
+.searchItem .logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 20px;
+}
+
+.searchItem .logo a {
+    text-align: center;
+}
+
+.searchItem .logo a img {
+    width: 170px;
+}
+
+.brandText1 p {
+    padding: 6px 0 0;
+    background: #242424;
+    color: #fff;
+    font-size: 20px;
+}
+
+.bar svg {
+    font-size: 29px;
+    color: #464646;
+    cursor: pointer;
+    display: none;
+}
+
+/* search Info */
+.searchInf {
+    background-color: #edf1f0;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.searchInf input {
+    background-color: #edf1f0;
+    padding: 0 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    border: 0;
+    color: #333333;
+}
+
+.searchInf input:focus {
+    box-shadow: none;
+    border: 0;
+    background-color: #edf1f0;
+}
+
+.rightSearchInfo {
+    display: flex;
+}
+
+.allCategory {
+    display: none;
+}
+
+.allCategory select {
+    background-color: transparent;
+    border: 0;
+    padding: 12px 8px;
+    font-size: 16px;
+    color: #333333;
+}
+
+.allCategory select:focus {
+    outline: 0;
+}
+
+.searchIcon svg {
+    font-size: 22px;
+    color: #242424;
+    cursor: pointer;
+}
+
+/* Call Details */
+.callDetail {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.callDetail svg {
+    font-size: 20px;
+}
+
+.callText h6 {
+    margin: 0;
+    text-transform: uppercase;
+    color: gray;
+    font-size: 12px;
+}
+
+.callText p {
+    color: #111;
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.searchIconsItem ul {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+.searchIconsItem ul li a,
+.searchIconsItem ul li span {
+    display: flex;
+    align-items: center;
+    column-gap: 6px;
+    position: relative;
+    font-size: 18px;
+    color: #b0247a;
+    line-height: 20px;
+}
+
+.countWish a .count {
+    background-color: #b0247a;
+    color: #fff;
+}
+
+.countParent a .count {
+    background-color: #b0247a;
+    color: #fff;
+}
+
+.count {
+    display: flex;
+    background-color: #111;
+    color: #fff;
+    font-size: 13px;
+    width: 17px;
+    height: 17px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-weight: 600;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+}
+
+
+/* Trending */
+.treandingSec {
+    box-shadow: 0 0 8px 0 rgb(7 7 7 / 10%);
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    transition: .4s ease-in-out;
+    z-index: 1;
+}
+
+.trendingItem {
+    border: 1px solid #e8e7e67d;
+    border-top: none;
+    padding: 16px 15px;
+}
+
+.trendingTitle {
+    font-size: 13px;
+    line-height: 1.38;
+    color: #333333;
+}
+
+.trendingItem ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.trendingItem ul li {
+    width: 80px;
+}
+
+.trendingItem ul li a {
+    padding: 9px 8px;
+    border: 1px solid #edf1f0;
+    border-radius: 10px;
+    display: block;
+    cursor: pointer;
+    font-size: 12px;
+    color: #333333;
+    transition: .4s ease-in-out;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+}
+
+.trendingItem ul li a .searchProduct img {
+    width: 40px;
+    margin-bottom: 8px;
+    border-radius: 50%;
+}
+
+.trendingItem ul li a:hover {
+    transform: translateY(-5px);
+}
+
+.closeBtnDrop {
+    font-size: 25px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #242424;
+    cursor: pointer;
+}
+
+.trendingItem {
+    position: relative;
+}
+
+.userNamePro .helll>li svg {
+    color: #242424;
+}
+
+.searchItem .logo.mamas a .text strong {
+    text-transform: uppercase;
+    color: #333;
+    white-space: nowrap;
+}
+
+.searchItem .logo.mamas a .text p {
+    text-transform: uppercase;
+    color: #333;
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.brandText p {
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.searchItemRight {
+    display: flex;
+    column-gap: 20px;
+}
+
+.brandText p {
+    color: #fff;
+    font-size: 20px;
+}

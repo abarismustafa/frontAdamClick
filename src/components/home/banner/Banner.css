@@ -1,0 +1,167 @@
+.bannerDetail {
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    height: 300px;
+    background-size: contain;
+}
+
+.bannerSection .slick-slider.slick-initialized .slick-prev {
+    left: 25px;
+    z-index: 10;
+}
+
+.bannerItem {
+    position: relative;
+}
+
+.bannerItemFigure {
+    position: relative;
+}
+
+.bannerItemFigure .bannerContent h2 {
+    font-size: 50px;
+    color: #111111;
+    font-weight: 600;
+    line-height: 60px;
+}
+
+.bannerItemFigure .bannerContent p {
+    color: #111111;
+    font-size: 18px;
+}
+
+.bannerSection .slick-slider.slick-initialized .slick-next {
+    right: 25px;
+    z-index: 10;
+}
+
+.bannerSection>div>div>div>div {
+    margin: 0 !important;
+}
+
+
+.categoryItemSlider>.slick-initialized {
+    height: 500px !important;
+}
+
+.bannerItemFigure {
+    padding: 70px 0;
+    
+}
+
+.bannerItemFigure .bannerContent {
+    width: 40%;
+}
+
+.bannerDetail:before {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #0e0e0e;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #171717, #ffffff00);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #171717, #ffffff00);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    z-index: 1;
+    content: "";
+}
+
+
+.bannerContent .title h6 {
+    color: #b1b1b1;
+    text-transform: capitalize;
+    display: none;
+}
+
+.bannerContent .title p {
+    color: #626262;
+}
+
+.bannerContent .title h3 {
+    font-size: 40px;
+    text-transform: capitalize;
+    color: #333333;
+}
+
+/* .percentOff {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+} */
+.bannerContent .title h1 {
+    color: #fff;
+    font-size: 80px;
+    text-transform: uppercase;
+    line-height: 60px;
+    margin-bottom: 40px;
+
+}
+
+.bannerContent .priceSection {
+    display: flex;
+    align-items: center;
+}
+
+.bannerContent .priceSection .text {
+    color: rgb(160, 160, 160);
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.bannerContent .priceSection .number {
+    padding: 0 8px;
+    color: #fb641b;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.shopNow a {
+    display: inline-block;
+    background-color: #242424;
+    color: #fff;
+    padding: 10px 26px;
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width: 1120px) {
+    .bannerItemFigure .bannerContent {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .bannerItemFigure .bannerContent h2 {
+        font-size: 40px;
+        line-height: 40px;
+    }
+    .bannerItemFigure{
+        background-position: center;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .bannerItemFigure .bannerContent h2 {
+        font-size: 28px;
+        line-height: 30px;
+    }
+    .bannerItemFigure{
+        padding: 20px 0;
+    }
+    .bannerItemFigure .bannerContent p {
+        line-height: 20px;
+        height: 40px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        font-size: 16px;
+    }
+}

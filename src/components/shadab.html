@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let one = "shadab";
+    let two = "mustasar";
+    let finalArray = [];
+
+    let oneArray = one.split("");
+    let twoArray = two.split("");
+
+    for (let i = 0; i < oneArray.length; i++) {
+      for (let j = 0; j < twoArray.length; j++) {
+        if (oneArray[i] === twoArray[j]) {
+          finalArray = [...finalArray, twoArray[j]]
+        }
+      }
+
+    }
+    console.log(oneArray);
+    console.log(twoArray);
+    console.log(finalArray); 
+  </script>
+</body>
+
+</html>

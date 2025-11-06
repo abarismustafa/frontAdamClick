@@ -1,0 +1,11 @@
+.costInfoContent{
+    border: 1px solid #ebebeb;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 767px){
+    .costInfoContent{
+        text-align: center;
+    }
+}

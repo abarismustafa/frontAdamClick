@@ -1,0 +1,60 @@
+.mainRap .icon {
+        margin-bottom: 16px;
+    font-size: 35px;
+    color: #b0247a;
+    border: 2px solid #b0247a;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainRap .text h6 a {
+    text-transform: capitalize;
+    font-size: 18px;
+    color: #111111;
+}
+
+.mainRap .text p {
+    font-size: 14px;
+    line-height: 22px;
+    color: #111111;
+}
+
+.brandsItem ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+}
+
+.brandsItem ul li a {
+    display: flex;
+    background: #ffffff;
+    padding: 35px;
+    text-align: center;
+    box-shadow: 0 0 8px 0 rgb(7 7 7 / 10%);
+    height: 137px;
+    justify-content: center;
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 991px) {
+    .mainRap .icon {
+        margin: 0 auto 20px;
+        font-size: 28px;
+    }
+
+    .mainRap .text h6 {
+        font-size: 16px;
+    }
+
+    .mainRap .text p {
+        font-size: 13px;
+        line-height: 20px;
+    }
+}

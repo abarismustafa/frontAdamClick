@@ -1,0 +1,64 @@
+.menuList h4 {
+  font-size: 18px;
+  text-transform: capitalize;
+  color: #242424;
+}
+
+.menuList ul {
+  padding: 0;
+  margin: 0;
+}
+
+.menuList ul li a {
+  padding: 8px 0;
+}
+
+.perent {
+  position: relative;
+}
+
+.expend-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expend-menu p {
+  color: white;
+}
+
+.dropdown-menu.dropAgro {
+  display: none;
+  background-color: #242424;
+  /* fallback color */
+  width: 100%;
+  position: relative;
+}
+
+.dropdown-menu.dropAgro.active {
+  display: block;
+  background-color: #242424;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  /* Adding transition effect */
+  position: relative;
+}
+
+.add {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add p {
+  color: white;
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.nav-item.my-item {
+  width: 100% !important;
+}
+
+.dropdown-menu.dropAgro.drop {
+  width: 100% !important;
+}

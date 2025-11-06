@@ -1,0 +1,128 @@
+.customerReviewSidebar {
+    position: sticky;
+    top: 90px;
+    transition: .4s ease-in-out;
+}
+
+.filterReview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.filterReview h5 {
+    margin: 0;
+}
+
+.filterBox.collectionFilterSort {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 15px;
+}
+
+.filterBox.collectionFilterSort select {
+    width: 120px;
+    background-color: #f7f7f7;
+}
+
+.reviewInfo {
+    display: flex;
+    column-gap: 15px;
+    align-items: end;
+    padding: 20px;
+    background: #fff;
+    margin: 20px 0;
+}
+
+.reviewNumber span {
+    font-size: 60px;
+    font-weight: 600;
+    line-height: 40px;
+    color: #242424;
+}
+
+.reviewText .rating svg {
+    color: orange;
+}
+
+.percentRating {
+    padding: 20px 0 30px;
+}
+
+.itemSortingReviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 10px;
+    margin-bottom: 7px;
+}
+
+.itemSortingReviews .progress {
+    width: 100%;
+    height: 10px;
+}
+
+.itemSortingReviews .TotalRating,
+.itemSortingReviews .number {
+    font-size: 15px;
+    color: #a5a5a5;
+}
+
+.customerName {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    padding: 10px 0;
+}
+
+.verified {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9e9e9;
+    color: #242424;
+    border-radius: 50%;
+}
+
+.reviewContent {
+    padding: 20px;
+    margin-bottom: 15px;
+    flex: 1;
+    background-color: #fff;
+}
+
+.reviewContent .rating {
+    color: orange;
+}
+
+.customerInfo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: 10px;
+}
+
+.customerInfo h5 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.reviewDate p {
+    font-size: 14px;
+    color: #7a7e9a;
+    font-weight: 500;
+}
+
+.customerInfo p {
+    font-size: 14px;
+    color: #242424;
+}
+
+.reviewDate p {
+    font-size: 14px;
+    color: #fb641b;
+}

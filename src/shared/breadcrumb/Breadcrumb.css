@@ -1,0 +1,13 @@
+.breadcrumbSec {
+    background-color: #edf1f0;
+    padding: 10px 0;
+}
+
+.breadcrumbSec .breadcrumb {
+    margin: 0;
+    padding: 0;
+}
+
+.breadcrumb-item a {
+    color: #3e5169;
+}

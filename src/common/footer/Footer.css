@@ -1,0 +1,40 @@
+.aboutCompanyText p.aboutCompanyText {
+    margin-bottom: 40px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #edf1f0;
+}
+
+.aboutCompanyText h3 {
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.aboutCompanyText p {
+    color: #fff;
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.footer-section.footer-bg .single-footer-widget .footer-social a.facebook {
+    background-color: #3c579e;
+}
+
+.footer-section.footer-bg .single-footer-widget .footer-social a.twitter {
+    background-color: #1cb8ec;
+}
+
+.footer-section.footer-bg .single-footer-widget .footer-social a.instagram {
+    background-color: #ec0a68;
+}
+
+.footer-section.footer-bg .single-footer-widget .footer-social a.whatsapp {
+    background-color: #1bd741;
+}
+
+@media (max-width: 500px) {
+    .single-footer-widget .footer-info-contact .topIcon svg {
+        display: none;
+    }
+}
