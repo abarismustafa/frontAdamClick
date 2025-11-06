@@ -43,3 +43,27 @@
     border: solid 1px #242424;
     background-color: #242424;
 }
+
+
+@media only screen and (max-width: 991px) {
+    .productSliderItem img {
+        border: 0;
+        border-bottom: 1px solid #edf1f0;
+    }
+    .selectImageInfo .slidePrev, .selectImageInfo .slideNext{
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+}
+@media only screen and (max-width: 480px) {
+    .selectImageInfo, .productSliderItem{
+        padding: 0;
+    }
+    .productSliderItem img {
+        border: 0;
+        border-right: 1px solid #edf1f0;
+    }
+    
+}

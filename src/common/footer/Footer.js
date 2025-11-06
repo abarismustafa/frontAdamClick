@@ -335,34 +335,6 @@ function Footer() {
             </div>
           </div>
         </div>
-
-        <div className="copyright-area">
-          <div className="container">
-            <div className="copyright-area-content">
-              <div className="copyright-left">
-                <p>
-                  {t("Copyright")} @ {currentYear} {t("Adamclick")}.{" "}
-                  {t("All rights reserved")}. |{t("Powered By")}:{" "}
-                  <a href="https://www.abarissoftech.com/" target="_blank">
-                    {t("Abaris Softech")}{" "}
-                  </a>
-                </p>
-              </div>
-
-              {/* <div className="copyright-right">
-                <ul>
-                  <li>
-                    <Link to="/terms-of-use">Terms & Conditions</Link>
-                  </li>
-                  <li>
-                    <Link to="/privacy-policy">Privacy Policy</Link>
-                  </li>
-                </ul>
-              </div> */}
-            </div>
-          </div>
-        </div>
-
         <div className="categoryFooter">
           <div className="container">
             <div className="fisherman-content text-start">
@@ -385,6 +357,35 @@ function Footer() {
                   );
                 })}
               </ul>
+            </div>
+          </div>
+        </div>
+
+       
+
+          <div className="container">
+        <div className="copyright-area">
+            <div className="copyright-area-content">
+              <div className="copyright-left">
+                <p>
+                  {t("Copyright")} @ {currentYear} {t("Adamclick")}.{" "}
+                  {t("All rights reserved")}. |{t("Powered By")}:{" "}
+                  <a href="https://www.abarissoftech.com/" target="_blank">
+                    {t("Abaris Softech")}{" "}
+                  </a>
+                </p>
+              </div>
+
+              {/* <div className="copyright-right">
+                <ul>
+                  <li>
+                    <Link to="/terms-of-use">Terms & Conditions</Link>
+                  </li>
+                  <li>
+                    <Link to="/privacy-policy">Privacy Policy</Link>
+                  </li>
+                </ul>
+              </div> */}
             </div>
           </div>
         </div>

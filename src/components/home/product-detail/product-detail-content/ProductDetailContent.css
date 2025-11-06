@@ -232,8 +232,9 @@
 
 .storageNumber li {
     display: flex;
-    column-gap: 5px;
+    gap: 5px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .productCount .IncItem {

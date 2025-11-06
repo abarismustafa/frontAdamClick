@@ -343,7 +343,7 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
                     return (
                       <div
                         key={variation._id}
-                        className="col-lg-3 col-md-4 col-sm-4 col-6 cusname"
+                        className="col-lg-3 col-md-4 col-sm-6 col-6 cusname"
                       >
                         <div className="featuredInfo products">
                           <div className="featuredImg featured">

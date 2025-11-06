@@ -11775,7 +11775,7 @@ Footer Section CSS
 }
 
 .copyright-area {
-  border: 1px solid #edf1f0;
+  border-top: 1px solid #edf1f0;
   margin-top: 40px;
 }
 
@@ -14382,6 +14382,7 @@ header.sticky.active .mobileMenu {
 .SelectImageSec {
   position: sticky;
   top: 100px;
+  z-index: 111;
 }
 
 .product-add-to-cart.addToCart.picture {
@@ -14633,6 +14634,30 @@ button.tableCommonBtn:hover span {
   margin: auto;
 }
 
+.product-tabs-container {
+  display: flex;
+  gap: 40px;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding: 80px 20px;
+}
+
+/* Each tab section */
+.tab-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  /* min-height: 80vh; */
+  padding: 30px 0;
+  border-bottom: 1px solid #eee;
+  pointer-events: none;
+  /* click disable when hidden */
+  position: relative;
+}
+.js-image-zoom__zoomed-image{
+  width: 670px !important;
+  height: 640px !important;
+}
 /* RESPONSIVE CSS START */
 
 @media only screen and (max-width: 1120px) {
@@ -14702,6 +14727,27 @@ button.tableCommonBtn:hover span {
 }
 
 @media only screen and (max-width: 991px) {
+
+  /*  */
+  .product-tabs-container{
+    gap: 0;
+  }
+  .categoryFooter {
+    padding: 15px 0;
+  }
+  .product-tabs-container {
+    padding: 30px 0;
+  }
+
+  .tab-section {
+    padding: 0;
+  }
+
+  .product-add-to-cart.addToCart.picture .default-btn svg {
+      display: none;
+  }
+
+  /*  */
 
   /* dev start*/
   .brandSection .brandsSec {
@@ -15003,6 +15049,20 @@ button.tableCommonBtn:hover span {
 }
 
 @media only screen and (max-width: 767px) {
+
+  /*  */
+  .product-details-image{
+    pointer-events: none;
+  }
+  .product-details-image>div>img:hover {
+    transform: scale(1.5);
+  }
+  .product-add-to-cart.addToCart.picture .default-btn {
+    font-size: 16px;
+  }
+
+
+  /*  */
   .single-footer-widget.line.mob:after {
     display: none;
   }
@@ -15291,10 +15351,19 @@ button.tableCommonBtn:hover span {
 }
 
 @media only screen and (max-width: 480px) {
+  /*  */
+  .product-details-image>div>img{
+    height: auto !important;
+  }
+  /*  */
+  .product-details-desc .price{
+    text-align: start;
+  }
   .userNamePro .helll {
     transform: translateX(-60px);
 
   }
+  
 
   .single-footer-widget .footer-heading h3,
   .single-footer-widget p,
@@ -15508,13 +15577,7 @@ button.tableCommonBtn:hover span {
 
 /* RESPONSIVE CSS END */
 
-.product-tabs-container {
-  display: flex;
-  gap: 40px;
-  /* max-width: 1200px; */
-  margin: 0 auto;
-  padding: 80px 20px;
-}
+
 
 /* Sidebar */
 .sidebar {
@@ -15558,18 +15621,7 @@ button.tableCommonBtn:hover span {
   position: relative;
 }
 
-/* Each tab section */
-.tab-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  /* min-height: 80vh; */
-  padding: 30px 0;
-  border-bottom: 1px solid #eee;
-  pointer-events: none;
-  /* click disable when hidden */
-  position: relative;
-}
+
 
 .tab-section.visible {
   opacity: 1;
