@@ -15,6 +15,8 @@ import { FcGoogle } from "react-icons/fc";
 import { useTranslation } from "react-i18next";
 import { base_url } from "../../server";
 import OtpModal from "./otpModal/OtpModal";
+import { toastSuccessMessage, toastSuccessMessageError } from "../../common/messageShow/MessageShow";
+import { ToastContainer } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -22,6 +24,11 @@ function Login() {
   const [loginForm, setLoginForm] = useState({
     mobileNumber: "",
     countryCode: "+91",
+    browser: "",
+    long: "",
+    lat: "",
+    address: "",
+    platform: "",
   });
 
   // const handleClose = () => setShow(false);
@@ -39,7 +46,7 @@ function Login() {
 
   const [loginFormStatus, { data, isError, isSuccess, isLoading }] =
     useSetLoginMutation();
-  console.log(data?.mobile);
+  console.log(isError);
 
   const params = useParams();
   useEffect(() => {
@@ -112,11 +119,80 @@ function Login() {
     loginOTP({ mobile: loginForm.countryCode + loginForm.mobileNumber });
     // loginFormStatus({ mobile: loginForm.countryCode + loginForm.mobileNumber });
   };
+
+  const getDeviceInfo = () => {
+    const browser = navigator.userAgent;
+    const platform = navigator.platform;
+    return { browser, platform };
+  };
+
+  // Helper function: Get location & address
+  const getLocation = async () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const lat = pos.coords.latitude;
+          const long = pos.coords.longitude;
+
+          try {
+            // Reverse geocoding using OpenStreetMap API
+            const res = await fetch(
+              `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`
+            );
+            const data = await res.json();
+            const address = data.display_name || "Address not found";
+
+            setLoginForm((prev) => ({
+              ...prev,
+              lat,
+              long,
+              address,
+            }));
+          } catch (error) {
+            console.error("Address fetch error:", error);
+          }
+        },
+        (err) => {
+          console.warn("Location permission denied:", err);
+        }
+      );
+    } else {
+      console.warn("Geolocation not supported");
+    }
+  };
+
+  // On mount, get browser/platform/location info
+  useEffect(() => {
+    const { browser, platform } = getDeviceInfo();
+    setLoginForm((prev) => ({
+      ...prev,
+      browser,
+      platform,
+    }));
+    getLocation();
+  }, []);
   const handleLoginVerify = async (otp) => {
-    loginFormStatus({
-      mobile: loginForm.countryCode + loginForm.mobileNumber,
-      otp: otp,
-    });
+    // const clone = { ...loginForm, mobile: loginForm.countryCode + loginForm.mobileNumber, otp: otp, }
+    // loginFormStatus(clone);
+    try {
+      const clone = {
+        ...loginForm,
+        mobile: loginForm.countryCode + loginForm.mobileNumber,
+        otp: otp,
+      };
+
+      // mutation call
+      const res = await loginFormStatus(clone).unwrap();
+      // console.log("API Response:", res);
+      if (res?.token) {
+        toastSuccessMessage('Login successfully')
+      } else {
+        toastSuccessMessageError(res?.message)
+      }
+
+    } catch (err) {
+      console.log("API Error:", err);
+    }
   };
 
   const [gmailData, setGailData] = useState();
@@ -252,7 +328,7 @@ function Login() {
                     </div>
                   </div>
                   {isError && <h4 style={{ color: "red" }}>login Fail ! </h4>}
-                  {isSuccess && <h4>login Successfully !</h4>}
+                  {/* {isSuccess && <h4>login Successfully !</h4>} */}
                   <button
                     className="commonButton justify-content-center w-100 loginBtn"
                     type="submit"
@@ -354,6 +430,7 @@ function Login() {
             handleClose={() => setShow(false)}
           />
         </div>
+        <ToastContainer />
       </div>
     </>
   );
