@@ -17,6 +17,8 @@ import "./Footer.css";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { base_url } from "../../server";
+import { ToastContainer } from "react-toastify";
+import { toastSuccessMessage, toastSuccessMessageError } from "../messageShow/MessageShow";
 
 function Footer() {
   const { pathname } = useLocation();
@@ -66,7 +68,7 @@ function Footer() {
         withCredentials: true,
       });
       setCateData(res.data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -79,16 +81,34 @@ function Footer() {
     getData2();
   }, []);
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const isValidEmail = (email) => {
+    // basic email regex validation
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const senDatas = async () => {
-    const obj = { email: email };
+
+    if (!email) {
+      // setErrorMsg("Please enter your email address.");
+      toastSuccessMessageError("Please enter your email address.")
+      return;
+    }
+    if (!isValidEmail(email)) {
+      toastSuccessMessageError("Please enter a valid email address.")
+      return;
+    }
+
 
     try {
-      const res = await axios.post(`${baseUrl}newsletter/add_newsletter`, obj);
+      const res = await axios.post(`${baseUrl}newsletter/add_newsletter`, { email });
       setEmail("");
-      alert("Subscribe Successfully");
+      // alert("✅ Subscribe Successfully!");
+      toastSuccessMessage("Subscribe Successfully!")
     } catch (error) {
-      alert("Not Subscribe");
+      toastSuccessMessageError("Not Subscribed, please try again later.");
     }
   };
   const { t, i18n } = useTranslation();
@@ -120,9 +140,7 @@ function Footer() {
                     className="input-newsletter"
                     placeholder="Enter your email"
                     name="email"
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
+                    onChange={(e) => setEmail(e.target.value)}
                     value={email}
                     required
                     autoComplete="off"
@@ -342,7 +360,7 @@ function Footer() {
             </div>
             <div className="categoryListFooter">
               <ul>
-                {categoriesDatas?.slice(0,5)?.map((item, i) => {
+                {categoriesDatas?.slice(0, 5)?.map((item, i) => {
                   return (
                     <li key={i}>
                       <h6>
@@ -361,10 +379,10 @@ function Footer() {
           </div>
         </div>
 
-       
 
-          <div className="container">
-        <div className="copyright-area">
+
+        <div className="container">
+          <div className="copyright-area">
             <div className="copyright-area-content">
               <div className="copyright-left">
                 <p>
@@ -390,6 +408,7 @@ function Footer() {
           </div>
         </div>
       </footer>
+      <ToastContainer />
       {/* End Footer Section */}
     </>
   );

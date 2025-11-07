@@ -69,6 +69,9 @@ function ProductDetailContent({
     "High-quality formula widely used in Korean aesthetic clinics and skincare salons.",
   ];
 
+  console.log(data?.wish);
+
+
   const settingsForSpecial = {
     speed: 500,
     slidesToShow: 2, // Number of items to show on desktop
@@ -155,14 +158,16 @@ function ProductDetailContent({
   };
   const isLogin = window.localStorage.getItem("isLogin");
   const token = window.localStorage.getItem("token");
-  const handleWishlist = (id) => {
+  const handleWishlist = (data) => {
     if (isLogin === "false") {
       setShowToaster({ show: true, message: "Login First !", color: "danger" });
       return;
     }
+    const variantId = data?.variations?.[0]?.uid || '';
     const paylode = {
       userid: window.localStorage.getItem("user_id"),
-      productid: id,
+      productid: data?.uid,
+      varientid: variantId
     };
     setWishList({ data: paylode, token: token });
   };
@@ -410,7 +415,7 @@ function ProductDetailContent({
                       <AiTwotoneHeart
                         style={{ fontSize: "20px" }}
                         onClick={() => {
-                          handleWishlist(data?.uid);
+                          handleWishlist(data);
                         }}
                       />
                     ) : (
@@ -419,7 +424,7 @@ function ProductDetailContent({
                         className="productWishList"
                         l
                         onClick={() => {
-                          handleWishlist(data?.uid);
+                          handleWishlist(data);
                         }}
                       />
                     )}
@@ -1222,7 +1227,7 @@ function ProductDetailContent({
 
           {data?.special_notes &&
             <div className="productDescText p-3 mb-3 border-start border-4 border-warning bg-warning bg-opacity-10 rounded">
-              <h5 className="fw-bold text-warning mb-2">Special Notes</h5>
+              <h5 className="fw-bold text-warning mb-2">Must Read</h5>
               <ul className="mb-0 list-unstyled">
                 {console.log(data)
                 }

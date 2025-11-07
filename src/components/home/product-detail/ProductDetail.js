@@ -56,6 +56,8 @@ import classnames from "classnames";
 import { FiShoppingCart } from "react-icons/fi";
 import { Spinner } from "react-bootstrap";
 import LoginAllPage from "../../../common/loginAllPage/LoginAllPage";
+import PdfCanvasViewer from "./PdfCanvasViewer";
+
 function createMarkup(data) {
   return { __html: data };
 }
@@ -616,7 +618,10 @@ function ProductDetail() {
   //   }, 1000);
   // };
 
-  console.log(data);
+  // console.log(data);
+
+
+  const isPdf = (url) => url?.toLowerCase().endsWith(".pdf");
 
   return (
     <>
@@ -974,9 +979,8 @@ function ProductDetail() {
                     {data?.description_tabs?.map((tab, index) => (
                       <li
                         key={tab._id}
-                        className={`tab-item ${
-                          activeTab === tab._id ? "active" : ""
-                        }`}
+                        className={`tab-item ${activeTab === tab._id ? "active" : ""
+                          }`}
                         onClick={() => handleTabClick(tab._id, index)}
                       >
                         {tab.title}
@@ -992,9 +996,8 @@ function ProductDetail() {
                       key={tab._id}
                       id={tab._id}
                       ref={(el) => (sectionRefs.current[index] = el)}
-                      className={`tab-section ${
-                        activeTab === tab._id ? "visible" : ""
-                      }`}
+                      className={`tab-section ${activeTab === tab._id ? "visible" : ""
+                        }`}
                     >
                       <div
                         className="tab-inner"
@@ -1014,6 +1017,48 @@ function ProductDetail() {
                 </div>
               </div>
             </div>
+
+
+
+            <div className="container my-4">
+              <div className="row g-4">
+                {data?.reports?.map((item) => (
+                  <div key={item._id} className="col-lg-12">
+                    {/* <div className="p-3 border rounded shadow-sm bg-white"> */}
+                    {/* <h5 className="mb-3">{item.title}</h5> */}
+                    <PdfCanvasViewer url={item.url} title={item.title} />
+                    {/* </div> */}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* <div
+              style={{
+                width: "100%",
+                height: "100vh",
+                overflowY: "scroll",
+                scrollSnapType: "y mandatory",
+                scrollBehavior: "smooth",
+                backgroundColor: "#f8f9fa",
+              }}
+            >
+              {data?.reports?.map((item) => (
+                <section
+                  key={item._id}
+                  style={{
+                    height: "100vh",
+                    scrollSnapAlign: "start",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "20px",
+                  }}
+                >
+                  <PdfCanvasViewer url={item.url} />
+                </section>
+              ))}
+            </div> */}
           </div>
         </div>
       </section>

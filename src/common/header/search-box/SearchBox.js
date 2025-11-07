@@ -119,7 +119,8 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
 
   const getDatas = async () => {
     try {
-      const res = await axios.get(`${baseUrl}user/wishlist`, {
+      // const res = await axios.get(`${baseUrl}user/wishlist`, {
+      const res = await axios.get(`${baseUrl}user/wishlist_nw`, {
         withCredentials: true,
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -166,6 +167,8 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
       return item.productList;
     }
   );
+  console.log(WishLengh);
+
   useEffect(() => {
     if (data) {
       dispatch(getProducts(data.cart.products));
@@ -312,7 +315,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
   };
 
   const [profileData, setProfiledata] = useState()
-  console.log(profileData);
+  // console.log(profileData);
 
 
   const getDataprofile = async () => {

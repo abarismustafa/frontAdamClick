@@ -202,6 +202,7 @@ function Cart() {
                   <tbody>
                     {showData &&
                       showData?.cart?.products.map((item, i) => {
+                        console.log(item);
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
@@ -209,7 +210,7 @@ function Cart() {
                               <div className="productImageInfo">
                                 <figure>
                                   <Link
-                                    to={`/product/${item?.productUid}/${item?.slug}`}
+                                    to={`/product/${item?.productUid}/${item?.slug}/${item?.variant?.variant_slug}`}
                                     className="productImage"
                                   >
                                     {item?.variant ? (
@@ -225,7 +226,7 @@ function Cart() {
                                 </figure>
                                 <h5>
                                   <Link
-                                    to={`/product/${item?.productUid}/${item?.slug}`}
+                                    to={`/product/${item?.productUid}/${item?.slug}/${item?.variant?.variant_slug}`}
                                   >
                                     {item?.name}
                                   </Link>
@@ -260,7 +261,7 @@ function Cart() {
                                 {showData?.currency?.symbol} {item.total}
                               </h6>
                             </td>
-                            <td>{item.deliveryType}</td>
+                            <td>{item?.deliveryType}</td>
                             <td>
                               <Popconfirm
                                 title="Delete Item"
@@ -348,7 +349,8 @@ function Cart() {
 
                 <div className="subTotal">
                   <h6>{t("Subtotal")}</h6>
-                  <p>{showData?.cart?.subTotal}</p>
+                  <p>{showData?.cart?.subTotal.toFixed(2)}</p>
+
                 </div>
                 <div className="subTotal">
                   <h6>{t("Coupon Applied")}</h6>
@@ -358,10 +360,18 @@ function Cart() {
                 <h6>{t('Shipping')}</h6>
                 <p> {showData?.cart?.products[0]?.shippingCost}</p>
               </div> */}
-                {/* <div className="subTotal">
-                <h6>{t('GST')}</h6>
-                <p> {showData?.cart?.tax}</p>
-              </div> */}
+                <div className="subTotal">
+                  <h6>{t('IGST')}</h6>
+                  <p>  {showData?.cart?.igst ? showData?.cart?.igst : showData?.cart?.tax}</p>
+                </div>
+                <div className="subTotal">
+                  <h6>{t('SGST')}</h6>
+                  <p>  {showData?.cart?.sgst ? showData?.cart?.sgst : '0'}</p>
+                </div>
+                <div className="subTotal">
+                  <h6>{t('CGST')}</h6>
+                  <p> {showData?.cart?.cgst ? showData?.cart?.cgst : "0"}</p>
+                </div>
                 <div className="subTotal">
                   <h6>{t("Cart Total")}</h6>
                   <p> {showData?.cart?.grandTotal}</p>

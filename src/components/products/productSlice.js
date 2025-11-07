@@ -282,7 +282,8 @@ export const productsApi = createApi({
     // Wishlist
     setWishList: builder.mutation({
       query: (payload) => ({
-        url: `product/wishlist`,
+        // url: `product/wishlist`,
+        url: `product/wishlist_nw`,
         method: "POST",
         body: payload.data,
         headers: {
@@ -297,6 +298,7 @@ export const productsApi = createApi({
         console.log("whishlist--");
         return {
           url: `user/wishlist/${userid}`,
+          // url: `user/wishlist_nw/${userid}`,
           method: "GET",
         };
       },
