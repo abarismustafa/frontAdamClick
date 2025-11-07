@@ -1152,7 +1152,7 @@ function Checkout() {
 
 
             <div className="col-lg-7">
-              <div className="allAddedAddress">
+              <div className="allAddedAddress mt-2">
                 <h6>Delivery Address</h6>
                 <div className="addressList">
 

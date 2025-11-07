@@ -110,7 +110,7 @@ const DiscoverKeras = () => {
             })} */}
 
             {Array.isArray(blogData) && blogData?.map((item) => {
-              return <div className="col-lg-4 col-md-4 col-sm-4 col-4" key={item?._id}>
+              return <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4" key={item?._id}>
                 <div className="discoverCard">
                   <div className="figure">
                     <img

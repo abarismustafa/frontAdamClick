@@ -58,7 +58,7 @@ function ProductDetailContent({
   handleAddCart,
   isAddCartLoading,
   BuyNowItem,
-  params
+  params,
 }) {
   const specialNotes = [
     "Effectively promotes skin regeneration and repairs damage with Salmon DNA (PDRN).",
@@ -114,7 +114,6 @@ function ProductDetailContent({
   };
 
   // console.log(params);
-
 
   const curr = window.localStorage.getItem("currencySym");
   let currencySymbol = curr;
@@ -173,7 +172,6 @@ function ProductDetailContent({
   };
 
   console.log(data?.seller_id);
-
 
   const handlePick = (pickup) => {
     setStr(pickup.pickupPoints.pickupPoint_name);
@@ -238,7 +236,7 @@ function ProductDetailContent({
     setVariantsval(data?.variations[0]);
     window.localStorage.setItem("variant_id", data?.variations[0]?._id);
     const urlPath = window.location.pathname; // "/product/4/Baofeng-BF-888s-Licence-Free-Walkie-Talkie/pack-of-1"
-    const segments = urlPath.split('/'); // splits by "/"
+    const segments = urlPath.split("/"); // splits by "/"
     const lastParam = segments[segments.length - 1]; // gets the last part
     // console.log('lastParam', lastParam, lastParam.length);
     if (data?.variantLists) {
@@ -324,7 +322,7 @@ function ProductDetailContent({
     let attributes = variantState.map((item) => item.str);
     // setSelectedAtributeValue(attributes);
 
-    setSelectedAtributeValue(param?.var)
+    setSelectedAtributeValue(param?.var);
     data.variations.forEach((item, index) => {
       if (getOnlyString(item.weight) === getOnlyString(attributes?.join(" "))) {
         handleActive(item.uid, index, item);
@@ -358,7 +356,7 @@ function ProductDetailContent({
       setUiShow(true);
     }
   };
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   console.log(data?.variations[0]?.variant_slug);
 
@@ -429,7 +427,11 @@ function ProductDetailContent({
             </div>
             <h5>
               {/* {data?.name} */}
-              {data?.name + (data?.variations[0]?.variant_slug ? " " + data?.variations[0]?.variant_slug : "")}</h5>
+              {data?.name +
+                (data?.variations[0]?.variant_slug
+                  ? " " + data?.variations[0]?.variant_slug
+                  : "")}
+            </h5>
             <div className="rateProduct">
               <div className="rateStar">
                 <span>Rating: </span>
@@ -448,8 +450,14 @@ function ProductDetailContent({
           )}
 
           {data?.brand_id && (
-            <div style={{ display: "flex", alignItems: "center", marginBottom: '9px' }}>
-              <h6 className="m-0"> {t("Brand")} : &nbsp; </h6>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "9px",
+              }}
+            >
+              <span> {t("Brand")} : &nbsp; </span>
               {/* <div style={{ maxWidth: "100px" }}> */}
               {!data?.brand_id?.logo.url ? (
                 <span
@@ -463,7 +471,11 @@ function ProductDetailContent({
                   {data.brand_id.name}{" "}
                 </span>
               ) : (
-                <img src={data?.brand_id?.logo.url} style={{ maxWidth: '100px' }} className="w-50" />
+                <img
+                  src={data?.brand_id?.logo.url}
+                  style={{ maxWidth: "100px" }}
+                  className="w-50"
+                />
               )}
               {/* </div> */}
             </div>
@@ -626,7 +638,6 @@ function ProductDetailContent({
             <div className="storageInfo">
               <div className="productColorInfo ">
                 <ul className="storageNumber productColorChoose d-block">
-
                   {Array.isArray(data?.variantLists) &&
                     data?.variantLists.map((item, i) => {
                       return (
@@ -638,22 +649,25 @@ function ProductDetailContent({
                               .map((val, it) => {
                                 console.log(val);
 
-
-                                return <button
-                                  key={it}
-                                  type="button"
-                                  className={classnames({
-                                    active: selectedAtributeValue.includes(val?.variant_slug),
-                                  })}
-                                  onClick={() => {
-                                    changeRequar(val, item?.title, i);
-                                    navigate(
-                                      `/product/${params?._id}/${params?.slug}/${val?.variant_slug}`
-                                    );
-                                  }}
-                                >
-                                  {val?.variant_name}
-                                </button>
+                                return (
+                                  <button
+                                    key={it}
+                                    type="button"
+                                    className={classnames({
+                                      active: selectedAtributeValue.includes(
+                                        val?.variant_slug
+                                      ),
+                                    })}
+                                    onClick={() => {
+                                      changeRequar(val, item?.title, i);
+                                      navigate(
+                                        `/product/${params?._id}/${params?.slug}/${val?.variant_slug}`
+                                      );
+                                    }}
+                                  >
+                                    {val?.variant_name}
+                                  </button>
+                                );
                               })}
                         </li>
                       );
@@ -693,7 +707,8 @@ function ProductDetailContent({
                   <h6>{t("AVAILABILITY")} :</h6>
 
                   {(() => {
-                    const rawStatus = data?.variations?.[0]?.display_status || "";
+                    const rawStatus =
+                      data?.variations?.[0]?.display_status || "";
                     const cleanStatus = rawStatus
                       .replace(/\u00A0/g, " ")
                       .trim()
@@ -1220,23 +1235,27 @@ function ProductDetailContent({
             </div>
           </div> */}
 
-          {data?.special_notes &&
+          {data?.special_notes && (
             <div className="productDescText p-3 mb-3 border-start border-4 border-warning bg-warning bg-opacity-10 rounded">
               <h5 className="fw-bold text-warning mb-2">Special Notes</h5>
               <ul className="mb-0 list-unstyled">
-                {console.log(data)
-                }
+                {console.log(data)}
                 {data?.special_notes?.map((item, i) => {
                   // console.log(item);
 
-                  return < li key={i} className="text-dark" > {item}</li>
+                  return (
+                    <li key={i} className="text-dark">
+                      {" "}
+                      {item}
+                    </li>
+                  );
                 })}
                 {/* {specialNotes.map((item, i) => (
                   <li key={i} className="text-dark">{item}</li>
                 ))} */}
               </ul>
             </div>
-          }
+          )}
 
           {/* <div className="productDescText">
             <h5>Special Notes</h5>
@@ -1277,8 +1296,6 @@ function ProductDetailContent({
               </Slider>
             </div>
           )}
-
-
 
           <div className="custom-payment-options d-none">
             <span>{t("Guaranteed safe checkout")}:</span>
@@ -1342,9 +1359,8 @@ function ProductDetailContent({
               count1={count1}
             />
           )}
-        </div >
-      )
-      }
+        </div>
+      )}
     </>
   );
 }

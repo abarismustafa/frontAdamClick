@@ -257,7 +257,7 @@ function ProductCategoryPage() {
             </div>
           )}
 
-          <div className="col-lg-3 col-md-4 col-sm-12">
+          <div className="col-lg-3 col-md-4 col-sm-4">
             <AsideBar
               t={t}
               filterdValues={filterdValues}
@@ -269,7 +269,7 @@ function ProductCategoryPage() {
               defaultRangeValue={defaultRangeValue}
             />
           </div>
-          <div className="col-lg-9 col-md-8 col-sm-12">
+          <div className="col-lg-9 col-md-8 col-sm-8">
             <div className="row">
               <div className="col-lg-12">
                 {isError && <h4>Server Error</h4>}

@@ -108,85 +108,103 @@ function TrendingProduct({ data, isLoading, handleShow, error }) {
               </div>
             </div> */}
 
-
             {Array.isArray(item?.variations) &&
               item.variations.length > 0 &&
               item?.variations?.map((variation, i) => {
-                return <div className="col-lg-3 col-md-4 col-sm-6 col-6" key={item._id}>
-                  <div className="featuredInfo products border bg-white ">
-                    <div className="featuredImg">
-                      <Link to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}>
-                        <img
-                          src={
-                            variation?.mainImage_url?.url ||
-                            variation?.images?.[0]?.url ||
-                            "/no-image.jpg"
-                          }
-                          alt="Product"
-                        />
-                      </Link>
-                      <div className="quickView d-none">
-                        <ul>
-                          <li className="viewProduct">
-                            <button
-                              className="quick_view_btn"
-                              onClick={(e) => {
-                                handleShow(item._id);
-                              }}
-                            >
-                              <FiSearch />
-                            </button>
-                          </li>
-                          <li className="addProduct">
-                            <Link to="/products">
-                              <GrAdd />
-                            </Link>
-                          </li>
-                        </ul>
+                return (
+                  <div
+                    className="col-lg-3 col-md-4 col-sm-6 col-6"
+                    key={item._id}
+                  >
+                    <div className="featuredInfo products border bg-white ">
+                      <div className="featuredImg">
+                        <Link
+                          to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}
+                        >
+                          <img
+                            src={
+                              variation?.mainImage_url?.url ||
+                              variation?.images?.[0]?.url ||
+                              "/no-image.jpg"
+                            }
+                            alt="Product"
+                          />
+                        </Link>
+                        <div className="quickView d-none">
+                          <ul>
+                            <li className="viewProduct">
+                              <button
+                                className="quick_view_btn"
+                                onClick={(e) => {
+                                  handleShow(item._id);
+                                }}
+                              >
+                                <FiSearch />
+                              </button>
+                            </li>
+                            <li className="addProduct">
+                              <Link to="/products">
+                                <GrAdd />
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                    <ul className="hotList  d-none">
-                      <li>
-                        <Link to="/products">Sale</Link>
-                      </li>
-                      <li>
-                        <Link to="/products">-24%</Link>
-                      </li>
-                    </ul>
-                    <div className="featuredContent">
-                      <Rating />
-                      <h5>
-                        <Link to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}>
-                          {/* {item?.name}  */}
-                          {item?.name + (variation?.variant_slug ? " " + variation.variant_slug : "")}
-                        </Link>
-                      </h5>
+                      <ul className="hotList  d-none">
+                        <li>
+                          <Link to="/products">Sale</Link>
+                        </li>
+                        <li>
+                          <Link to="/products">-24%</Link>
+                        </li>
+                      </ul>
+                      <div className="featuredContent">
+                        <Rating />
+                        <h5>
+                          <Link
+                            to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}
+                          >
+                            {/* {item?.name}  */}
+                            {item?.name +
+                              (variation?.variant_slug
+                                ? " " + variation.variant_slug
+                                : "")}
+                          </Link>
+                        </h5>
 
-                      <span>{t("MRP")}: {variation?.prices?.mrp}</span>
-                      <p>
-                        {t("Sale Price")}:{" "}
-                        {item?.variations[0]?.prices?.country_id?.currency_id?.symbol}
-                        {variation?.prices?.sale_rate}
-                      </p>
+                        <span>
+                          {t("MRP")}:{" "}
+                          <span className="text-decoration-line-through">
+                            ₹{variation?.prices?.mrp}
+                          </span>
+                        </span>
+                        <p>
+                          {t("Sale Price")}:{" "}
+                          {
+                            item?.variations[0]?.prices?.country_id?.currency_id
+                              ?.symbol
+                          }
+                          ₹{variation?.prices?.sale_rate}
+                        </p>
 
-                      <div className="buyNowInfo">
-                        <Link
-                          to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}
-                          className="btn btn-danger buyNow"
-                        >
-                          {t("Buy Now")}
-                        </Link>
-                        <Link
-                          to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}
-                          className="buyNow bgGray"
-                        >
-                          {t("Add in Cart")}
-                        </Link>
+                        <div className="buyNowInfo">
+                          <Link
+                            to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}
+                            className="btn btn-danger buyNow"
+                          >
+                            {t("Buy Now")}
+                          </Link>
+                          <Link
+                            to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}
+                            className="buyNow bgGray"
+                          >
+                            {t("Add in Cart")}
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
+                );
               })}
           </>
         );
