@@ -15061,10 +15061,11 @@ button.tableCommonBtn:hover span {
 @media only screen and (max-width: 767px) {
 
   /*  */
-  
-  .rangeNumber{
+
+  .rangeNumber {
     flex-wrap: wrap;
   }
+
   .product-details-image {
     pointer-events: none;
   }
@@ -15207,10 +15208,12 @@ button.tableCommonBtn:hover span {
 }
 
 @media only screen and (max-width: 600px) {
+
   /*  */
-  .discoverCard{
+  .discoverCard {
     text-align: center;
   }
+
   /*  */
 
 
@@ -16210,6 +16213,10 @@ header.sticky.active .searchSec {
   background: #fafafa;
   overflow: hidden;
 
+}
+
+.buyNowInfo .delt {
+  padding: 5px 10px;
 }
 
 @media (max-width: 768px) {
