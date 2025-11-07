@@ -70,6 +70,12 @@
     .collectionFilter {
         margin-top: 30px !important;
     }
+    .collectionFilterItem{
+        column-gap: 10px;
+    }
+    .collectionFilterSort select{
+        width: 120px;
+    }
 }
 
 @media (max-width: 480px) {

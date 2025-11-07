@@ -158,9 +158,13 @@
     color: #fff;
 }
 
+.countParent a {
+    position: relative;
+}
 .countParent a .count {
     background-color: #b0247a;
     color: #fff;
+    position: absolute;
 }
 
 .count {
@@ -176,7 +180,7 @@
     font-weight: 600;
     position: absolute;
     top: -10px;
-    right: -10px;
+    right: 28px;
 }
 
 
