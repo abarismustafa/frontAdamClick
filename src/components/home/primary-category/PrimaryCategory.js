@@ -124,7 +124,7 @@ const settings = {
     {
       breakpoint: 1024, // Screen size for tablets
       settings: {
-        slidesToShow: 3, // Number of items to show on tablets
+        slidesToShow: 2, // Number of items to show on tablets
         slidesToScroll: 1,
         arrows: false,
       },
@@ -141,7 +141,7 @@ const settings = {
     {
       breakpoint: 500, // Screen size for mobile devices
       settings: {
-        slidesToShow: 2, // Number of items to show on mobile
+        slidesToShow: 1, // Number of items to show on mobile
         slidesToScroll: 1,
         arrows: false,
       },
@@ -149,10 +149,9 @@ const settings = {
   ],
 };
 
-
 const PrimaryCategory = ({ pageTitle }) => {
   const baseUrl = base_url();
-  const [catData, setCatData] = useState(null)
+  const [catData, setCatData] = useState(null);
   console.log(catData);
 
   const productCatget = async () => {
@@ -161,16 +160,12 @@ const PrimaryCategory = ({ pageTitle }) => {
         withCredentials: true,
       });
       setCatData(res?.data || []);
-
-    } catch (error) {
-
-    }
-  }
+    } catch (error) {}
+  };
 
   useEffect(() => {
-    productCatget()
-  }, [])
-
+    productCatget();
+  }, []);
 
   const data = {
     instagramPosts: [
@@ -189,10 +184,11 @@ const PrimaryCategory = ({ pageTitle }) => {
     ],
   };
 
-
   useEffect(() => {
     // पहले अगर script पहले से है तो remove करो ताकि reload पर conflict न हो
-    const existingScript = document.querySelector("script[src='https://www.instagram.com/embed.js']");
+    const existingScript = document.querySelector(
+      "script[src='https://www.instagram.com/embed.js']"
+    );
     if (existingScript) {
       existingScript.remove();
     }
@@ -212,8 +208,6 @@ const PrimaryCategory = ({ pageTitle }) => {
   }, [data]);
   const { t } = useTranslation();
 
-
-
   return (
     <>
       <section>
@@ -222,7 +216,6 @@ const PrimaryCategory = ({ pageTitle }) => {
             <div className="row">
               {catData?.map((category) => (
                 <React.Fragment key={category._id}>
-
                   <div className="col-lg-12" key={category._id}>
                     <div className="fisherman-content special text-start">
                       {/* <h6>{t("Primary Category")}</h6> */}
@@ -244,7 +237,6 @@ const PrimaryCategory = ({ pageTitle }) => {
                     </div>
                   </div>
 
-
                   <div className="col-lg-8 col-md-7 col-sm-7 col-7">
                     <div className="wiseProducts">
                       <div className="categoryWrapper ">
@@ -262,10 +254,15 @@ const PrimaryCategory = ({ pageTitle }) => {
                                 0;
                               return (
                                 // <React.Fragment key={item._id}>
-                                <div className="col-lg-4 col-md-4 col-sm-6 col-6" key={variation._id}>
+                                <div
+                                  className="col-lg-4 col-md-4 col-sm-6 col-6"
+                                  key={variation._id}
+                                >
                                   <div className="featuredInfo bg-white border">
                                     <div className="featuredImg">
-                                      <Link to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}>
+                                      <Link
+                                        to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
+                                      >
                                         <img
                                           src={image}
                                           alt={variation.name || product.name}
@@ -275,9 +272,20 @@ const PrimaryCategory = ({ pageTitle }) => {
                                     </div>
                                     <div className="featuredContent text-center primary">
                                       {/* <Rating /> */}
-                                      <h5 className="mb-2">{t(`${variation.name || product.name}`)}</h5>
-                                      <p className="mb-0">MRP : ₹{variation?.prices[0]?.mrp}</p>
-                                      <p className="mb-0">Sale Price : ₹{variation?.prices[0]?.sale_rate}</p>
+                                      <h5 className="mb-2">
+                                        {t(`${variation.name || product.name}`)}
+                                      </h5>
+                                      <span>
+                                        MRP :{" "}
+                                        <span className="text-decoration-line-through">
+                                          {" "}
+                                          ₹{variation?.prices[0]?.mrp}
+                                        </span>
+                                      </span>
+                                      <p className="mb-0">
+                                        Sale Price : ₹
+                                        {variation?.prices[0]?.sale_rate}
+                                      </p>
                                     </div>
                                   </div>
                                 </div>
@@ -289,8 +297,6 @@ const PrimaryCategory = ({ pageTitle }) => {
                         <div className="mobile row">
                           {category.list?.map((product) =>
                             product.variations?.map((variation) => {
-                              console.log(variation?.name);
-
                               const image =
                                 variation.mainImage_url?.url ||
                                 variation.images?.[0]?.url ||
@@ -304,7 +310,9 @@ const PrimaryCategory = ({ pageTitle }) => {
                                 <div className="col-lg-4 col-md-6 col-sm-6 col-6">
                                   <div className="featuredInfo bg-white border">
                                     <div className="featuredImg">
-                                      <Link to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}>
+                                      <Link
+                                        to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
+                                      >
                                         <img
                                           src={image}
                                           alt={variation.name || product.name}
@@ -314,13 +322,23 @@ const PrimaryCategory = ({ pageTitle }) => {
                                     </div>
                                     <div className="featuredContent text-center primary">
                                       {/* <Rating /> */}
-                                      <h5 className="mb-2">{t(`${variation.name || product.name}`)} </h5>
-                                      <p className="mb-0">MRP : ₹{variation?.prices[0]?.mrp}</p>
-                                      <p className="mb-0">Sale Price : ₹{variation?.prices[0]?.sale_rate}</p>
+                                      <h5 className="mb-2">
+                                        {t(`${variation.name || product.name}`)}{" "}
+                                      </h5>
+                                      <span>
+                                        MRP :{" "}
+                                        <span className="text-decoration-line-through">
+                                          {" "}
+                                          ₹{variation?.prices[0]?.mrp}
+                                        </span>
+                                      </span>
+                                      <p className="mb-0">
+                                        Sale Price : ₹
+                                        {variation?.prices[0]?.sale_rate}
+                                      </p>
                                     </div>
                                   </div>
                                 </div>
-
                               );
                             })
                           )}
@@ -328,32 +346,32 @@ const PrimaryCategory = ({ pageTitle }) => {
                       </div>
                     </div>
                   </div>
-
                 </React.Fragment>
               ))}
-
             </div>
           </div>
         </div>
 
-
         {catData?.map((category) => {
-          return <div className="socialCategory bgGray sectionPD" key={category?._id}>
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="fisherman-content">
-                    {/* <h6>{t("Social Media feedback")}</h6> */}
-                    <h3>
-                      {category?.categoryName} {t("on instagram")}
-                    </h3>
+          return (
+            <div
+              className="socialCategory bgGray sectionPD"
+              key={category?._id}
+            >
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="fisherman-content">
+                      {/* <h6>{t("Social Media feedback")}</h6> */}
+                      <h3>
+                        {category?.categoryName} {t("on instagram")}
+                      </h3>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="clientPost">
-
-                {/* <div className="instagram-embed">
+                <div className="clientPost">
+                  {/* <div className="instagram-embed">
                 <blockquote
                   className="instagram-media"
                   data-instgrm-permalink="https://www.instagram.com/p/DJQVK0fo_aQ/?utm_source=ig_embed&amp;utm_campaign=loading"
@@ -371,137 +389,134 @@ const PrimaryCategory = ({ pageTitle }) => {
                   }}
                 ></blockquote>
               </div> */}
-                <Slider {...settings}>
-                  {category.insta_links?.map((item) => {
-                    return (
-
-                      <div className="tapId" key={item._id}>
-                        <div
-                          className="customerCard"
-                          style={{
-                            background: "#fff",
-                            borderRadius: "12px",
-                            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                            overflow: "hidden",
-                            padding: "10px",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            height: "100%",
-                            width: "95%",
-                          }}
-                        >
-                          <Link
-                            to="#"
+                  <Slider {...settings}>
+                    {category.insta_links?.map((item) => {
+                      return (
+                        <div className="tapId" key={item._id}>
+                          <div
+                            className="customerCard"
                             style={{
-                              textDecoration: "none",
-                              color: "inherit",
-                              width: "100%",
+                              background: "#fff",
+                              borderRadius: "12px",
+                              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                              overflow: "hidden",
+                              padding: "10px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              height: "100%",
+                              width: "95%",
                             }}
                           >
-                            <div
-                              className="figure"
+                            <Link
+                              to="#"
                               style={{
-                                position: "relative",
+                                textDecoration: "none",
+                                color: "inherit",
                                 width: "100%",
-                                aspectRatio: "1 / 1", // 👈 keeps perfect square ratio
-                                // maxHeight: "500px",
-                                overflow: "hidden",
-                                borderRadius: "10px",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                background: "#fafafa",
                               }}
                             >
-                              <blockquote
-                                className="instagram-media"
-                                data-instgrm-permalink={item?.embedded_url}
-                                data-instgrm-version="14"
+                              <div
+                                className="figure"
                                 style={{
-                                  background: "#FFF",
-                                  border: "0",
-                                  borderRadius: "8px",
-                                  boxShadow:
-                                    "0 0 1px 0 rgba(0,0,0,0.4), 0 1px 10px 0 rgba(0,0,0,0.1)",
-                                  margin: "auto",
+                                  position: "relative",
                                   width: "100%",
-                                  maxWidth: "400px",
-                                  minWidth: "250px",
-                                  height: "100%",
+                                  aspectRatio: "1 / 1", // 👈 keeps perfect square ratio
+                                  // maxHeight: "500px",
+                                  overflow: "hidden",
+                                  borderRadius: "10px",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  background: "#fafafa",
                                 }}
-                              ></blockquote>
-                            </div>
+                              >
+                                <blockquote
+                                  className="instagram-media"
+                                  data-instgrm-permalink={item?.embedded_url}
+                                  data-instgrm-version="14"
+                                  style={{
+                                    background: "#FFF",
+                                    border: "0",
+                                    borderRadius: "8px",
+                                    boxShadow:
+                                      "0 0 1px 0 rgba(0,0,0,0.4), 0 1px 10px 0 rgba(0,0,0,0.1)",
+                                    margin: "auto",
+                                    width: "100%",
+                                    maxWidth: "400px",
+                                    minWidth: "250px",
+                                    height: "100%",
+                                  }}
+                                ></blockquote>
+                              </div>
 
-                            {/* Optional name/title */}
-                            {/* <h5 style={{ textAlign: "center", marginTop: "12px", fontSize: "1rem" }}>
+                              {/* Optional name/title */}
+                              {/* <h5 style={{ textAlign: "center", marginTop: "12px", fontSize: "1rem" }}>
         {t(`${item.name}`)}
       </h5> */}
-                          </Link>
+                            </Link>
+                          </div>
                         </div>
-                      </div>
-                      // <div className="tapId" key={item.id}>
-                      //   <div className="customerCard" style={{
-                      //     background: "#fff",
-                      //     borderRadius: "12px",
-                      //     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                      //     overflow: "hidden",
-                      //     padding: "15px",
-                      //     display: "flex",
-                      //     justifyContent: "center",
-                      //     alignItems: "center",
-                      //     height: "100%", 
-                      //     width: '95%'
-                      //   }}>
-                      //     <Link to="#" style={{ textDecoration: "none", color: "inherit", width: "100%" }}>
-                      //       <div className="figure" style={{
-                      //         position: "relative",
-                      //         width: "100%",
-                      //         height: "700px", 
-                      //         overflow: "hidden",
-                      //         borderRadius: "10px",
-                      //         display: "flex",
-                      //         justifyContent: "center",
-                      //         alignItems: "center",
-                      //         background: "#f9f9f9",
-                      //       }}>
-                      //         <video width={402} height={180} loop muted autoPlay>
-                      //           <source src={item.img_url} type="video/mp4" />
-                      //         </video>
+                        // <div className="tapId" key={item.id}>
+                        //   <div className="customerCard" style={{
+                        //     background: "#fff",
+                        //     borderRadius: "12px",
+                        //     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                        //     overflow: "hidden",
+                        //     padding: "15px",
+                        //     display: "flex",
+                        //     justifyContent: "center",
+                        //     alignItems: "center",
+                        //     height: "100%",
+                        //     width: '95%'
+                        //   }}>
+                        //     <Link to="#" style={{ textDecoration: "none", color: "inherit", width: "100%" }}>
+                        //       <div className="figure" style={{
+                        //         position: "relative",
+                        //         width: "100%",
+                        //         height: "700px",
+                        //         overflow: "hidden",
+                        //         borderRadius: "10px",
+                        //         display: "flex",
+                        //         justifyContent: "center",
+                        //         alignItems: "center",
+                        //         background: "#f9f9f9",
+                        //       }}>
+                        //         <video width={402} height={180} loop muted autoPlay>
+                        //           <source src={item.img_url} type="video/mp4" />
+                        //         </video>
 
-                      //         <blockquote
-                      //           className="instagram-media"
-                      //           data-instgrm-permalink={item.url}
-                      //           data-instgrm-version="14"
-                      //           style={{
-                      //             background: "#FFF",
-                      //             border: "0",
-                      //             borderRadius: "8px",
-                      //             boxShadow:
-                      //               "0 0 1px 0 rgba(0,0,0,0.4), 0 1px 10px 0 rgba(0,0,0,0.1)",
-                      //             margin: "auto",
-                      //             width: "100%",
-                      //             maxWidth: "400px",
-                      //             minWidth: "280px",
-                      //             height: "100%",
-                      //           }}
-                      //         ></blockquote>
+                        //         <blockquote
+                        //           className="instagram-media"
+                        //           data-instgrm-permalink={item.url}
+                        //           data-instgrm-version="14"
+                        //           style={{
+                        //             background: "#FFF",
+                        //             border: "0",
+                        //             borderRadius: "8px",
+                        //             boxShadow:
+                        //               "0 0 1px 0 rgba(0,0,0,0.4), 0 1px 10px 0 rgba(0,0,0,0.1)",
+                        //             margin: "auto",
+                        //             width: "100%",
+                        //             maxWidth: "400px",
+                        //             minWidth: "280px",
+                        //             height: "100%",
+                        //           }}
+                        //         ></blockquote>
 
-                      //       </div>
+                        //       </div>
 
-
-                      //     </Link>
-                      //   </div>
-                      // </div>
-                    );
-                  })}
-                </Slider>
+                        //     </Link>
+                        //   </div>
+                        // </div>
+                      );
+                    })}
+                  </Slider>
+                </div>
               </div>
             </div>
-          </div>
+          );
         })}
-
-
       </section>
     </>
   );

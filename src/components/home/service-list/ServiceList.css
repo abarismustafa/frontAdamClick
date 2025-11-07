@@ -72,6 +72,8 @@
     .serviceItemIcon img {
         width: 100px;
         height: 100px;
+    }.serviceItemText {
+        display: none;
     }
 }
 
@@ -81,9 +83,7 @@
         height: 80px;
     }
 
-    .serviceItemText {
-        display: none;
-    }
+    
 
     .serviceItem {
         width: 100%;
