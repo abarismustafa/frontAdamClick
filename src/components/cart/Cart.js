@@ -61,7 +61,8 @@ function Cart() {
   const getCartData = async () => {
     try {
       const res = await axios.get(
-        `${baseUrl}cart?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+        `${baseUrl}cart?products=${getCartToken() || ""}&coupon=${
+          getCouponToken() || ""
         }`
       );
       setisSuccess(true);
@@ -126,7 +127,7 @@ function Cart() {
   };
 
   const orderConfirm = () => {
-    const isLogin = window.localStorage.getItem('isLogin') === 'true';
+    const isLogin = window.localStorage.getItem("isLogin") === "true";
 
     if (!isLogin) {
       setIsModalOpen(true);
@@ -160,7 +161,7 @@ function Cart() {
         withCredentials: true,
       });
       getCartData();
-    } catch (error) { }
+    } catch (error) {}
   };
 
   return (
@@ -202,7 +203,7 @@ function Cart() {
                   <tbody>
                     {showData &&
                       showData?.cart?.products.map((item, i) => {
-                        console.log(item);
+                        // console.log(item);
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
@@ -350,7 +351,6 @@ function Cart() {
                 <div className="subTotal">
                   <h6>{t("Subtotal")}</h6>
                   <p>{showData?.cart?.subTotal.toFixed(2)}</p>
-
                 </div>
                 <div className="subTotal">
                   <h6>{t("Coupon Applied")}</h6>
@@ -361,15 +361,20 @@ function Cart() {
                 <p> {showData?.cart?.products[0]?.shippingCost}</p>
               </div> */}
                 <div className="subTotal">
-                  <h6>{t('IGST')}</h6>
-                  <p>  {showData?.cart?.igst ? showData?.cart?.igst : showData?.cart?.tax}</p>
+                  <h6>{t("IGST")}</h6>
+                  <p>
+                    {" "}
+                    {showData?.cart?.igst
+                      ? showData?.cart?.igst
+                      : showData?.cart?.tax}
+                  </p>
                 </div>
                 <div className="subTotal">
-                  <h6>{t('SGST')}</h6>
-                  <p>  {showData?.cart?.sgst ? showData?.cart?.sgst : '0'}</p>
+                  <h6>{t("SGST")}</h6>
+                  <p> {showData?.cart?.sgst ? showData?.cart?.sgst : "0"}</p>
                 </div>
                 <div className="subTotal">
-                  <h6>{t('CGST')}</h6>
+                  <h6>{t("CGST")}</h6>
                   <p> {showData?.cart?.cgst ? showData?.cart?.cgst : "0"}</p>
                 </div>
                 <div className="subTotal">
@@ -406,7 +411,7 @@ function Cart() {
       <LoginAllPage
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-      // BuyNowItem={BuyNowItem}
+        // BuyNowItem={BuyNowItem}
       />
     </>
   );
