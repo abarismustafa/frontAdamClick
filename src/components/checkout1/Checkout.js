@@ -57,7 +57,7 @@ function Checkout() {
         alert(
           `Payment successful! Payment ID: ${response.razorpay_payment_id}`
         );
-        console.log("Payment Success:", response);
+        // console.log("Payment Success:", response);
       },
       prefill: {
         name: "Test adamclick User",
@@ -227,7 +227,7 @@ function Checkout() {
   });
 
   const [diliveryAdd, setDiliveryAdd] = useState([])
-  console.log(diliveryAdd);
+  // console.log(diliveryAdd);
 
 
   const updateAddress = async () => {
@@ -267,7 +267,7 @@ function Checkout() {
           token: window.localStorage.getItem("token"),
         }).unwrap(); // unwrap() se promise resolve hota hai
 
-        console.log("Bill address added:", res);
+        // console.log("Bill address added:", res);
         getDiliveryAddres()
       } catch (err) {
         console.error("Error adding bill address:", err);
@@ -333,7 +333,7 @@ function Checkout() {
 
     const cloneData = { ...formData, [name]: val };
     setFormData(cloneData);
-    console.log("formData", formData);
+    // console.log("formData", formData);
 
     if (name === "bzip") {
       if (val.length === 6) {
@@ -395,7 +395,7 @@ function Checkout() {
 
   // const { data } = useGetActiveBillingQuery(userid)
   const [data, setData] = useState(null);
-  console.log(data);
+  // console.log(data);
 
 
   // const token = window.localStorage.getItem('token')
@@ -407,7 +407,7 @@ function Checkout() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res);
+      // console.log(res);
 
       setData(res.data);
     } catch (error) { }
@@ -508,7 +508,7 @@ function Checkout() {
     bmobile: "",
   });
 
-  console.log("formDataShipp", formDataShipp);
+  // console.log("formDataShipp", formDataShipp);
 
   const [validationShipp, setvalidationShipp] = useState({
     country: false,
@@ -572,8 +572,8 @@ function Checkout() {
     if (formData.blastname?.length) {
       clone.lastName = false;
     }
-    console.log(clone);
-    console.log(formData);
+    // console.log(clone);
+    // console.log(formData);
     setvalidationBill(clone);
   };
 
@@ -802,7 +802,7 @@ function Checkout() {
   // console.log('timeslot', timeslot);
 
   const [currentDate, setCurrentDate] = useState("");
-  console.log("currentDate", currentDate);
+  // console.log("currentDate", currentDate);
 
   useEffect(() => {
     // Call the function to set the current date when the component mounts
@@ -823,7 +823,7 @@ function Checkout() {
         `https://onlineparttimejobs.in/api/timeGroup/public`,
         { withCredentials: true }
       );
-      console.log(res.data);
+      // console.log(res.data);
       setTimeslot(res.data);
     } catch (error) {
       alert(error);
@@ -852,7 +852,7 @@ function Checkout() {
         },
       });
 
-      console.log(res);
+      // console.log(res);
 
       // setData(res.data.address);
     } catch (error) {
@@ -953,7 +953,7 @@ function Checkout() {
                   {diliveryAdd && diliveryAdd?.map((item) => {
                     const isSelected = String(item?._id) === String(selectedAddressId);
 
-                    console.log(isSelected);
+                    // console.log(isSelected);
 
 
                     return <div className="addressListItem" key={item?._id}>

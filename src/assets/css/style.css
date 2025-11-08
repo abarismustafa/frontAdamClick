@@ -3492,8 +3492,8 @@ button.btn.btn-primary.registerShop {
 }
 
 .single-comment-item .sc-author img {
-  height: 70px;
-  width: 70px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
 }
 
@@ -4104,7 +4104,7 @@ button.btn.btn-primary.registerShop {
 
 /* Brand Page Start */
 .brandsItem.fullBrandsItem ul {
-  justify-content: center;
+  justify-content: start;
   row-gap: 15px;
   flex-wrap: wrap;
 }
@@ -12017,7 +12017,7 @@ Footer Section CSS
   background-color: #edf1f0;
   border: none;
   height: 42px;
-  padding-left: 25px;
+  padding-left: 15px;
   border-radius: 0;
   outline: 0;
   color: #454545;
@@ -13943,7 +13943,7 @@ header.sticky.active .mobileMenu {
   bottom: 70px;
   position: fixed;
   right: 24px;
-  z-index: 1;
+  z-index: 1111;
 }
 
 .socialItem {
@@ -14008,7 +14008,10 @@ header.sticky.active .mobileMenu {
 
 .searchIconsItem ul li a span {
   font-size: 16px;
-  /* display: none; */
+}
+
+.searchIconsItem ul li a .iconText {
+  display: none;
 }
 
 .commonButton {
@@ -14734,6 +14737,29 @@ button.tableCommonBtn:hover span {
 @media only screen and (max-width: 991px) {
 
   /*  */
+  .recentPosts .recentItemInfo{
+    flex-wrap: wrap;
+  }
+  .recentItemInfo .recentImg{
+    width: 100%;
+  }
+  .blogCategory, .recentPosts, .asideTags{
+    padding: 15px;
+  }
+  .blogItemContent .title h4 a{
+    font-size: 16px;
+  }
+  .blogItemContent .author ul{
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px;
+  }
+  .blogItemContent .readMore{
+    padding: 8px;
+  }
+  .blogItemContent .title{
+    padding: 0 8px 10px;
+  }
   .product-tabs-container {
     gap: 0;
   }
@@ -15061,6 +15087,18 @@ button.tableCommonBtn:hover span {
 @media only screen and (max-width: 767px) {
 
   /*  */
+  .recentPosts .recentItemInfo{
+    flex-wrap: nowrap;
+  }
+  .recentItemInfo .recentImg{
+    width: 30%;
+  }
+  .asideTitle {
+    font-size: 16px;
+  }
+  button.commonButton.w-100.bg-success.text-white.border-0 {
+    justify-content: center;
+  }
 
   .rangeNumber {
     flex-wrap: wrap;
@@ -15205,6 +15243,9 @@ button.tableCommonBtn:hover span {
     transform: translateX(-20px);
   }
 
+  .product-details-desc .price {
+    text-align: start;
+  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -15371,6 +15412,7 @@ button.tableCommonBtn:hover span {
   .sectionPD {
     padding: 20px 0;
   }
+
 }
 
 @media only screen and (max-width: 480px) {
@@ -15390,9 +15432,7 @@ button.tableCommonBtn:hover span {
   }
 
   /*  */
-  .product-details-desc .price {
-    text-align: start;
-  }
+
 
   .userNamePro .helll {
     transform: translateX(-60px);

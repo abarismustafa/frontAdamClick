@@ -1289,7 +1289,7 @@ function Checkout() {
                     />
 
                     <form className="row needs-validation" novalidate>
-                      <div className="mb-3 col-lg-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label className="form-label form-label-high">{t("Delivery Type")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span></label>
                         <div className="d-flex gap-3">
                           <label className="form-check-label">
@@ -1329,7 +1329,7 @@ function Checkout() {
                           </label>
                         </div>
                       </div>
-                      <div className="mb-3 col-lg-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label className="form-label form-label-high">{t("Address Type")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span></label>
 
                         {/* <div className="d-flex gap-3">
@@ -1435,7 +1435,7 @@ function Checkout() {
                           </span>
                         )}
                       </div> */}
-                      <div className="mb-3 col-lg-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail1"
                           className="form-label"
@@ -1456,7 +1456,7 @@ function Checkout() {
                           <span style={{ color: "red" }}>Enter a First Name</span>
                         )}
                       </div>
-                      <div className="mb-3 col-lg-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail1"
                           className="form-label"
@@ -1499,7 +1499,7 @@ function Checkout() {
                         )}
                       </div>
 
-                      <div className="mb-3 col-lg-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail10"
                           className="form-label"
@@ -1535,7 +1535,7 @@ function Checkout() {
                         )}
                       </div>
 
-                      <div className="mb-3 col-lg-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail1"
                           className="form-label"
@@ -1557,7 +1557,7 @@ function Checkout() {
                         )}
                       </div>
 
-                      <div className="mb-3 col-lg-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail10"
                           className="form-label"
@@ -1583,7 +1583,7 @@ function Checkout() {
 
 
 
-                      <div className="mb-3 col-lg-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail10"
                           className="form-label"
@@ -1607,11 +1607,11 @@ function Checkout() {
                         )}
                       </div>
 
-                      {/* <div className="mb-3 col-6">
+                      {/* <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                       <label htmlFor="exampleInputEmail1" className="form-label">{('State')}</label>
                       <input type="text" className="form-control" name="bstate" value={formData?.bstate} onChange={handleChange} aria-describedby="emailHelp" />
                     </div> */}
-                      <div className="mb-3 col-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail1"
                           className="form-label"
@@ -1628,7 +1628,7 @@ function Checkout() {
                           aria-describedby="emailHelp"
                         />
                       </div>
-                      <div className="mb-3 col-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail1"
                           className="form-label"
@@ -1645,7 +1645,7 @@ function Checkout() {
                           aria-describedby="emailHelp"
                         />
                       </div>
-                      <div className="mb-3 col-6">
+                      <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail1"
                           className="form-label"
@@ -1663,17 +1663,17 @@ function Checkout() {
                         />
                       </div>
 
-                      {/* <div className="mb-3 col-6">
+                      {/* <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                       <label htmlFor="exampleInputEmail1" className="form-label">{t('Province')}</label>
                       <input type="text" className="form-control" name="bprovince" value={formData?.bprovince} onChange={handleChange} aria-describedby="emailHelp" />
                     </div> */}
 
-                      {/* <div className="mb-3 col-6">
+                      {/* <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                       <label htmlFor="exampleInputEmail1" className="form-label">{t('Address Line2')}</label>
                       <input type="text" className="form-control" name="baddressLine2" value={formData?.baddressLine2} onChange={handleChange} aria-describedby="emailHelp" />
                     </div> */}
 
-                      {/* <div className="mb-3 col-6">
+                      {/* <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                       <label htmlFor="exampleInputEmail1" className="form-label">{t('Company')}</label>
                       <input type="text" className="form-control" name="bcompany" value={formData?.bcompany} onChange={handleChange} aria-describedby="emailHelp" />
                     </div> */}
@@ -1762,7 +1762,7 @@ function Checkout() {
                           <h4>Shipping Address</h4>
 
                           <form className="row">
-                            <div className="mb-3 col-6">
+                            <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                               <label
                                 htmlFor="exampleInputEmail1"
                                 className="form-label"
@@ -1778,7 +1778,7 @@ function Checkout() {
                                 aria-describedby="emailHelp"
                               />
                             </div>
-                            <div className="mb-3 col-6">
+                            <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                               <label
                                 htmlFor="exampleInputEmail1"
                                 className="form-label"
@@ -1794,7 +1794,7 @@ function Checkout() {
                                 aria-describedby="emailHelp"
                               />
                             </div>
-                            <div className="mb-3 col-6">
+                            <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                               <label
                                 htmlFor="exampleInputEmail1"
                                 className="form-label"
@@ -1811,11 +1811,11 @@ function Checkout() {
                               />
                             </div>
 
-                            {/* <div className="mb-3 col-6">
+                            {/* <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                       <label htmlFor="exampleInputEmail1" className="form-label">{('State')}</label>
                       <input type="text" className="form-control" name="bstate" value={formDataShipp?.bstate} onChange={handleChangeship} aria-describedby="emailHelp" />
                     </div> */}
-                            <div className="mb-3 col-6">
+                            <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                               <label
                                 htmlFor="exampleInputEmail1"
                                 className="form-label"
@@ -1848,57 +1848,57 @@ function Checkout() {
                               />
                             </div>
 
-                            {/* <div className="mb-3 col-6">
+                            {/* <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                       <label htmlFor="exampleInputEmail1" className="form-label">{t('Province')}</label>
                       <input type="text" className="form-control" name="bprovince" value={formDataShipp?.bprovince} onChange={handleChangeship} aria-describedby="emailHelp" />
                     </div> */}
 
-                            {/* <div className="mb-3 col-6">
+                            {/* <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                       <label htmlFor="exampleInputEmail1" className="form-label">{t('Address Line2')}</label>
                       <input type="text" className="form-control" name="baddressLine2" value={formDataShipp?.baddressLine2} onChange={handleChangeship} aria-describedby="emailHelp" />
                     </div> */}
 
-                            {/* <div className="mb-3 col-6">
+                            {/* <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                       <label htmlFor="exampleInputEmail1" className="form-label">{t('Company')}</label>
                       <input type="text" className="form-control" name="bcompany" value={formDataShipp?.bcompany} onChange={handleChangeship} aria-describedby="emailHelp" />
                     </div> */}
                           </form>
 
                           {/* <form className="row">
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{t('Country')}</label>
                           <input type="text" className="form-control" name="bcountry" value={formDataShipp?.bcountry} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>
 
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{('State')}</label>
                           <input type="text" className="form-control" name="bstate" value={formDataShipp?.bstate} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{t('City')}</label>
                           <input type="text" className="form-control" name="bcity" value={formDataShipp?.bcity} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{t('ZIP')}</label>
                           <input type="text" className="form-control" name="bzip" value={formDataShipp?.bzip} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{t('Province')}</label>
                           <input type="text" className="form-control" name="bprovince" value={formDataShipp?.bprovince} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{t('Address Line1')}</label>
                           <input type="text" className="form-control" name="baddressLine1" value={formDataShipp?.baddressLine1} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{t('Address Line2')}</label>
                           <input type="text" className="form-control" name="baddressLine2" value={formDataShipp?.baddressLine2} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{t('Landmark')}</label>
                           <input type="text" className="form-control" name="blandmark" value={formDataShipp?.blandmark} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>
-                        <div className="mb-3 col-6">
+                        <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                           <label htmlFor="exampleInputEmail1" className="form-label">{t('Company')}</label>
                           <input type="text" className="form-control" name="bcompany" value={formDataShipp?.bcompany} onChange={handleChangeship} aria-describedby="emailHelp" />
                         </div>

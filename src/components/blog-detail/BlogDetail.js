@@ -99,7 +99,7 @@ function BlogDetail() {
       setData(res.data[0]);
     } catch (error) {
       setisLoading(false);
-      console.log("Fail to Load Blog Detail !");
+      // console.log("Fail to Load Blog Detail !");
     }
   };
 
@@ -107,7 +107,7 @@ function BlogDetail() {
   const { t } = useTranslation();
   const [blogData, setBlogData] = useState(cosmeticBlogCategories);
   const filterData = blogData.find((item) => {
-    console.log(item.id === params.id);
+    // console.log(item.id === params.id);
 
     return item.id == params.id;
   });
@@ -125,7 +125,7 @@ function BlogDetail() {
       if (res?.status == 200) {
         setReviewData(res?.data)
       }
-      console.log(res);
+      // console.log(res);
 
     } catch (error) {
 

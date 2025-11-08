@@ -15,73 +15,71 @@ const cosmeticBlogCategories = [
   {
     id: 1,
     name: "Makeup",
-    description: "blogDesc1"
+    description: "blogDesc1",
   },
   {
     id: 2,
     name: "Skincare",
-    description: "blogDesc2"
+    description: "blogDesc2",
   },
   {
     id: 3,
     name: "Beauty Tips & Hacks",
-    description: "blogDesc3"
+    description: "blogDesc3",
   },
   {
     id: 4,
     name: "Product Reviews",
-    description: "blogDesc4"
+    description: "blogDesc4",
   },
   {
     id: 5,
     name: "Hair Care",
-    description: "blogDesc5"
+    description: "blogDesc5",
   },
   {
     id: 6,
     name: "Natural & Organic Beauty",
-    description: "blogDesc6"
+    description: "blogDesc6",
   },
   {
     id: 7,
     name: "Trends & News",
-    description: "blogDesc7"
+    description: "blogDesc7",
   },
   {
     id: 8,
     name: "DIY Beauty",
-    description: "blogDesc8"
+    description: "blogDesc8",
   },
   {
     id: 9,
     name: "Travel Beauty",
-    description: "blogDesc9"
+    description: "blogDesc9",
   },
   {
     id: 10,
     name: "Ingredients & Science",
-    description: "blogDesc10"
-  }
+    description: "blogDesc10",
+  },
 ];
 
 function BlogItem({ t }) {
   const { data, isLoading } = useGetBlogsQuery();
-  console.log(data);
+  // console.log(data);
   const baseUrl = base_url();
-  const [blogData, setBlogData] = useState(null)
+  const [blogData, setBlogData] = useState(null);
   const getBlogData = async () => {
     try {
-      const res = await axios.get(`${baseUrl}blogs`)
+      const res = await axios.get(`${baseUrl}blogs`);
       // console.log(res?.data);
-      setBlogData(res?.data)
-    } catch (error) {
-
-    }
-  }
+      setBlogData(res?.data);
+    } catch (error) {}
+  };
 
   useEffect(() => {
-    getBlogData()
-  }, [])
+    getBlogData();
+  }, []);
 
   return (
     <>
@@ -146,21 +144,28 @@ function BlogItem({ t }) {
           {blogData &&
             blogData.map((item) => {
               return (
-                <div key={item._id} className="col-lg-6">
+                <div
+                  key={item._id}
+                  className="col-lg-6 col-md-6 col-sm-6 col-xs-6"
+                >
                   <div className="blogItemInfo">
                     <div className="blogItemFigure">
-                      <img
-                        src={item.banner.url}
-                        style={{ height: "400px" }}
-                        alt="Blog"
-                      />
+                      <Link to={`/blog-detail/${item.uid}/${item?._id}`}>
+                        <img
+                          src={item.banner.url}
+                          alt={item.title}
+                          title={item.title}
+                        />
+                      </Link>
                       <div className="postDate">
                         {/* <span className="date">25</span>
                         <span className="month">feb</span> */}
                         {(() => {
                           const dateObj = new Date(item?.updatedAt);
                           const day = dateObj.getDate();
-                          const month = dateObj.toLocaleString("en-US", { month: "short" }).toLowerCase(); // feb, mar, etc.
+                          const month = dateObj
+                            .toLocaleString("en-US", { month: "short" })
+                            .toLowerCase(); // feb, mar, etc.
                           return (
                             <>
                               <span className="date">{day}</span>

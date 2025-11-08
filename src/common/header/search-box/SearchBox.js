@@ -80,7 +80,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
   }, []);
 
   const logout = async () => {
-    // console.log('dfgfdg');
+    // console.log("dfgfdg");
 
     try {
       const res = await axios.get(`${baseUrl}auth/logout`, {
@@ -97,7 +97,6 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
     dispatch(setWishCalc(0));
     dispatch(setCartLengLogout());
     dispatch(setUpdatedProductsblack());
-
   };
 
   useEffect(() => {
@@ -168,10 +167,6 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
       return item.productList;
     }
   );
-
-  // console.log();
-
-
   // console.log(WishLengh);
 
   useEffect(() => {
@@ -265,19 +260,21 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
         const resData = await axios.get(
           `${baseUrl}product/search/${e.target.value}`
         );
-        console.log(
-          "resData.data?.getSearchedProduct",
-          resData.data?.getSearchedProduct
-        );
+        // console.log(
+        //   "resData.data?.getSearchedProduct",
+        //   resData.data?.getSearchedProduct
+        // );
         setData2(resData.data?.getSearchedProduct);
       } catch (error) { }
     }
   };
   const changeROutes = (item) => {
-    console.log(item);
+    // console.log(item);
 
-    // navigate(`/product/${item.uid}/${item.slug}`); 
-    navigate(`/product/${item?.uid}/${item.slug}/${item?.variation?.variant_slug}`);
+    // navigate(`/product/${item.uid}/${item.slug}`);
+    navigate(
+      `/product/${item?.uid}/${item.slug}/${item?.variation?.variant_slug}`
+    );
     setShow(false);
     inputRef.current.value = "";
     setData2([]);
@@ -319,9 +316,8 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
     }
   };
 
-  const [profileData, setProfiledata] = useState()
+  const [profileData, setProfiledata] = useState();
   // console.log(profileData);
-
 
   const getDataprofile = async () => {
     const res = await axios.get(`${baseUrl}user/profile`, {
@@ -334,7 +330,6 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
   };
 
   useEffect(() => {
-
     getDataprofile();
   }, []);
 
@@ -545,14 +540,18 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                                     // ✅ Only show active variations
                                     .filter((variation) => variation?.isActive)
                                     .map((variation, i) => {
-                                      console.log(variation);
+                                      // console.log(variation);
 
                                       return (
                                         <div
                                           key={variation._id || i}
                                           className="mainViy"
                                           onClick={() => {
-                                            changeROutes({ ...item, variation, i });
+                                            changeROutes({
+                                              ...item,
+                                              variation,
+                                              i,
+                                            });
                                           }}
                                         >
                                           <img
@@ -568,17 +567,24 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                                               objectFit: "cover",
                                               borderRadius: "6px",
                                             }}
-                                            alt={variation?.variant_slug || "Product"}
+                                            alt={
+                                              variation?.variant_slug ||
+                                              "Product"
+                                            }
                                           />
                                           <div>
                                             <h6>
                                               {item?.name +
                                                 (variation?.variant_slug
-                                                  ? " " + variation?.variant_slug
+                                                  ? " " +
+                                                  variation?.variant_slug
                                                   : "")}
                                             </h6>
-                                            <h6 style={{ whiteSpace: "nowrap" }}>
-                                              {variation?.country?.code} {variation?.prices?.sale_rate}
+                                            <h6
+                                              style={{ whiteSpace: "nowrap" }}
+                                            >
+                                              {variation?.country?.code}{" "}
+                                              {variation?.prices?.sale_rate}
                                             </h6>
                                           </div>
                                         </div>
@@ -694,11 +700,15 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                         {/* <AiOutlineUser /> */}
                         {profileImg ? (
                           <img
-                            style={{ width: "28px", height: "28px" }}
+                            style={{ width: "20px", height: "20px" }}
                             src={
-                              profileImg && profileImg !== "" && profileImg !== undefined
+                              profileImg &&
+                                profileImg != "" &&
+                                profileImg != undefined
                                 ? profileImg
-                                : profileData?.getaUser?.profilePhoto?.url && profileData?.getaUser?.profilePhoto?.url !== ""
+                                : profileData?.getaUser?.profilePhoto?.url &&
+                                  profileData?.getaUser?.profilePhoto?.url !==
+                                  ""
                                   ? profileData?.getaUser.profilePhoto.url
                                   : tempProfileImg
                             }
@@ -715,9 +725,13 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                     {isLogin === "true" && (
                       <li className="userNamePro">
                         <Link to="/" className="userNameText">
-                          {profileData?.getaUser?.firstname && profileData?.getaUser?.lastname
+                          {profileData?.getaUser?.firstname &&
+                            profileData?.getaUser?.lastname
                             ? `${profileData?.getaUser.firstname} ${profileData?.getaUser.lastname}`
-                            : profileData?.getaUser?.selectedBillingAddress?.firstname && profileData?.getaUser?.selectedBillingAddress?.lastname
+                            : profileData?.getaUser?.selectedBillingAddress
+                              ?.firstname &&
+                              profileData?.getaUser?.selectedBillingAddress
+                                ?.lastname
                               ? `${profileData?.getaUser.selectedBillingAddress.firstname} ${profileData?.getaUser.selectedBillingAddress.lastname}`
                               : profileData?.getaUser?.mobile || ""}
                           <MdOutlineArrowDropDown
@@ -829,18 +843,18 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                       <li>
                         <Link to="/myAccount">
                           <BiUser />
-                          <span>{t("Account")}</span>
+                          <span className="iconText">{t("Account")}</span>
                         </Link>
                       </li>
                     )}
 
                     <li className="countWish">
                       <Link to="/wishlist">
+                        <AiOutlineHeart />
                         {WishLengh > 0 && (
                           <span className="count">{WishLengh}</span>
                         )}
-                        <AiOutlineHeart />
-                        <span>{t("Wishlist")}</span>
+                        <span className="iconText">{t("Wishlist")}</span>
                       </Link>
                     </li>
                     <li className="countParent">
@@ -849,7 +863,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                         {cartLengh > 0 && (
                           <span className="count">{cartLengh}</span>
                         )}{" "}
-                        <span>{t("Cart")}</span>
+                        <span className="iconText">{t("Cart")}</span>
                       </Link>
                     </li>
                     <li>
@@ -878,7 +892,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
             </div>
           </div>
         </div>
-      </section >
+      </section>
     </>
   );
 }

@@ -126,7 +126,7 @@ function Cart() {
   };
 
   const orderConfirm = () => {
-    const isLogin = window.localStorage.getItem('isLogin') === 'true';
+    const isLogin = window.localStorage.getItem("isLogin") === "true";
 
     if (!isLogin) {
       setIsModalOpen(true);
@@ -202,7 +202,7 @@ function Cart() {
                   <tbody>
                     {showData &&
                       showData?.cart?.products.map((item, i) => {
-                        console.log(item);
+                        // console.log(item);
                         return (
                           <tr key={i}>
                             <td>{i + 1}</td>
@@ -350,7 +350,6 @@ function Cart() {
                 <div className="subTotal">
                   <h6>{t("Subtotal")}</h6>
                   <p>{showData?.cart?.subTotal.toFixed(2)}</p>
-
                 </div>
                 <div className="subTotal">
                   <h6>{t("Coupon Applied")}</h6>
@@ -365,11 +364,11 @@ function Cart() {
                   <p>  {showData?.cart?.igst?.toFixed(2) ? showData?.cart?.igst?.toFixed(2) : showData?.cart?.tax?.toFixed(2)}</p>
                 </div>
                 <div className="subTotal">
-                  <h6>{t('SGST')}</h6>
-                  <p>  {showData?.cart?.sgst ? showData?.cart?.sgst : '0'}</p>
+                  <h6>{t("SGST")}</h6>
+                  <p> {showData?.cart?.sgst ? showData?.cart?.sgst : "0"}</p>
                 </div>
                 <div className="subTotal">
-                  <h6>{t('CGST')}</h6>
+                  <h6>{t("CGST")}</h6>
                   <p> {showData?.cart?.cgst ? showData?.cart?.cgst : "0"}</p>
                 </div>
                 <div className="subTotal">

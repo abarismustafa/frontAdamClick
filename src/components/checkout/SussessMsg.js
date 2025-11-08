@@ -2,8 +2,8 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 function SussessMsg({ plaecedData, cartValue, currencySymbol, paymentMode }) {
-  console.log("placeOrde", plaecedData);
-  console.log("cartValue", cartValue);
+  // console.log("placeOrde", plaecedData);
+  // console.log("cartValue", cartValue);
   const isLogin = window.localStorage.getItem("isLogin");
   return (
     <div
