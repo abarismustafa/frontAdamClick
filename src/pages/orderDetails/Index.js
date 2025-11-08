@@ -505,7 +505,7 @@ function OrderDetail() {
                       ( {data[0]?.coupon[0]?.discount}{" "}
                       {data[0]?.coupon[0]?.discount_type === "Percent"
                         ? "Percent"
-                        : "Amount"}{" "}
+                        : "0"}{" "}
                       )
                     </p>
                   </div>
@@ -521,6 +521,18 @@ function OrderDetail() {
                   <div className="subTotal">
                     <h6>{t("Shipping")}</h6>
                     <p> {data?.getaOrderById?.shippingCost}</p>
+                  </div>
+                  <div className="subTotal">
+                    <h6>{t("IGST")}</h6>
+                    <p> {data[0]?.igst?.toFixed(2) ? data[0]?.igst?.toFixed(2) : data[0]?.tax?.toFixed(2)}</p>
+                  </div>
+                  <div className="subTotal">
+                    <h6>{t("SGST")}</h6>
+                    <p> {data[0]?.sgst ? data[0]?.sgst : "0"}</p>
+                  </div>
+                  <div className="subTotal">
+                    <h6>{t("CGST")}</h6>
+                    <p> {data[0]?.cgst ? data[0]?.cgst : "0"}</p>
                   </div>
                   <div
                     style={{ margin: "4px 0", borderTop: "1px solid black" }}

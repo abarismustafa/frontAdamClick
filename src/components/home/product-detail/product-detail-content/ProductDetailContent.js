@@ -128,6 +128,7 @@ function ProductDetailContent({
   const [setWishList, { data: wishData, isSuccess, isError: wisherr }] =
     useSetWishListMutation();
 
+
   const [str, setStr] = useState(null);
   const [showTaoster, setShowToaster] = useState({
     show: false,
@@ -162,7 +163,7 @@ function ProductDetailContent({
       setShowToaster({ show: true, message: "Login First !", color: "danger" });
       return;
     }
-    const variantId = data?.variations?.[0]?.uid || '';
+    const variantId = data?.variations?.[0]?.variant_slug || '';
     const paylode = {
       userid: window.localStorage.getItem("user_id"),
       productid: data?.uid,
@@ -176,7 +177,7 @@ function ProductDetailContent({
     setPickupData(res.data);
   };
 
-  console.log(data?.seller_id);
+  // console.log(data?.seller_id);
 
   const handlePick = (pickup) => {
     setStr(pickup.pickupPoints.pickupPoint_name);
@@ -203,7 +204,7 @@ function ProductDetailContent({
     }
     if (isSuccess) {
       getAllDeta();
-      dispacher(setWishCalc(wishData?.wishlist?.length));
+      dispacher(setWishCalc(wishData?.wishlistNew?.length));
       setShowToaster({
         show: true,
         message: "Product WishList Add successfully!",

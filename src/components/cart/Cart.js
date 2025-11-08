@@ -362,7 +362,7 @@ function Cart() {
               </div> */}
                 <div className="subTotal">
                   <h6>{t('IGST')}</h6>
-                  <p>  {showData?.cart?.igst ? showData?.cart?.igst : showData?.cart?.tax}</p>
+                  <p>  {showData?.cart?.igst?.toFixed(2) ? showData?.cart?.igst?.toFixed(2) : showData?.cart?.tax?.toFixed(2)}</p>
                 </div>
                 <div className="subTotal">
                   <h6>{t('SGST')}</h6>

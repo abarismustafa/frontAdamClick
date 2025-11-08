@@ -2135,7 +2135,7 @@ function Checkout() {
                       <div className="subTotal">
                         <h6>{t("IGST")}</h6>
                         <p>
-                          {currencySymbol} {cartDetail?.cart?.igst ? cartDetail?.cart?.igst : cartDetail?.cart?.tax}
+                          {currencySymbol} {cartDetail?.cart?.igst?.toFixed(2) ? cartDetail?.cart?.igst?.toFixed(2) : cartDetail?.cart?.tax?.toFixed(2)}
                         </p>
                       </div>
                       <div className="subTotal">

@@ -5,11 +5,14 @@ import axios from 'axios';
 import { Select } from 'antd';
 import { ToastContainer } from 'react-toastify';
 import { toastSuccessMessage, toastSuccessMessageError } from '../../../common/messageShow/MessageShow';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Loader from '../../../common/loader/Loader';
 const { Option } = Select;
 const CraeteRmaReturm = () => {
     const params = useParams()
-    console.log(params);
+    // console.log(params);
+    const navigate = useNavigate()
+    const [loader, setLoader] = useState(false)
 
     const orders = [
         { id: "#00000003", date: "Oct 30, 2025", total: "$43.77" },
@@ -24,6 +27,24 @@ const CraeteRmaReturm = () => {
         variant_id: [],
         resulution_type: "",
         reason: '',
+        product_id: "",
+        user_comment: "",
+        returnPickupAddress: {
+            country: "",
+            state: "",
+            city: "",
+            zip: "",
+            addressLine1: "",
+            addressLine2: "",
+            landmark: "",
+            province: "",
+            phone: "",
+            email: "",
+            firstname: "",
+            lastname: "",
+            company: "",
+            type: "",
+        }
         // userid: ''
     })
 
@@ -55,6 +76,7 @@ const CraeteRmaReturm = () => {
     }
 
     const deatilsApi = async (id) => {
+        setLoader(true)
         try {
             const res = await axios.get(`${baseUrl}order/getOrderById/${id}`, {
                 headers: {
@@ -62,8 +84,59 @@ const CraeteRmaReturm = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            setAppliedOrders(res?.data);
-            setInitialValue((prev) => ({ ...prev, orderId: id }));
+            if (res?.data?.length > 0) {
+                const order = res.data[0];
+                const productId = order?.products?.[0]?.productId?._id || "";
+
+                // ✅ shipping data normalize
+                const shipping = order?.shipping || {};
+
+                const shippingAddress = {
+                    country: shipping?.bcountry || "",
+                    state: shipping?.bstate || "",
+                    city: shipping?.bcity || "",
+                    zip: shipping?.bzip || "",
+                    addressLine1: shipping?.baddressLine1 || "",
+                    addressLine2: shipping?.baddressLine2 || "",
+                    landmark: shipping?.blandmark || "",
+                    province: shipping?.bprovince || "",
+                    phone: shipping?.bmobile || "",
+                    email: shipping?.bemail || "",
+                    firstname: shipping?.bfirstname || "",
+                    lastname: shipping?.blastname || "",
+                    company: shipping?.bcompany || "",
+                    type: shipping?.btype,
+                };
+
+                // ✅ Update states
+                setAppliedOrders(res?.data);
+                setInitialValue((prev) => ({
+                    ...prev,
+                    orderId: id,
+                    product_id: productId,
+                    returnPickupAddress: shippingAddress,
+                }));
+            }
+            // if (res?.data?.length > 0) {
+            //     const order = res.data[0];
+            //     // console.log(order);
+
+            //     // const product = order?.products?.[0];
+            //     const productId = order?.products[0]?.productId?._id || "";
+
+            //     // ✅ state update
+            //     setAppliedOrders(res?.data);
+            //     setInitialValue((prev) => ({
+            //         ...prev,
+            //         orderId: id,
+            //         product_id: productId,
+            //         // variant_id: [product?.price?.variant_id], 
+            //     }));
+            //     setLoader(false)
+            // }
+            setLoader(false)
+            // setAppliedOrders(res?.data);
+            // setInitialValue((prev) => ({ ...prev, orderId: id }));
             // setAppliedOrders((prev) => {
             //     const alreadyExists = prev.find((o) => o._id === res.data._id);
             //     if (alreadyExists) return prev;
@@ -71,7 +144,7 @@ const CraeteRmaReturm = () => {
             // });
 
         } catch (error) {
-
+            setLoader(false)
         }
     }
 
@@ -142,18 +215,22 @@ const CraeteRmaReturm = () => {
             toastSuccessMessageError("Please enter a reason for your request!");
             return;
         }
+        const clone = [initialValue]
         try {
-            const res = await axios.post(`${baseUrl}rma/requestRMA`, initialValue, {
+            const res = await axios.post(`${baseUrl}rma/requestRMA`, clone, {
                 headers: {
                     "Content-type": "application/json; charset=UTF-8",
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(res);
+            // console.log(res);
             // if (res?.status == ) {
 
             // }
             toastSuccessMessage(res?.data?.message || "RMA Request submitted successfully!");
+            setTimeout(() => {
+                navigate('/returns/rma/list')
+            }, 1000)
         } catch (error) {
             toastSuccessMessageError(
                 error?.response?.data?.message || "Something went wrong, please try again!"
@@ -180,12 +257,21 @@ const CraeteRmaReturm = () => {
         getData();
         getOrder()
     }, [])
-    return (
-        <div className="container my-5">
-            <h2 className="fw-bold mb-4 text-dark">Create RMA</h2>
 
-            {/* Select Order Section */}
-            {/* <div className="card shadow-sm mb-4 border-0">
+    useEffect(() => {
+        if (params?.id) {
+
+        }
+    }, [params?.id])
+    return (
+        <>
+            {loader && <Loader />}
+
+            <div className="container my-5">
+                <h2 className="fw-bold mb-4 text-dark">Create RMA</h2>
+
+                {/* Select Order Section */}
+                {/* <div className="card shadow-sm mb-4 border-0">
                 <div className="card-body">
                     <div className="d-flex flex-wrap align-items-center gap-2 justify-content-center">
                         <label className="fw-semibold me-2 mb-0">
@@ -259,10 +345,10 @@ const CraeteRmaReturm = () => {
                 </div>
             </div> */}
 
-            {/* Applied Orders */}
-            {appliedOrders?.map((order, index) => (
-                <div key={order._id} className="card mb-4 shadow-sm">
-                    {/* <div className="card-header d-flex justify-content-between align-items-center">
+                {/* Applied Orders */}
+                {appliedOrders?.map((order, index) => (
+                    <div key={order._id} className="card mb-4 shadow-sm">
+                        {/* <div className="card-header d-flex justify-content-between align-items-center">
                         <h5 className="mb-0">
                             Order #{index + 1} - {order?.order_referenceNo}
                         </h5>
@@ -273,92 +359,107 @@ const CraeteRmaReturm = () => {
                             Remove
                         </button>
                     </div> */}
-                    <div className="card-body">
-                        <div className="table-responsive">
-                            <table className="table align-middle">
-                                <thead className="table-light">
-                                    <tr>
-                                        <th>
-                                            <input
+                        <div className="card-body">
+                            <div className="table-responsive">
+                                <table className="table align-middle">
+                                    <thead className="table-light">
+                                        <tr>
+                                            <th>
+                                                {/* <input
                                                 type="checkbox"
                                                 onChange={() => handleSelectAll(order)}
-                                            />{" "}
-                                            Select All
-                                        </th>
-                                        <th>image / Product Name</th>
-                                        <th>Variant</th>
-                                        <th>Quantity</th>
-                                        <th>Sale Rate</th>
-                                        <th>Sub Total</th>
-                                        <th>IGST</th>
-                                        <th>SGST</th>
-                                        <th>CGST</th>
-                                        <th>Total</th>
-                                        <th>Delivery Type</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {order?.products?.map((item, idx) => {
-                                        const variationId = item?.productId?.variations?._id;
-                                        return (<tr key={item._id}>
-                                            <td>
-                                                <input
-                                                    type="checkbox"
-                                                    checked={initialValue.variant_id.includes(
-                                                        variationId
-                                                    )}
-                                                    onChange={(e) =>
-                                                        handleCheckboxChange(variationId, e.target.checked)
-                                                    }
-                                                />
-                                            </td>
-                                            <td className='d-flex item-center'>
-                                                <img style={{ width: '150px' }} src={item?.productId?.mainImage_url?.url || "/no-image.jpg"} alt="" />
-                                                {item?.productId?.name}
-                                            </td>
-                                            <td>{item?.productId?.variations?.weight}</td>
-                                            <td>{item?.qty}</td>
-                                            <td>{item?.price?.sale_rate}</td>
-                                            <td>{item?.subTotal}</td>
-                                            <td>{item?.igst}</td>
-                                            <td>{item?.sgst}</td>
-                                            <td>{item?.cgst}</td>
-                                            <td>{item?.total}</td>
-                                            <td>{item?.deliveryType}</td>
+                                            />{" "} */}
+                                                {/* Select All */}
+                                            </th>
+                                            <th>Image / Product Name</th>
+                                            <th>Variant</th>
+                                            <th>Quantity</th>
+                                            <th style={{ whiteSpace: 'nowrap' }}>Sale Rate</th>
+                                            <th style={{ whiteSpace: 'nowrap' }}>Sub Total</th>
+                                            <th>IGST</th>
+                                            <th>SGST</th>
+                                            <th>CGST</th>
+                                            <th>Total</th>
+                                            <th style={{ whiteSpace: 'nowrap' }}>Delivery Type</th>
                                         </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        {order?.products?.map((item, idx) => {
+                                            const variationId = item?.productId?.variations?.uid;
+                                            return (<tr key={item._id}>
+                                                <td>
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={initialValue?.variant_id.includes(
+                                                            variationId
+                                                        )}
+                                                        style={{
+                                                            width: "25px",
+                                                            height: "25px",
+                                                            cursor: "pointer",
+                                                            accentColor: "#007bff"
+                                                        }}
+                                                        onChange={(e) =>
+                                                            handleCheckboxChange(variationId, e.target.checked)
+                                                        }
+                                                    />
+                                                </td>
+                                                <td className='d-flex item-center'>
+                                                    <img style={{ width: '150px' }} src={item?.productId?.variations?.mainImage_url?.url || "/no-image.jpg"} alt="" />
+                                                    {item?.productId?.name}
+                                                </td>
+                                                <td>{item?.productId?.variations?.weight}</td>
+                                                <td>{item?.qty}</td>
+                                                <td>{item?.price?.sale_rate}</td>
+                                                <td>{item?.subTotal}</td>
+                                                <td>{item?.igst}</td>
+                                                <td>{item?.sgst}</td>
+                                                <td>{item?.cgst}</td>
+                                                <td>{item?.total}</td>
+                                                <td>{item?.deliveryType}</td>
+                                            </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        {/* Grand Total Card */}
-                        <div className="border rounded p-3 bg-light mt-3" style={{ width: "300px", marginLeft: "auto" }}>
-                            <h6 className="fw-bold mb-3">Price Details</h6>
-                            <p className="d-flex justify-content-between mb-1">
-                                <span>Base Price</span> <span>{order?.basePrice?.toFixed(2)}</span>
-                            </p>
-                            {/* <p className="d-flex justify-content-between mb-1">
-                                <span>Discount</span> <span>{order?.discount}</span>
-                            </p> */}
-                            <p className="d-flex justify-content-between mb-1">
-                                <span>Tax</span> <span>{order?.tax}</span>
-                            </p>
-                            <hr />
-                            <p className="d-flex justify-content-between fw-bold">
-                                <span>Grand Total</span> <span>{order?.grandTotal}</span>
-                            </p>
+                            {/* Grand Total Card */}
+                            <div className="border rounded p-3 bg-light mt-3" style={{ width: "300px", marginLeft: "auto" }}>
+                                <h6 className="fw-bold mb-3">Price Details</h6>
+                                <p className="d-flex justify-content-between mb-1">
+                                    <span>Base Price</span> <span>{order?.basePrice?.toFixed(2)}</span>
+                                </p>
+                                <p className="d-flex justify-content-between mb-1">
+                                    <span>Discount</span> <span>{order?.discount}</span>
+                                </p>
+                                <p className="d-flex justify-content-between mb-1">
+                                    <span>IGST</span> <span> {order?.igst?.toFixed(2) ? order?.igst?.toFixed(2) : order?.tax?.toFixed(2)}</span>
+                                </p>
+                                <p className="d-flex justify-content-between mb-1">
+                                    <span>SGST</span> <span>{order?.sgst?.toFixed(2) ? order?.sgst?.toFixed(2) : "0"}</span>
+                                </p>
+                                <p className="d-flex justify-content-between mb-1">
+                                    <span>CGST</span> <span>{order?.cgst?.toFixed(2) ? order?.cgst?.toFixed(2) : "0"}</span>
+                                </p>
+                                <hr />
+                                <p className="d-flex justify-content-between fw-bold">
+                                    <span>Grand Total</span> <span>{order?.grandTotal}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
 
-            {/* Bottom Form */}
-            {appliedOrders.length > 0 && (
-                <div className="card shadow-sm border-0 mt-4">
-                    <div className="card-body">
-                        <form>
-                            {/* <div className="mb-3 form-check">
+                {/* Bottom Form */}
+                {appliedOrders.length > 0 && (
+                    <div className="card shadow-sm border-0 mt-4">
+                        <div className="card-body">
+                            <form>
+                                <div className='row'>
+
+
+                                    {/* <div className="mb-3 form-check">
                                 <input
                                     type="checkbox"
                                     className="form-check-input"
@@ -372,49 +473,62 @@ const CraeteRmaReturm = () => {
                                 </label>
                                 <div className="form-text">example of custom field</div>
                             </div> */}
+                                    <div className='col-lg-6'>
+                                        <div className="mb-3">
+                                            <label className="form-label fw-semibold">
+                                                Resulution Type <span style={{ color: 'red' }}>*</span>
+                                            </label>
+                                            <select className="form-select" aria-label="Default select example" name='resulution_type' value={initialValue?.resulution_type} onChange={changeHandle}>
+                                                <option selected>Open this select menu</option>
+                                                <option value={"Refund"}>Refund</option>
+                                                <option value={"Replacement"}>Replacement</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className='col-lg-6'>
+                                        <div className="mb-3">
+                                            <label className="form-label fw-semibold" >
+                                                Reason <span style={{ color: 'red' }}>*</span>
+                                            </label>
+                                            {/* <textarea className="form-control" rows="3" name='reason' value={initialValue?.reason} onChange={changeHandle}></textarea> */}
+                                            <select className="form-select" aria-label="Default select example" name='reason' value={initialValue?.reason} onChange={changeHandle}>
+                                                <option selected>Open this select menu</option>
+                                                {reasons &&
+                                                    reasons.map((item) => {
+                                                        return <option value={item?._id}>{item.reason}</option>;
+                                                    })}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className='col-lg-12'>
+                                        <div className="mb-3">
+                                            <label className="form-label fw-semibold" >
+                                                User Commet
+                                            </label>
+                                            <textarea className="form-control" rows="3" name='user_comment' value={initialValue?.user_comment} onChange={changeHandle}></textarea>
+                                        </div>
+                                    </div>
 
-                            <div className="mb-3">
-                                <label className="form-label fw-semibold">
-                                    Resulution Type <span style={{ color: 'red' }}>*</span>
-                                </label>
-                                <select className="form-select" aria-label="Default select example" name='resulution_type' value={initialValue?.resulution_type} onChange={changeHandle}>
-                                    <option selected>Open this select menu</option>
-                                    <option value={"Refund"}>Refund</option>
-                                    <option value={"Replacement"}>Replacement</option>
-                                </select>
-                            </div>
-
-                            <div className="mb-3">
-                                <label className="form-label fw-semibold" >
-                                    Reason <span style={{ color: 'red' }}>*</span>
-                                </label>
-                                {/* <textarea className="form-control" rows="3" name='reason' value={initialValue?.reason} onChange={changeHandle}></textarea> */}
-                                <select className="form-select" aria-label="Default select example" name='reason' value={initialValue?.reason} onChange={changeHandle}>
-                                    <option selected>Open this select menu</option>
-                                    {reasons &&
-                                        reasons.map((item) => {
-                                            return <option value={item?._id}>{item.reason}</option>;
-                                        })}
-                                </select>
-                            </div>
-
-                            {/* <div className="mb-3">
+                                    {/* <div className="mb-3">
                                 <label className="form-label fw-semibold">Attach files</label>
                                 <input type="file" className="form-control" />
                                 <div className="form-text">Max file size: 2M</div>
                             </div> */}
-
-                            <button type="button" className="btn btn-primary px-4" onClick={submitData}>
-                                Submit Request
-                            </button>
-                        </form>
+                                    <div className='col-lg-12 text-center'>
+                                        <button type="button" className="btn btn-primary px-4 " onClick={submitData}>
+                                            Submit Request
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
 
 
-            <ToastContainer />
-        </div>
+                <ToastContainer />
+            </div>
+        </>
     )
 }
 

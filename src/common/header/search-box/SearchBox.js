@@ -80,7 +80,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
   }, []);
 
   const logout = async () => {
-    console.log('dfgfdg');
+    // console.log('dfgfdg');
 
     try {
       const res = await axios.get(`${baseUrl}auth/logout`, {
@@ -164,10 +164,15 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
 
   const { updatedProducts, products, cartLengh, WishLengh } = useSelector(
     (item) => {
+      console.log(item);
       return item.productList;
     }
   );
-  console.log(WishLengh);
+
+  // console.log();
+
+
+  // console.log(WishLengh);
 
   useEffect(() => {
     if (data) {
@@ -750,7 +755,8 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           </li>
                           <li>
                             <SiAdobecreativecloud />{" "}
-                            <Link to="/rma_history">{t("RMA History")}</Link>
+                            {/* <Link to="/rma_history">{t("RMA History")}</Link> */}
+                            <Link to="/returns/rma/list">{t("RMA List")}</Link>
                           </li>
                           <li>
                             <HiOutlineReceiptRefund />{" "}
