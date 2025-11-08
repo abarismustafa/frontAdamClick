@@ -327,7 +327,7 @@ function App() {
 
         <Route path="returns/rma/list" element={<RmarReturnPage />} />
         <Route path="returns/rma/new/:id" element={<CraeteRmaReturm />} />
-        <Route path="returns/rma/view" element={<RmaReturnView />} />
+        <Route path="returns/rma/view/:id" element={<RmaReturnView />} />
       </Routes>
       <SocialMedias />
       <Footer />

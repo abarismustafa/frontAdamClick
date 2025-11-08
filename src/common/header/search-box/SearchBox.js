@@ -86,7 +86,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
       const res = await axios.get(`${baseUrl}auth/logout`, {
         withCredentials: true,
       });
-    } catch (error) {}
+    } catch (error) { }
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("user_id", "");
     window.localStorage.setItem("token", "");
@@ -127,14 +127,13 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
         },
       });
       dispatch(setWishCalc(res.data.length));
-    } catch (error) {}
+    } catch (error) { }
     if (!token) {
       return;
     }
     try {
       const res2 = await axios.get(
-        `${baseUrl}cart?products=${getCartToken() || ""}&coupon=${
-          getCouponToken() || ""
+        `${baseUrl}cart?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
         }`,
         {
           headers: {
@@ -145,7 +144,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
       );
       dispatch(setCartLeng(res2.data?.cart?.products.length));
       // window.localStorage.setItem("cartItem", res2.data?.cart);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -164,6 +163,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
 
   const { updatedProducts, products, cartLengh, WishLengh } = useSelector(
     (item) => {
+      console.log(item);
       return item.productList;
     }
   );
@@ -265,7 +265,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
         //   resData.data?.getSearchedProduct
         // );
         setData2(resData.data?.getSearchedProduct);
-      } catch (error) {}
+      } catch (error) { }
     }
   };
   const changeROutes = (item) => {
@@ -385,11 +385,11 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                 <button
                   className="navbar-toggler"
                   type="button"
-                  // data-bs-toggle="collapse"
-                  // data-bs-target="#navbarSupportedContent"
-                  // aria-controls="navbarSupportedContent"
-                  // aria-expanded="false"
-                  // aria-label="Toggle navigation"
+                // data-bs-toggle="collapse"
+                // data-bs-target="#navbarSupportedContent"
+                // aria-controls="navbarSupportedContent"
+                // aria-expanded="false"
+                // aria-label="Toggle navigation"
                 >
                   <HiMiniBars3BottomRight onClick={hideShowMenu} />
                 </button>
@@ -442,7 +442,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                     </li>
                     <li>
                       {window.localStorage.getItem("preferredLanguage") ==
-                      "de" ? (
+                        "de" ? (
                         <span
                           onClick={() => {
                             handleLanguage("65111f1f78085e4cc5cce8ff");
@@ -577,7 +577,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                                               {item?.name +
                                                 (variation?.variant_slug
                                                   ? " " +
-                                                    variation?.variant_slug
+                                                  variation?.variant_slug
                                                   : "")}
                                             </h6>
                                             <h6
@@ -703,14 +703,14 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                             style={{ width: "20px", height: "20px" }}
                             src={
                               profileImg &&
-                              profileImg != "" &&
-                              profileImg != undefined
+                                profileImg != "" &&
+                                profileImg != undefined
                                 ? profileImg
                                 : profileData?.getaUser?.profilePhoto?.url &&
                                   profileData?.getaUser?.profilePhoto?.url !==
-                                    ""
-                                ? profileData?.getaUser.profilePhoto.url
-                                : tempProfileImg
+                                  ""
+                                  ? profileData?.getaUser.profilePhoto.url
+                                  : tempProfileImg
                             }
                           />
                         ) : (
@@ -726,14 +726,14 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                       <li className="userNamePro">
                         <Link to="/" className="userNameText">
                           {profileData?.getaUser?.firstname &&
-                          profileData?.getaUser?.lastname
+                            profileData?.getaUser?.lastname
                             ? `${profileData?.getaUser.firstname} ${profileData?.getaUser.lastname}`
                             : profileData?.getaUser?.selectedBillingAddress
-                                ?.firstname &&
+                              ?.firstname &&
                               profileData?.getaUser?.selectedBillingAddress
                                 ?.lastname
-                            ? `${profileData?.getaUser.selectedBillingAddress.firstname} ${profileData?.getaUser.selectedBillingAddress.lastname}`
-                            : profileData?.getaUser?.mobile || ""}
+                              ? `${profileData?.getaUser.selectedBillingAddress.firstname} ${profileData?.getaUser.selectedBillingAddress.lastname}`
+                              : profileData?.getaUser?.mobile || ""}
                           <MdOutlineArrowDropDown
                             style={{ fontSize: "19px" }}
                           />
@@ -769,7 +769,8 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           </li>
                           <li>
                             <SiAdobecreativecloud />{" "}
-                            <Link to="/rma_history">{t("RMA History")}</Link>
+                            {/* <Link to="/rma_history">{t("RMA History")}</Link> */}
+                            <Link to="/returns/rma/list">{t("RMA List")}</Link>
                           </li>
                           <li>
                             <HiOutlineReceiptRefund />{" "}
@@ -867,7 +868,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                     </li>
                     <li>
                       {window.localStorage.getItem("preferredLanguage") ==
-                      "de" ? (
+                        "de" ? (
                         <span
                           onClick={() => {
                             handleLanguage("65111f1f78085e4cc5cce8ff");

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { base_url } from "../../server";
+import { Popconfirm, message } from "antd";
 
 function ModalCancel(props) {
   console.log(props);
@@ -49,16 +50,16 @@ function ModalCancel(props) {
         }
       );
 
-      console.log(res);
-      if (res?.data?.status == 200) {
+      // console.log(res);
+      if (res?.data?._id) {
         props.fechData();
         props.onHide();
-        alert("Order Cancel Successfully");
+        alert("Order cancelled successfully!");
       }
 
 
     } catch (error) {
-      alert("Please Select reason");
+      alert("Please select a reason");
     }
   };
 
@@ -101,7 +102,23 @@ function ModalCancel(props) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={sendData} disabled={!state?.reason || !state?.note}>Send</Button>
+        <Popconfirm
+          title="Are you sure you want to cancel this order?"
+          // description="This action cannot be undone."
+          onConfirm={sendData}
+          okText="Yes, Cancel"
+          cancelText="No"
+          okButtonProps={{ danger: true }}
+          placement="topRight"
+        >
+          <Button
+            variant="danger"
+            disabled={!state?.reason || !state?.note}
+          >
+            Cancel Now
+          </Button>
+        </Popconfirm>
+        {/* <Button onClick={sendData} disabled={!state?.reason || !state?.note}>Cancel Now</Button> */}
       </Modal.Footer>
     </Modal>
   );

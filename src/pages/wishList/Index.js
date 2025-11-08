@@ -54,8 +54,8 @@ function WishList() {
     if (!isLogin) getData();
   }, []);
 
-  const deleteItem = (id) => {
-    deleteWishlist({ data: { id: id, userId: userid }, token: token });
+  const deleteItem = (item) => {
+    deleteWishlist({ data: { prodId: item?.uid, variantId: item?.variations[0]?.variant_slug, userId: userid }, token: token });
   };
 
   const dispacher = useDispatch();
@@ -89,7 +89,7 @@ function WishList() {
                 }
                 return (
                   <>
-                    {/* <div
+                    <div
                       key={item._id}
                       className="col-xxl-3 col-xl-4 col-lg-3 col-md-4 col-sm-6"
                       id="wishlist_1"
@@ -100,7 +100,8 @@ function WishList() {
                       >
                         <div className="card-body" style={{ paddingTop: "0" }}>
                           <Link
-                            to={`/product/${item.uid}/${item?.slug}`}
+                            // to={`/product/${item.uid}/${item?.slug}`}
+                            to={`/product/${item?.uid}/${item?.slug}/${item?.variations[0]?.variant_slug}`}
                             className="d-block mb-3"
                           >
                             {item?.variations[0]?.mainImage_url?.url ? (
@@ -132,12 +133,13 @@ function WishList() {
                             style={{ color: "black" }}
                           >
                             <Link
-                              to={`/product/${item.uid}/${item?.slug}`}
+                              to={`/product/${item?.uid}/${item?.slug}/${item?.variations[0]?.variant_slug}`}
                               className="text-reset"
                               style={{ fontSize: "16px", color: "black" }}
                             >
                               {" "}
-                              {t("Name")} : {item?.name}
+                              {/* {t("Name")} : {item?.name} */}
+                              {item?.name + (item?.variations[0]?.variant_slug ? " " + item?.variations[0]?.variant_slug : "")}
                             </Link>
                           </h5>
                           <div
@@ -172,21 +174,21 @@ function WishList() {
                           <button
                             type="button"
                             className="btn btn-danger addCart w-100 delt"
-                            onClick={() => deleteItem(item?.uid)}
+                            onClick={() => deleteItem(item)}
                           >
                             {t("Delete Item")}
                           </button>
                           <Link
-                            to={`/product/${item.uid}/${item?.slug}`}
+                            to={`/product/${item?.uid}/${item?.slug}/${item?.variations[0]?.variant_slug}`}
                             className="btn btn-primary buyNow"
                           >
                             {t("View Detail")}
                           </Link>
                         </div>
                       </div>
-                    </div> */}
+                    </div>
 
-                    {Array.isArray(item?.variations) &&
+                    {/* {Array.isArray(item?.variations) &&
                       item.variations.length > 0 &&
                       item?.variations?.map((variation, i) => {
                         console.log(variation?.variant_slug);
@@ -244,7 +246,7 @@ function WishList() {
                                   style={{ fontSize: "16px", color: "black" }}
                                 >
                                   {" "}
-                                  {/* {t("Name")} : {item?.name} */}
+
 
                                   {item?.name + (variation?.variant_slug ? " " + variation.variant_slug : "")}
                                 </Link>
@@ -294,7 +296,7 @@ function WishList() {
                             </div>
                           </div>
                         </div>
-                      })}
+                      })} */}
                   </>
                 );
               })}

@@ -61,8 +61,7 @@ function Cart() {
   const getCartData = async () => {
     try {
       const res = await axios.get(
-        `${baseUrl}cart?products=${getCartToken() || ""}&coupon=${
-          getCouponToken() || ""
+        `${baseUrl}cart?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
         }`
       );
       setisSuccess(true);
@@ -161,7 +160,7 @@ function Cart() {
         withCredentials: true,
       });
       getCartData();
-    } catch (error) {}
+    } catch (error) { }
   };
 
   return (
@@ -361,13 +360,8 @@ function Cart() {
                 <p> {showData?.cart?.products[0]?.shippingCost}</p>
               </div> */}
                 <div className="subTotal">
-                  <h6>{t("IGST")}</h6>
-                  <p>
-                    {" "}
-                    {showData?.cart?.igst
-                      ? showData?.cart?.igst
-                      : showData?.cart?.tax}
-                  </p>
+                  <h6>{t('IGST')}</h6>
+                  <p>  {showData?.cart?.igst?.toFixed(2) ? showData?.cart?.igst?.toFixed(2) : showData?.cart?.tax?.toFixed(2)}</p>
                 </div>
                 <div className="subTotal">
                   <h6>{t("SGST")}</h6>
@@ -411,7 +405,7 @@ function Cart() {
       <LoginAllPage
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        // BuyNowItem={BuyNowItem}
+      // BuyNowItem={BuyNowItem}
       />
     </>
   );

@@ -197,7 +197,9 @@ export const productsApi = createApi({
 
     setCartTempt: builder.mutation({
       query: (pay) => ({
-        url: `order/temp_cart?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+        // url: `order/temp_cart?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+        //   }`,
+        url: `order/temp_cart_nw?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
           }`,
         method: "POST",
         body: pay.data,
@@ -306,7 +308,8 @@ export const productsApi = createApi({
     }),
     deleteWishlist: builder.mutation({
       query: (val) => ({
-        url: `product/wishlist/delete_wishlist`,
+        // url: `product/wishlist/delete_wishlist`,
+        url: `product/wishlist/delete_wishlist_nw`,
         method: "DELETE",
         credentials: "include",
         body: val.data,
