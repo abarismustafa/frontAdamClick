@@ -32,7 +32,7 @@ function LoginCartSec(props) {
     useEffect(() => {
         if (data?.firstname) {
             setTimeout(() => {
-                console.log(data);
+                // console.log(data);
                 window.localStorage.setItem("token", data.token);
                 window.localStorage.setItem("user_id", data._id);
                 window.localStorage.setItem("isLogin", true);

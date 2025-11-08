@@ -18,7 +18,7 @@ function About() {
       const res = await axios.get(`${baseUrl}adminWeb_footer/get`);
       setData(res.data);
     } catch (error) {
-      console.log("server-error");
+      // console.log("server-error");
     }
   };
   useEffect(() => {
@@ -28,14 +28,14 @@ function About() {
   return (
     <>
       <Breadcrumb title="About Us" t={t} />
-      <main className="main about d-none">
+      <main className="main about">
         {/* <AboutBanner /> */}
         <AboutStory data={data} t={t} />
-        <AboutChoose t={t} />
-        <AboutCounters t={t} />
+        {/* <AboutChoose t={t} /> */}
+        {/* <AboutCounters t={t} /> */}
       </main>
 
-      <div className="tab products-details-tab">
+      <div className="tab products-details-tab d-none">
         <div className="row">
           <div className="col-lg-3 col-md-12">
             <ul className="tabs" id="myTab" role="tablist">

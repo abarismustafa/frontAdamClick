@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 
-import suitBanner1 from "../../../assets/img/banner/banner1.webp";
-import suitBanner2 from "../../../assets/img/banner/banner2.webp";
+import suitBanner1 from "../../../assets/img/banner/cc0mbccgavf8aft8ct55.png";
+import suitBanner2 from "../../../assets/img/banner/bofengg.png";
 
 import "./Banner.css";
 import { Link } from "react-router-dom";

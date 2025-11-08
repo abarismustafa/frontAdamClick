@@ -34,7 +34,7 @@ function BlogUsersComment({ reviewData, resviewCommet }) {
           </div>}
 
           {reviewData && reviewData?.map((item) => {
-            console.log(item);
+            // console.log(item);
 
             return <div className="single-comment-item first-comment" key={item._id}>
               {item?.user_id?.profilePhoto?.url &&

@@ -137,7 +137,7 @@
 .searchIconsItem ul {
     display: flex;
     align-items: center;
-    column-gap: 16px;
+    /* column-gap: 16px; */
     margin: 0;
     padding: 0;
 }
@@ -158,13 +158,9 @@
     color: #fff;
 }
 
-.countParent a {
-    position: relative;
-}
 .countParent a .count {
     background-color: #b0247a;
     color: #fff;
-    position: absolute;
 }
 
 .count {
@@ -180,7 +176,7 @@
     font-weight: 600;
     position: absolute;
     top: -10px;
-    right: 28px;
+    right: 10px;
 }
 
 
@@ -216,7 +212,7 @@
 }
 
 .trendingItem ul li {
-    width: 80px;
+    /* width: 80px; */
 }
 
 .trendingItem ul li a {
