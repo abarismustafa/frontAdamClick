@@ -1,0 +1,19 @@
+.img-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+@media (max-width: 992px) {
+    .img-name {
+        width: 300px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .img-name {
+        width: 300px;
+    }
+}

@@ -545,7 +545,7 @@ function OrderDetail() {
                   </div>
 
                 </div>
-                <button className="btn btn-success w-100 mt-2" onClick={handleDownload}>Download Invoice</button>
+                {/* <button className="btn btn-success w-100 mt-2" onClick={handleDownload}>Download Invoice</button> */}
               </div>
 
             </div>
