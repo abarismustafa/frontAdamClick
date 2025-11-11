@@ -221,6 +221,8 @@ function MyAccountDetail() {
 
   const [invoiceData, setInvoiceData] = useState(null)
   const idGet = async (item) => {
+    console.log(item);
+
     try {
       const res = await axios.get(
         `${baseUrl}order/getOrderById/${item?._id}`,
@@ -537,7 +539,7 @@ function MyAccountDetail() {
                                     <span>Contact Support</span>
                                   </Button>
 
-                                  <Button className={btnClass} style={baseStyle}>
+                                  <Button className={btnClass} style={baseStyle} onClick={() => idGet(item)}>
                                     <HiOutlineDocumentText size={iconSize} />
                                     <span>Print Invoice</span>
                                   </Button>

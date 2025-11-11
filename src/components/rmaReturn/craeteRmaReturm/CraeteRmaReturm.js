@@ -7,8 +7,10 @@ import { ToastContainer } from 'react-toastify';
 import { toastSuccessMessage, toastSuccessMessageError } from '../../../common/messageShow/MessageShow';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../../../common/loader/Loader';
+import OtpSendRma from './otpSendRma/OtpSendRma';
 const { Option } = Select;
 const CraeteRmaReturm = () => {
+    const [modalShow, setModalShow] = useState(false);
     const params = useParams()
     // console.log(params);
     const navigate = useNavigate()
@@ -199,8 +201,9 @@ const CraeteRmaReturm = () => {
         setInitialValue((prev) => ({ ...prev, [name]: value }));
     };
 
-    const submitData = async () => {
-        // console.log("Submit Payload:", initialValue);
+    const submitData = async (otp) => {
+        console.log("Submit Payload:", otp);
+
         if (!initialValue.variant_id.length) {
             toastSuccessMessageError("Please select at least one product variant!");
             return;
@@ -215,7 +218,12 @@ const CraeteRmaReturm = () => {
             toastSuccessMessageError("Please enter a reason for your request!");
             return;
         }
-        const clone = [initialValue]
+
+        // const clone = [initialValue]
+        const clone = {
+            otp: otp,
+            data: [initialValue],
+        };
         try {
             const res = await axios.post(`${baseUrl}rma/requestRMA`, clone, {
                 headers: {
@@ -227,14 +235,23 @@ const CraeteRmaReturm = () => {
             // if (res?.status == ) {
 
             // }
-            toastSuccessMessage(res?.data?.message || "RMA Request submitted successfully!");
-            setTimeout(() => {
-                navigate('/returns/rma/list')
-            }, 1000)
+
+
+            if (res?.data?.error == true) {
+                toastSuccessMessageError(
+                    res?.data?.message
+                );
+            } else {
+                toastSuccessMessage(res?.data?.message || "RMA Request submitted successfully!");
+                setTimeout(() => {
+                    navigate('/returns/rma/list')
+                }, 1000)
+            }
         } catch (error) {
             toastSuccessMessageError(
                 error?.response?.data?.message || "Something went wrong, please try again!"
             );
+
         }
     };
 
@@ -242,11 +259,45 @@ const CraeteRmaReturm = () => {
     const getData = async () => {
         try {
             const res = await axios.get(`${baseUrl}cancelReason`);
-            setReasons(res.data);
+            setReasons(res?.data);
         } catch (error) {
             alert("Somthing Wend Wrong");
         }
     };
+
+    const otpSend = async () => {
+        if (!initialValue.variant_id.length) {
+            toastSuccessMessageError("Please select at least one product variant!");
+            return;
+        }
+
+        if (!initialValue.resulution_type) {
+            toastSuccessMessageError("Please select a resolution type!");
+            return;
+        }
+
+        if (!initialValue.reason.trim()) {
+            toastSuccessMessageError("Please enter a reason for your request!");
+            return;
+        }
+        try {
+            const resOtp = await axios?.get(`${baseUrl}rma/otp`, {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            if (resOtp?.data?.error === false) {
+                toastSuccessMessage(resOtp?.data?.message)
+                setModalShow(true)
+            } else {
+                toastSuccessMessageError(resOtp?.data?.message)
+            }
+
+        } catch (error) {
+
+        }
+    }
 
     // useEffect(() => {
     //     getData();
@@ -515,7 +566,18 @@ const CraeteRmaReturm = () => {
                                 <div className="form-text">Max file size: 2M</div>
                             </div> */}
                                     <div className='col-lg-12 text-center'>
-                                        <button type="button" className="btn btn-primary px-4 " onClick={submitData}>
+                                        <button type="button"
+                                            className="px-4 btn"
+                                            style={{
+                                                backgroundColor: initialValue.variant_id.length ? "#007bff" : "#ccc",
+                                                color: initialValue.variant_id.length ? "#fff" : "#666",
+                                                border: "none",
+                                                cursor: initialValue.variant_id.length ? "pointer" : "not-allowed",
+                                                transition: "all 0.2s ease",
+                                            }}
+                                            disabled={!initialValue.variant_id.length}
+                                            onClick={otpSend}
+                                        >
                                             Submit Request
                                         </button>
                                     </div>
@@ -524,9 +586,13 @@ const CraeteRmaReturm = () => {
                         </div>
                     </div>
                 )}
-
-
                 <ToastContainer />
+
+                <OtpSendRma
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    submitData={submitData}
+                />
             </div>
         </>
     )

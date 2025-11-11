@@ -4,10 +4,16 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { base_url } from '../../../server'
 import Loader from '../../../common/loader/Loader'
+import { FaEdit } from 'react-icons/fa'
+import { ToastContainer } from 'react-toastify'
+import { toastSuccessMessage, toastSuccessMessageError } from '../../../common/messageShow/MessageShow'
 
 const RmaReturnView = () => {
     const params = useParams()
     const [loader, setLoader] = useState(false)
+    const [isEditing, setIsEditing] = useState(false);
+    const [serviceAvailable, setServiceAvailable] = useState(null);
+    const [checkingPincode, setCheckingPincode] = useState(false);
     const token = window.localStorage.getItem("token");
     const [ramaDetailsList, setRamaDetailsList] = useState(null)
     const baseUrl = base_url();
@@ -31,6 +37,111 @@ const RmaReturnView = () => {
             getRamaDetails(params?.id)
         }
     }, [params?.id])
+
+    const [formdataUpdate, setFormdataUpdate] = useState({
+        addressLine1: '',
+        city: '',
+        country: '',
+        firstname: '',
+        lastname: '',
+        phone: '',
+        state: '',
+        zip: '',
+        addressLine2: "",
+        company: "",
+        email: "",
+        landmark: "",
+        province: "",
+        type: "",
+    })
+
+
+    const handleEditClick = (address) => {
+        setIsEditing(true);
+        setFormdataUpdate({
+            addressLine1: address?.addressLine1 || '',
+            city: address?.city || '',
+            country: address?.country || '',
+            firstname: address?.firstname || '',
+            lastname: address?.lastname || '',
+            phone: address?.phone || '',
+            state: address?.state || '',
+            zip: address?.zip || '',
+            addressLine2: address?.addressLine2 || '',
+            company: address?.company || '',
+            email: address?.email || '',
+            landmark: address?.landmark || '',
+            province: address?.province || '',
+            type: address?.type || '',
+        });
+        if (address?.zip && address.zip.length === 6) {
+            checkPincodeService(address.zip);
+        } else {
+            setServiceAvailable(null);
+        }
+    };
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormdataUpdate((prev) => ({ ...prev, [name]: value }));
+
+        // ZIP check logic
+        if (name === "zip" && value.length === 6) {
+            checkPincodeService(value);
+        } else if (name === "zip" && value.length < 6) {
+            setServiceAvailable(null);
+        }
+    };
+    const checkPincodeService = async (zip) => {
+        setCheckingPincode(true);
+        setServiceAvailable(null);
+        try {
+            const res = await axios.post(
+                `${baseUrl}delivery-service/pincode`,
+                { pincode: zip },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            const service = res?.data?.is_serviceable === true;
+            setServiceAvailable(service);
+        } catch (error) {
+            // console.error("Pincode check error:", error);
+            setServiceAvailable(false);
+        } finally {
+            setCheckingPincode(false);
+        }
+    };
+
+
+    const updateAddress = async () => {
+        const clone = { returnPickupAddress: formdataUpdate }
+        try {
+            const res = await axios.put(`${baseUrl}rma/updateRMA/${params?.id}`, clone, {
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log('res');
+            if (res?.data?.success === true) {
+                toastSuccessMessage(res?.data?.message)
+                setIsEditing(false);
+                getRamaDetails(params?.id);
+            } else {
+                toastSuccessMessageError("server side errror")
+            }
+
+
+        } catch (error) {
+
+            toastSuccessMessageError(error?.response?.data?.message || "Update failed, please try again!")
+        }
+    };
     return (
         <>
             {loader && <Loader />}
@@ -160,19 +271,168 @@ const RmaReturnView = () => {
                                 </p>
                             </div>
 
-                            <div className="col-md-6">
-                                <h5 className="fw-bold mb-3">Return Address</h5>
-                                <p className="mb-0">
-                                    {item?.returnPickupAddress?.addressLine1} <br />
-                                    {item?.returnPickupAddress?.city} {item?.returnPickupAddress?.state} {item?.returnPickupAddress?.country}<br />
-                                    {item?.returnPickupAddress?.zip} <br />
-                                    <a
-                                        // href="tel:+13218439792"
-                                        href='#'
-                                        className="text-decoration-none">
-                                        {item?.returnPickupAddress?.phone}
-                                    </a>
-                                </p>
+                            <div className="col-md-6 position-relative">
+                                <h5 className="fw-bold mb-3 d-flex justify-content-between align-items-center">
+                                    Return Address
+                                    {!isEditing && (
+                                        <FaEdit
+                                            onClick={() => handleEditClick(ramaDetailsList?.[0]?.returnPickupAddress)}
+                                            style={{ cursor: "pointer", color: "#0d6efd" }}
+                                            title="Edit Address"
+                                        />
+                                    )}
+                                </h5>
+                                {!isEditing ? (
+                                    // ====== VIEW MODE ======
+                                    <p className="mb-0">
+                                        {ramaDetailsList?.[0]?.returnPickupAddress?.firstname}{" "}
+                                        {ramaDetailsList?.[0]?.returnPickupAddress?.lastname} <br />
+                                        {ramaDetailsList?.[0]?.returnPickupAddress?.addressLine1} <br />
+                                        {ramaDetailsList?.[0]?.returnPickupAddress?.city}{" "}
+                                        {ramaDetailsList?.[0]?.returnPickupAddress?.state}{" "}
+                                        {ramaDetailsList?.[0]?.returnPickupAddress?.country}
+                                        <br />
+                                        {ramaDetailsList?.[0]?.returnPickupAddress?.zip} <br />
+                                        <a href="#" className="text-decoration-none">
+                                            {ramaDetailsList?.[0]?.returnPickupAddress?.phone}
+                                        </a>
+                                    </p>
+                                ) : (
+                                    // ====== EDIT MODE ======
+                                    <div className="border p-3 rounded bg-light">
+                                        <div className="row g-3">
+                                            <div className="col-md-6">
+                                                <label className="form-label fw-semibold">First Name</label>
+                                                <input
+                                                    type="text"
+                                                    name="firstname"
+                                                    value={formdataUpdate.firstname}
+                                                    onChange={handleChange}
+                                                    className="form-control"
+                                                    placeholder="Enter first name"
+                                                />
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <label className="form-label fw-semibold">Last Name</label>
+                                                <input
+                                                    type="text"
+                                                    name="lastname"
+                                                    value={formdataUpdate.lastname}
+                                                    onChange={handleChange}
+                                                    className="form-control"
+                                                    placeholder="Enter last name"
+                                                />
+                                            </div>
+
+                                            <div className="col-md-12">
+                                                <label className="form-label fw-semibold">Address Line 1</label>
+                                                <input
+                                                    type="text"
+                                                    name="addressLine1"
+                                                    value={formdataUpdate.addressLine1}
+                                                    onChange={handleChange}
+                                                    className="form-control"
+                                                    placeholder="Enter address"
+                                                />
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <label className="form-label fw-semibold">City</label>
+                                                <input
+                                                    type="text"
+                                                    name="city"
+                                                    value={formdataUpdate.city}
+                                                    onChange={handleChange}
+                                                    className="form-control"
+                                                    placeholder="Enter city"
+                                                />
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <label className="form-label fw-semibold">State</label>
+                                                <input
+                                                    type="text"
+                                                    name="state"
+                                                    value={formdataUpdate.state}
+                                                    onChange={handleChange}
+                                                    className="form-control"
+                                                    placeholder="Enter state"
+                                                />
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <label className="form-label fw-semibold">Country</label>
+                                                <input
+                                                    type="text"
+                                                    name="country"
+                                                    value={formdataUpdate.country}
+                                                    onChange={handleChange}
+                                                    className="form-control"
+                                                    placeholder="Enter country"
+                                                />
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <label className="form-label fw-semibold">Phone</label>
+                                                <input
+                                                    type="text"
+                                                    name="phone"
+                                                    value={formdataUpdate.phone}
+                                                    onChange={handleChange}
+                                                    className="form-control"
+                                                    placeholder="Enter phone"
+                                                />
+                                            </div>
+
+                                            <div className="col-md-6">
+                                                <label className="form-label fw-semibold">PIN Code</label>
+                                                <input
+                                                    type="text"
+                                                    name="zip"
+                                                    value={formdataUpdate.zip}
+                                                    onChange={(e) => {
+                                                        handleChange(e);
+                                                        const zip = e.target.value;
+                                                        if (zip.length === 6) {
+                                                            checkPincodeService(zip);
+                                                        } else {
+                                                            setServiceAvailable(null);
+                                                        }
+                                                    }}
+                                                    maxLength={6}
+                                                    className="form-control"
+                                                    placeholder="Enter 6-digit PIN"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        {/* Pincode check message */}
+                                        {checkingPincode && (
+                                            <p className="text-primary mt-2">Checking service availability...</p>
+                                        )}
+                                        {serviceAvailable === false && (
+                                            <p className="text-danger mt-2">❌ Service not available for this PIN code!</p>
+                                        )}
+                                        {serviceAvailable === true && (
+                                            <p className="text-success mt-2">✅ Service available for this PIN code!</p>
+                                        )}
+
+                                        <button
+                                            className="btn mt-3 w-100"
+                                            type='button'
+                                            style={{
+                                                backgroundColor: serviceAvailable ? "#0d6efd" : "#adb5bd",
+                                                color: "#fff",
+                                                cursor: serviceAvailable ? "pointer" : "not-allowed",
+                                            }}
+                                            disabled={!serviceAvailable}
+                                            onClick={updateAddress}
+                                        >
+                                            Update Address
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     })}
@@ -292,6 +552,7 @@ const RmaReturnView = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }
