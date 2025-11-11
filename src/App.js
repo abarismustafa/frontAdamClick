@@ -83,6 +83,8 @@ import OtpPage from "./pages/otp";
 import RmarReturnPage from "./pages/rmaReturn";
 import CraeteRmaReturm from "./components/rmaReturn/craeteRmaReturm/CraeteRmaReturm";
 import RmaReturnView from "./components/rmaReturn/rmaReturnView/RmaReturnView";
+import ThankyouSucccessPage from "./pages/thankyouSucccess/ThankyouSucccess";
+import StatisticTrackerWrapper from "./StatisticTrackerWrapper";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -175,9 +177,9 @@ function App() {
       </div> */}
 
       <RecentViewed recent={recent} closeRecent={closeRecent} />
+      <StatisticTrackerWrapper />
       <Routes>
         <Route path="/" element={<HomePage setShow={setShow} />} />
-
         <Route path="*" element={<Navigate to="/page-not-found" />} />
         <Route
           path="/page-not-found"
@@ -328,7 +330,9 @@ function App() {
         <Route path="returns/rma/list" element={<RmarReturnPage />} />
         <Route path="returns/rma/new/:id" element={<CraeteRmaReturm />} />
         <Route path="returns/rma/view/:id" element={<RmaReturnView />} />
+        <Route path="thankyou" element={<ThankyouSucccessPage />} />
       </Routes>
+
       <SocialMedias />
       <Footer />
       <div

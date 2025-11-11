@@ -1012,6 +1012,42 @@ function ProductDetail() {
                           style={{ maxHeight: "400px", width: "300px", marginRight: "10px" }}
                         />
                       ))} */}
+                      {tab?.docs?.length > 0 && (
+                        <div className="pdf-section mt-2">
+                          {/* <h5 className="fw-bold mb-3">Documents</h5> */}
+                          {tab?.docs?.map((doc, i) => (
+                            <div
+                              key={doc?._id}
+                              className="mb-4 shadow-sm border rounded overflow-hidden bg-white"
+                              style={{
+                                borderRadius: "12px",
+                              }}
+                            >
+                              {/* 🔹 Title on top */}
+                              <div
+                                className="p-2  bg-light border-bottom"
+                                style={{
+                                  backgroundColor: "#f8f9fa",
+                                }}
+                              >
+                                <strong className="text-dark">{doc?.title}</strong>
+                              </div>
+
+                              {/* 🔹 PDF Viewer */}
+                              <iframe
+                                src={`${doc?.url}#toolbar=0&navpanes=0&scrollbar=0`}
+                                title={doc?.title}
+                                style={{
+                                  width: "100%",
+                                  height: "500px",
+                                  border: "none",
+                                  backgroundColor: "#fff",
+                                }}
+                              ></iframe>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </section>
                   ))}
                 </div>
@@ -1020,18 +1056,17 @@ function ProductDetail() {
 
 
 
-            <div className="container my-4">
+            {/* <div className="container my-4">
               <div className="row g-4">
                 {data?.reports?.map((item) => (
                   <div key={item._id} className="col-lg-12">
-                    {/* <div className="p-3 border rounded shadow-sm bg-white"> */}
-                    {/* <h5 className="mb-3">{item.title}</h5> */}
+
                     <PdfCanvasViewer url={item.url} title={item.title} />
-                    {/* </div> */}
+
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* <div
               style={{

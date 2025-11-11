@@ -1027,7 +1027,7 @@ function Checkout() {
 
   useEffect(() => {
     if (plaecedData?.error == false) {
-      console.log('plaecedData', plaecedData);
+      // console.log('plaecedData', plaecedData);
       handlePayment(plaecedData)
     }
   }, [plaecedData])
@@ -1035,6 +1035,7 @@ function Checkout() {
   useEffect(() => {
     if (plaecedData?.statusCode == 200) {
       setSuccessModal(true);
+      navigate("/thankyou", { state: { placedData: plaecedData } });
     }
   }, [plaecedData])
 

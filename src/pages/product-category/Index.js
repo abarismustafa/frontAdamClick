@@ -10,9 +10,13 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { base_url } from "../../server";
+import UseStatisticTracker from "../../common/useStatisticTracker/UseStatisticTracker";
 
 function ProductCategoryPage() {
   const params = useParams();
+  // console.log(params);
+  UseStatisticTracker({ category_id: params?.id });
+
   // const { data: allData, isLoading } = useGetCategoriesProductQuery(params.id)
   let isError = false;
   const [data, setData] = useState();
