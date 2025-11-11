@@ -148,6 +148,50 @@ const settings = {
     },
   ],
 };
+const primarySettings = {
+  speed: 500,
+  slidesToShow: 2, // Number of items to show on desktop
+  slidesToScroll: 1,
+  dots: false,
+  arrows: false,
+  autoplay: true,
+  autoplaySpeed: 4000,
+  responsive: [
+    {
+      breakpoint: 1120, // Screen size for tablets
+      settings: {
+        slidesToShow: 2, // Number of items to show on tablets
+        slidesToScroll: 1,
+        arrows: false,
+      },
+    },
+    {
+      breakpoint: 1024, // Screen size for tablets
+      settings: {
+        slidesToShow: 2, // Number of items to show on tablets
+        slidesToScroll: 1,
+        arrows: false,
+      },
+    },
+    {
+      breakpoint: 768, // Screen size for mobile devices
+
+      settings: {
+        slidesToShow: 1, // Number of items to show on mobile
+        slidesToScroll: 1,
+        arrows: true,
+      },
+    },
+    {
+      breakpoint: 500, // Screen size for mobile devices
+      settings: {
+        slidesToShow: 1, // Number of items to show on mobile
+        slidesToScroll: 1,
+        arrows: true,
+      },
+    },
+  ],
+};
 
 const PrimaryCategory = ({ pageTitle }) => {
   const baseUrl = base_url();
@@ -223,7 +267,7 @@ const PrimaryCategory = ({ pageTitle }) => {
                     </div>
                   </div>
 
-                  <div className="col-lg-4 col-md-5 col-sm-5 col-5">
+                  <div className="col-lg-4 col-md-5 col-sm-6 col-6">
                     <div className="categoryVideo">
                       {category.banner?.url && (
                         <div className="mb-3 h-100">
@@ -237,7 +281,7 @@ const PrimaryCategory = ({ pageTitle }) => {
                     </div>
                   </div>
 
-                  <div className="col-lg-8 col-md-7 col-sm-7 col-7">
+                  <div className="col-lg-8 col-md-7 col-sm-6 col-6">
                     <div className="wiseProducts">
                       <div className="categoryWrapper ">
                         <div className="desktop row">
@@ -295,53 +339,57 @@ const PrimaryCategory = ({ pageTitle }) => {
                           )}
                         </div>
                         <div className="mobile row">
-                          {category.list?.map((product) =>
-                            product.variations?.map((variation) => {
-                              const image =
-                                variation.mainImage_url?.url ||
-                                variation.images?.[0]?.url ||
-                                product.mainImage_url?.url;
-                              const price =
-                                variation.prices?.sale_rate ||
-                                variation.prices?.mrp ||
-                                product.prices?.sale_rate ||
-                                0;
-                              return (
-                                <div className="col-lg-4 col-md-6 col-sm-6 col-6">
-                                  <div className="featuredInfo bg-white border">
-                                    <div className="featuredImg">
-                                      <Link
-                                        to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
-                                      >
-                                        <img
-                                          src={image}
-                                          alt={variation.name || product.name}
-                                          className="img-fluid"
-                                        />
-                                      </Link>
-                                    </div>
-                                    <div className="featuredContent text-center primary">
-                                      {/* <Rating /> */}
-                                      <h5 className="mb-2">
-                                        {t(`${variation.name || product.name}`)}{" "}
-                                      </h5>
-                                      <span>
-                                        MRP :{" "}
-                                        <span className="text-decoration-line-through">
-                                          {" "}
-                                          ₹{variation?.prices[0]?.mrp}
+                          <Slider {...primarySettings}>
+                            {category.list?.map((product) =>
+                              product.variations?.map((variation) => {
+                                const image =
+                                  variation.mainImage_url?.url ||
+                                  variation.images?.[0]?.url ||
+                                  product.mainImage_url?.url;
+                                const price =
+                                  variation.prices?.sale_rate ||
+                                  variation.prices?.mrp ||
+                                  product.prices?.sale_rate ||
+                                  0;
+                                return (
+                                  <div className="">
+                                    <div className="featuredInfo bg-white border">
+                                      <div className="featuredImg">
+                                        <Link
+                                          to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
+                                        >
+                                          <img
+                                            src={image}
+                                            alt={variation.name || product.name}
+                                            className="img-fluid"
+                                          />
+                                        </Link>
+                                      </div>
+                                      <div className="featuredContent text-center primary">
+                                        {/* <Rating /> */}
+                                        <h5 className="mb-2">
+                                          {t(
+                                            `${variation.name || product.name}`
+                                          )}{" "}
+                                        </h5>
+                                        <span>
+                                          MRP :{" "}
+                                          <span className="text-decoration-line-through">
+                                            {" "}
+                                            ₹{variation?.prices[0]?.mrp}
+                                          </span>
                                         </span>
-                                      </span>
-                                      <p className="mb-0">
-                                        Sale Price : ₹
-                                        {variation?.prices[0]?.sale_rate}
-                                      </p>
+                                        <p className="mb-0">
+                                          Sale Price : ₹
+                                          {variation?.prices[0]?.sale_rate}
+                                        </p>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              );
-                            })
-                          )}
+                                );
+                              })
+                            )}
+                          </Slider>
                         </div>
                       </div>
                     </div>

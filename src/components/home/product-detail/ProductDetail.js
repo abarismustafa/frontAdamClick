@@ -620,7 +620,6 @@ function ProductDetail() {
 
   // console.log(data);
 
-
   const isPdf = (url) => url?.toLowerCase().endsWith(".pdf");
 
   return (
@@ -719,7 +718,7 @@ function ProductDetail() {
                   )}
                   {!isMobile && zoomImageProps?.img && (
                     <ReactImageZoom
-                      // style={{ zIndex: "9999999", position: "relative" }}
+                      style={{ zIndex: "9999999", position: "relative" }}
                       {...zoomImageProps}
                     />
                   )}
@@ -979,8 +978,9 @@ function ProductDetail() {
                     {data?.description_tabs?.map((tab, index) => (
                       <li
                         key={tab._id}
-                        className={`tab-item ${activeTab === tab._id ? "active" : ""
-                          }`}
+                        className={`tab-item ${
+                          activeTab === tab._id ? "active" : ""
+                        }`}
                         onClick={() => handleTabClick(tab._id, index)}
                       >
                         {tab.title}
@@ -996,8 +996,9 @@ function ProductDetail() {
                       key={tab._id}
                       id={tab._id}
                       ref={(el) => (sectionRefs.current[index] = el)}
-                      className={`tab-section ${activeTab === tab._id ? "visible" : ""
-                        }`}
+                      className={`tab-section ${
+                        activeTab === tab._id ? "visible" : ""
+                      }`}
                     >
                       <div
                         className="tab-inner"
@@ -1030,7 +1031,9 @@ function ProductDetail() {
                                   backgroundColor: "#f8f9fa",
                                 }}
                               >
-                                <strong className="text-dark">{doc?.title}</strong>
+                                <strong className="text-dark">
+                                  {doc?.title}
+                                </strong>
                               </div>
 
                               {/* 🔹 PDF Viewer */}
@@ -1053,8 +1056,6 @@ function ProductDetail() {
                 </div>
               </div>
             </div>
-
-
 
             {/* <div className="container my-4">
               <div className="row g-4">

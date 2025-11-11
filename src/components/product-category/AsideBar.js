@@ -246,10 +246,10 @@ function ProductsFilter({
           </div> */}
           <div className="rangeNumber">
             <span className="minNum">
-              {t("Minimum")} :{getCountryCode()} {priceRange[0]}
+              {t("Min")} :{getCountryCode()} {priceRange[0]}
             </span>
             <span className="maxNum">
-              {t("Maximum")}: {getCountryCode()} {priceRange[1]}
+              {t("Max")}: {getCountryCode()} {priceRange[1]}
             </span>
           </div>
 
@@ -314,7 +314,6 @@ function ProductsFilter({
               }}
             >
               {categoryTitle ? `${t("View More")}` : `${t("Less")}`}
-              
             </button>
           </div>
         </div>
@@ -383,7 +382,6 @@ function ProductsFilter({
                 handleShow("categoriesBrand");
               }}
             >
-              
               {brandTitle ? `${t("View More")}` : `${t("Less")}`}
             </button>
           </div>

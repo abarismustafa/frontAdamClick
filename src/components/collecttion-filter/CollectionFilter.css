@@ -76,13 +76,16 @@
     .collectionFilterSort select{
         width: 120px;
     }
+    .row.changeGrid.listView .featuredInfo{
+        display: block;
+    }
 }
 
 @media (max-width: 480px) {
 
     .collectionFilter {
-        flex-wrap: wrap;
-        justify-content: center !important;
+        /* flex-wrap: wrap; */
+        justify-content: space-between !important;
         row-gap: 15px;
     }
 }
