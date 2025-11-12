@@ -86,7 +86,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
       const res = await axios.get(`${baseUrl}auth/logout`, {
         withCredentials: true,
       });
-    } catch (error) { }
+    } catch (error) {}
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("user_id", "");
     window.localStorage.setItem("token", "");
@@ -127,13 +127,14 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
         },
       });
       dispatch(setWishCalc(res.data.length));
-    } catch (error) { }
+    } catch (error) {}
     if (!token) {
       return;
     }
     try {
       const res2 = await axios.get(
-        `${baseUrl}cart?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+        `${baseUrl}cart?products=${getCartToken() || ""}&coupon=${
+          getCouponToken() || ""
         }`,
         {
           headers: {
@@ -144,7 +145,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
       );
       dispatch(setCartLeng(res2.data?.cart?.products.length));
       // window.localStorage.setItem("cartItem", res2.data?.cart);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -265,7 +266,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
         //   resData.data?.getSearchedProduct
         // );
         setData2(resData.data?.getSearchedProduct);
-      } catch (error) { }
+      } catch (error) {}
     }
   };
   const changeROutes = (item) => {
@@ -385,11 +386,11 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                 <button
                   className="navbar-toggler"
                   type="button"
-                // data-bs-toggle="collapse"
-                // data-bs-target="#navbarSupportedContent"
-                // aria-controls="navbarSupportedContent"
-                // aria-expanded="false"
-                // aria-label="Toggle navigation"
+                  // data-bs-toggle="collapse"
+                  // data-bs-target="#navbarSupportedContent"
+                  // aria-controls="navbarSupportedContent"
+                  // aria-expanded="false"
+                  // aria-label="Toggle navigation"
                 >
                   <HiMiniBars3BottomRight onClick={hideShowMenu} />
                 </button>
@@ -413,15 +414,184 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                   </select>
                 </div>
               </div> */}
+                <div className="socialMedia">
+                  <ul>
+                    {/* {isLogin === "true" && (
+                      <li>
+                        <button
+                          type="button"
+                          className="logoutBtn"
+                          onClick={logout}
+                        >
+                          {t("welcome_to_react")}
+                        </button>
+                      </li>
+                    )}
+                    {isLogin === "false" && (
+                      <li>
+                        <Link to="/login"> {t("welcome_to_reactt")} </Link>
+                      </li>
+                    )} */}
+                    {isLogin === "true" && (
+                      <li
+                        style={{
+                          background: "white",
+                          borderRadius: "100%",
+                          marginRight: "-10px",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {/* <AiOutlineUser /> */}
+                        {profileImg ? (
+                          <img
+                            style={{ width: "20px", height: "20px" }}
+                            src={
+                              profileImg &&
+                              profileImg != "" &&
+                              profileImg != undefined
+                                ? profileImg
+                                : profileData?.getaUser?.profilePhoto?.url &&
+                                  profileData?.getaUser?.profilePhoto?.url !==
+                                    ""
+                                ? profileData?.getaUser.profilePhoto.url
+                                : tempProfileImg
+                            }
+                          />
+                        ) : (
+                          <img
+                            style={{ width: "20px", height: "20px" }}
+                            src={tempProfileImg}
+                          />
+                        )}
+                      </li>
+                    )}
 
+                    {isLogin === "true" && (
+                      <li className="userNamePro">
+                        <Link to="/" className="userNameText">
+                          {/* {profileData?.getaUser?.firstname &&
+                          profileData?.getaUser?.lastname
+                            ? `${profileData?.getaUser.firstname} ${profileData?.getaUser.lastname}`
+                            : profileData?.getaUser?.selectedBillingAddress
+                                ?.firstname &&
+                              profileData?.getaUser?.selectedBillingAddress
+                                ?.lastname
+                            ? `${profileData?.getaUser.selectedBillingAddress.firstname} ${profileData?.getaUser.selectedBillingAddress.lastname}`
+                            : profileData?.getaUser?.mobile || ""} */}
+                          <MdOutlineArrowDropDown
+                            style={{ fontSize: "19px" }}
+                          />
+                        </Link>
+                        <ul className="dropdown-menu helll">
+                          <li>
+                            <AiOutlineShoppingCart />{" "}
+                            <Link to="/myAccount">{t("My Oders")}</Link>
+                          </li>
+                          <li>
+                            <TbJewishStarFilled />{" "}
+                            <Link to="/wishlist">{t("My WishList")}</Link>
+                          </li>
+                          <li>
+                            <FaBabyCarriage />{" "}
+                            <Link to="/cart">{t("My Cart")}</Link>
+                          </li>
+                          <li>
+                            <GiWallet />{" "}
+                            <Link to="/myWallet">{t("My Wallet")}</Link>
+                          </li>
+                          <li>
+                            <GiNewspaper />{" "}
+                            <Link to="/my_product_reviews">
+                              {t("My Product Reviews")}{" "}
+                            </Link>
+                          </li>
+                          <li>
+                            <VscActivateBreakpoints />{" "}
+                            <Link to="/earning-points">
+                              {t("My Earning Points")}
+                            </Link>
+                          </li>
+                          <li>
+                            <SiAdobecreativecloud />{" "}
+                            {/* <Link to="/rma_history">{t("RMA History")}</Link> */}
+                            <Link to="/returns/rma/list">{t("RMA List")}</Link>
+                          </li>
+                          <li>
+                            <HiOutlineReceiptRefund />{" "}
+                            <Link to="/sent-refund-request">
+                              {t("Sent Refund Request")}
+                            </Link>
+                          </li>
+                          <li>
+                            <BsBuildingAdd />{" "}
+                            <Link to="/billingAddress">
+                              {t("My Billing Address")}
+                            </Link>
+                          </li>
+                          <li>
+                            <FaShippingFast />{" "}
+                            <Link to="/shippingAddress">
+                              {t("My Delivery Address")}
+                            </Link>
+                          </li>
+                          <li>
+                            <MdSell />{" "}
+                            <Link to="/allSeller">{t("Visit Sellers")}</Link>
+                          </li>
+                          {/* <li><SiAdobecreativecloud /> <Link to="/seller/sign-Up">Become ETG Seller</Link></li> */}
+
+                          <li>
+                            <BiUser />{" "}
+                            <Link to="/profile">{t("My Profile")}</Link>
+                          </li>
+                          <li>
+                            <BiUser />{" "}
+                            <Link to="/changePassword">
+                              {t("Change Password")}
+                            </Link>
+                          </li>
+                          <li>
+                            <CgTrack />{" "}
+                            <Link to="/track-order">{t("Track My Order")}</Link>
+                          </li>
+                          <li>
+                            <MdSell />{" "}
+                            <Link to="/support_ticket">
+                              {t("Support Ticket")}
+                            </Link>
+                          </li>
+                          {isLogin === "true" && (
+                            <li
+                              className="py-1 px-3 text-uppercase"
+                              onClick={logout}
+                            >
+                              <BiLogInCircle /> {t("welcome_to_react")}
+                            </li>
+                          )}
+                          {isLogin === "false" && (
+                            <li>
+                              <BiLogInCircle />{" "}
+                              <Link className="py-1 px-3" to="/login">
+                                {t("welcome_to_reactt")}{" "}
+                              </Link>
+                            </li>
+                          )}
+                        </ul>
+                      </li>
+                    )}
+                  </ul>
+                </div>
                 <div className="searchIconsItem">
                   <ul>
-                    <li>
-                      <Link to="/myAccount">
-                        <BiUser />
-                        <span>{t("Account")}</span>
-                      </Link>
-                    </li>
+                    {isLogin === "false" && (
+                      <li className="mobileDrop">
+                        <Link to="/myAccount">
+                          <BiUser />
+                          <span className="iconText">{t("Account")}</span>
+                        </Link>
+                      </li>
+                    )}
+
                     <li className="countWish">
                       <Link to="/wishlist">
                         {WishLengh > 0 && (
@@ -442,7 +612,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                     </li>
                     <li>
                       {window.localStorage.getItem("preferredLanguage") ==
-                        "de" ? (
+                      "de" ? (
                         <span
                           onClick={() => {
                             handleLanguage("65111f1f78085e4cc5cce8ff");
@@ -577,7 +747,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                                               {item?.name +
                                                 (variation?.variant_slug
                                                   ? " " +
-                                                  variation?.variant_slug
+                                                    variation?.variant_slug
                                                   : "")}
                                             </h6>
                                             <h6
@@ -703,14 +873,14 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                             style={{ width: "20px", height: "20px" }}
                             src={
                               profileImg &&
-                                profileImg != "" &&
-                                profileImg != undefined
+                              profileImg != "" &&
+                              profileImg != undefined
                                 ? profileImg
                                 : profileData?.getaUser?.profilePhoto?.url &&
                                   profileData?.getaUser?.profilePhoto?.url !==
-                                  ""
-                                  ? profileData?.getaUser.profilePhoto.url
-                                  : tempProfileImg
+                                    ""
+                                ? profileData?.getaUser.profilePhoto.url
+                                : tempProfileImg
                             }
                           />
                         ) : (
@@ -726,14 +896,14 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                       <li className="userNamePro">
                         <Link to="/" className="userNameText">
                           {profileData?.getaUser?.firstname &&
-                            profileData?.getaUser?.lastname
+                          profileData?.getaUser?.lastname
                             ? `${profileData?.getaUser.firstname} ${profileData?.getaUser.lastname}`
                             : profileData?.getaUser?.selectedBillingAddress
-                              ?.firstname &&
+                                ?.firstname &&
                               profileData?.getaUser?.selectedBillingAddress
                                 ?.lastname
-                              ? `${profileData?.getaUser.selectedBillingAddress.firstname} ${profileData?.getaUser.selectedBillingAddress.lastname}`
-                              : profileData?.getaUser?.mobile || ""}
+                            ? `${profileData?.getaUser.selectedBillingAddress.firstname} ${profileData?.getaUser.selectedBillingAddress.lastname}`
+                            : profileData?.getaUser?.mobile || ""}
                           <MdOutlineArrowDropDown
                             style={{ fontSize: "19px" }}
                           />
@@ -868,7 +1038,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                     </li>
                     <li>
                       {window.localStorage.getItem("preferredLanguage") ==
-                        "de" ? (
+                      "de" ? (
                         <span
                           onClick={() => {
                             handleLanguage("65111f1f78085e4cc5cce8ff");

@@ -60,21 +60,18 @@ const articles = [
 const DiscoverKeras = () => {
   const { t } = useTranslation();
   const baseUrl = base_url();
-  const [blogData, setBlogData] = useState(null)
+  const [blogData, setBlogData] = useState(null);
   const getBlogData = async () => {
     try {
-      const res = await axios.get(`${baseUrl}blogs`)
+      const res = await axios.get(`${baseUrl}blogs`);
       // console.log(res?.data);
-      setBlogData(res?.data)
-
-    } catch (error) {
-
-    }
-  }
+      setBlogData(res?.data);
+    } catch (error) {}
+  };
 
   useEffect(() => {
-    getBlogData()
-  }, [])
+    getBlogData();
+  }, []);
   return (
     <>
       <section className="discoverKerasSec">
@@ -84,7 +81,9 @@ const DiscoverKeras = () => {
               <div className="fisherman-content d-flex justify-content-between align-items-center">
                 {/* <h6>{t("Post From Blogs")}</h6> */}
                 <h3>{t("Our Latest News Update")}</h3>
-                <Link to="/blog" className="btn btn-primary">View All</Link>
+                <Link to="/blog" className="btn btn-primary">
+                  View All
+                </Link>
               </div>
             </div>
             {/* {articles.map((item, i) => {
@@ -109,39 +108,45 @@ const DiscoverKeras = () => {
               );
             })} */}
 
-            {Array.isArray(blogData) && blogData?.map((item) => {
-              return <div className="col-lg-4 col-md-4 col-sm-4 col-xs-4" key={item?._id}>
-                <div className="discoverCard">
-                  <div className="figure">
-                    <img
-                      src={item?.banner?.url}
-                      alt={item.title}
-                      className="img-fluid"
-                      title={item.title}
-                    />
+            {Array.isArray(blogData) &&
+              blogData?.map((item) => {
+                return (
+                  <div
+                    className="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+                    key={item?._id}
+                  >
+                    <div className="discoverCard">
+                      <div className="figure gg">
+                        <img
+                          src={item?.banner?.url}
+                          alt={item.title}
+                          className="img-fluid"
+                          title={item.title}
+                        />
+                      </div>
+                      <div className="text">
+                        <Link to={`/blog-detail/${item.uid}`}>
+                          <span>{t(`${item.title}`)}</span>
+                        </Link>
+
+                        <h5
+                          dangerouslySetInnerHTML={{ __html: item.description }}
+                        ></h5>
+                        <p>
+                          {new Date(item.updatedAt).toLocaleString("en-GB", {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            hour12: true,
+                          })}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text">
-                    <Link to={`/blog-detail/${item.uid}`}>
-                      <span>{t(`${item.title}`)}</span>
-                    </Link>
-
-                    <h5 dangerouslySetInnerHTML={{ __html: item.description }}></h5>
-                    <p>
-                      {new Date(item.updatedAt).toLocaleString("en-GB", {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: true,
-                      })}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            })}
-
-
+                );
+              })}
           </div>
         </div>
       </section>

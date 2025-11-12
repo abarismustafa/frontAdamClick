@@ -150,7 +150,7 @@ function FeaturedProducts() {
               <div className="fishermanHeader ">
                 <div className="fisherman-content featuredText">
                   {/* <h6>{t("Newly Arrived Products")}</h6> */}
-                  <h3>{t("Explore New Arrivals")}</h3>
+                  <h3 className="mobileTitle">{t("Explore New Arrivals")}</h3>
                 </div>
                 <div className="fisherman-btn d-none">
                   <Link to="/products" className="optional-btn">

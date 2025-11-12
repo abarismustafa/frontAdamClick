@@ -55,7 +55,7 @@ function ProductsCategory() {
     slidesToShow: 7, // Number of items to show on desktop
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 1120, // Screen size for tablets
@@ -144,7 +144,7 @@ function ProductsCategory() {
             <div className="col-lg-12 col-md-12 col-sm-12">
               <div className="fisherman-content">
                 {/* <h6>{t("Top Search Categories")}</h6> */}
-                <h3> {t("Shop by Categories")} </h3>
+                <h3 className="mobileTitle">{t("Shop by Categories")} </h3>
               </div>
             </div>
 

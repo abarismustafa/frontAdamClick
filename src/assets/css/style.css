@@ -2354,6 +2354,11 @@ div#navbarSupportedContent {
 .row.changeGrid.listView .featuredInfo {
   display: flex;
   column-gap: 15px;
+  background-color: #edf1f0;
+}
+
+.row.changeGrid.listView .buyNowInfo .buyNow {
+  font-size: 12px;
 }
 
 .row.changeGrid.listView .col-lg-3 {
@@ -2369,13 +2374,13 @@ div#navbarSupportedContent {
   text-align: left;
 }
 
-.row.changeGrid.listView .featuredImg {
+/* .row.changeGrid.listView .featuredImg {
   width: 280px;
 }
 
 .row.changeGrid.listView .featuredImg img {
   min-height: 254px;
-}
+} */
 
 .row.changeGrid.listView .featuredContent .rateDigit {
   justify-content: start;
@@ -4038,12 +4043,17 @@ button.btn.btn-primary.registerShop {
   position: relative;
 }
 
+.row.changeGrid.listView .featuredContent p {
+  font-size: 14px;
+}
+
 .row.changeGrid.listView .buyNowInfo {
-  position: absolute;
+  /* position: absolute; */
   top: 10px;
   right: 10px;
   z-index: 1;
   flex-direction: column;
+  gap: 4px;
 }
 
 .row.changeGrid.listView .buyNowInfo .addCart {
@@ -14330,7 +14340,7 @@ header.sticky.active .mobileMenu {
   row-gap: 24px;
 }
 
-.categoryWrapper .mobile.row .featuredInfo,
+/* .categoryWrapper .mobile.row .featuredInfo, */
 .categoryWrapper .desktop.row .featuredInfo {
   margin: 0;
 }
@@ -14661,6 +14671,10 @@ button.tableCommonBtn:hover span {
   background-color: #fff;
 }
 
+.slick-dots li {
+  margin: 0;
+}
+
 /* RESPONSIVE CSS START */
 
 @media only screen and (max-width: 1120px) {
@@ -14737,7 +14751,16 @@ button.tableCommonBtn:hover span {
 @media only screen and (max-width: 991px) {
 
   /*  */
-  .recentPosts .recentItemInfo {
+  .searchIcons.mobile .searchIconsItem ul li a span.count {
+    display: flex;
+    position: absolute;
+    font-size: 13px;
+    width: 15px;
+    height: 15px;
+    right: -6px;
+  }
+
+  .recentPosts .recentItemInfo  {
     flex-wrap: wrap;
   }
 
@@ -14826,10 +14849,16 @@ button.tableCommonBtn:hover span {
   }
 
   .searchIconsItem ul {
-    column-gap: 5px;
+    column-gap: 15px;
+  }
+
+  .productDescText ul li {
+    font-size: 14px;
   }
 
   .topHeaderSec,
+  .searchIcons.desktop .searchIconsItem,
+  .searchIcons.desktop .socialMedia,
   .searchIcons.desktop,
   .searchIcons.mobile .searchIconsItem ul li a span,
   .bar,
@@ -14892,6 +14921,11 @@ button.tableCommonBtn:hover span {
     padding-bottom: 0;
     margin-bottom: 16px;
     border-radius: 10px;
+    border: 1px solid #d5e0ec;
+  }
+
+  .categoryBanner a img {
+    border: 2px solid #c8c6c6;
   }
 
   .socialBody {
@@ -14911,6 +14945,7 @@ button.tableCommonBtn:hover span {
 
   .categoryWrapper .mobile.row {
     display: flex;
+    margin-bottom: 10px;
   }
 
   .footer-section {
@@ -15091,11 +15126,49 @@ button.tableCommonBtn:hover span {
     height: 130px;
   }
 
+  /*  */
+  .featuredInfo.bg-white.border {
+    margin-right: 8px;
+    margin-bottom: 0;
+  }
+
+  .userNamePro {
+    position: relative;
+  }
+
+  .userNamePro .helll {
+    /* transform: translateX(-65px); */
+    position: absolute;
+    left: -65px;
+    width: 150px;
+    top: 22px;
+  }
+
+  .searchIconsItem ul .mobileDrop:hover .userNamePro .helll {
+    display: block;
+  }
+
+  .userNamePro .helll>li a {
+    text-align: start;
+  }
+
+  .SelectImageSec {
+    z-index: 1;
+  }
+
+  .fisherman-content .mobileTitle {
+    text-decoration: underline;
+    color: #0069b3;
+  }
+
+  /*  */
+
 }
 
 @media only screen and (max-width: 767px) {
 
   /*  */
+
   .recentPosts .recentItemInfo {
     flex-wrap: nowrap;
   }
@@ -15116,12 +15189,15 @@ button.tableCommonBtn:hover span {
     flex-wrap: wrap;
   }
 
-  .product-details-image {
+  .js-image-zoom__zoomed-image,
+  .js-image-zoom__zoomed-area {
     pointer-events: none;
+    display: none;
   }
 
   .product-details-image>div>img:hover {
-    transform: scale(1.5);
+    /* transform: scale(1.5); */
+    pointer-events: none;
   }
 
   .product-add-to-cart.addToCart.picture .default-btn {
@@ -15251,9 +15327,7 @@ button.tableCommonBtn:hover span {
     margin: 0;
   }
 
-  .userNamePro .helll {
-    transform: translateX(-20px);
-  }
+
 
   .product-details-desc .price {
     text-align: start;
@@ -15265,6 +15339,10 @@ button.tableCommonBtn:hover span {
   /*  */
   .discoverCard {
     text-align: center;
+  }
+
+  .featuredInfo.bg-white.border {
+    margin-right: 0;
   }
 
   /*  */
@@ -15446,10 +15524,6 @@ button.tableCommonBtn:hover span {
   /*  */
 
 
-  .userNamePro .helll {
-    transform: translateX(-60px);
-
-  }
 
 
   .single-footer-widget .footer-heading h3,
@@ -15581,7 +15655,8 @@ button.tableCommonBtn:hover span {
   }
 
   .scroller {
-    height: 163px !important;
+    height: 170px !important;
+    overflow: hidden;
   }
 
   .fisherman-content h3 {
@@ -16255,7 +16330,7 @@ header.sticky.active .searchSec {
   display: block;
 }
 
-.figure {
+.figure.gg {
   aspect-ratio: 1 / 1;
   max-height: 500px;
   display: flex;
