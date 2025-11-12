@@ -618,9 +618,11 @@ function ProductDetail() {
   //   }, 1000);
   // };
 
-  // console.log(data);
+  console.log(data);
 
   const isPdf = (url) => url?.toLowerCase().endsWith(".pdf");
+
+
 
   return (
     <>
@@ -978,9 +980,8 @@ function ProductDetail() {
                     {data?.description_tabs?.map((tab, index) => (
                       <li
                         key={tab._id}
-                        className={`tab-item ${
-                          activeTab === tab._id ? "active" : ""
-                        }`}
+                        className={`tab-item ${activeTab === tab._id ? "active" : ""
+                          }`}
                         onClick={() => handleTabClick(tab._id, index)}
                       >
                         {tab.title}
@@ -996,9 +997,8 @@ function ProductDetail() {
                       key={tab._id}
                       id={tab._id}
                       ref={(el) => (sectionRefs.current[index] = el)}
-                      className={`tab-section ${
-                        activeTab === tab._id ? "visible" : ""
-                      }`}
+                      className={`tab-section ${activeTab === tab._id ? "visible" : ""
+                        }`}
                     >
                       <div
                         className="tab-inner"
@@ -1129,7 +1129,9 @@ function ProductDetail() {
         )} */}
       </section>
 
-      <Review ids={params._id} />
+
+
+      <Review ids={params._id} dataproduct={data} />
       {/* <Review ids={window.localStorage.getItem('variant_id')} /> */}
       {/* {data && <RelatedProducts productData={data} />} */}
       {/* End Product Details Area */}

@@ -4,16 +4,21 @@ import { useReviewProductMutation } from "../../../products/productSlice";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { base_url } from "../../../../server";
-function ReviewForm({ setShow, getReview }) {
+import { FaStar } from "react-icons/fa";
+import { toastSuccessMessage, toastSuccessMessageError } from "../../../../common/messageShow/MessageShow";
+function ReviewForm({ setShow, getReview, dataproduct }) {
   const [sendReview, { data, isError, isSuccess }] = useReviewProductMutation();
   const params = useParams();
+  console.log(params);
+
 
   const [state, setState] = useState({
     name: window.localStorage.getItem("userName"),
-    email: window.localStorage.getItem("email"),
+    email: "",
     title: "",
-    rating: "",
+    rating: 5,
     comments: "",
+    variant_id: "",
     product_id: params._id,
     userid: window.localStorage.getItem("user_id"),
   });
@@ -32,19 +37,36 @@ function ReviewForm({ setShow, getReview }) {
           authorization: `Bearer ${window.localStorage.getItem("token")}`,
         },
       });
-      alert("Review added Successfully");
-      getReview();
+
+      toastSuccessMessage("Review added Successfully")
+      // alert("Review added Successfully");
+      getReview(state?.variant_id);
       setShow(false);
     } catch (error) {
-      alert("Somthing Went Wrong Review not added");
+      // alert("Somthing Went Wrong Review not added");
+      // console.log(error);
+      toastSuccessMessageError(error?.response?.data?.message)
     }
   };
+
+  const handleStarClick = (value) => {
+    setState({ ...state, rating: value });
+  }
+
+  useEffect(() => {
+    if (dataproduct?.variations?.[0]?.uid) {
+      setState((prev) => ({
+        ...prev,
+        variant_id: dataproduct.variations[0].uid,
+      }));
+    }
+  }, [dataproduct]);
 
   return (
     <>
       <form className="reviewForm mt-3">
         <div className="row">
-          <div className="col-lg-6 col-md-6">
+          <div className="col-lg-12 col-md-6">
             <div className="form-group">
               <input
                 type="text"
@@ -57,7 +79,7 @@ function ReviewForm({ setShow, getReview }) {
               />
             </div>
           </div>
-          <div className="col-lg-6 col-md-6">
+          {/* <div className="col-lg-6 col-md-6">
             <div className="form-group">
               <input
                 type="email"
@@ -69,7 +91,7 @@ function ReviewForm({ setShow, getReview }) {
                 className="form-control"
               />
             </div>
-          </div>
+          </div> */}
 
           <div className="col-lg-12 col-md-12">
             <div className="form-group">
@@ -84,7 +106,7 @@ function ReviewForm({ setShow, getReview }) {
               />
             </div>
           </div>
-          <div className="col-lg-12 col-md-12">
+          {/* <div className="col-lg-12 col-md-12">
             <div className="form-group">
               <input
                 type="number"
@@ -95,6 +117,20 @@ function ReviewForm({ setShow, getReview }) {
                 placeholder="Enter review-number"
                 className="form-control"
               />
+            </div>
+          </div> */}
+          <div className="col-lg-12 col-md-12">
+            <div className="form-group star-ratingstar d-flex gap-1 align-center justify-center">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <span
+                  key={star}
+                  className={`star ${star <= state.rating ? "selected" : ""}`}
+                  onClick={() => handleStarClick(star)}
+                >
+                  {/* ★ */}
+                  <FaStar />
+                </span>
+              ))}
             </div>
           </div>
           <div className="col-lg-12 col-md-12">

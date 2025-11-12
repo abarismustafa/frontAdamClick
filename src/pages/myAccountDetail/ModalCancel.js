@@ -69,6 +69,7 @@ function ModalCancel(props) {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      className="modal-cnacle"
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -114,6 +115,7 @@ function ModalCancel(props) {
           <Button
             variant="danger"
             disabled={!state?.reason || !state?.note}
+            className="canclebtn"
           >
             Cancel Now
           </Button>

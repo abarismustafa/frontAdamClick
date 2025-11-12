@@ -23,6 +23,7 @@ import { FaMapMarkedAlt } from "react-icons/fa";
 import InvoiceDetails from "../orderDetails/invoiceDetails/InvoiceDetails";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import "./MyAccountDetail.css";
 function MyAccountDetail() {
   const isLogin = window.localStorage.getItem("isLogin");
   const idUser = window.localStorage.getItem("user_id");
@@ -281,19 +282,29 @@ function MyAccountDetail() {
     if (id) {
       navigate(`/returns/rma/new/${id}`)
     }
+  }
 
+  const returnSet = (item) => {
+    // console.log(item);
+
+    navigate(`/product/${item?.productDetails[0]?.uid}/${item?.productDetails[0]?.slug}/${item?.productDetails[0]?.matchedVariation[0]?.variant_slug}`)
   }
 
   return (
     <>
-      <section className="sectionPD">
+
+
+
+
+
+      <section className="sectionPD myAccountSection">
         <div className="container">
           <div className="fisherman-content">
             <h3>{t("Purchase History")}</h3>
           </div>
-          <div className="d-xl-flex justify-content-between mb-3">
+          <div className="d-xl-flex justify-content-between mb-3 flex-wrap gap-3">
             <h5 onClick={sendCancel}>{t("See Your Cancel Orders")}</h5>
-            <div>
+            <div className="responsiveFilter">
               <select
                 className="form-select"
                 onChange={getIdstatus}
@@ -313,11 +324,11 @@ function MyAccountDetail() {
               </select>
             </div>
           </div>
-          <div className="table-responsive">
+          <div className="table-responsive orderTableWrapper">
             <Table
               bordered
               hover
-              className="table aiz-table mb-0 footable footable-1 breakpoint-xl"
+              className="table aiz-table mb-0"
             >
               <thead>
                 <tr className="footable-header">
@@ -328,7 +339,7 @@ function MyAccountDetail() {
                   <th>{t("Order Amount")}</th>
                   <th>{t("Order Status")}</th>
                   <th>{t("Payment Type")}</th>
-                  <th className="text-nowrap">{t("Address Type")}</th>
+                  <th >{t("Address Type")}</th>
                   <th>{t("More Action")}</th>
                 </tr>
               </thead>
@@ -336,10 +347,10 @@ function MyAccountDetail() {
                 {data ? (
                   data.map((item, i) => {
                     return (
-                      <tr key={i}>
+                      <tr key={i} className="orderRow">
                         <td>{i + 1}</td>
                         {/* <td>{item?.referenceNo}</td> */}
-                        <td style={{ width: '150px' }}>
+                        <td className="orderProductInfo">
                           <div className="product-cell">
                             {item?.productDetails?.map((product, i) =>
                               product?.matchedVariation?.map((variation, j) => (
@@ -364,7 +375,7 @@ function MyAccountDetail() {
                             )}
                           </div>
 
-                          <div style={{ marginTop: "8px" }}>
+                          <div className="orderDates">
                             <p>
                               <strong>Order Date:</strong>{" "}
                               {new Date(item?.createdAt).toLocaleString("en-IN", {
@@ -415,7 +426,7 @@ function MyAccountDetail() {
 
 
                         <td
-                          style={{ textAlign: "right", paddingRight: "20px" }}
+                        // className="text-end"
                         >
                           {item?.currency?.name
                             ? item?.currency?.name
@@ -428,12 +439,12 @@ function MyAccountDetail() {
                           )}
                         </td>
                         <td>{item?.payment_type}</td>
-                        <td className="text-nowrap">{item?.deliveryType}</td>
+                        <td >{item?.deliveryType}</td>
                         {/* <td>---</td> */}
                         {/* <td>{item?.products[0]?.deliveryType} {item?.products[0]?.pickupPoints?.pickupPoint_name}</td> */}
 
 
-                        <td style={{ width: "220px" }}>
+                        <td className="orderActions">
 
 
                           {(() => {
@@ -442,7 +453,7 @@ function MyAccountDetail() {
                             // Common styling
                             const iconSize = 24;
                             const baseStyle = {
-                              backgroundColor: "#007bff",
+                              backgroundColor: "rgb(0 105 179)",
                               color: "#fff",
                               fontWeight: 500,
                               border: "none",
@@ -456,7 +467,7 @@ function MyAccountDetail() {
                             };
 
                             const btnClass =
-                              "w-100 mb-2 tableCommonBtn d-flex align-items-center  gap-3 py-2";
+                              "w-100 mb-2 tableCommonBtn d-flex align-items-center gap-2 justify-content-center";
 
                             // ✅ Pending / Processing / Ready to Ship
 
@@ -553,7 +564,7 @@ function MyAccountDetail() {
                                     <span>Re-Order</span>
                                   </Button>
 
-                                  <Button className={btnClass} style={baseStyle}>
+                                  <Button className={btnClass} style={baseStyle} onClick={() => returnSet(item)}>
                                     <MdRateReview size={iconSize} />
                                     <span>Product Review</span>
                                   </Button>

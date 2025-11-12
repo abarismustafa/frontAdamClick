@@ -7,18 +7,25 @@ import { useTranslation } from "react-i18next";
 
 function My_product_reviews() {
   const userid = window.localStorage.getItem("user_id");
+  const token = window.localStorage.getItem("token");
   const [data, setdata] = useState(null);
   const baseUrl = base_url();
   const getData = async () => {
-    const res = await axios.get(`${baseUrl}rating/user/${userid}`);
+
+    const res = await axios.get(`${baseUrl}rating/user`, {
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     setdata(res.data);
   };
 
   useEffect(() => {
     getData();
   }, []);
-  
-    const { t, i18n } = useTranslation();
+
+  const { t, i18n } = useTranslation();
 
   return (
     <section className="sectionPD">
@@ -50,11 +57,11 @@ function My_product_reviews() {
                         <td>
                           <img
                             style={{ width: "100px", height: "100px" }}
-                            src={item?.product_id?.mainimage_url?.url}
+                            src={item?.variations[0]?.mainImage_url?.url}
                           />
                         </td>
-                        <td>{item?.product_id?.name}</td>
-                        <td>{item?.variant?.weight}</td>
+                        <td>{item?.productName}</td>
+                        <td>{item?.variations[0]?.uid}</td>
                         <td>{item?.rating}</td>
                         <td>{item?.comments}</td>
                         <td>{item?.title}</td>
