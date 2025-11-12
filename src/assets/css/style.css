@@ -2,6 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 
+:root {
+  /* --bgColor:  #b0247a;
+  --textColor:  #b0247a;
+  --borderColor:  #b0247a; */
+
+  /* --bgColor:  #0069b3;
+  --textColor:  #0069b3;
+  --borderColor:  #0069b3; */
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -187,7 +197,7 @@ h6 {
   z-index: 1;
   color: #ffffff;
   text-transform: capitalize;
-  background-color: #b0247a;
+  background-color: var(--bgColor);
   -webkit-transition: 0.6s;
   transition: 0.6s;
   font-weight: 400;
@@ -230,7 +240,7 @@ h6 {
 }
 
 .bgPink {
-  background-color: #b0247a !important;
+  background-color: var(--bgColor) !important;
 }
 
 .otpForm {
@@ -1548,7 +1558,7 @@ div#navbarSupportedContent {
 
 /* Privacy Policy CSS Start */
 .privacyWrapper {
-  background-color: #b0247a;
+  background-color:  var(--textColor);
   padding: 40px 0;
 }
 
@@ -2470,7 +2480,7 @@ table.table.cartTablePage {
 
 .product-add-to-cart.addToCart.picture .default-btn.cart.btn-row {
   background: #fff;
-  color: #af257a;
+  color: var(--textColor);
   box-shadow: 0 0 8px 0 rgb(7 7 7 / 10%);
 }
 
@@ -2720,7 +2730,7 @@ table.cartTablePage .quantity {
 }
 
 .billingDetails {
-  border: 2px solid #b0247a;
+  border: 2px solid var(--borderColor);
   padding: 20px;
   margin-top: 20px;
 }
@@ -3993,7 +4003,7 @@ button.btn.btn-primary.registerShop {
   width: 35px;
   height: 35px;
   border-radius: 20px;
-  background: #b0247a;
+  background: var(--bgColor);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -6623,7 +6633,7 @@ Fisherman Section CSS
 }
 
 .fisherman-content h6 {
-  color: #b0247a;
+  color:  var(--textColor);
   text-transform: uppercase;
   position: relative;
   font-size: 15px;
@@ -6649,7 +6659,7 @@ Fisherman Section CSS
 }
 
 .fisherman-content.special h4:before {
-  background-color: #b0247a;
+  background-color:  var(--textColor);
 }
 
 .fisherman-content p {
@@ -10747,9 +10757,9 @@ Product Details Area CSS
   position: relative;
   border: none;
   padding: 8px 20px;
-  background-color: #b0247a;
+  background-color:  var(--textColor);
   color: #fff;
-  border: 2px solid #b0247a;
+  border: 2px solid var(--borderColor);
   display: flex;
   align-items: center;
   column-gap: 10px;
@@ -10945,20 +10955,20 @@ Product Details Area CSS
 .products-details-tab .tabs li a:hover,
 .products-details-tab .tabs li a:focus {
   color: #ffffff;
-  background-color: #b0247a;
-  border-color: #b0247a;
+  background-color:  var(--textColor);
+  border-color:  var(--textColor);
 }
 
 .products-details-tab .tabs li.current a {
   color: #ffffff;
-  background-color: #b0247a;
-  border-color: #b0247a;
+  background-color:  var(--textColor);
+  border-color:  var(--textColor);
 }
 
 .products-details-tab .tabs li a.nav-link.active {
   color: #ffffff;
-  background-color: #b0247a;
-  border-color: #b0247a;
+  background-color:  var(--textColor);
+  border-color:  var(--textColor);
 }
 
 .products-details-tab .tabs li:last-child {
@@ -11791,7 +11801,7 @@ Footer Section CSS
 
 
 .footer-section .single-footer-widget .footer-social a {
-  background-color: #b0247a;
+  background-color:  var(--textColor);
   color: #ffff;
 }
 
@@ -11811,7 +11821,7 @@ Footer Section CSS
 
 
 .footer-section .single-footer-widget .footer-quick-links li a:hover {
-  color: #b0247a;
+  color:  var(--textColor);
 }
 
 .footer-section .single-footer-widget .footer-info-contact i {
@@ -12051,7 +12061,7 @@ Footer Section CSS
 }
 
 .single-footer-widget .newsletter-form button {
-  background-color: #b0247a;
+  background-color:  var(--textColor);
   color: #fff;
   border: none;
   height: 100%;
@@ -12093,7 +12103,7 @@ Footer Section CSS
 }
 
 .single-footer-widget .footer-info-contact .topIcon svg {
-  color: #b0247a;
+  color:  var(--textColor);
   font-size: 23px;
 }
 
@@ -12577,7 +12587,7 @@ marquee>ul>li>a {
 }
 
 .bg-grad-1 {
-  background-color: #b0247a;
+  background-color:  var(--textColor);
   border-radius: 10px;
 }
 
@@ -13115,7 +13125,7 @@ h5 {
 }
 
 .connectSec .feature-box-content {
-  border: 2px solid #b0247a;
+  border: 2px solid var(--borderColor);
   margin-bottom: 24px;
 }
 
@@ -13126,13 +13136,13 @@ h5 {
 }
 
 .connectSec .feature-box-content a {
-  color: #b0247a;
+  color:  var(--textColor);
   font-weight: bold;
   font-size: 23px;
 }
 
 .feature-box-content p {
-  color: #b0247a;
+  color:  var(--textColor);
   font-weight: bold;
   font-size: 23px;
 
@@ -13141,9 +13151,9 @@ h5 {
 .featuredInfo {
   margin-bottom: 30px;
   transition: .4s ease-in-out;
-  padding: 20px;
   background: #edf1f0;
   border-radius: 20px;
+  padding: 4px;
 }
 
 
@@ -13443,7 +13453,7 @@ h5 {
 }
 
 .buyNowInfo .buyNow {
-  color: #b0247a;
+  color:  var(--textColor);
   border: 0;
   background-color: #fff;
   border-radius: 10px;
@@ -13712,7 +13722,7 @@ strong.ratingPercent {
 
 .mobileMenu {
   position: absolute;
-  background: #b0247a;
+  background: var(--bgColor);
   width: 100%;
   z-index: 1000;
   top: -36px;
@@ -13773,7 +13783,7 @@ header.sticky.active .mobileMenu {
 }
 
 .mediaQueryClass:hover .serviceItemText h5 a {
-  background: #b0247a;
+  background: var(--bgColor);
   color: #fff;
 }
 
@@ -13845,7 +13855,7 @@ header.sticky.active .mobileMenu {
   background: #fff;
   width: 16px;
   height: 16px;
-  border: 2px solid #b0247a;
+  border: 2px solid var(--borderColor);
   border-radius: 50%;
   position: absolute;
   left: -30px;
@@ -13884,7 +13894,7 @@ header.sticky.active .mobileMenu {
 }
 
 .discoverItem .text h5 {
-  color: #b0247a;
+  color:  var(--textColor);
   font-weight: 500;
   font-size: 17px;
   margin-bottom: 15px;
@@ -13900,7 +13910,7 @@ header.sticky.active .mobileMenu {
   font-weight: 300;
   margin-bottom: 20px;
   font-size: 20px;
-  color: #b0247a;
+  color:  var(--textColor);
 }
 
 .tabContent ul {
@@ -13942,7 +13952,7 @@ header.sticky.active .mobileMenu {
 }
 
 .tabImage ul li p {
-  color: #b0247a;
+  color:  var(--textColor);
 }
 
 .imgContact {
@@ -13980,7 +13990,7 @@ header.sticky.active .mobileMenu {
 }
 
 .dropdown.categoryDropdown ul.dropdown-menu {
-  border: 2px solid #b0247a;
+  border: 2px solid var(--borderColor);
   background-color: #fff;
   border-radius: 0;
   margin: 0;
@@ -13996,7 +14006,7 @@ header.sticky.active .mobileMenu {
 
 .dropdown.categoryDropdown ul.dropdown-menu .nav-item .nav-link:hover {
   color: #fff;
-  background: #b0247a;
+  background: var(--bgColor);
 }
 
 .navbar-nav .nav-item .nav-link {
@@ -14011,13 +14021,13 @@ header.sticky.active .mobileMenu {
 
 .navbar-nav .nav-item .nav-link:hover,
 .dropdown.categoryDropdown button.btn:hover {
-  color: #b0247a;
+  color:  var(--textColor);
   border-radius: 10px;
-  border: 1px solid #b0247a;
+  border: 1px solid var(--borderColor);
 }
 
-.searchIconsItem ul li a span {
-  font-size: 16px;
+.searchIconsItem ul li a span.count {
+  font-size: 12px;
 }
 
 .searchIconsItem ul li a .iconText {
@@ -14037,13 +14047,13 @@ header.sticky.active .mobileMenu {
   padding: 14px 28px;
   text-transform: uppercase;
   transition: .4s ease-in-out;
-  border: 1px solid #a52681;
+  border: 1px solid var(--borderColor);
 }
 
 .commonButton:after {
   width: 12px;
   height: 12px;
-  border: 2px solid #a52681;
+  border: 2px solid var(--borderColor);
   content: "";
   border-radius: 10px;
   transition: .4s ease-in-out;
@@ -14051,9 +14061,9 @@ header.sticky.active .mobileMenu {
 
 .commonButton.bg-white:hover,
 .commonButton:hover {
-  background: #a52681 !important;
+  background: var(--bgColor) !important;
   color: #fff !important;
-  border-color: #a52681;
+  border-color: var(--borderColor) !important;
 }
 
 .commonButton:hover:after {
@@ -14087,13 +14097,13 @@ header.sticky.active .mobileMenu {
   text-transform: uppercase;
   font-size: 12px;
   transition: .4s ease-in-out;
-  border: 1px solid #b0247a;
+  border: 1px solid var(--borderColor);
   color: #111;
   font-weight: 500;
 }
 
 .discoverCard:hover .text span {
-  background-color: #b0247a;
+  background-color:  var(--textColor);
   color: #fff;
 }
 
@@ -14105,7 +14115,7 @@ header.sticky.active .mobileMenu {
 
 .countersSection {
   padding: 40px 0;
-  background-color: #b0247a;
+  background-color:  var(--textColor);
 }
 
 .allCategoryCard {
@@ -14133,7 +14143,7 @@ header.sticky.active .mobileMenu {
   padding: 5px 10px;
   background: #fff;
   border-radius: 10px;
-  border: 1px solid #b0247a;
+  border: 1px solid var(--borderColor);
   color: #111;
   font-weight: 600;
 }
@@ -14181,7 +14191,7 @@ header.sticky.active .mobileMenu {
 }
 
 .navbar-nav.mobileMenuList .dropdown.categoryDropdown .dropdown-toggle {
-  background: #b0247a;
+  background: var(--bgColor);
   width: 100%;
   text-align: start;
   color: #fff;
@@ -14194,7 +14204,7 @@ header.sticky.active .mobileMenu {
 }
 
 .brochuresItems {
-  background-color: #b0247a;
+  background-color:  var(--textColor);
   border-radius: 10px;
   margin-bottom: 20px;
   padding: 30px;
@@ -14280,7 +14290,7 @@ header.sticky.active .mobileMenu {
 } */
 
 .customerCard .rating svg {
-  color: #b0247a;
+  color:  var(--textColor);
 }
 
 .customerCard p {
@@ -14290,7 +14300,7 @@ header.sticky.active .mobileMenu {
 
 .categoryIcon span svg {
   font-size: 24px;
-  color: #b0247a;
+  color:  var(--textColor);
 }
 
 .accordion .accordion-body p {
@@ -14331,7 +14341,7 @@ header.sticky.active .mobileMenu {
 }
 
 .buyNowInfo .btn.btn-danger.buyNow {
-  background: #ad2178;
+  background: var(--bgColor);
   color: #fff;
 }
 
@@ -14348,6 +14358,8 @@ header.sticky.active .mobileMenu {
 .featuredContent {
   text-align: center;
   margin-top: 10px;
+  padding: 16px;
+  border-top: 1px solid #eee;
 }
 
 .single-footer-widget.line {
@@ -14384,7 +14396,7 @@ header.sticky.active .mobileMenu {
 }
 
 .categoryListFooter ul li h6 a {
-  color: #b0247a;
+  color: var(--textColor);
 }
 
 
@@ -14489,7 +14501,7 @@ header.sticky.active .mobileMenu {
 .slideInfoText .item span {
 
   text-transform: uppercase;
-  background: #b0247a;
+  background: var(--bgColor);
   display: inline-block;
   padding: 0 5px;
   color: #fff;
@@ -14675,9 +14687,94 @@ button.tableCommonBtn:hover span {
   margin: 0;
 }
 
+.searchSec.customer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.supportNumber p {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+
+.supportNumber p span {
+  background: #edf1f0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c7cac9;
+}
+
+.supportNumber p svg {
+  color: var(--textColor);
+  font-size: 16px;
+}
+
+.supportNumber p a {
+  color: #0069b3;
+  font-weight: 600;
+}
+
+.searchIcons.mobile {
+  position: relative;
+}
+
+.searchIcons.mobile .supportNumberMobile {
+  position: absolute;
+  right: 0;
+  top: -13px;
+  display: none;
+  line-height: 12px;
+}
+
+.searchIcons.mobile .supportNumberMobile a {
+  color: #0069b3;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+header.sticky.active .searchSec {
+  padding: 8px 0;
+}
+
+.d-flex.align-items-center.justify-content-between.category-header {
+  background: #0066b3;
+  border-color: #e5f4ff;
+  border-radius: 4px;
+  color: #fff;
+}
+.stockMsg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.stockMsg .coming, .stockMsg .outStock {
+    text-transform: uppercase;
+    padding: 2px 4px;
+    font-size: 12px;
+    background: #d11a1f;
+    font-weight: 500;
+    color: #ffffff;
+    transform: rotate(354deg);
+    display: inline-block;
+    border-radius: 4px;
+}
+.stockMsg .outStock{
+  background: #c58f02;
+    font-weight: 500;
+    color: #fff;
+}
 /* RESPONSIVE CSS START */
 
 @media only screen and (max-width: 1120px) {
+  .searchSec.customer .supportNumber {
+    display: none;
+  }
 
   .mediaQueryClass {
     text-align: center;
@@ -14703,7 +14800,7 @@ button.tableCommonBtn:hover span {
     justify-content: space-between;
   }
 
-  .searchItemRight .searchIconsItem ul li span {
+  .searchItemRight .searchIconsItem ul li span.iconText {
     display: none;
   }
 
@@ -14751,16 +14848,38 @@ button.tableCommonBtn:hover span {
 @media only screen and (max-width: 991px) {
 
   /*  */
+  header.sticky.active .searchSec.customer {
+    padding: 4px 0;
+  }
+
+  .searchIcons.mobile .supportNumberMobile {
+    display: block;
+  }
+
+  header.sticky.active .searchSec {
+    padding: 16px 0 4px;
+  }
+
+  .featuredImg {
+    border-bottom: 0;
+  }
+
+  .featuredContent {
+    padding: 8px;
+  }
+
+  /*  */
   .searchIcons.mobile .searchIconsItem ul li a span.count {
     display: flex;
     position: absolute;
-    font-size: 13px;
-    width: 15px;
-    height: 15px;
+    font-size: 10px;
+    width: 12px;
+    height: 12px;
     right: -6px;
+    top: -4px;
   }
 
-  .recentPosts .recentItemInfo  {
+  .recentPosts .recentItemInfo {
     flex-wrap: wrap;
   }
 
@@ -14816,9 +14935,6 @@ button.tableCommonBtn:hover span {
     display: none;
   }
 
-  /*  */
-
-  /* dev start*/
   .brandSection .brandsSec {
     padding: 0;
   }
@@ -14832,7 +14948,7 @@ button.tableCommonBtn:hover span {
   }
 
   .buyNowInfo .btn.btn-danger.buyNow {
-    background: #ad2178;
+    background: var(--bgColor);
     color: #fff;
   }
 
@@ -14840,9 +14956,6 @@ button.tableCommonBtn:hover span {
     margin-bottom: 5px;
   }
 
-  .featuredContent h5 {
-    text-align: start;
-  }
 
   .categoryBanner a img {
     height: 100%;
@@ -14867,7 +14980,7 @@ button.tableCommonBtn:hover span {
   }
 
   .sticky>.searchSec {
-    padding: 8px 0;
+    padding: 16px 0 8px;
   }
 
   .searchSec {
@@ -14952,7 +15065,6 @@ button.tableCommonBtn:hover span {
     padding-top: 30px;
   }
 
-  /* dev end*/
   .bar svg {
     display: block;
   }
@@ -15126,7 +15238,6 @@ button.tableCommonBtn:hover span {
     height: 130px;
   }
 
-  /*  */
   .featuredInfo.bg-white.border {
     margin-right: 8px;
     margin-bottom: 0;
@@ -15156,12 +15267,11 @@ button.tableCommonBtn:hover span {
     z-index: 1;
   }
 
-  .fisherman-content .mobileTitle {
+  .fisherman-content h3 {
     text-decoration: underline;
     color: #0069b3;
   }
 
-  /*  */
 
 }
 
@@ -15213,14 +15323,6 @@ button.tableCommonBtn:hover span {
   .videoDetail h2,
   .whyUse h3 {
     font-size: 30px;
-  }
-
-  .featuredInfo {
-    padding: 0;
-  }
-
-  .featuredInfo.products {
-    padding: 10px;
   }
 
   .featuredContent .rating {
@@ -15337,6 +15439,13 @@ button.tableCommonBtn:hover span {
 @media only screen and (max-width: 600px) {
 
   /*  */
+  .featuredInfo.products{
+    border: 1px solid #eee;
+  }
+  .featuredInfo.products .featuredContent {
+      border: 0;
+  }
+  /*  */
   .discoverCard {
     text-align: center;
   }
@@ -15344,8 +15453,6 @@ button.tableCommonBtn:hover span {
   .featuredInfo.bg-white.border {
     margin-right: 0;
   }
-
-  /*  */
 
 
   .bannerItemFigure .bannerContent p {
@@ -15369,7 +15476,7 @@ button.tableCommonBtn:hover span {
   }
 
   .searchIconsItem ul {
-    column-gap: 5px;
+    column-gap: 10px;
   }
 
   .commonButton {
@@ -15807,22 +15914,22 @@ button.tableCommonBtn:hover span {
 
 .commonButton.bg-white:hover,
 .commonButton:hover {
-  background: #a52681 !important;
+  background: var(--bgColor) !important;
   color: #fff !important;
-  border-color: #a52681 !important;
+  border-color: var(--borderColor) !important;
 }
 
 .commonButton.active {
-  background: #a52681 !important;
+  background: var(--bgColor) !important;
   color: #fff !important;
-  border-color: #a52681 !important;
+  border-color: var(--borderColor) !important;
 }
 
 /* 🔹 Place Order button enabled style */
 .commonButton.enabled {
-  background: #a52681 !important;
+  background: var(--bgColor) !important;
   color: #fff !important;
-  border-color: #a52681 !important;
+  border-color: var(--borderColor) !important;
 }
 
 /* 🔸 Disabled button */
@@ -16039,9 +16146,8 @@ button.tableCommonBtn:hover span {
   color: #0d6efd !important;
 }
 
-header.sticky.active .searchSec {
-  padding: 8px 0;
-}
+
+
 
 
 /* .custom-offcanvas {
@@ -16243,15 +16349,13 @@ header.sticky.active .searchSec {
 
 .featuredImg {
   width: 100%;
-  /* height: 220px; */
   height: 269px;
-  /* fix your preferred size */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   background: #fff;
-  border-bottom: 1px solid #eee;
+  border-radius: 16px;
 }
 
 .featuredImg img {
@@ -16347,9 +16451,9 @@ header.sticky.active .searchSec {
 }
 
 @media (max-width: 768px) {
-  .figure {
-    aspect-ratio: 4 / 5;
-    max-height: 400px;
+  .figure.gg {
+    aspect-ratio: 0;
+    max-height: 100%;
   }
 }
 

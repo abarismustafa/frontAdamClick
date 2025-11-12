@@ -164,7 +164,7 @@
     transform: translateY(-18px);
     padding: 6px 20px;
     border-radius: 10px;
-    border: 1px solid #b0247a;
+    border: 1px solid var(--borderColor);
     white-space: nowrap;
 }
 

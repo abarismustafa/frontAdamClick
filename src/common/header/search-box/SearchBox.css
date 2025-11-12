@@ -137,7 +137,7 @@
 .searchIconsItem ul {
     display: flex;
     align-items: center;
-    column-gap: 6px;
+    column-gap: 0;
     margin: 0;
     padding: 0;
 }
@@ -146,20 +146,20 @@
 .searchIconsItem ul li span {
     display: flex;
     align-items: center;
-    column-gap: 6px;
+    /* column-gap: 6px; */
     position: relative;
-    font-size: 18px;
-    color: #b0247a;
+    font-size: 20px;
+    color: var(--textColor);
     line-height: 20px;
 }
 
 .countWish a .count {
-    background-color: #b0247a;
+    background-color: var(--bgColor);
     color: #fff;
 }
 
 .countParent a .count {
-    background-color: #b0247a;
+    background-color: var(--bgColor);
     color: #fff;
 }
 
@@ -168,8 +168,8 @@
     background-color: #111;
     color: #fff;
     font-size: 13px;
-    width: 17px;
-    height: 17px;
+    width: 13px;
+    height: 13px;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -211,9 +211,9 @@
     flex-wrap: wrap;
 }
 
-.trendingItem ul li {
-    /* width: 80px; */
-}
+/* .trendingItem ul li {
+    width: 80px;
+} */
 
 .trendingItem ul li a {
     padding: 9px 8px;
