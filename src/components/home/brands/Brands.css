@@ -5,8 +5,8 @@
 .mainRap .icon {
     margin: 0 auto 16px;
     font-size: 35px;
-    color: #b0247a;
-    border: 2px solid #b0247a;
+    color: var(--textColor);
+    border: 2px solid var(--borderColor);
     width: 60px;
     height: 60px;
     display: flex;

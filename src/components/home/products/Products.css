@@ -110,7 +110,6 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    /* Limits the text to 2 lines */
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
 }
@@ -123,7 +122,7 @@
 }
 
 .featuredContent .rating svg {
-    color: #b0247a;
+    color: #ffa534;
 }
 
 .featuredOption select {
@@ -199,6 +198,6 @@
 
     .featuredImg.featured a img {
         object-fit: contain;
-        height: 130px;
+        height: 160px;
     }
 }

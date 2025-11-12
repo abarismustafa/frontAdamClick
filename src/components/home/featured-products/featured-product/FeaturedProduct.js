@@ -103,7 +103,7 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
   const BuyNowItem = (item) => {
     console.log(item);
 
-    const isLogin = window.localStorage.getItem('isLogin') === 'true';
+    const isLogin = window.localStorage.getItem("isLogin") === "true";
 
     if (!isLogin) {
       setIsModalOpen(true);
@@ -228,8 +228,7 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
                       </span>
 
                       <p>
-                        {t("Sale Price")}
-                        :{" "}
+                        {t("Sale Price")}:{" "}
                         {
                           item?.variations[0]?.prices?.country_id?.currency_id
                             ?.symbol
@@ -335,7 +334,6 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
                 </div>
               </div> */}
 
-
               {Array.isArray(item?.variations) &&
                 item.variations
                   .filter((variation) => variation?.isActive)
@@ -360,6 +358,10 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
                                 className="imgProduct"
                               />
                             </Link>
+                            <div className="stockMsg d-none">
+                              {/* <span className="coming">Coming Soon</span> */}
+                              <span className="outStock">Out Of Stock</span>
+                            </div>
                           </div>
 
                           <div className="featuredContent">
@@ -372,7 +374,9 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
                                   (variation?.variant_slug
                                     ? " " + variation.variant_slug
                                     : "")}
-                                {variation?.weight ? `(${variation.weight})` : ""}
+                                {variation?.weight
+                                  ? `(${variation.weight})`
+                                  : ""}
                               </Link>
                             </h5>
 
@@ -392,7 +396,10 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
                                 className="btn btn-danger buyNow"
                                 to="#"
                                 onClick={() =>
-                                  BuyNowItem({ ...item, selectedVariation: variation })
+                                  BuyNowItem({
+                                    ...item,
+                                    selectedVariation: variation,
+                                  })
                                 }
                               >
                                 {t("Buy Now")}
@@ -400,7 +407,10 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
 
                               <Link
                                 onClick={() =>
-                                  handleAddCart({ ...item, selectedVariation: variation })
+                                  handleAddCart({
+                                    ...item,
+                                    selectedVariation: variation,
+                                  })
                                 }
                                 to={`/product/${item?.uid}/${item.slug}/${variation?.variant_slug}`}
                                 className="buyNow cart"
@@ -414,35 +424,29 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
                     );
                   })}
 
-
-
               {/* {i === 7 && <Brands />} */}
-            </React.Fragment >
+            </React.Fragment>
           );
         })
       )}
       {/* <Brands /> */}
-      {
-        !isPopular && (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <button
-              type="button"
-              onClick={changeLoad}
-              className="commonButton"
-              disabled={count > data?.length}
-            >
-              {t("Load More")}
-            </button>
-          </div>
-        )
-      }
-      {
-        error && (
-          <div className="alertMsg mb-4" role="alert">
-            No Data Found
-          </div>
-        )
-      }
+      {!isPopular && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button
+            type="button"
+            onClick={changeLoad}
+            className="commonButton"
+            disabled={count > data?.length}
+          >
+            {t("Load More")}
+          </button>
+        </div>
+      )}
+      {error && (
+        <div className="alertMsg mb-4" role="alert">
+          No Data Found
+        </div>
+      )}
 
       <LoginAllPage
         isOpen={isModalOpen}

@@ -173,13 +173,13 @@ function Header({ changeLang }) {
                   style={{ cursor: "pointer" }}
                 >
                   <div className="d-flex align-items-center">
-                    <FaWalkieTalkie className="text-warning me-2 toggle-folder" />
-                    <span className="category-link text-dark fw-semibold">
+                    <FaWalkieTalkie className="fs-4 me-2 toggle-folder" />
+                    <span className="category-link text-white fw-semibold">
                       {parent?.name || "Unnamed Category"}
                     </span>
                   </div>
                   {parent.children?.length > 0 && (
-                    <span className="toggle-arrow text-dark">
+                    <span className="toggle-arrow text-white">
                       {openParent === parent._id ? (
                         <FaChevronDown />
                       ) : (
@@ -205,12 +205,12 @@ function Header({ changeLang }) {
                             style={{ cursor: "pointer" }}
                           >
                             <span className="child-link text-dark">
-                              <FaChevronRight className="me-2 text-warning small" />
+                              <FaChevronRight className="me-2 small" />
                               {child.name}
                             </span>
 
                             {child.subChildren?.length > 0 && (
-                              <span className="toggle-icon text-warning">
+                              <span className="toggle-icon">
                                 {openSubChild === child._id ? (
                                   <FaChevronDown />
                                 ) : (

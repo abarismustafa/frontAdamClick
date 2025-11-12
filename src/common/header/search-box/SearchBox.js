@@ -13,6 +13,7 @@ import {
   AiOutlineShoppingCart,
   AiOutlineUser,
 } from "react-icons/ai";
+import { IoMdCall } from "react-icons/io";
 import { BiLogInCircle, BiSearch, BiUser } from "react-icons/bi";
 import { BsBuildingAdd, BsCart } from "react-icons/bs";
 import { FaBabyCarriage, FaBars, FaShippingFast } from "react-icons/fa";
@@ -396,6 +397,9 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                 </button>
               </div>
               <div className="searchIcons mobile">
+                <div className="supportNumberMobile">
+                  <a href="tel:+91-9084074524">+91-9084074524</a>
+                </div>
                 {/*  <div className="optionSelect">
                 <div className="lang1">
                   <select name="language" id="languId" className="form-select">
@@ -637,7 +641,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
             {/* <nav className="navbar navbarItem navbar-expand-md p-0">
               <Menus />
             </nav> */}
-            <div className="searchSec">
+            <div className="searchSec customer">
               <div className="searchInf">
                 <input
                   type="text"
@@ -648,6 +652,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                   onKeyDown={handleKeyDown}
                   onChange={changeApiData}
                 />
+
                 <div className="rightSearchInfo">
                   <div className="allCategory">
                     <select defaultValue="all category">
@@ -670,6 +675,15 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                     {/* <button type="button" ></button> */}
                   </div>
                 </div>
+              </div>
+              <div className="supportNumber">
+                <p>
+                  <span>
+                    {" "}
+                    <IoMdCall />
+                  </span>{" "}
+                  <a href="tel:+91-9084074524">+91-9084074524</a>
+                </p>
               </div>
               {show && (
                 <div className="treandingSec" id="DropShow" ref={handleRef}>

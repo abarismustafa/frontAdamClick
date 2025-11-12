@@ -148,7 +148,7 @@ function FeaturedProducts() {
           <div className="row featuredRow">
             <div className="col-lg-12">
               <div className="fishermanHeader ">
-                <div className="fisherman-content featuredText">
+                <div className="fisherman-content">
                   {/* <h6>{t("Newly Arrived Products")}</h6> */}
                   <h3 className="mobileTitle">{t("Explore New Arrivals")}</h3>
                 </div>
@@ -172,6 +172,7 @@ function FeaturedProducts() {
                             alt={item.title}
                             className="img-fluid"
                           />
+                         
                         </div>
                         <div className="featuredContent">
                           <Rating />

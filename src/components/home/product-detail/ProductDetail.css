@@ -20,26 +20,26 @@
     display: flex;
 }
 .product-add-to-cart.addToCart .buy svg{
-  color: #b0247a;
+  color: var(--textColor);
 }
 .product-add-to-cart.addToCart .buy {
     background: #ffffff;
-    color: #b0247a;
+    color: var(--textColor);
     box-shadow: 0 0 8px 0 rgb(7 7 7 / 10%);
 }
 /* .product-add-to-cart.addToCart .buy:hover {
     color: #242424;
-    border: 2px solid #b0247a;
+    border: 2px solid var(--borderColor);
 }
 
 .product-add-to-cart.addToCart .cart{
-    border:2px solid #b0247a;
+    border:2px solid var(--borderColor);
 
 } 
 .product-add-to-cart.addToCart .cart:hover {
     color: #242424;
     background: transparent;
-    border:2px solid #b0247a;
+    border:2px solid var(--borderColor);
 }*/
 
 /* swipper */
