@@ -47,7 +47,7 @@
 }
 
 .collectionFilterList ul li .grid-view-btn {
-    background: #b0247a;
+    background: var(--bgColor);
     font-weight: 600;
     border-radius: 10px;
     width: 35px;

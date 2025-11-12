@@ -15,6 +15,25 @@ import "slick-carousel/slick/slick-theme.css";
 import { Provider } from "react-redux";
 import { persistor, store } from "./components/store";
 
+const domain = window.location.origin;
+
+ //bofeng
+if (domain.includes('https://test.baofengradios.co.in')) { //boffeng
+  document.documentElement.style.setProperty('--bgColor', '#0069b3'); //blue
+  document.documentElement.style.setProperty('--textColor', '#0069b3');
+  document.documentElement.style.setProperty('--borderColor', '#0069b3');
+} else if (domain.includes('https://www.adamclick.com')) { //adamclick
+  document.documentElement.style.setProperty('--bgColor', '#b0247a'); //pink
+  document.documentElement.style.setProperty('--textColor', '#b0247a');
+  document.documentElement.style.setProperty('--borderColor', '#b0247a');
+} else {
+  document.documentElement.style.setProperty('--bgColor', '#0069b3'); //blue
+  document.documentElement.style.setProperty('--textColor', '#0069b3');
+  document.documentElement.style.setProperty('--borderColor', '#0069b3');
+}
+console.log("domain", domain);
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
