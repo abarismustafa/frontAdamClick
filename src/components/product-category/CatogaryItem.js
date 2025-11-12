@@ -307,7 +307,8 @@ function CatogaryItem({ item, i, handleShow, t }) {
 
                     <p>
                       <span className="currentPrice">
-                        Sale Price: {item?.country?.code}{" "}
+                        Sale Price: ₹ 
+                        {/* {item?.country?.code}{" "} */}
                         {variation?.prices?.sale_rate}
                       </span>
                     </p>
