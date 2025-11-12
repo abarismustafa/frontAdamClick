@@ -14760,7 +14760,7 @@ button.tableCommonBtn:hover span {
     right: -6px;
   }
 
-  .recentPosts .recentItemInfo {
+  .recentPosts .recentItemInfo  {
     flex-wrap: wrap;
   }
 
@@ -16347,8 +16347,151 @@ header.sticky.active .searchSec {
 }
 
 @media (max-width: 768px) {
-  .figure.gg {
-    aspect-ratio: 0;
-    max-height: 100%;
+  .figure {
+    aspect-ratio: 4 / 5;
+    max-height: 400px;
+  }
+}
+
+
+
+.rmaHeading {
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rmaStatus {
+  font-size: 22px;
+  color: #6c757d;
+}
+
+
+
+
+
+
+
+.allSellerSection {
+  padding: 60px 0;
+}
+
+
+.sellerListGrid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px;
+}
+
+
+.sellerCard {
+  background: #fff;
+  border-radius: 15px;
+  text-align: center;
+  padding: 20px 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+.sellerCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sellerImage {
+  width: 100%;
+  max-width: 120px;
+  height: 120px;
+  object-fit: cover;
+  /* border-radius: 50%; */
+  margin-bottom: 12px;
+}
+
+.sellerInfo {
+  font-size: 16px;
+  color: #333;
+}
+
+
+@media (max-width: 992px) {
+  .table-main-main {
+    white-space: nowrap;
+  }
+
+  .img-name {
+    width: 300px;
+  }
+
+  .rmaHeading {
+    font-size: 22px;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .rmaStatus {
+    font-size: 18px;
+  }
+
+  .sellerListGrid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 20px;
+  }
+
+  .sellerCard {
+    padding: 15px;
+  }
+
+  .sellerImage {
+    height: 100px;
+    max-width: 100px;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .table-main-main {
+    white-space: nowrap;
+  }
+
+  .img-name {
+    width: 300px;
+  }
+
+  .rmaHeading {
+    font-size: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    gap: 4px;
+  }
+
+  .rmaStatus {
+    font-size: 16px;
+    display: block;
+    color: #888;
+  }
+
+  .allSellerSection {
+    padding: 40px 0;
+  }
+
+  .sellerListGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .sellerImage {
+    height: 80px;
+    max-width: 80px;
+  }
+
+  .sellerInfo {
+    font-size: 14px;
   }
 }

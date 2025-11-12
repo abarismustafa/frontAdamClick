@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
+import './craeteRmaReturm.css'
 import { base_url } from '../../../server';
 import axios from 'axios';
 import { Select } from 'antd';
@@ -318,7 +319,7 @@ const CraeteRmaReturm = () => {
         <>
             {loader && <Loader />}
 
-            <div className="container my-5">
+            <div className="container my-5 createRmaPage">
                 <h2 className="fw-bold mb-4 text-dark">Create RMA</h2>
 
                 {/* Select Order Section */}
@@ -455,7 +456,7 @@ const CraeteRmaReturm = () => {
                                                         }
                                                     />
                                                 </td>
-                                                <td className='d-flex item-center'>
+                                                <td className='img-name'>
                                                     <img style={{ width: '150px' }} src={item?.productId?.variations?.mainImage_url?.url || "/no-image.jpg"} alt="" />
                                                     {item?.productId?.name}
                                                 </td>

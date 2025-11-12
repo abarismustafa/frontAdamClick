@@ -11,6 +11,7 @@ import BillingAddres from "./BillingAddres";
 import axios from "axios";
 import { base_url } from "../../server";
 import { useTranslation } from "react-i18next";
+import './profile.css'
 
 function Profile() {
   const user_id = window.localStorage.getItem("user_id");
@@ -170,203 +171,302 @@ function Profile() {
     setState(obj);
   }, [data]);
 
+  const profileImage =
+    state?.profilePhoto?.url ||
+    "https://cdn-icons-png.flaticon.com/512/149/149071.png"; // 👈 dummy image
+
   const { t, i18n } = useTranslation();
 
   return (
+    // <>
+    //   <section className="profilePage sectionPD">
+    //     <div className="container">
+    //       <div className="fisherman-content">
+    //         <h3>{t("Manage Profile")}</h3>
+    //       </div>
+    //       <form className="border rounded p-3">
+    //         <div className="card-header">
+    //           <h4>{t("Basic Info")}</h4>
+    //         </div>
+    //         <div className="row">
+    //           <div className="col-lg-12">
+    //             <div className="form-group mb-3">
+    //               <label className="col-form-label">{t("Image")}</label>
+    //               <div>
+    //                 {/* <input
+
+
+    //                       placeholder="Image"
+    //                       name="image"
+    //                       autoComplete="off"
+    //                       value={state.image}
+
+    //                     /> */}
+    //                 <input
+    //                   type="file"
+    //                   name="profilePhoto"
+    //                   className="form-control"
+    //                   onChange={handleChangeImage}
+    //                 />
+    //                 {/* {window.localStorage.getItem("profilePic") && (
+    //                   <img
+    //                     style={{ width: "100px", height: "100px" }}
+    //                     src={window.localStorage.getItem("profilePic")}
+    //                   // alt="Profile"
+    //                   />
+    //                 )} */}
+
+    //                 {state?.profilePhoto && (
+    //                   <img
+    //                     style={{ width: "100px", height: "100px" }}
+    //                     src={state?.profilePhoto?.url}
+    //                   // alt="Profile"
+    //                   />
+    //                 )}
+    //               </div>
+    //             </div>
+    //           </div>
+    //           <div className="col-lg-6">
+    //             <div className="form-group mb-3">
+    //               <label className="col-form-label">{t("First Name")}</label>
+    //               <div>
+    //                 <input
+    //                   type="text"
+    //                   className="form-control"
+    //                   placeholder="John"
+    //                   name="firstName"
+    //                   autoComplete="off"
+    //                   value={state.firstName}
+    //                   onChange={onchengeHandle}
+    //                 />
+    //               </div>
+    //             </div>
+    //           </div>
+    //           <div className="col-lg-6">
+    //             <div className="form-group mb-3">
+    //               <label className="col-form-label">{t("Last Name")}</label>
+    //               <div>
+    //                 <input
+    //                   type="text"
+    //                   className="form-control"
+    //                   name="lastName"
+    //                   autoComplete="off"
+    //                   value={state.lastName}
+    //                   onChange={onchengeHandle}
+    //                 />
+    //               </div>
+    //             </div>
+    //           </div>
+    //           <div className="col-lg-6">
+    //             <div className="form-group mb-3">
+    //               <label className="col-form-label">{t("email")}</label>
+    //               <div>
+    //                 <input
+    //                   type="text"
+    //                   className="form-control"
+    //                   placeholder="Smith"
+    //                   name="email"
+    //                   value={state.email}
+    //                   onChange={onchengeHandle}
+    //                   autoComplete="off"
+    //                 />
+    //               </div>
+    //             </div>
+    //           </div>
+    //           <div className="col-lg-6">
+    //             <div className="form-group mb-3">
+    //               <label className="col-form-label">{t("Your Phone")}</label>
+    //               <div>
+    //                 <input
+    //                   type="text"
+    //                   className="form-control"
+    //                   placeholder="+91-123456789"
+    //                   name="mobile"
+    //                   onChange={onchengeHandle}
+    //                   value={state.mobile}
+    //                 />
+    //               </div>
+    //             </div>
+    //           </div>
+    //           {/* <div className="col-lg-6">
+    //             <div className="form-group mb-3">
+    //               <label className="col-form-label">{t("Your Language")}</label>
+    //               <div>
+    //                 <select
+    //                   className="form-select"
+    //                   name="language"
+    //                   id="languId"
+    //                   onChange={onchengeHandle}
+    //                   aria-label="Default select example"
+    //                 >
+    //                   <option selected>
+    //                     {state?.language ? state.language : "Select Language"}
+    //                   </option>
+    //                   {language &&
+    //                     language.map((item) => {
+    //                       if (item.name === state?.language) {
+    //                         return;
+    //                       } else {
+    //                         return (
+    //                           <option key={item._id} value={item._id}>
+    //                             {item.name}
+    //                           </option>
+    //                         );
+    //                       }
+    //                     })}
+    //                 </select>
+    //               </div>
+    //             </div>
+    //           </div> */}
+    //           {/* <div className="col-lg-6">
+    //             <div className="form-group mb-3">
+    //               <label className="col-form-label">{t("Your Currency")}</label>
+    //               <div>
+    //                 <select
+    //                   className="form-select"
+    //                   name="currency"
+    //                   id="currId"
+    //                   onChange={onchengeHandle}
+    //                   aria-label="Default select example"
+    //                 >
+    //                   <option selected>
+    //                     {state?.currency ? state.currency : "Select Currency"}
+    //                   </option>
+    //                   {currency &&
+    //                     currency.map((item) => {
+    //                       if (item.name === state?.currency) {
+    //                         return;
+    //                       } else {
+    //                         return (
+    //                           <option key={item._id} value={item._id}>
+    //                             {item.name}
+    //                           </option>
+    //                         );
+    //                       }
+    //                     })}
+    //                 </select>
+    //               </div>
+    //             </div>
+    //           </div> */}
+    //         </div>
+    //         <div className="form-group mt-3 text-right">
+    //           {show && (
+    //             <div className="alert alert-success" role="alert">
+    //               Profile Update Successfully!
+    //             </div>
+    //           )}
+    //           <button
+    //             style={{ display: "flex", alignItems: "center" }}
+    //             type="button"
+    //             onClick={sendData}
+    //             className="commonButton"
+    //           >
+    //             {t("Update Profile")}
+    //             {show && (
+    //               <div className="spinner-border" role="status">
+    //                 <span className="visually-hidden">Loading...</span>
+    //               </div>
+    //             )}
+    //           </button>
+    //         </div>
+    //       </form>
+
+    //       {/* <BillingAddres /> */}
+    //     </div>
+    //   </section>
+    // </>
     <>
       <section className="profilePage sectionPD">
         <div className="container">
-          <div className="fisherman-content">
-            <h3>{t("Manage Profile")}</h3>
-          </div>
-          <form className="border rounded p-3">
-            <div className="card-header">
-              <h4>{t("Basic Info")}</h4>
+          <div className="profileCard">
+            <div className="profileHeader text-center">
+              <div className="profileImageWrapper">
+                <img src={profileImage} alt="Profile" className="profileImage" />
+                <label className="uploadLabel">
+                  <input
+                    type="file"
+                    name="profilePhoto"
+                    className="d-none"
+                    onChange={handleChangeImage}
+                  />
+                  <span className="uploadText">{t("Change Photo")}</span>
+                </label>
+              </div>
+              <h4 className="mt-3 mb-1">
+                {state.firstName || "User"} {state.lastName}
+              </h4>
+              <p className="text-muted small">{state.email}</p>
             </div>
-            <div className="row">
-              <div className="col-lg-12">
-                <div className="form-group mb-3">
-                  <label className="col-form-label">{t("Image")}</label>
-                  <div>
-                    {/* <input
-                        
-                         
-                          placeholder="Image"
-                          name="image"
-                          autoComplete="off"
-                          value={state.image}
-                         
-                        /> */}
-                    <input
-                      type="file"
-                      name="profilePhoto"
-                      className="form-control"
-                      onChange={handleChangeImage}
-                    />
-                    {/* {window.localStorage.getItem("profilePic") && (
-                      <img
-                        style={{ width: "100px", height: "100px" }}
-                        src={window.localStorage.getItem("profilePic")}
-                      // alt="Profile"
-                      />
-                    )} */}
 
-                    {state?.profilePhoto && (
-                      <img
-                        style={{ width: "100px", height: "100px" }}
-                        src={state?.profilePhoto?.url}
-                      // alt="Profile"
-                      />
-                    )}
-                  </div>
+            <div className="profileBody">
+              <h5 className="sectionTitle mb-3">{t("Basic Info")}</h5>
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <label className="form-label">{t("First Name")}</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    className="form-control"
+                    value={state.firstName}
+                    onChange={onchengeHandle}
+                    placeholder="John"
+                  />
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label className="form-label">{t("Last Name")}</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    className="form-control"
+                    value={state.lastName}
+                    onChange={onchengeHandle}
+                    placeholder="Smith"
+                  />
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label className="form-label">{t("Email")}</label>
+                  <input
+                    type="text"
+                    name="email"
+                    className="form-control"
+                    value={state.email}
+                    onChange={onchengeHandle}
+                    placeholder="example@email.com"
+                  />
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label className="form-label">{t("Your Phone")}</label>
+                  <input
+                    type="text"
+                    name="mobile"
+                    className="form-control"
+                    value={state.mobile}
+                    onChange={onchengeHandle}
+                    placeholder="+91-1234567890"
+                  />
                 </div>
               </div>
-              <div className="col-lg-6">
-                <div className="form-group mb-3">
-                  <label className="col-form-label">{t("First Name")}</label>
-                  <div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="John"
-                      name="firstName"
-                      autoComplete="off"
-                      value={state.firstName}
-                      onChange={onchengeHandle}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="form-group mb-3">
-                  <label className="col-form-label">{t("Last Name")}</label>
-                  <div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="lastName"
-                      autoComplete="off"
-                      value={state.lastName}
-                      onChange={onchengeHandle}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="form-group mb-3">
-                  <label className="col-form-label">{t("email")}</label>
-                  <div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Smith"
-                      name="email"
-                      value={state.email}
-                      onChange={onchengeHandle}
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <div className="form-group mb-3">
-                  <label className="col-form-label">{t("Your Phone")}</label>
-                  <div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="+91-123456789"
-                      name="mobile"
-                      onChange={onchengeHandle}
-                      value={state.mobile}
-                    />
-                  </div>
-                </div>
-              </div>
-              {/* <div className="col-lg-6">
-                <div className="form-group mb-3">
-                  <label className="col-form-label">{t("Your Language")}</label>
-                  <div>
-                    <select
-                      className="form-select"
-                      name="language"
-                      id="languId"
-                      onChange={onchengeHandle}
-                      aria-label="Default select example"
-                    >
-                      <option selected>
-                        {state?.language ? state.language : "Select Language"}
-                      </option>
-                      {language &&
-                        language.map((item) => {
-                          if (item.name === state?.language) {
-                            return;
-                          } else {
-                            return (
-                              <option key={item._id} value={item._id}>
-                                {item.name}
-                              </option>
-                            );
-                          }
-                        })}
-                    </select>
-                  </div>
-                </div>
-              </div> */}
-              {/* <div className="col-lg-6">
-                <div className="form-group mb-3">
-                  <label className="col-form-label">{t("Your Currency")}</label>
-                  <div>
-                    <select
-                      className="form-select"
-                      name="currency"
-                      id="currId"
-                      onChange={onchengeHandle}
-                      aria-label="Default select example"
-                    >
-                      <option selected>
-                        {state?.currency ? state.currency : "Select Currency"}
-                      </option>
-                      {currency &&
-                        currency.map((item) => {
-                          if (item.name === state?.currency) {
-                            return;
-                          } else {
-                            return (
-                              <option key={item._id} value={item._id}>
-                                {item.name}
-                              </option>
-                            );
-                          }
-                        })}
-                    </select>
-                  </div>
-                </div>
-              </div> */}
-            </div>
-            <div className="form-group mt-3 text-right">
-              {show && (
-                <div className="alert alert-success" role="alert">
-                  Profile Update Successfully!
-                </div>
-              )}
-              <button
-                style={{ display: "flex", alignItems: "center" }}
-                type="button"
-                onClick={sendData}
-                className="commonButton"
-              >
-                {t("Update Profile")}
+
+              <div className="text-end mt-4">
                 {show && (
-                  <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
+                  <div className="alert alert-success p-2 text-center">
+                    {t("Profile Update Successfully!")}
                   </div>
                 )}
-              </button>
+                <button className="commonButton d-inline-flex align-items-center gap-2" onClick={sendData}>
+                  {t("Update Profile")}
+                  {show && (
+                    <div className="spinner-border spinner-border-sm" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  )}
+                </button>
+              </div>
             </div>
-          </form>
-
-          {/* <BillingAddres /> */}
+          </div>
         </div>
       </section>
     </>

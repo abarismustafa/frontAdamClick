@@ -147,8 +147,12 @@ const RmaReturnView = () => {
             {loader && <Loader />}
             <div className="container my-5">
                 {/* Header */}
-                <h2 className="fw-bold mb-4">
+                {/* <h2 className="fw-bold mb-4">
                     RMA {ramaDetailsList?.[0]?._id} <span className="text-muted">- {ramaDetailsList?.[0]?.status}</span>
+                </h2> */}
+                <h2 className="fw-bold mb-4 rmaHeading">
+                    RMA {ramaDetailsList?.[0]?._id}
+                    <span className="text-muted rmaStatus"> - {ramaDetailsList?.[0]?.status}</span>
                 </h2>
 
                 {/* Progress Bar */}
@@ -458,7 +462,7 @@ const RmaReturnView = () => {
                             {ramaDetailsList && ramaDetailsList?.map((item) => {
                                 return <tr key={item?._id}>
 
-                                    <td className="d-flex align-items-center">
+                                    <td className="img-name">
                                         <img
                                             src={item?.variant_id?.mainImage_url?.url}
                                             alt="product"

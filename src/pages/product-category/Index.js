@@ -15,7 +15,7 @@ import UseStatisticTracker from "../../common/useStatisticTracker/UseStatisticTr
 function ProductCategoryPage() {
   const params = useParams();
   // console.log(params);
-  UseStatisticTracker({ category_id: params?.id });
+  UseStatisticTracker({ category_id: params?.id, });
 
   // const { data: allData, isLoading } = useGetCategoriesProductQuery(params.id)
   let isError = false;

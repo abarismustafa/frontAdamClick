@@ -67,7 +67,7 @@ const RmaReturnList = () => {
                 </Row>
 
                 <div className="table-responsive shadow-sm rounded">
-                    <Table hover className="align-middle mb-0">
+                    <Table hover className="align-middle mb-0 table-main-main">
                         <thead className="table-light">
                             <tr>
                                 <th>RMA #</th>
