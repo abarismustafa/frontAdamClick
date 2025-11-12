@@ -10,16 +10,20 @@ import {
 } from "../../../products/productSlice";
 import axios from "axios";
 import { base_url } from "../../../../server";
-function Review({ ids }) {
+import LoginAllPage from "../../../../common/loginAllPage/LoginAllPage";
+function Review({ ids, dataproduct }) {
+  // console.log(dataproduct);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [show, setShow] = useState(false);
   const params = useParams();
   // const { data, isLoading } = useGetReviewsQuery({ proid: params._id, variant_id:ids })
 
   const [data, setData] = useState();
   const baseUrl = base_url();
-  const getReview = async () => {
+  const getReview = async (uid) => {
     try {
-      const res = await axios.get(`${baseUrl}rating/product/${ids}`, {
+      const res = await axios.get(`${baseUrl}rating/product/${ids}/${uid}`, {
         withCredentials: true,
         headers: {
           "content-type": "application/json; charset=UTF-8",
@@ -40,14 +44,31 @@ function Review({ ids }) {
   };
 
   useEffect(() => {
-    getReview();
-  }, []);
+    if (dataproduct?.variations[0]?.uid) {
+      getReview(dataproduct?.variations[0]?.uid);
+    }
+
+  }, [dataproduct?.variations[0]?.uid]);
 
   useEffect(() => {
     if (isSuccess) {
       setData(filterData);
     }
   }, [isSuccess]);
+
+  const resviewDev = () => {
+    const isLogin = window.localStorage.getItem("isLogin") === "true";
+
+    if (!isLogin) {
+      setIsModalOpen(true);
+      return;
+    }
+    setShow(!show)
+  }
+
+
+  // console.log(dataproduct);
+
   return (
     <>
       <section className="reviewSec sectionPD bgGray">
@@ -156,12 +177,13 @@ function Review({ ids }) {
                   <button
                     type="button"
                     className="commonButton"
-                    onClick={() => setShow(!show)}
+                    // onClick={() => setShow(!show)}
+                    onClick={resviewDev}
                   >
                     Write a Review
                   </button>
                   {show && (
-                    <ReviewForm getReview={getReview} setShow={setShow} />
+                    <ReviewForm getReview={getReview} setShow={setShow} dataproduct={dataproduct} />
                   )}
                 </div>
               </aside>
@@ -198,11 +220,24 @@ function Review({ ids }) {
                     data?.map((item) => {
                       return (
                         <div key={item._id} className="reviewContent">
-                          <div className="ratingPart d-flex">
+                          <div className="ratingPart d-flex align-items-center">
                             {/* <Rating /> */}
-                            <strong style={{ marginLeft: "7px" }}>
+                            Rating:
+                            {[1, 2, 3, 4, 5].map((star) => (
+                              <span
+                                key={star}
+                                style={{
+                                  color: star <= item.rating ? "#ffc107" : "#e4e5e9",
+                                  fontSize: "18px",
+                                  marginRight: "2px",
+                                }}
+                              >
+                                ★
+                              </span>
+                            ))}
+                            {/* <strong style={{ marginLeft: "7px" }}>
                               Rating : {item.rating}
-                            </strong>
+                            </strong> */}
                           </div>
                           <div className="customerName">
                             <div className="verified">
@@ -214,11 +249,18 @@ function Review({ ids }) {
                             </div>
                           </div>
                           <div className="customerDesc">
-                            <p>{item.title}</p>
-                            <p>{item.comments}</p>
+                            <p>{item?.title}</p>
+                            <p>{item?.comments}</p>
                           </div>
                           <div className="reviewDate">
-                            <p>{item.createdAt}</p>
+                            <p> {new Date(item.createdAt).toLocaleString("en-GB", {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            })}</p>
                           </div>
                         </div>
                       );
@@ -229,6 +271,10 @@ function Review({ ids }) {
           </div>
         </div>
       </section>
+      <LoginAllPage
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 }

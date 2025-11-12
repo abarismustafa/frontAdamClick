@@ -3,6 +3,7 @@ import ProductDetail from "../../components/home/product-detail/ProductDetail";
 import { productData } from "./mockData";
 import UseStatisticTracker from "../../common/useStatisticTracker/UseStatisticTracker";
 import { useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 export const productItemContext = createContext();
 
 function ProductDetailPage({ setShow }) {
@@ -18,6 +19,7 @@ function ProductDetailPage({ setShow }) {
       <productItemContext.Provider value={productData}>
         <ProductDetail />
       </productItemContext.Provider>
+      <ToastContainer />
     </>
   );
 }

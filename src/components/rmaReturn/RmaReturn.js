@@ -13,10 +13,10 @@ const RmaReturnList = () => {
 
     const getStatusBadge = (status) => {
         if (status === "Pending")
-            return <Badge bg="warning" text="dark">{status}</Badge>;
+            return <Badge bg="warning" text="dark" className="budges">{status}</Badge>;
         if (status === "Approved")
-            return <Badge bg="primary">{status}</Badge>;
-        return <Badge bg="danger">{status}</Badge>;
+            return <Badge bg="primary" className="budges">{status}</Badge>;
+        return <Badge bg="danger" className="budges">{status}</Badge>;
     };
 
 
@@ -66,7 +66,7 @@ const RmaReturnList = () => {
                     </Col>
                 </Row>
 
-                <div className="table-responsive shadow-sm rounded">
+                <div className="table-responsive shadow-sm rounded listRmaset">
                     <Table hover className="align-middle mb-0 table-main-main">
                         <thead className="table-light">
                             <tr>

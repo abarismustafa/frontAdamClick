@@ -14760,7 +14760,7 @@ button.tableCommonBtn:hover span {
     right: -6px;
   }
 
-  .recentPosts .recentItemInfo  {
+  .recentPosts .recentItemInfo {
     flex-wrap: wrap;
   }
 
@@ -16493,5 +16493,48 @@ header.sticky.active .searchSec {
 
   .sellerInfo {
     font-size: 14px;
+  }
+}
+
+
+
+.star-ratingstar {
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.star {
+  color: #ccc;
+  transition: color 0.2s;
+  /* width: 100%; */
+}
+
+.star.selected {
+  color: #f8b400;
+  /* yellow for selected */
+}
+
+.star:hover {
+  color: #ffcc00;
+}
+
+.star svg {
+  font-size: 30px;
+}
+
+.table-responsive-2 {
+  overflow: hidden !important;
+}
+
+.table-responsive-2 .table tbody tr {
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .listRmaset .table tbody td .budges {
+    width: 200px;
+    margin: auto;
+    height: 30px;
+    font-size: 17px;
   }
 }

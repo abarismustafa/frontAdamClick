@@ -412,7 +412,7 @@ const CraeteRmaReturm = () => {
                         </button>
                     </div> */}
                         <div className="card-body">
-                            <div className="table-responsive">
+                            <div className="table-responsive table-responsive-2">
                                 <table className="table align-middle">
                                     <thead className="table-light">
                                         <tr>
