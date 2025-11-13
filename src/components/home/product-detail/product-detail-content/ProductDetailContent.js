@@ -602,8 +602,8 @@ function ProductDetailContent({
                     <p
                       style={{
                         color: isServiceable ? "green" : "red",
-                        marginTop: "5px",
-                        fontSize: "14px",
+                        
+                        fontSize: "12px",
                       }}
                     >
                       {messageShow}
