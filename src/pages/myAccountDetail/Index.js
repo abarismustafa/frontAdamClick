@@ -13,11 +13,17 @@ import {
   useSetCartMutation,
 } from "../../components/products/productSlice";
 
-
 import { useTranslation } from "react-i18next";
 import { base_url } from "../../server";
 import { useDispatch } from "react-redux";
-import { MdCancel, MdSupportAgent, MdAssignmentReturn, MdReplay, MdRateReview, MdBlock } from "react-icons/md";
+import {
+  MdCancel,
+  MdSupportAgent,
+  MdAssignmentReturn,
+  MdReplay,
+  MdRateReview,
+  MdBlock,
+} from "react-icons/md";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import InvoiceDetails from "../orderDetails/invoiceDetails/InvoiceDetails";
@@ -50,7 +56,6 @@ function MyAccountDetail() {
   useEffect(() => {
     fechData();
   }, []);
-
 
   window.localStorage.setItem("Invoice", "");
 
@@ -85,7 +90,6 @@ function MyAccountDetail() {
   };
   const { t, i18n } = useTranslation();
 
-
   // const reOorder = () => {
   //   navigate("/checkout");
   // };
@@ -100,10 +104,8 @@ function MyAccountDetail() {
     },
   ] = useSetCartMutation();
 
-
   const isProductAdded = window.localStorage.getItem("currentProductId");
   const [productAdded, setProductAdded] = useState(false);
-
 
   const reOorder = async (order) => {
     try {
@@ -120,13 +122,12 @@ function MyAccountDetail() {
       }
 
       for (const prod of products) {
-
         const variations = prod?.matchedVariation || [];
 
         if (!variations.length) continue;
 
         for (const variant of variations) {
-          console.log('variant', variant);
+          console.log("variant", variant);
 
           const payload = {
             qty: 1,
@@ -150,7 +151,6 @@ function MyAccountDetail() {
     }
   };
 
-
   // const reOorder = async (order) => {
   //   console.log(order);
   //   // debugger
@@ -173,7 +173,6 @@ function MyAccountDetail() {
   //     for (const prod of products) {
   //       console.log('prod', prod);
   //       console.log('products', products);
-
 
   //       const payload = {
   //         qty: product_count,
@@ -220,33 +219,26 @@ function MyAccountDetail() {
     }
   }, [isAddToCartSuccess, isAddToCartError, isProductAdded]);
 
-  const [invoiceData, setInvoiceData] = useState(null)
+  const [invoiceData, setInvoiceData] = useState(null);
   const idGet = async (item) => {
     console.log(item);
 
     try {
-      const res = await axios.get(
-        `${baseUrl}order/getOrderById/${item?._id}`,
-        {
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-            Authorization: `Bearer ${token1}`,
-          },
-        }
-      );
+      const res = await axios.get(`${baseUrl}order/getOrderById/${item?._id}`, {
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${token1}`,
+        },
+      });
 
       if (res?.status === 200) {
-        setInvoiceData(res?.data)
+        setInvoiceData(res?.data);
         setTimeout(() => {
-          handleDownload()
-        }, 800)
+          handleDownload();
+        }, 800);
       }
-
-    } catch (error) {
-
-    }
-  }
-
+    } catch (error) {}
+  };
 
   const printRef = useRef();
 
@@ -280,23 +272,20 @@ function MyAccountDetail() {
 
   const returnOrder = (id) => {
     if (id) {
-      navigate(`/returns/rma/new/${id}`)
+      navigate(`/returns/rma/new/${id}`);
     }
-  }
+  };
 
   const returnSet = (item) => {
     // console.log(item);
 
-    navigate(`/product/${item?.productDetails[0]?.uid}/${item?.productDetails[0]?.slug}/${item?.productDetails[0]?.matchedVariation[0]?.variant_slug}`)
-  }
+    navigate(
+      `/product/${item?.productDetails[0]?.uid}/${item?.productDetails[0]?.slug}/${item?.productDetails[0]?.matchedVariation[0]?.variant_slug}`
+    );
+  };
 
   return (
     <>
-
-
-
-
-
       <section className="sectionPD myAccountSection">
         <div className="container">
           <div className="fisherman-content">
@@ -314,7 +303,13 @@ function MyAccountDetail() {
                 {pickup &&
                   pickup
                     .filter((item) =>
-                      ["Pending", "Processing", "Ready to ship", "Order In Transit", "Delivered"].includes(item?.orderStatusName)
+                      [
+                        "Pending",
+                        "Processing",
+                        "Ready to ship",
+                        "Order In Transit",
+                        "Delivered",
+                      ].includes(item?.orderStatusName)
                     )
                     .map((item) => (
                       <option key={item._id} value={item._id}>
@@ -325,11 +320,7 @@ function MyAccountDetail() {
             </div>
           </div>
           <div className="table-responsive orderTableWrapper">
-            <Table
-              bordered
-              hover
-              className="table aiz-table mb-0"
-            >
+            <Table bordered hover className="table aiz-table mb-0">
               <thead>
                 <tr className="footable-header">
                   <th>{t("Serial No.")}</th>
@@ -339,7 +330,7 @@ function MyAccountDetail() {
                   <th>{t("Order Amount")}</th>
                   <th>{t("Order Status")}</th>
                   <th>{t("Payment Type")}</th>
-                  <th >{t("Address Type")}</th>
+                  <th>{t("Address Type")}</th>
                   <th>{t("More Action")}</th>
                 </tr>
               </thead>
@@ -360,7 +351,10 @@ function MyAccountDetail() {
                                     className="productImage"
                                   >
                                     <img
-                                      src={variation?.mainImage_url?.url || "/no-image.jpg"}
+                                      src={
+                                        variation?.mainImage_url?.url ||
+                                        "/no-image.jpg"
+                                      }
                                       alt={product?.slug}
                                     />
                                   </Link>
@@ -368,7 +362,10 @@ function MyAccountDetail() {
                                   <Link
                                     to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
                                   >
-                                    {product?.name + (variation?.variant_slug ? " " + variation?.variant_slug : "")}
+                                    {product?.name +
+                                      (variation?.variant_slug
+                                        ? " " + variation?.variant_slug
+                                        : "")}
                                   </Link>
                                 </div>
                               ))
@@ -378,17 +375,23 @@ function MyAccountDetail() {
                           <div className="orderDates">
                             <p>
                               <strong>Order Date:</strong>{" "}
-                              {new Date(item?.createdAt).toLocaleString("en-IN", {
-                                day: "2-digit",
-                                month: "short",
-                                year: "numeric",
-                                hour: "2-digit",
-                                minute: "2-digit",
-                              })}
+                              {new Date(item?.createdAt).toLocaleString(
+                                "en-IN",
+                                {
+                                  day: "2-digit",
+                                  month: "short",
+                                  year: "numeric",
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                }
+                              )}
                             </p>
                             <p>
                               <strong>Order No:</strong>{" "}
-                              <Link to={`/order-detail/${item._id}`} className="blue">
+                              <Link
+                                to={`/order-detail/${item._id}`}
+                                className="blue"
+                              >
                                 {item?.referenceNo}
                               </Link>
                             </p>
@@ -423,14 +426,10 @@ function MyAccountDetail() {
                           </Link>
                         </td> */}
 
-
-
                         <td
                         // className="text-end"
                         >
-                          {item?.currency?.name
-                            ? item?.currency?.name
-                            : "INR"}{" "}
+                          {item?.currency?.name ? item?.currency?.name : "INR"}{" "}
                           {item.grandTotal}
                         </td>
                         <td>
@@ -439,14 +438,11 @@ function MyAccountDetail() {
                           )}
                         </td>
                         <td>{item?.payment_type}</td>
-                        <td >{item?.deliveryType}</td>
+                        <td>{item?.deliveryType}</td>
                         {/* <td>---</td> */}
                         {/* <td>{item?.products[0]?.deliveryType} {item?.products[0]?.pickupPoints?.pickupPoint_name}</td> */}
 
-
                         <td className="orderActions">
-
-
                           {(() => {
                             const status = item?.status?.[0]?.orderStatusName;
 
@@ -467,14 +463,19 @@ function MyAccountDetail() {
                             };
 
                             const btnClass =
-                              "w-100 mb-2 tableCommonBtn d-flex align-items-center gap-2 justify-content-center";
+                              "w-100 mb-2 tableCommonBtn d-flex align-items-center gap-2";
 
                             // ✅ Pending / Processing / Ready to Ship
 
-                            if (["Pending", "Processing", "Ready to ship"].includes(status)) {
+                            if (
+                              [
+                                "Pending",
+                                "Processing",
+                                "Ready to ship",
+                              ].includes(status)
+                            ) {
                               return (
                                 <>
-
                                   {/* <Button
                                     className={btnClass}
                                     style={baseStyle}
@@ -492,7 +493,10 @@ function MyAccountDetail() {
                                     <span>Cancel Order</span>
                                   </Button>
 
-                                  <Button className={btnClass} style={baseStyle}>
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                  >
                                     <MdSupportAgent size={iconSize} />
                                     <span>Contact Support</span>
                                   </Button>
@@ -514,17 +518,27 @@ function MyAccountDetail() {
                             if (["Order In Transit"].includes(status)) {
                               return (
                                 <>
-                                  <Button className={btnClass} style={baseStyle}>
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                  >
                                     <FaMapMarkedAlt size={iconSize} />
                                     <span>Track Your Order</span>
                                   </Button>
 
-                                  <Button className={btnClass} style={baseStyle}>
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                  >
                                     <MdSupportAgent size={iconSize} />
                                     <span>Contact Support</span>
                                   </Button>
 
-                                  <Button className={btnClass} style={disabledStyle} disabled>
+                                  <Button
+                                    className={btnClass}
+                                    style={disabledStyle}
+                                    disabled
+                                  >
                                     <HiOutlineDocumentText size={iconSize} />
                                     <span>Print Invoice</span>
                                   </Button>
@@ -545,12 +559,19 @@ function MyAccountDetail() {
                                     <span>Return Your Order</span>
                                   </Button>
 
-                                  <Button className={btnClass} style={baseStyle}>
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                  >
                                     <MdSupportAgent size={iconSize} />
                                     <span>Contact Support</span>
                                   </Button>
 
-                                  <Button className={btnClass} style={baseStyle} onClick={() => idGet(item)}>
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                    onClick={() => idGet(item)}
+                                  >
                                     <HiOutlineDocumentText size={iconSize} />
                                     <span>Print Invoice</span>
                                   </Button>
@@ -564,7 +585,11 @@ function MyAccountDetail() {
                                     <span>Re-Order</span>
                                   </Button>
 
-                                  <Button className={btnClass} style={baseStyle} onClick={() => returnSet(item)}>
+                                  <Button
+                                    className={btnClass}
+                                    style={baseStyle}
+                                    onClick={() => returnSet(item)}
+                                  >
                                     <MdRateReview size={iconSize} />
                                     <span>Product Review</span>
                                   </Button>
@@ -574,7 +599,11 @@ function MyAccountDetail() {
 
                             // ✅ Default (no action)
                             return (
-                              <Button className={btnClass} style={disabledStyle} disabled>
+                              <Button
+                                className={btnClass}
+                                style={disabledStyle}
+                                disabled
+                              >
                                 <MdBlock size={iconSize} />
                                 <span>No Actions Available</span>
                               </Button>
@@ -763,7 +792,7 @@ function MyAccountDetail() {
         >
           <InvoiceDetails printRef={printRef} data={invoiceData} />
         </div>
-      </section >
+      </section>
     </>
   );
 }
