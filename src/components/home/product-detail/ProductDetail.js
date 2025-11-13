@@ -671,6 +671,7 @@ function ProductDetail() {
                   className="product-details-image col-lg-10 col-md-10 col-sm-10 col-xs-10"
                   style={!isMobile ? { zIndex: "10" } : { zIndex: "0" }}
                 >
+                  
                   {isMobile && (
                     <div className="mobileBanner">
                       <Slider {...settings} ref={sliderRef}>
@@ -713,12 +714,13 @@ function ProductDetail() {
                       </div>
                     </div>
                   )}
+                  <div className="big">
                   {!isMobile && zoomImageProps?.img && (
                     <ReactImageZoom
                       style={{ zIndex: "9999999", position: "relative" }}
                       {...zoomImageProps}
                     />
-                  )}
+                  )}</div>
                   {/* <div className="product-add-to-cart addToCart picture">
                     {isLogin === "true" ? (
                       <button

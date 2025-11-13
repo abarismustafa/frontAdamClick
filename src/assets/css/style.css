@@ -1559,6 +1559,7 @@ div#navbarSupportedContent {
 /* Privacy Policy CSS Start */
 .privacyWrapper {
   background-color: var(--textColor);
+  background-color: var(--textColor);
   padding: 40px 0;
 }
 
@@ -10623,15 +10624,15 @@ Product Details Area CSS
   border: 0;
 }
 
-.product-details-image>div {
+.product-details-image .big div {
   text-align: center;
   border: 1px solid #edf1f0;
+  height: 77vh;
 }
 
-.product-details-image>div>img {
+.product-details-image .big img {
   object-fit: contain;
-  /* height: 570px !important; */
-  height: 542px !important;
+  height: 100% !important;
 }
 
 .product-details-desc h3 {
@@ -14333,6 +14334,7 @@ header.sticky.active .mobileMenu {
   text-transform: uppercase;
   padding: 4px 10px;
   letter-spacing: 1px;
+  white-space: nowrap;
 }
 
 .searchIcons.mobile,
@@ -14408,7 +14410,7 @@ header.sticky.active .mobileMenu {
 .SelectImageSec {
   position: sticky;
   top: 100px;
-  z-index: 111;
+  z-index: 11;
 }
 
 .product-add-to-cart.addToCart.picture {
@@ -14679,7 +14681,7 @@ button.tableCommonBtn:hover span {
 
 .js-image-zoom__zoomed-image {
   width: 680px !important;
-  height: 640px !important;
+  height: 100vh !important;
   background-color: #fff;
 }
 
@@ -14772,6 +14774,11 @@ header.sticky.active .searchSec {
   background: #c58f02;
   font-weight: 500;
   color: #fff;
+}
+
+.serviceItemIcon.category img {
+  width: 70px;
+  height: 70px;
 }
 
 /* RESPONSIVE CSS START */
@@ -15434,14 +15441,25 @@ header.sticky.active .searchSec {
     margin: 0;
   }
 
-
-
   .product-details-desc .price {
     text-align: start;
   }
 }
 
 @media only screen and (max-width: 600px) {
+
+  /*  */
+  .product-details-image .big div {
+    height: 400px !important;
+  }
+
+  .product-details-image .big div img {
+    pointer-events: none;
+  }
+
+  .product-details-image .big div .js-image-zoom__zoomed-area {
+    height: auto !important;
+  }
 
   /*  */
   .featuredInfo.products {
@@ -15452,7 +15470,6 @@ header.sticky.active .searchSec {
     border: 0;
   }
 
-  /*  */
   .discoverCard {
     text-align: center;
   }
@@ -15622,6 +15639,13 @@ header.sticky.active .searchSec {
 @media only screen and (max-width: 480px) {
 
   /*  */
+
+  .selectImageInfo {
+    margin-top: 4px;
+  }
+
+  /*  */
+
   .categoryListFooter ul {
     gap: 10px;
     justify-content: start;
@@ -15634,11 +15658,6 @@ header.sticky.active .searchSec {
   .product-details-image>div>img {
     height: auto !important;
   }
-
-  /*  */
-
-
-
 
   .single-footer-widget .footer-heading h3,
   .single-footer-widget p,
