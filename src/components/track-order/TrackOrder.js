@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Table } from "react-bootstrap";
 import barCode from "../../assets/img/barCode.png";
-import imgs from "../../assets/img/client/3.jpg";
+
 import axios from "axios";
 
 import QRCode from "react-qr-code";
@@ -46,7 +46,7 @@ function TrackOrder() {
       alert("Somthing Went Wrong !");
     }
   }, [isError]);
-  
+
   const { t } = useTranslation();
 
   return (
@@ -280,7 +280,7 @@ function TrackOrder() {
                         Address Line 1 :{" "}
                         {data?.getaOrderById?.shippingAddress_save?.addressLine1
                           ? data?.getaOrderById?.shippingAddress_save
-                              ?.addressLine1
+                            ?.addressLine1
                           : data?.getaOrderById?.billingAddress?.baddressLine1}
                       </span>
                     </div>
@@ -289,7 +289,7 @@ function TrackOrder() {
                         Address Line 2 :{" "}
                         {data?.getaOrderById?.shippingAddress_save?.addressLine2
                           ? data?.getaOrderById?.shippingAddress_save
-                              ?.addressLine2
+                            ?.addressLine2
                           : data?.getaOrderById?.billingAddress?.baddressLine2}
                       </span>
                     </div>
@@ -297,9 +297,9 @@ function TrackOrder() {
                       Name :{" "}
                       {data?.getaOrderById?.shippingAddress_save?.firstname &&
                         data?.getaOrderById?.shippingAddress_save?.firstname +
-                          " " +
-                          data?.getaOrderById?.shippingAddress_save
-                            ?.lastname}{" "}
+                        " " +
+                        data?.getaOrderById?.shippingAddress_save
+                          ?.lastname}{" "}
                     </div>
                     <div>
                       Email :
@@ -390,7 +390,7 @@ function TrackOrder() {
                             <td>
                               <img
                                 style={{ widows: "100px", height: "100px" }}
-                                src={item?.photo ? item?.photo.url : imgs}
+                                src={item?.photo ? item?.photo.url : ""}
                               />
                             </td>
                           </tr>

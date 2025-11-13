@@ -85,6 +85,7 @@ import CraeteRmaReturm from "./components/rmaReturn/craeteRmaReturm/CraeteRmaRet
 import RmaReturnView from "./components/rmaReturn/rmaReturnView/RmaReturnView";
 import ThankyouSucccessPage from "./pages/thankyouSucccess/ThankyouSucccess";
 import StatisticTrackerWrapper from "./StatisticTrackerWrapper";
+import AddTicketPage from "./pages/supportTicket/addTicket";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -331,6 +332,7 @@ function App() {
         <Route path="returns/rma/new/:id" element={<CraeteRmaReturm />} />
         <Route path="returns/rma/view/:id" element={<RmaReturnView />} />
         <Route path="thankyou" element={<ThankyouSucccessPage />} />
+        <Route path="add-support-ticket" element={<AddTicketPage />} />
       </Routes>
 
       <SocialMedias />

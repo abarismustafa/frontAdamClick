@@ -8,18 +8,7 @@ import "./ProductsCategory.css";
 import axios from "axios";
 import Slider from "react-slick";
 
-import service1 from "../../../assets/img/rki/network/engineering.png";
-import service2 from "../../../assets/img/rki/network/feeding-bottle.png";
-import service3 from "../../../assets/img/rki/network/bib.png";
-import service4 from "../../../assets/img/rki/network/baby.png";
-import service5 from "../../../assets/img/rki/network/clean-dishes.png";
-import service6 from "../../../assets/img/rki/network/cutlery.png";
 
-import category1 from "../../../assets/img/category/1.jpg";
-import category2 from "../../../assets/img/category/2.jpg";
-import category3 from "../../../assets/img/category/3.jpg";
-import category4 from "../../../assets/img/category/4.jpg";
-import category5 from "../../../assets/img/category/5.jpg";
 
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -96,42 +85,42 @@ function ProductsCategory() {
   const custom = [
     {
       id: 1,
-      url: category1,
+      url: "",
       name: "Beauty Glow",
     },
     {
       id: 2,
-      url: category2,
+      url: "",
       name: "Body Lotion",
     },
     {
       id: 3,
-      url: category3,
+      url: "",
       name: "Cosmetics",
     },
     {
       id: 4,
-      url: category4,
+      url: "",
       name: "Face Wash",
     },
     {
       id: 5,
-      url: category5,
+      url: "",
       name: "Hair Style",
     },
     {
       id: 6,
-      url: category1,
+      url: "",
       name: "Makeup",
     },
     {
       id: 7,
-      url: category2,
+      url: "",
       name: "Skin Care",
     },
     {
       id: 8,
-      url: category3,
+      url: "",
       name: "Mascara",
     },
   ];

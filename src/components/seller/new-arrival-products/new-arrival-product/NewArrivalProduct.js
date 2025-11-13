@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import fertilizer1 from "../../../../assets/img/products/1.jpg";
-import fertilizer2 from "../../../../assets/img/products/2.jpg";
-import fertilizer3 from "../../../../assets/img/products/3.jpg";
-import fertilizer4 from "../../../../assets/img/products/4.jpg";
-import fertilizer5 from "../../../../assets/img/products/5.jpg";
+// import fertilizer1 from "../../../../assets/img/products/1.jpg";
+// import fertilizer2 from "../../../../assets/img/products/2.jpg";
+// import fertilizer3 from "../../../../assets/img/products/3.jpg";
+// import fertilizer4 from "../../../../assets/img/products/4.jpg";
+// import fertilizer5 from "../../../../assets/img/products/5.jpg";
 import Rating from "../../../../shared/rating/Rating";
 
 import { FiSearch } from "react-icons/fi";
@@ -34,7 +34,7 @@ function NewArrivalProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer4} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -74,7 +74,7 @@ function NewArrivalProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer1} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -114,7 +114,7 @@ function NewArrivalProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer2} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -154,7 +154,7 @@ function NewArrivalProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer3} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -194,7 +194,7 @@ function NewArrivalProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer5} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -234,7 +234,7 @@ function NewArrivalProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer5} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -299,12 +299,12 @@ function NewArrivalProduct() {
                   <div className="container-fluid p-3">
                     <div className="row row-sm">
                       <div className="col-md-6 _boxzoom">
-                        <img src={fertilizer1} alt="Fertilizer" />
+                        <img src={""} alt="Fertilizer" />
                         <div className="_product-images">
                           <div className="picZoomer">
                             <img
                               className="my_img"
-                              src={fertilizer1}
+                              src={""}
                               alt="Fertilizer"
                             />
                           </div>

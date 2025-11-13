@@ -184,7 +184,7 @@ function CustomerSupportTicket() {
                             <option value="low">Low</option>
                             <option value="high">Higth</option>
                             <option value="urgent">Urgent</option>
-                            <option value="top_urgent">Top Urgent</option>
+                            <option value="top_urgent">Critical</option>
                           </select>
                         </div>
                       </div>

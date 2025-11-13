@@ -7,7 +7,6 @@ import { MdCall } from "react-icons/md";
 import { HiMail } from "react-icons/hi";
 import { GoArrowUpRight } from "react-icons/go";
 
-import footerBG from "../../assets/img/banner/luchiana-1913484823.webp";
 
 import visa from "../../assets/img/rki/payment/visa.svg";
 import master from "../../assets/img/rki/payment/master.svg";

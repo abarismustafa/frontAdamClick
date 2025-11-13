@@ -5,9 +5,7 @@ import { MdOutlineAdminPanelSettings, MdPhoneInTalk } from "react-icons/md";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { useGetBlogsQuery } from "../../products/productSlice";
 
-import blog1 from "../../../assets/img/category/blog-01-min.jpg";
-import blog2 from "../../../assets/img/category/blog-02-min.jpg";
-import blog3 from "../../../assets/img/category/blog-03-min.jpg";
+
 import axios from "axios";
 import { base_url } from "../../../server";
 
@@ -74,7 +72,7 @@ function BlogItem({ t }) {
       const res = await axios.get(`${baseUrl}blogs`);
       // console.log(res?.data);
       setBlogData(res?.data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

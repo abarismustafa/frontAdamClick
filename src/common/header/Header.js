@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import TopHeader from "./top-header/TopHeader";
 import SearchBox from "./search-box/SearchBox";
 import { isMobile } from "react-device-detect";
+import * as bootstrap from "bootstrap";
 
 import "./Header.css";
 import Menus from "./menu/Menus";
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { base_url } from "../../server";
 import { useTranslation } from "react-i18next";
 
@@ -19,6 +20,7 @@ function Header({ changeLang }) {
   const [isSticky, setIsSticky] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const baseUrl = base_url();
+  const location = useLocation();
   const fixedHeader = () => {
     if (window.scrollY >= 1) {
       setIsSticky(true);
@@ -46,6 +48,61 @@ function Header({ changeLang }) {
   const [clickedParentId, setClickedParentId] = useState(null);
   const [clickedChildId, setClickedChildId] = useState(null);
   const navigate = useNavigate();
+
+
+  // useEffect(() => {
+  //   const offcanvasEl = document.querySelector(".offcanvas.show");
+  //   if (offcanvasEl) {
+  //     const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+  //     if (bsOffcanvas) {
+  //       bsOffcanvas.hide();
+  //     }
+  //   }
+  // }, [location]);
+
+  useEffect(() => {
+    const offcanvasEl = document.getElementById("offcanvasExample");
+    if (!offcanvasEl) return;
+
+    let bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+    if (!bsOffcanvas) {
+      bsOffcanvas = new bootstrap.Offcanvas(offcanvasEl, { backdrop: false });
+    }
+
+    const toggleOffcanvas = () => {
+      if (offcanvasEl.classList.contains("show")) {
+        bsOffcanvas.hide();
+      } else {
+        bsOffcanvas.show();
+      }
+    };
+
+    const menuBtn = document.getElementById("menuButton");
+    if (menuBtn) {
+      menuBtn.addEventListener("click", toggleOffcanvas);
+    }
+
+    return () => {
+      if (menuBtn) menuBtn.removeEventListener("click", toggleOffcanvas);
+    };
+  }, []);
+
+  // 🔹 Automatically close offcanvas when route changes
+  useEffect(() => {
+    const offcanvasEl = document.getElementById("offcanvasExample");
+    if (!offcanvasEl) return;
+
+    const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+    if (bsOffcanvas && offcanvasEl.classList.contains("show")) {
+      bsOffcanvas.hide();
+    }
+
+    // Optional: cleanup backdrop and overflow if any remains
+    document.querySelectorAll(".offcanvas-backdrop").forEach((el) => el.remove());
+    document.body.classList.remove("offcanvas-backdrop", "show", "modal-open");
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
+  }, [location]);
 
   const handleParentClick = (parent) => {
     // 🔹 Agar parent ke child hain:
@@ -148,6 +205,7 @@ function Header({ changeLang }) {
 
       <div
         className="offcanvas offcanvas-start custom-offcanvas"
+        data-bs-backdrop="false"
         tabIndex="-1"
         id="offcanvasExample"
         aria-labelledby="offcanvasExampleLabel"
@@ -160,6 +218,10 @@ function Header({ changeLang }) {
             data-bs-dismiss="offcanvas"
             aria-label="Close"
           ></button>
+
+
+
+
         </div>
 
         <div className="offcanvas-body custom-body">

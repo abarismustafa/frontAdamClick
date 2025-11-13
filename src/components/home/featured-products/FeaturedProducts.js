@@ -9,14 +9,7 @@ import axios from "axios";
 import { base_url } from "../../../server";
 import { useTranslation } from "react-i18next";
 
-import product1 from "../../../assets/img/products/1.png";
-import product2 from "../../../assets/img/products/2.png";
-import product3 from "../../../assets/img/products/3.png";
-import product4 from "../../../assets/img/products/4.png";
-import product5 from "../../../assets/img/products/5.png";
-import product6 from "../../../assets/img/products/6.png";
-import product7 from "../../../assets/img/products/7.png";
-import product8 from "../../../assets/img/products/8.png";
+
 import Rating from "../../../shared/rating/Rating";
 
 function FeaturedProducts() {
@@ -68,49 +61,49 @@ function FeaturedProducts() {
   const custom = [
     {
       id: 1,
-      url: product1,
+      url: "",
       title: "Drop Stitch Wakeboard",
       price: "499",
     },
     {
       id: 2,
-      url: product2,
+      url: "",
       title: "Moisturizer Summer Skin",
       price: "599",
     },
     {
       id: 3,
-      url: product3,
+      url: "",
       title: "Dry Skin Moisturizer Lotion",
       price: "2,299",
     },
     {
       id: 4,
-      url: product4,
+      url: "",
       title: "100% Body Care",
       price: "Rs. 2,299",
     },
     {
       id: 5,
-      url: product5,
+      url: "",
       title: "Women Beauty Glow",
       price: "1100",
     },
     {
       id: 6,
-      url: product6,
+      url: "",
       title: "ISUP Drop Stitch Wakeboard",
       price: "779",
     },
     {
       id: 7,
-      url: product7,
+      url: "",
       title: "True Match Nude Hyaluronic",
       price: "433",
     },
     {
       id: 8,
-      url: product8,
+      url: "",
       title: "Body Serum For Women",
       price: "2,299.00",
     },
@@ -172,7 +165,7 @@ function FeaturedProducts() {
                             alt={item.title}
                             className="img-fluid"
                           />
-                         
+
                         </div>
                         <div className="featuredContent">
                           <Rating />

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import fertilizer1 from "../../../../../assets/img/products/1.jpg";
-import fertilizer2 from "../../../../../assets/img/products/2.jpg";
+
 
 import { FiSearch } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
@@ -32,7 +31,7 @@ function RelatedProduct({ productData }) {
         `${baseUrl}product/category/${productData?.getaProduct?.category_id[0]._id}`
       );
       setrelatedProducts(res.data);
-    } catch (error) {}
+    } catch (error) { }
   };
   const settings = {
     dots: false,

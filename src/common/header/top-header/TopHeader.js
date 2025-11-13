@@ -31,7 +31,7 @@ import {
 } from "../../../components/products/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUpdatedProduct } from "../../../components/products/productSlice";
-import img from "../../../assets/img/client/2.jpg";
+
 import { BsBuildingAdd } from "react-icons/bs";
 import { CgTrack } from "react-icons/cg";
 import { HiOutlineReceiptRefund } from "react-icons/hi";
@@ -69,7 +69,7 @@ function TopHeader({ state, changeLange }) {
       const res = await axios.get(`${baseUrl}auth/logout`, {
         withCredentials: true,
       });
-    } catch (error) {}
+    } catch (error) { }
     window.localStorage.setItem("isLogin", false);
     window.localStorage.setItem("user_id", "");
     window.localStorage.setItem("token", "");
@@ -274,9 +274,9 @@ function TopHeader({ state, changeLange }) {
                       name="language"
                       id="languId"
                       value={defLanguage}
-                      // onChange={(e) => {
-                      //   handleLanguage(e);
-                      // }}
+                    // onChange={(e) => {
+                    //   handleLanguage(e);
+                    // }}
                     >
                       {valcur &&
                         valcur.map((item) => {

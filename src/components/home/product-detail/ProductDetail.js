@@ -28,12 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ModalQuatation from "./ModalQutation";
 
-import strengthens from "../../../assets/img/category/strengthens.webp";
-import bain from "../../../assets/img/category/bain.webp";
-import oleo from "../../../assets/img/category/oleo.webp";
-import KER_BENEFITS from "../../../assets/img/category/KER_BENEFITS.webp";
-import maxresdefault from "../../../assets/img/category/maxresdefault.jpg";
-import Kerastase_Elixir from "../../../assets/img/category/Kerastase_Elixir.jpg";
+
 
 // swiper -------------------------------//
 
