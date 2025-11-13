@@ -11,11 +11,15 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FaCloudUploadAlt } from "react-icons/fa";
 // import { baseUrl, baseUrlImage } from "../../../../baseUrl";
 import "../ticket.css"
+import axios from "axios";
+import { base_url } from "../../../server";
 function AddTicket({ placeholder }) {
+    const token = window.localStorage.getItem("token");
+    const baseUrl = base_url();
     const navigate = useNavigate()
 
-    const patam = useParams()
-    // console.log(patam);
+    const params = useParams()
+    // console.log(params);
     const [defaultData, setDefaultData] = useState()
     console.log(defaultData?.serviceId);
     const location = useLocation();
@@ -34,7 +38,7 @@ function AddTicket({ placeholder }) {
     const [profileImage, setProfileImage] = useState()
     // console.log(profileImage);
     const [selectedFiles, setSelectedFiles] = useState([]);
-    console.log(selectedFiles);
+    // console.log(selectedFiles);
 
     const [listImage, setListImage] = useState([])
 
@@ -71,38 +75,50 @@ function AddTicket({ placeholder }) {
     }
 
     const depart = async () => {
-        // try {
-        //     const res = await department()
-        //     setDepartData(res?.data?.data);
-        // } catch (error) {
+        try {
+            // const res = await department()
+            const res = await axios.get(`${baseUrl}department/public`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setDepartData(res?.data?.data);
+        } catch (error) {
 
-        // }
+        }
     }
     const prioty = async () => {
-        // try {
-        //     const res = await dmtDisputePriority()
-        //     setPriotyData(res?.data?.data);
-        // } catch (error) {
+        try {
+            // const res = await dmtDisputePriority()
+            const res = await axios.get(`${baseUrl}dmtDisputePriority/public`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setPriotyData(res?.data?.data);
+        } catch (error) {
 
-        // }
+        }
     }
     const relatService = async () => {
-        // try {
-        //     const res = await relatedService()
-        //     const res2 = await userValidate()
-        //     // console.log(res2?.data.email);
-        //     setRelateData(res?.data?.data);
-        //     setAutoFillInitial({
-        //         email: res2?.data?.email,
-        //         name: res2?.data?.name,
-        //         phone: res2?.data?.mobile
-        //     })
+        try {
+            const res = await axios.get(`${baseUrl}service/public`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            // console.log(res);
+
+            const res2 = await axios.get(`${baseUrl}user/profile`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            // console.log(res2?.data.email);
+            setRelateData(res?.data?.data);
+            setAutoFillInitial({
+                email: res2?.data?.getaUser?.email,
+                name: `${res2?.data?.getaUser?.firstname || ""} ${res2?.data?.getaUser?.lastname || ""}`.trim(),
+                phone: res2?.data?.getaUser?.mobile
+            })
 
 
 
-        // } catch (error) {
+        } catch (error) {
 
-        // }
+        }
     }
 
 
@@ -220,8 +236,26 @@ function AddTicket({ placeholder }) {
     useEffect(() => {
 
         setInitialData({ ...initialData, service_id: defaultData?.serviceId })
-        console.log('kjbjk', defaultData?.serviceId);
+        // console.log('kjbjk', defaultData?.serviceId);
     }, [defaultData?.serviceId])
+
+    const [dataAll, setDataAll] = useState(null)
+    const dataGet = async (id) => {
+        try {
+            const res = await axios.get(`${baseUrl}order/getOrderById/${id}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setDataAll(res?.data)
+        } catch (error) {
+
+        }
+    }
+
+    useEffect(() => {
+        if (params?.id) {
+            dataGet(params?.id)
+        }
+    }, [params?.id])
     return (
         <>
 
@@ -230,7 +264,9 @@ function AddTicket({ placeholder }) {
                     <h1>Add Ticket</h1>
                 </div>
                 <div className="card">
-                    <div className="card-header"><span>Open Ticket</span></div>
+                    <div className="card-header"><span>Open Ticket</span>
+                        <div>Order Id : <strong>{dataAll && dataAll[0]?.order_referenceNo}</strong></div>
+                    </div>
                     <div className="card-body">
                         <form action="" method="post" name="frmReport" id="frmReport">
                             <input type="hidden" id="hidID" name="hidID" />

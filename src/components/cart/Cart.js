@@ -124,6 +124,54 @@ function Cart() {
   const deleteSingle = (i) => {
     deleteSingleItem({ userid: user_id, index: i, token: token });
   };
+  // newAdd
+  const [cartValueVa, setCartValueVa] = useState(null);
+  const [cartDetail, setcartDetail] = useState(null);
+  const shippingSelectionActive = async (id) => {
+    if (id) {
+      try {
+        const res = await axios.post(
+          `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+          }`,
+          { shipId: id },
+          {
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
+        );
+        setcartDetail(res.data);
+
+        console.log("resIf", res);
+
+      } catch (error) { }
+    } else {
+      try {
+        const res = await axios.post(
+          `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+          }`,
+          { shipId: cartValueVa },
+          {
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
+        );
+        console.log("resElse", res);
+        setcartDetail(res.data);
+        if (res?.status === 200) {
+          navigate(`/checkout/${res?.data?.abndnt}`);
+        }
+      } catch (error) { }
+    }
+  };
+
+  // newAdd
+
 
   const orderConfirm = () => {
     const isLogin = window.localStorage.getItem("isLogin") === "true";
@@ -132,7 +180,8 @@ function Cart() {
       setIsModalOpen(true);
       return;
     }
-    navigate("/checkout");
+    shippingSelectionActive()
+    // navigate("/checkout");
   };
 
   const couponRef = useRef();

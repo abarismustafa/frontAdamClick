@@ -4,7 +4,7 @@ import { BsCheckCircleFill } from "react-icons/bs";
 import { FaInfoCircle } from "react-icons/fa";
 import { BsSunFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useRazorpay } from "react-razorpay";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -47,6 +47,7 @@ import { RiSecurePaymentLine } from "react-icons/ri";
 import { toast, ToastContainer } from "react-toastify";
 
 function Checkout() {
+  const params = useParams()
   const Razorpay = useRazorpay();
   const handlePayment = useCallback(
     async (data) => {
@@ -131,7 +132,7 @@ function Checkout() {
 
   const [diliveryAdd, setDiliveryAdd] = useState([])
   const [billingAddres, setBillingAddres] = useState([])
-  // console.log(billingAddres[0]);
+  console.log(billingAddres[0]);
 
   const userid = window.localStorage.getItem("user_id");
   const isLogin = window.localStorage.getItem("isLogin");
@@ -169,10 +170,12 @@ function Checkout() {
   const shippingSelectionActive = async (id) => {
     if (id) {
       try {
-        const res = await axios.post(
-          `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
-          }`,
-          { shipId: id },
+        // const res = await axios.post(
+        //   `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+        //   }`,
+        const res = await axios.get(
+          `${baseUrl}abndt/${params?.id}`,
+          // { shipId: id },
           {
             headers: {
               "Content-type": "application/json; charset=UTF-8",
@@ -185,10 +188,13 @@ function Checkout() {
       } catch (error) { }
     } else {
       try {
-        const res = await axios.post(
-          `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
-          }`,
-          { shipId: cartValueVa },
+        // const res = await axios.post(
+        //   `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+        //   }`,
+
+        const res = await axios.get(
+          `${baseUrl}abndt/${params?.id}`,
+          // { shipId: cartValueVa },
           {
             headers: {
               "Content-type": "application/json; charset=UTF-8",
@@ -351,8 +357,6 @@ function Checkout() {
         bfirstname: item?.firstname,
         blastname: item?.lastname,
         bcompany: item?.company,
-
-
         bdeliveryType: item?.deliveryType,
         bemail: item?.email,
         bmobile: item?.phone,
@@ -911,6 +915,7 @@ function Checkout() {
     const paylode = {
       // billAddress: formData,
       // shipping_Address: shippingAdd,
+      abndnt: params?.id,
       shipping_Address: formData,
       billAddress: billingAddres[0],
       Seller: cartDetail?.cart?.products[0]?.price?.seller_id,
@@ -1059,11 +1064,120 @@ function Checkout() {
         setSuccessModal(true);
         setCheckoutData(res)
       }
-
     } catch (error) {
 
     }
   }
+
+
+
+
+  // useEffect(() => {
+  //   const callAbndtUpdate = async () => {
+  //     try {
+  //       // 1️⃣ Wait for 5 seconds after checkout page load
+  //       await new Promise((resolve) => setTimeout(resolve, 5000));
+
+  //       // 2️⃣ Get the abandoned cart data
+  //       const getRes = await axios.get(`${baseUrl}abndt/${params?.id}`, {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+
+  //       // 3️⃣ Prepare the payload
+  //       const payload = {
+  //         ...getRes?.data?.cart,
+  //         shippingAddress_save: diliveryAdd?.length > 0 ? diliveryAdd[0] : null, // shipping address
+
+  //       };
+
+  //       // 4️⃣ PUT call to update
+  //       const putRes = await axios.put(`${baseUrl}abndt/${params?.id}`, payload, {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+
+  //       console.log("✅ Abandoned checkout updated successfully:", putRes.data);
+  //     } catch (error) {
+  //       console.error("❌ Error updating abandoned checkout:", error);
+  //     }
+  //   };
+
+  //   // Run only if we have address data available
+  //   if (data?.address || diliveryAdd?.length > 0) {
+  //     callAbndtUpdate();
+  //   }
+  // }, [data, diliveryAdd]);
+
+
+  useEffect(() => {
+    let timer;
+    let userInteracted = false;
+
+    const callAbndtUpdate = async () => {
+      try {
+        const getRes = await axios.get(`${baseUrl}abndt/${params?.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const latestAddress =
+          diliveryAdd?.length > 0
+            ? diliveryAdd[0]
+            : data?.address || null;
+
+        const payload = {
+          ...getRes?.data?.cart,
+          shippingAddress_save: latestAddress,
+        };
+
+        const putRes = await axios.put(`${baseUrl}abndt/${params?.id}`, payload, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        console.log("✅ Abandoned checkout updated successfully:", putRes.data);
+      } catch (error) {
+        console.error("❌ Error updating abandoned checkout:", error);
+      }
+    };
+
+    // 🕒 1️⃣ PAGE LOAD PE bhi 5 sec baad call karo
+    timer = setTimeout(() => {
+      callAbndtUpdate();
+    }, 5000);
+
+    // 🧑‍💻 2️⃣ User input detect hone par bhi reset timer
+    const resetTimer = () => {
+      userInteracted = true;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        callAbndtUpdate();
+      }, 5000);
+    };
+
+    // 🎯 Target form area
+    const addressContainer = document.querySelector("#shippingAddressForm");
+    if (addressContainer) {
+      ["input", "change", "keyup"].forEach((event) =>
+        addressContainer.addEventListener(event, resetTimer)
+      );
+    }
+
+    // 🧹 Cleanup
+    return () => {
+      clearTimeout(timer);
+      if (addressContainer) {
+        ["input", "change", "keyup"].forEach((event) =>
+          addressContainer.removeEventListener(event, resetTimer)
+        );
+      }
+    };
+  }, [data, diliveryAdd]);
 
   return (
     <>
@@ -1276,7 +1390,7 @@ function Checkout() {
 
               {newAddress && (
                 <div className="checkoutBody">
-                  <div className="billingDetails">
+                  <div className="billingDetails" >
                     <h5>{t("Add New Address")}</h5>
 
                     <CustomToaster
@@ -1289,7 +1403,7 @@ function Checkout() {
                       delay={3000}
                     />
 
-                    <form className="row needs-validation" novalidate>
+                    <form className="row needs-validation" novalidate id="shippingAddressForm">
                       <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label className="form-label form-label-high">{t("Delivery Type")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span></label>
                         <div className="d-flex gap-3">

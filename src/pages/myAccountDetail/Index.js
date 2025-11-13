@@ -237,7 +237,7 @@ function MyAccountDetail() {
           handleDownload();
         }, 800);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const printRef = useRef();
@@ -283,6 +283,11 @@ function MyAccountDetail() {
       `/product/${item?.productDetails[0]?.uid}/${item?.productDetails[0]?.slug}/${item?.productDetails[0]?.matchedVariation[0]?.variant_slug}`
     );
   };
+  const contactSupport = (item) => {
+    navigate(
+      `/add-support-ticket/${item?._id}`
+    );
+  }
 
   return (
     <>
@@ -496,6 +501,7 @@ function MyAccountDetail() {
                                   <Button
                                     className={btnClass}
                                     style={baseStyle}
+                                    onClick={() => contactSupport(item)}
                                   >
                                     <MdSupportAgent size={iconSize} />
                                     <span>Contact Support</span>
@@ -529,6 +535,7 @@ function MyAccountDetail() {
                                   <Button
                                     className={btnClass}
                                     style={baseStyle}
+                                    onClick={() => contactSupport(item)}
                                   >
                                     <MdSupportAgent size={iconSize} />
                                     <span>Contact Support</span>
@@ -562,6 +569,7 @@ function MyAccountDetail() {
                                   <Button
                                     className={btnClass}
                                     style={baseStyle}
+                                    onClick={() => contactSupport(item)}
                                   >
                                     <MdSupportAgent size={iconSize} />
                                     <span>Contact Support</span>
