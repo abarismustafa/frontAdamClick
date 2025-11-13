@@ -11,11 +11,12 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { base_url } from "../../server";
 import UseStatisticTracker from "../../common/useStatisticTracker/UseStatisticTracker";
+import Slider from "react-slick";
 
 function ProductCategoryPage() {
   const params = useParams();
   // console.log(params);
-  UseStatisticTracker({ category_id: params?.id, });
+  UseStatisticTracker({ category_id: params?.id });
 
   // const { data: allData, isLoading } = useGetCategoriesProductQuery(params.id)
   let isError = false;
@@ -245,8 +246,61 @@ function ProductCategoryPage() {
     setFilterState(clone);
     getFilterdData(clone);
   };
+  const [categoriesDatas, setCateData] = useState(null);
+  const getcateData = async () => {
+    try {
+      const res = await axios.get(`${baseUrl}category/public`, {
+        withCredentials: true,
+      });
+      setCateData(res.data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getcateData();
+  }, []);
+  const settings = {
+    speed: 500,
+    slidesToShow: 8, // Number of items to show on desktop
+    slidesToScroll: 1,
+    autoplay: true,
+    arrows: false,
+    autoplaySpeed: 2000,
+    responsive: [
+      {
+        breakpoint: 1120, // Screen size for tablets
+        settings: {
+          slidesToShow: 5, // Number of items to show on tablets
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 1024, // Screen size for tablets
+        settings: {
+          slidesToShow: 4, // Number of items to show on tablets
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+      {
+        breakpoint: 768, // Screen size for mobile devices
 
-  console.log(data);
+        settings: {
+          slidesToShow: 4, // Number of items to show on mobile
+          slidesToScroll: 1,
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 500, // Screen size for mobile devices
+        settings: {
+          slidesToShow: 4, // Number of items to show on mobile
+          slidesToScroll: 1,
+          arrows: true,
+        },
+      },
+    ],
+  };
 
   const { t, i18n } = useTranslation();
   return (
@@ -282,12 +336,49 @@ function ProductCategoryPage() {
                                     <span className="visually-hidden">Loading...</span>
                                 </div>
                             </div>} */}
-
+                <div className="subCategoriesCard">
+                  <div className="categoryWrapper">
+                    <Slider {...settings}>
+                    {categoriesDatas
+                      ?.filter((item) => item.parent_id !== null)
+                      .reverse()
+                      .map((item, i) => (
+                        <div className="mediaQueryClass" key={i}>
+                          <Link
+                            to={`/product/category/${item.uid}/${item?.slug}`}
+                          >
+                            <div className="serviceItemIcon category">
+                              <img
+                                src={item?.icon?.url}
+                                alt="Product"
+                                className="img-fluid"
+                              />
+                            </div>
+                            <div className="serviceItemText d-none">
+                              <h5>
+                                <Link
+                                  to={`/product/category/${item.uid}/${item?.slug}`}
+                                >
+                                  {item?.name}
+                                </Link>
+                              </h5>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                      </Slider>
+                  </div>
+                </div>
                 <div className="collectionFilter">
                   <div className="totalProducts">
                     <h6>
                       {/* {data?.length} {t("Products")} */}
-                      {data?.reduce((total, item) => total + (item?.variations?.length || 0), 0)} {t("Products")}
+                      {data?.reduce(
+                        (total, item) =>
+                          total + (item?.variations?.length || 0),
+                        0
+                      )}{" "}
+                      {t("Products")}
                     </h6>
                   </div>
                   <div className="collectionFilterItem">
@@ -353,8 +444,9 @@ function ProductCategoryPage() {
                 </div>
 
                 <div
-                  className={`row featuredRow changeGrid ${listView ? "listView" : ""
-                    }`}
+                  className={`row featuredRow changeGrid ${
+                    listView ? "listView" : ""
+                  }`}
                 >
                   {data &&
                     data?.map((item, i) => {

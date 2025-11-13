@@ -1,5 +1,5 @@
 .otp-login-btn {
-    background-color: #d63384;
+    background-color: var(--bgColor);
     color: white;
     border: none;
     border-radius: 6px;
@@ -13,7 +13,7 @@
 }
 
 .otp-login-btn:hover {
-    background-color: #c2185b;
+    background-color: var(--bgColor);
 }
 
 /* Modal custom styling */
@@ -54,7 +54,7 @@
 .forgot-link {
     font-size: 14px;
     text-decoration: none;
-    color: #d63384;
+    color: var(--textColor);
 }
 
 .forgot-link:hover {
@@ -63,17 +63,20 @@
 
 /* Buttons inside modal */
 .pink-btn {
-    background-color: #d63384 !important;
+    background-color: var(--bgColor) !important;
     border: none !important;
     height: 42px;
     font-weight: 600;
     border-radius: 8px;
     font-size: 15px;
     transition: 0.3s;
+    
 }
-
+.pink-btn span{
+    color: #fff;
+}
 .pink-btn:hover {
-    background-color: #c2185b !important;
+    background-color:var(--bgColor) !important;
 }
 
 .pink-btn:disabled {
