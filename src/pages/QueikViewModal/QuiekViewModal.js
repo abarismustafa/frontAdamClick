@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-import save from "../../assets/img/product-detail/save.png";
+
 import { QuantityCounter } from "../../components/cart/QuantityCounter";
 import {
   setCartLists,

@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import fertilizer1 from "../../../../assets/img/products/1.jpg";
-import fertilizer2 from "../../../../assets/img/products/2.jpg";
-import fertilizer3 from "../../../../assets/img/products/3.jpg";
-import fertilizer4 from "../../../../assets/img/products/4.jpg";
-import fertilizer5 from "../../../../assets/img/products/5.jpg";
-import Rating from "../../../../shared/rating/Rating";
+
+
 
 import { FiSearch } from "react-icons/fi";
 import { RxCross1 } from "react-icons/rx";
@@ -73,7 +69,7 @@ function FeaturedProduct() {
                       src={
                         item?.mainimage_url
                           ? item?.mainimage_url.url
-                          : fertilizer4
+                          : ""
                       }
                       alt="Product"
                     />
@@ -161,7 +157,7 @@ function FeaturedProduct() {
                           </ul>
                         </div>
                         <div className="thumbView">
-                          <img src={fertilizer1} alt="Fertilizer" />
+                          <img src={""} alt="Fertilizer" />
                         </div>
                       </div>
                       <div className="modalText">

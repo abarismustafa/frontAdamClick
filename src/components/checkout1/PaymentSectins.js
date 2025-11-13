@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import CardModal from "./CardModal";
 import SelectOptions from "./SelectOptions";
 import { useEffect, useState } from "react";
-import img2 from "../../assets/img/client/cardCopy2.jpg";
+
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import { base_url } from "../../server";
@@ -39,7 +39,7 @@ function PaymentSectins() {
     try {
       const res = await axios.get(`${baseUrl}africanConfig/available`);
       setData1(res.data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -72,7 +72,7 @@ function PaymentSectins() {
                   Enter card details.
                 </Link>
               </p>
-              <img src={img2} />
+              {/* <img src={img2} /> */}
             </div>
           )}
           <CardModal show={modalShow} onHide={() => setModalShow(false)} />

@@ -1,4 +1,4 @@
-import mamaspro from "../../assets/img/products/mp4.1.webp";
+
 import { BsFillCartFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { GrAdd } from "react-icons/gr";
@@ -252,7 +252,7 @@ function CatogaryItem({ item, i, handleShow, t }) {
                             className="imgProduct"
                           />
                         ) : (
-                          <img src={mamaspro} alt="Product" />
+                          <img src={""} alt="Product" />
                         )}
                       </Link>
 
@@ -307,7 +307,7 @@ function CatogaryItem({ item, i, handleShow, t }) {
 
                     <p>
                       <span className="currentPrice">
-                        Sale Price: ₹ 
+                        Sale Price: ₹
                         {/* {item?.country?.code}{" "} */}
                         {variation?.prices?.sale_rate}
                       </span>

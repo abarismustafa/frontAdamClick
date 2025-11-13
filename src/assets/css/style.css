@@ -1558,7 +1558,7 @@ div#navbarSupportedContent {
 
 /* Privacy Policy CSS Start */
 .privacyWrapper {
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
   padding: 40px 0;
 }
 
@@ -4828,15 +4828,15 @@ Home Banner Two Area CSS
 }
 
 .home-banner-two .home-slides .home-item.item-bg1 {
-  background-image: url(../../assets/img/home-two/bg-1.jpg);
+  background-image: url("");
 }
 
 .home-banner-two .home-slides .home-item.item-bg2 {
-  background-image: url(../../assets/img/home-two/bg-2.jpg);
+  background-image: url("");
 }
 
 .home-banner-two .home-slides .home-item.item-bg3 {
-  background-image: url(../../assets/img/home-two/bg-3.jpg);
+  background-image: url("");
 }
 
 .home-banner-two .home-slides .home-item .main-banner-content {
@@ -5109,7 +5109,7 @@ Home Banner Three Area CSS
 }
 
 .home-banner-three .home-slides .home-item.item-bg {
-  background-image: url(../../assets/img/home-three/bg.png);
+  background-image: url("");
 }
 
 .home-banner-three .home-slides .home-item .main-banner-content {
@@ -5530,7 +5530,7 @@ About Section CSS
 Harvesting Section CSS
 =================================================*/
 .harvesting-section {
-  background-image: url(../../assets/img/harvesting/harvesting-bg.jpg);
+  background-image: url("");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -6633,7 +6633,7 @@ Fisherman Section CSS
 }
 
 .fisherman-content h6 {
-  color:  var(--textColor);
+  color: var(--textColor);
   text-transform: uppercase;
   position: relative;
   font-size: 15px;
@@ -6659,7 +6659,7 @@ Fisherman Section CSS
 }
 
 .fisherman-content.special h4:before {
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
 }
 
 .fisherman-content p {
@@ -7004,15 +7004,15 @@ Blog Section CSS
 }
 
 .single-blog-item.bg-1 {
-  background-image: url(../../assets/img/blog/1.jpg);
+  /* background-image: url(../../assets/img/blog/1.jpg); */
 }
 
 .single-blog-item.bg-2 {
-  background-image: url(../../assets/img/blog/2.jpg);
+  /* background-image: url(../../assets/img/blog/2.jpg); */
 }
 
 .single-blog-item.bg-3 {
-  background-image: url(../../assets/img/blog/3.jpg);
+  /* background-image: url(../../assets/img/blog/3.jpg); */
 }
 
 .single-blog-item span {
@@ -9696,15 +9696,15 @@ Sidebar Widget Area CSS
 }
 
 .widget-area .widget_abaris_posts_thumb .item .thumb .fullimage.bg1 {
-  background-image: url(../../assets/img/blog-details/1.jpg);
+  /* background-image: url(../../assets/img/blog-details/1.jpg); */
 }
 
 .widget-area .widget_abaris_posts_thumb .item .thumb .fullimage.bg2 {
-  background-image: url(../../assets/img/blog-details/2.jpg);
+  /* background-image: url(../../assets/img/blog-details/2.jpg); */
 }
 
 .widget-area .widget_abaris_posts_thumb .item .thumb .fullimage.bg3 {
-  background-image: url(../../assets/img/blog-details/3.jpg);
+  /* background-image: url(../../assets/img/blog-details/3.jpg); */
 }
 
 .widget-area .widget_abaris_posts_thumb .item .info {
@@ -10757,7 +10757,7 @@ Product Details Area CSS
   position: relative;
   border: none;
   padding: 8px 20px;
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
   color: #fff;
   border: 2px solid var(--borderColor);
   display: flex;
@@ -10955,20 +10955,20 @@ Product Details Area CSS
 .products-details-tab .tabs li a:hover,
 .products-details-tab .tabs li a:focus {
   color: #ffffff;
-  background-color:  var(--textColor);
-  border-color:  var(--textColor);
+  background-color: var(--textColor);
+  border-color: var(--textColor);
 }
 
 .products-details-tab .tabs li.current a {
   color: #ffffff;
-  background-color:  var(--textColor);
-  border-color:  var(--textColor);
+  background-color: var(--textColor);
+  border-color: var(--textColor);
 }
 
 .products-details-tab .tabs li a.nav-link.active {
   color: #ffffff;
-  background-color:  var(--textColor);
-  border-color:  var(--textColor);
+  background-color: var(--textColor);
+  border-color: var(--textColor);
 }
 
 .products-details-tab .tabs li:last-child {
@@ -11801,7 +11801,7 @@ Footer Section CSS
 
 
 .footer-section .single-footer-widget .footer-social a {
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
   color: #ffff;
 }
 
@@ -11821,7 +11821,7 @@ Footer Section CSS
 
 
 .footer-section .single-footer-widget .footer-quick-links li a:hover {
-  color:  var(--textColor);
+  color: var(--textColor);
 }
 
 .footer-section .single-footer-widget .footer-info-contact i {
@@ -12061,7 +12061,7 @@ Footer Section CSS
 }
 
 .single-footer-widget .newsletter-form button {
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
   color: #fff;
   border: none;
   height: 100%;
@@ -12103,7 +12103,7 @@ Footer Section CSS
 }
 
 .single-footer-widget .footer-info-contact .topIcon svg {
-  color:  var(--textColor);
+  color: var(--textColor);
   font-size: 23px;
 }
 
@@ -12587,7 +12587,7 @@ marquee>ul>li>a {
 }
 
 .bg-grad-1 {
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
   border-radius: 10px;
 }
 
@@ -13136,13 +13136,13 @@ h5 {
 }
 
 .connectSec .feature-box-content a {
-  color:  var(--textColor);
+  color: var(--textColor);
   font-weight: bold;
   font-size: 23px;
 }
 
 .feature-box-content p {
-  color:  var(--textColor);
+  color: var(--textColor);
   font-weight: bold;
   font-size: 23px;
 
@@ -13453,7 +13453,7 @@ h5 {
 }
 
 .buyNowInfo .buyNow {
-  color:  var(--textColor);
+  color: var(--textColor);
   border: 0;
   background-color: #fff;
   border-radius: 10px;
@@ -13894,7 +13894,7 @@ header.sticky.active .mobileMenu {
 }
 
 .discoverItem .text h5 {
-  color:  var(--textColor);
+  color: var(--textColor);
   font-weight: 500;
   font-size: 17px;
   margin-bottom: 15px;
@@ -13910,7 +13910,7 @@ header.sticky.active .mobileMenu {
   font-weight: 300;
   margin-bottom: 20px;
   font-size: 20px;
-  color:  var(--textColor);
+  color: var(--textColor);
 }
 
 .tabContent ul {
@@ -13952,7 +13952,7 @@ header.sticky.active .mobileMenu {
 }
 
 .tabImage ul li p {
-  color:  var(--textColor);
+  color: var(--textColor);
 }
 
 .imgContact {
@@ -14021,7 +14021,7 @@ header.sticky.active .mobileMenu {
 
 .navbar-nav .nav-item .nav-link:hover,
 .dropdown.categoryDropdown button.btn:hover {
-  color:  var(--textColor);
+  color: var(--textColor);
   border-radius: 10px;
   border: 1px solid var(--borderColor);
 }
@@ -14103,7 +14103,7 @@ header.sticky.active .mobileMenu {
 }
 
 .discoverCard:hover .text span {
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
   color: #fff;
 }
 
@@ -14115,7 +14115,7 @@ header.sticky.active .mobileMenu {
 
 .countersSection {
   padding: 40px 0;
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
 }
 
 .allCategoryCard {
@@ -14204,7 +14204,7 @@ header.sticky.active .mobileMenu {
 }
 
 .brochuresItems {
-  background-color:  var(--textColor);
+  background-color: var(--textColor);
   border-radius: 10px;
   margin-bottom: 20px;
   padding: 30px;
@@ -14290,7 +14290,7 @@ header.sticky.active .mobileMenu {
 } */
 
 .customerCard .rating svg {
-  color:  var(--textColor);
+  color: var(--textColor);
 }
 
 .customerCard p {
@@ -14300,7 +14300,7 @@ header.sticky.active .mobileMenu {
 
 .categoryIcon span svg {
   font-size: 24px;
-  color:  var(--textColor);
+  color: var(--textColor);
 }
 
 .accordion .accordion-body p {
@@ -14748,27 +14748,32 @@ header.sticky.active .searchSec {
   border-radius: 4px;
   color: #fff;
 }
+
 .stockMsg {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
-.stockMsg .coming, .stockMsg .outStock {
-    text-transform: uppercase;
-    padding: 2px 4px;
-    font-size: 12px;
-    background: #d11a1f;
-    font-weight: 500;
-    color: #ffffff;
-    transform: rotate(354deg);
-    display: inline-block;
-    border-radius: 4px;
+
+.stockMsg .coming,
+.stockMsg .outStock {
+  text-transform: uppercase;
+  padding: 2px 4px;
+  font-size: 12px;
+  background: #d11a1f;
+  font-weight: 500;
+  color: #ffffff;
+  transform: rotate(354deg);
+  display: inline-block;
+  border-radius: 4px;
 }
-.stockMsg .outStock{
+
+.stockMsg .outStock {
   background: #c58f02;
-    font-weight: 500;
-    color: #fff;
+  font-weight: 500;
+  color: #fff;
 }
+
 /* RESPONSIVE CSS START */
 
 @media only screen and (max-width: 1120px) {
@@ -15439,12 +15444,14 @@ header.sticky.active .searchSec {
 @media only screen and (max-width: 600px) {
 
   /*  */
-  .featuredInfo.products{
+  .featuredInfo.products {
     border: 1px solid #eee;
   }
+
   .featuredInfo.products .featuredContent {
-      border: 0;
+    border: 0;
   }
+
   /*  */
   .discoverCard {
     text-align: center;

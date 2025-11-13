@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import fertilizer1 from "../../../../assets/img/products/1.jpg";
+
 import Rating from "../../../../shared/rating/Rating";
 
 import { FiSearch } from "react-icons/fi";

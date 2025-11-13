@@ -18,7 +18,7 @@ import {
 } from "../products/productSlice";
 import { ApiQuatity } from "./ApiQuantity";
 import { AiFillDelete } from "react-icons/ai";
-import productSmall1 from "../../assets/img/products/productSmall1.jpg";
+
 import LoginCartSec from "./LoginCartSec";
 import axios from "axios";
 import { useTranslation } from "react-i18next";

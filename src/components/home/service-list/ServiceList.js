@@ -1,10 +1,5 @@
 import React from "react";
-import service1 from "../../../assets/img/rki/network/engineering.png";
-import service2 from "../../../assets/img/rki/network/feeding-bottle.png";
-import service3 from "../../../assets/img/rki/network/bib.png";
-import service4 from "../../../assets/img/rki/network/baby.png";
-import service5 from "../../../assets/img/rki/network/clean-dishes.png";
-import service6 from "../../../assets/img/rki/network/cutlery.png";
+
 import {
   GiChestnutLeaf,
   GiFruitBowl,
@@ -22,7 +17,7 @@ function ServiceList() {
           <div className="serviceItemInfo">
             <div className="serviceItem">
               <div className="serviceItemIcon">
-                <img src={service1} className="img-fluid" alt="Service" />
+                <img src={""} className="img-fluid" alt="Service" />
               </div>
               <div className="serviceItemText">
                 <h5>
@@ -35,7 +30,7 @@ function ServiceList() {
             </div>
             <div className="serviceItem">
               <div className="serviceItemIcon">
-                <img src={service2} className="img-fluid" alt="Service" />
+                <img src={""} className="img-fluid" alt="Service" />
               </div>
               <div className="serviceItemText">
                 <h5>
@@ -48,7 +43,7 @@ function ServiceList() {
             </div>
             <div className="serviceItem">
               <div className="serviceItemIcon">
-                <img src={service3} className="img-fluid" alt="Service" />
+                <img src={""} className="img-fluid" alt="Service" />
               </div>
               <div className="serviceItemText">
                 <h5>
@@ -61,7 +56,7 @@ function ServiceList() {
             </div>
             <div className="serviceItem">
               <div className="serviceItemIcon">
-                <img src={service4} className="img-fluid" alt="Service" />
+                <img src={""} className="img-fluid" alt="Service" />
               </div>
               <div className="serviceItemText">
                 <h5>
@@ -74,7 +69,7 @@ function ServiceList() {
             </div>
             <div className="serviceItem">
               <div className="serviceItemIcon">
-                <img src={service5} className="img-fluid" alt="Service" />
+                <img src={""} className="img-fluid" alt="Service" />
               </div>
               <div className="serviceItemText">
                 <h5>
@@ -87,7 +82,7 @@ function ServiceList() {
             </div>
             <div className="serviceItem">
               <div className="serviceItemIcon">
-                <img src={service6} className="img-fluid" alt="Service" />
+                <img src={""} className="img-fluid" alt="Service" />
               </div>
               <div className="serviceItemText">
                 <h5>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import blog1 from "../../../assets/img/product-detail/fertilizer-application1.jpg";
-import blog2 from "../../../assets/img/product-detail/fertilizer-application-bg1.jpg";
+
 import { FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useGetBlogCatQuery } from "../../products/productSlice";
@@ -25,7 +24,7 @@ function BlogAside({ t }) {
       });
       // console.log(res?.data);
       setBlogCatData(res?.data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
@@ -38,7 +37,7 @@ function BlogAside({ t }) {
       const res = await axios.get(`${baseUrl}blogs`);
       // console.log(res?.data);
       setBlogData(res?.data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

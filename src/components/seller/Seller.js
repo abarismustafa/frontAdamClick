@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Breadcrumb from "../../shared/breadcrumb/Breadcrumb";
 import Rating from "../../shared/rating/Rating";
-import logo from "../../assets/img/about-seller/abaris.png";
+
 import { FaFacebookF } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
 import { BsTwitter, BsInstagram, BsWhatsapp } from "react-icons/bs";
@@ -40,7 +40,7 @@ function Seller() {
                       height: "100px",
                       objectFit: "cover",
                     }}
-                    src={data?.profilePhoto ? data?.profilePhoto.url : logo}
+                    src={data?.profilePhoto ? data?.profilePhoto.url : ""}
                     alt="Seller"
                   />
                 </div>

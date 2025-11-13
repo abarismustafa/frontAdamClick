@@ -1,8 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import babyBoy from "../../../assets/img/rki/star-img/baby-boy.png";
-import babyGirl from "../../../assets/img/rki/star-img/baby-girl.png";
-import circle from "../../../assets/img/rki/star-img/circle.png";
+
 import { useTranslation } from "react-i18next";
 
 function BestSeller() {
@@ -54,7 +52,7 @@ function BestSeller() {
                 <div className="col-lg-6">
                   <div className="asideSellerCard">
                     <div className="sellerProductCard">
-                      <img src={babyBoy} alt="Product" className="img-fluid" />
+                      <img src={""} alt="Product" className="img-fluid" />
                       <div className="sellerProductContent ">
                         <h2>Feedings</h2>
                       </div>
@@ -64,7 +62,7 @@ function BestSeller() {
                 <div className="col-lg-6" onClick={() => changeRoute("2")}>
                   <div className="asideSellerCard">
                     <div className="sellerProductCard">
-                      <img src={babyGirl} alt="Product" className="img-fluid" />
+                      <img src={""} alt="Product" className="img-fluid" />
                       <div className="sellerProductContent ">
                         <h2 className="text-white">Fun Time</h2>
                       </div>
@@ -74,7 +72,7 @@ function BestSeller() {
                 <div className="col-lg-12" onClick={() => changeRoute("3")}>
                   <div className="asideSellerCard">
                     <div className="sellerProductCard ">
-                      <img src={circle} alt="Product" className="img-fluid" />
+                      <img src={""} alt="Product" className="img-fluid" />
                       <div className="sellerProductContent full ">
                         <h2>
                           Bibs <span> & Pacifiers</span>

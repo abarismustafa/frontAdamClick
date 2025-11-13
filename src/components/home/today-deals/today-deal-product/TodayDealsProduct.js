@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import fertilizer3 from "../../../../assets/img/products/3.jpg";
+
 import Rating from "../../../../shared/rating/Rating";
 
 import { FiSearch } from "react-icons/fi";
@@ -15,7 +15,7 @@ import {
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-function TodayDealsProduct({ data, isLoading, error,handleShow }) {
+function TodayDealsProduct({ data, isLoading, error, handleShow }) {
   const curr = window.localStorage.getItem('currencySym')
   const currencySymbol = curr ? curr : 'ZK'
 
@@ -40,7 +40,7 @@ function TodayDealsProduct({ data, isLoading, error,handleShow }) {
               <div className="featuredFigure">
                 <div className="featuredImg">
                   <Link to={`/product/${item._id}`}>
-                    {item.mainimage_url ? <img src={item.mainimage_url?.url} alt="Product" /> : <img src={fertilizer3} alt="Product" />}
+                    {item.mainimage_url ? <img src={item.mainimage_url?.url} alt="Product" /> : <img src={""} alt="Product" />}
 
                   </Link>
                   <div className="quickView">

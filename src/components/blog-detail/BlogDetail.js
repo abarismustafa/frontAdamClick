@@ -17,9 +17,7 @@ import { useTranslation } from "react-i18next";
 // import blog5 from "../../assets/img/serviceList/f454dq2nqgkt45dcladv.png";
 // import blog6 from "../../assets/img/serviceList/jo1im9jkpkbst0of9sti.png";
 
-import blog1 from "../../assets/img/category/blog-01-min.jpg";
-import blog2 from "../../assets/img/category/blog-02-min.jpg";
-import blog3 from "../../assets/img/category/blog-03-min.jpg";
+
 
 const cosmeticBlogCategories = [
   {

@@ -1,5 +1,5 @@
 import { useListSellersQuery } from "../../components/products/productSlice";
-import img from "../../assets/img/banner/etg.png";
+
 import { Link } from "react-router-dom";
 import Breadcrumb from "../../shared/breadcrumb/Breadcrumb";
 import { useEffect } from "react";

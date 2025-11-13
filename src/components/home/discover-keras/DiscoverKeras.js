@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import discover1 from "../../../assets/img/category/blog-01-min.jpg";
-import discover2 from "../../../assets/img/category/blog-02-min.jpg";
-import discover3 from "../../../assets/img/category/blog-03-min.jpg";
-
-import discover4 from "../../../assets/img/category-banner/blog-02-min.jpg";
-import discover5 from "../../../assets/img/category-banner/blog-03-min.jpg";
-import discover6 from "../../../assets/img/category-banner/blog-04-min.jpg";
-
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { base_url } from "../../../server";
@@ -18,42 +10,42 @@ const articles = [
     date: "March 24, 2025",
     comments: 0,
     category: "Cosmetics",
-    img_url: discover1,
+    img_url: "",
   },
   {
     title: "blogText",
     date: "March 24, 2025",
     comments: 2,
     category: "Body Lotion",
-    img_url: discover2,
+    img_url: "",
   },
   {
     title: "blogText",
     date: "March 24, 2025",
     comments: 0,
     category: "Cosmetics",
-    img_url: discover3,
+    img_url: "",
   },
   {
     title: "blogText",
     date: "April 01, 2025",
     comments: 0,
     category: "Cosmetics",
-    img_url: discover4,
+    img_url: "",
   },
   {
     title: "blogText",
     date: "June 12, 2025",
     comments: 2,
     category: "Body Lotion",
-    img_url: discover5,
+    img_url: "",
   },
   {
     title: "blogText",
     date: "December 15, 2025",
     comments: 0,
     category: "Cosmetics",
-    img_url: discover6,
+    img_url: "",
   },
 ];
 
@@ -66,7 +58,7 @@ const DiscoverKeras = () => {
       const res = await axios.get(`${baseUrl}blogs`);
       // console.log(res?.data);
       setBlogData(res?.data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {

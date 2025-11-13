@@ -1,6 +1,5 @@
 import React from "react";
-import abarisBg from "../../../assets/img/about-seller/abaris-bg.png";
-import abarisBg2 from "../../../assets/img/about-seller/abaris.png";
+
 import FeaturedProducts from "../featured-products/FeaturedProducts";
 import NewArrivalProducts from "../new-arrival-products/NewArrivalProducts";
 import { Carousel } from "react-bootstrap";
@@ -23,7 +22,7 @@ function SellerHome() {
                   <Carousel.Item>
                     <img
                       className="d-block w-100"
-                      src={abarisBg}
+                      src={""}
                       alt="First slide"
                     />
                     <Carousel.Caption>
@@ -34,7 +33,7 @@ function SellerHome() {
                   <Carousel.Item>
                     <img
                       className="d-block w-100"
-                      src={abarisBg2}
+                      src={""}
                       alt="Second slide"
                     />
 
@@ -46,7 +45,7 @@ function SellerHome() {
                   <Carousel.Item>
                     <img
                       className="d-block w-100"
-                      src={abarisBg}
+                      src={""}
                       alt="Third slide"
                     />
 

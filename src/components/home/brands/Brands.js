@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
-import etg from "../../../assets/img/brands/etg.png";
-import kynoch from "../../../assets/img/brands/kynoch.png";
-import falcon from "../../../assets/img/brands/falcon.png";
-import oemff from "../../../assets/img/brands/oemff.png";
+// import etg from "../../../assets/img/brands/etg.png";
+// import kynoch from "../../../assets/img/brands/kynoch.png";
+// import falcon from "../../../assets/img/brands/falcon.png";
+// import oemff from "../../../assets/img/brands/oemff.png";
 import "./Brands.css";
 import { Link } from "react-router-dom";
 import { useListAllBrandQuery } from "../../products/productSlice";
@@ -15,7 +15,7 @@ import { BsShieldLockFill } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import { MdOutlineLocalShipping } from "react-icons/md";
 
-const imgs = [etg, kynoch, falcon, oemff];
+// const imgs = [etg, kynoch, falcon, oemff];
 
 function Brands() {
   const { t } = useTranslation();

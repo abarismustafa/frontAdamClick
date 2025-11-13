@@ -2019,15 +2019,15 @@ Home Banner Two Area CSS
 }
 
 .home-banner-two .home-slides .home-item.item-bg1 {
-  background-image: url(../../assets/img/home-two/bg-1.jpg);
+  background-image: url("");
 }
 
 .home-banner-two .home-slides .home-item.item-bg2 {
-  background-image: url(../../assets/img/home-two/bg-2.jpg);
+  background-image: url("");
 }
 
 .home-banner-two .home-slides .home-item.item-bg3 {
-  background-image: url(../../assets/img/home-two/bg-3.jpg);
+  background-image: url("");
 }
 
 .home-banner-two .home-slides .home-item .main-banner-content {
@@ -2300,7 +2300,7 @@ Home Banner Three Area CSS
 }
 
 .home-banner-three .home-slides .home-item.item-bg {
-  background-image: url(../../assets/img/home-three/bg.png);
+  background-image: url("");
 }
 
 .home-banner-three .home-slides .home-item .main-banner-content {
@@ -2721,7 +2721,7 @@ About Section CSS
 Harvesting Section CSS
 =================================================*/
 .harvesting-section {
-  background-image: url(../../assets/img/harvesting/harvesting-bg.jpg);
+  background-image: url("");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -4158,15 +4158,15 @@ Blog Section CSS
 }
 
 .single-blog-item.bg-1 {
-  background-image: url(../../assets/img/blog/1.jpg);
+  /* background-image: url(../../assets/img/blog/1.jpg); */
 }
 
 .single-blog-item.bg-2 {
-  background-image: url(../../assets/img/blog/2.jpg);
+  /* background-image: url(../../assets/img/blog/2.jpg); */
 }
 
 .single-blog-item.bg-3 {
-  background-image: url(../../assets/img/blog/3.jpg);
+  /* background-image: url(../../assets/img/blog/3.jpg); */
 }
 
 .single-blog-item span {
@@ -6850,15 +6850,15 @@ Sidebar Widget Area CSS
 }
 
 .widget-area .widget_abaris_posts_thumb .item .thumb .fullimage.bg1 {
-  background-image: url(../../assets/img/blog-details/1.jpg);
+  /* background-image: url(../../assets/img/blog-details/1.jpg); */
 }
 
 .widget-area .widget_abaris_posts_thumb .item .thumb .fullimage.bg2 {
-  background-image: url(../../assets/img/blog-details/2.jpg);
+  /* background-image: url(../../assets/img/blog-details/2.jpg); */
 }
 
 .widget-area .widget_abaris_posts_thumb .item .thumb .fullimage.bg3 {
-  background-image: url(../../assets/img/blog-details/3.jpg);
+  /* background-image: url(../../assets/img/blog-details/3.jpg); */
 }
 
 .widget-area .widget_abaris_posts_thumb .item .info {

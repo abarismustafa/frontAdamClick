@@ -1,9 +1,8 @@
 import React from "react";
 import Breadcrumb from "../../shared/breadcrumb/Breadcrumb";
-import client1 from "../../assets/img/client/1.jpg";
-import client2 from "../../assets/img/client/2.jpg";
-import client3 from "../../assets/img/client/3.jpg";
-import client4 from "../../assets/img/client/4.jpg";
+// import client1 from "../../assets/img/client/1.jpg";
+// import client2 from "../../assets/img/client/2.jpg";
+
 import Slider from "react-slick";
 import { Helmet } from "react-helmet";
 
@@ -59,7 +58,7 @@ function Testimonial() {
                         </p>
                       </div>
                       <div className="media">
-                        <img src={client1} className="mr-3" />
+                        {/* <img src={client1} className="mr-3" /> */}
                         <div className="media-body">
                           <div className="overview">
                             <div className="name">
@@ -107,7 +106,7 @@ function Testimonial() {
                         </p>
                       </div>
                       <div className="media">
-                        <img src={client2} className="mr-3" />
+                        {/* <img src={client2} className="mr-3" /> */}
                         <div className="media-body">
                           <div className="overview">
                             <div className="name">
@@ -155,7 +154,7 @@ function Testimonial() {
                         </p>
                       </div>
                       <div className="media">
-                        <img src={client1} className="mr-3" />
+                        {/* <img src={client1} className="mr-3" /> */}
                         <div className="media-body">
                           <div className="overview">
                             <div className="name">
@@ -203,7 +202,7 @@ function Testimonial() {
                         </p>
                       </div>
                       <div className="media">
-                        <img src={client2} className="mr-3" />
+                        {/* <img src={client2} className="mr-3" /> */}
                         <div className="media-body">
                           <div className="overview">
                             <div className="name">

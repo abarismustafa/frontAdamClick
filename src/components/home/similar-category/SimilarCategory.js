@@ -1,10 +1,5 @@
 import { Link } from "react-router-dom";
-import img1 from "../../../assets/img/category-banner/blog-02-min.jpg";
-import img2 from "../../../assets/img/category-banner/blog-03-min.jpg";
-import img3 from "../../../assets/img/category-banner/blog-04-min.jpg";
-import img4 from "../../../assets/img/category-banner/blog-05-min.jpg";
-import img5 from "../../../assets/img/category-banner/blog-06-min.jpg";
-import img6 from "../../../assets/img/category-banner/blog-07-min.jpg";
+
 import { base_url } from "../../../server";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -14,32 +9,32 @@ const data = {
     {
       id: 1,
       url: "product/category/1/BeautyGlow",
-      img_url: img1,
+      img_url: "",
     },
     {
       id: 2,
       url: "product/category/2/BodyLotion",
-      img_url: img2,
+      img_url: "",
     },
     {
       id: 3,
       url: "product/category/5/HairStyle",
-      img_url: img3,
+      img_url: "",
     },
     {
       id: 4,
       url: "product/category/4/FaceWash",
-      img_url: img4,
+      img_url: "",
     },
     {
       id: 5,
       url: "product/category/3/Cosmetics",
-      img_url: img5,
+      img_url: "",
     },
     {
       id: 6,
       url: "product/category/7/SkinCare",
-      img_url: img6,
+      img_url: "",
     },
   ],
 };

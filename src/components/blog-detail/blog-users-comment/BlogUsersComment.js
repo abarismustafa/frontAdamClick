@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import blog1 from "../../../assets/img/product-detail/fertilizer-application1.jpg";
-import blog2 from "../../../assets/img/product-detail/fertilizer-application-bg1.jpg";
+
 import { Link, useParams } from "react-router-dom";
 import { useGetRevireBlogQuery, useSendLinkeMutation } from "../../products/productSlice";
 

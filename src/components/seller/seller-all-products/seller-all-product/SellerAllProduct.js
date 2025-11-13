@@ -1,11 +1,11 @@
 
 
 import React, { useState } from "react";
-import fertilizer1 from "../../../../assets/img/products/1.jpg";
-import fertilizer2 from "../../../../assets/img/products/2.jpg";
-import fertilizer3 from "../../../../assets/img/products/3.jpg";
-import fertilizer4 from "../../../../assets/img/products/4.jpg";
-import fertilizer5 from "../../../../assets/img/products/5.jpg";
+// import fertilizer1 from "../../../../assets/img/products/1.jpg";
+// import fertilizer2 from "../../../../assets/img/products/2.jpg";
+// import fertilizer3 from "../../../../assets/img/products/3.jpg";
+// import fertilizer4 from "../../../../assets/img/products/4.jpg";
+// import fertilizer5 from "../../../../assets/img/products/5.jpg";
 import Rating from "../../../../shared/rating/Rating";
 
 import { FiSearch } from "react-icons/fi";
@@ -36,7 +36,7 @@ function SellerAllProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer4} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -62,7 +62,7 @@ function SellerAllProduct() {
               <span className="currentPrice">ZK49.00</span>
             </div>
             <h5><Link to="/product-detail">movento 15.31%od insecticide</Link></h5>
-           
+
             <Rating />
             <div className="reward">
               <p className="text">Reward Points</p>
@@ -75,7 +75,7 @@ function SellerAllProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer1} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -100,7 +100,7 @@ function SellerAllProduct() {
             <div className="rateDigit">
               <span className="currentPrice">ZK50.00</span>
             </div>
-             <h5><Link to="/product-detail">movento 15.31%od insecticide</Link></h5>
+            <h5><Link to="/product-detail">movento 15.31%od insecticide</Link></h5>
             <Rating />
             <div className="reward">
               <p className="text">Reward Points</p>
@@ -113,7 +113,7 @@ function SellerAllProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer2} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -138,7 +138,7 @@ function SellerAllProduct() {
             <div className="rateDigit">
               <span className="currentPrice">ZK35.00</span>
             </div>
-             <h5><Link to="/product-detail">vanproz v-bind (bio viricide)</Link></h5>
+            <h5><Link to="/product-detail">vanproz v-bind (bio viricide)</Link></h5>
             <Rating />
             <div className="reward">
               <p className="text">Reward Points</p>
@@ -151,7 +151,7 @@ function SellerAllProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer3} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -176,8 +176,8 @@ function SellerAllProduct() {
             <div className="rateDigit">
               <span className="currentPrice">ZK56.00</span>
             </div>
-             <h5><Link to="/product-detail">movento 15.31%od insecticide</Link></h5>
-           
+            <h5><Link to="/product-detail">movento 15.31%od insecticide</Link></h5>
+
             <Rating />
             <div className="reward">
               <p className="text">Reward Points</p>
@@ -190,7 +190,7 @@ function SellerAllProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer5} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -215,7 +215,7 @@ function SellerAllProduct() {
             <div className="rateDigit">
               <span className="currentPrice">ZK49.00</span>
             </div>
-             <h5><Link to="/product-detail">vanproz v-bind (bio viricide)</Link></h5>
+            <h5><Link to="/product-detail">vanproz v-bind (bio viricide)</Link></h5>
             <Rating />
             <div className="reward">
               <p className="text">Reward Points</p>
@@ -228,7 +228,7 @@ function SellerAllProduct() {
         <div className="featuredInfo">
           <div className="featuredFigure">
             <div className="featuredImg">
-              <img src={fertilizer5} alt="Product" />
+              <img src={""} alt="Product" />
               <div className="quickView">
                 <ul>
                   <li className="viewProduct">
@@ -253,7 +253,7 @@ function SellerAllProduct() {
             <div className="rateDigit">
               <span className="currentPrice">ZK50.00</span>
             </div>
-             <h5><Link to="/product-detail">movento 15.31%od insecticide</Link></h5>
+            <h5><Link to="/product-detail">movento 15.31%od insecticide</Link></h5>
             <Rating />
             <div className="reward">
               <p className="text">Reward Points</p>
@@ -262,7 +262,7 @@ function SellerAllProduct() {
           </div>
         </div>
       </div>
-      
+
       <div
         className="modal fade"
         id="exampleModal"
@@ -291,12 +291,12 @@ function SellerAllProduct() {
                   <div className="container-fluid p-3">
                     <div className="row row-sm">
                       <div className="col-md-6 _boxzoom">
-                        <img src={fertilizer1} alt="Fertilizer" />
+                        <img src={""} alt="Fertilizer" />
                         <div className="_product-images">
                           <div className="picZoomer">
                             <img
                               className="my_img"
-                              src={fertilizer1}
+                              src={""}
                               alt="Fertilizer"
                             />
                           </div>
@@ -312,7 +312,7 @@ function SellerAllProduct() {
                             <div className="p-list">
                               <span>
                                 {" "}
-                                M.R.P. : 
+                                M.R.P. :
                                 <del> 1399</del>{" "}
                               </span>
                               <span className="price"> Rs. 699 </span>

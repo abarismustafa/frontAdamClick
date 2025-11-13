@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import img1 from "../../assets/img/client/cardCopy.jpg"
+
 
 function CardModal(props) {
     return (
@@ -33,7 +33,7 @@ function CardModal(props) {
                     </div>
                     <div className='cardRight'>
                         <h5 style={{ color: "#007185" }}>ETG accepts all major credit and debit cards:</h5>
-                        <img src={img1} />
+                        <img src={""} />
                     </div>
                 </div>
             </Modal.Body>

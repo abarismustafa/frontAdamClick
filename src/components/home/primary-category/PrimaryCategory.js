@@ -5,17 +5,9 @@ import { Link } from "react-router-dom";
 // import video2 from "../../../assets/img/video/video2.mp4";
 // import video3 from "../../../assets/img/video/video3.mp4";
 
-import bannerWise from "../../../assets/img/category-banner/banner-21.webp";
 
-import product1 from "../../../assets/img/products/1.png";
-import product2 from "../../../assets/img/products/2.png";
-import product3 from "../../../assets/img/products/3.png";
-import product4 from "../../../assets/img/products/4.png";
-import product5 from "../../../assets/img/products/5.png";
-import product6 from "../../../assets/img/products/6.png";
-import product7 from "../../../assets/img/products/7.png";
-import product8 from "../../../assets/img/products/8.png";
-import Rating from "../../../shared/rating/Rating";
+
+
 import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
@@ -26,56 +18,56 @@ const data = {
   categoryProducts: [
     {
       id: 1,
-      url: product1,
+      url: "",
       main_url: "product/115/jimitree-face-serum",
       title: "Drop Stitch Wakeboard",
       price: "499",
     },
     {
       id: 2,
-      url: product2,
+      url: "",
       main_url: "product/114/In-Your-Heart-PDRN-Spicule-Ampoule",
       title: "Moisturizer Summer Skin",
       price: "599",
     },
     {
       id: 3,
-      url: product3,
+      url: "",
       main_url: "product/113/In-Your-Heart-calming-care-cream",
       title: "Dry Skin Moisturizer Lotion",
       price: "299",
     },
     {
       id: 4,
-      url: product4,
+      url: "",
       main_url: "product/112/In-Your-Heart-lifting-Ampoule",
       title: "100% Body Care",
       price: "199",
     },
     {
       id: 5,
-      url: product5,
+      url: "",
       main_url: "product/111/In-Your-Heart-milk-cleanser",
       title: "Women Beauty Glow",
       price: "110",
     },
     {
       id: 6,
-      url: product6,
+      url: "",
       main_url: "product/109/divme-whitening-Ampoule-Pads",
       title: "ISUP Drop Stitch Wakeboard",
       price: "779",
     },
     {
       id: 7,
-      url: product7,
+      url: "",
       main_url: "",
       title: "True Match Nude Hyaluronic",
       price: "433",
     },
     {
       id: 8,
-      url: product8,
+      url: "",
       main_url: "",
       title: "Body Serum For Women",
       price: "229.00",
@@ -204,7 +196,7 @@ const PrimaryCategory = ({ pageTitle }) => {
         withCredentials: true,
       });
       setCatData(res?.data || []);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
