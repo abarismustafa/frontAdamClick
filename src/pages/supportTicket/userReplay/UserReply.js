@@ -9,8 +9,13 @@ import ReactFancyBox from 'react-fancybox'
 import { useCallback, useEffect, useState } from "react";
 import { Pagination } from "antd";
 import Replay from "./Replay";
+import { base_url } from "../../../server";
+import axios from "axios";
+import 'react-fancybox/lib/fancybox.css'
 
 function UserReply() {
+    const token = window.localStorage.getItem("token");
+    const baseUrl = base_url();
     const param = useParams()
     // console.log(param);
     const [loading, setLoading] = useState(false);
@@ -33,14 +38,17 @@ function UserReply() {
 
     const ticketUser = useCallback(async (input) => {
         setLoading(true);
-        // const clone = { ...filterInitial, count: count, page: input, id: param?.id };
-        // try {
-        //     const res = await dmtdisputechat(clone);
-        //     setTotalCount(res?.data?.totalCount);
-        //     setData(res?.data?.data);
-        // } catch (error) {
-        //     console.error(error);
-        // }
+        const clone = { ...filterInitial, count: count, page: input, id: param?.id };
+        try {
+            // const res = await dmtdisputechat(clone);
+            const res = await axios.get(`${baseUrl}dmtdisputechat/public?dispute_id=${clone.id}&count=${clone.count}&page=${clone.page}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            setTotalCount(res?.data?.totalCount);
+            setData(res?.data?.data);
+        } catch (error) {
+            console.error(error);
+        }
         setLoading(false);
     }, [filterInitial, count, param?.id]);
 
@@ -74,12 +82,10 @@ function UserReply() {
                                                         <FaUser />
                                                     </div>
                                                     <div className="parent-set">
-
-
                                                         <h5>{item?.by.name}</h5>  <h5>{item?.by.email}</h5>
                                                     </div>
                                                     <div className="parent-set">
-                                                        <p className="operator operator-2">{item?.operator}</p>
+                                                        <p className="operator operator-2">{item?.operator ? item?.operator : 'User'}</p>
                                                     </div>
                                                 </div>
                                                 <div className="dateandtime dateandtime-2">
@@ -99,15 +105,13 @@ function UserReply() {
                                                 </div>
                                                 {/* <p>In publishing and graph`ic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document.</p> */}
                                                 <div className="form-row mt-3">
-                                                    {item?.attachments.map((item) => {
-                                                        return <div className="col-lg-2 image-set" style={{ height: '155px' }}>
-                                                            {/* <ReactFancyBox
-                                                            thumbnail={`${baseUrlImage}${item}`}
-                                                            image={`${baseUrlImage}${item}`}
-                                                            className="ljhdfjdh"
-                                                        /> */}
-
-
+                                                    {item?.attachments?.map((item) => {
+                                                        return <div className="col-lg-2 image-set" >
+                                                            <ReactFancyBox
+                                                                thumbnail={`${item}`}
+                                                                image={`${item}`}
+                                                                className="ljhdfjdh"
+                                                            />
                                                             {/* <img src={`https://api.paypandabnk.com/api/cloudinary/${item}`} style={{ height: '100%', width: "100%" }} alt="" /> */}
                                                         </div>
                                                     })}
@@ -118,10 +122,6 @@ function UserReply() {
                                         </div>
                                     </div>
                                 })}
-
-
-
-
                                 {/* <div className="col-lg-12 mt-3">
                                 <div className="chat-first">
                                     <div className="card-header card-header-card">

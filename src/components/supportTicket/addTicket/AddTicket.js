@@ -21,7 +21,7 @@ function AddTicket({ placeholder }) {
     const params = useParams()
     // console.log(params);
     const [defaultData, setDefaultData] = useState()
-    console.log(defaultData?.serviceId);
+    // console.log(defaultData?.serviceId);
     const location = useLocation();
     // console.log(location.state);
     useEffect(() => {
@@ -65,6 +65,9 @@ function AddTicket({ placeholder }) {
         description: '',
         attachments: []
     })
+
+    // console.log(initialData);
+
 
     const handleChange = (e) => {
         const clone = { ...initialData }
@@ -146,26 +149,30 @@ function AddTicket({ placeholder }) {
             const array = []
             const array2 = [...listImage]
 
-            // for (let ind = 0; ind < e.target.files?.length; ind++) {
-            //     try {
-            //         const element0 = e.target.files[ind];
-            //         imgs.set("image", element0);
+            for (let ind = 0; ind < e.target.files?.length; ind++) {
+                try {
+                    const element0 = e.target.files[ind];
+                    imgs.set("image", element0);
 
-            //         const res = await cloudImage(imgs)
-            //         // console.log(res?.data?.error == false);
+                    // const res = await cloudImage(imgs)
+                    // console.log(res?.data?.error == false);
+                    const res = await axios.post(
+                        `${baseUrl}/image/addImage`,
+                        imgs
+                    );
 
-            //         const obj2 = { id: Math.random(), url: res?.data?.data?.url };
-            //         array2.push(obj2)
+                    const obj2 = { id: Math.random(), url: res?.data?.url };
+                    array2.push(obj2)
 
-            //         if (res?.data?.error == false) {
-            //             setAttachDisable(false)
-            //         }
-            //         // setshoingLoader(false);
-            //     } catch (error) {
-            //         console.log(" Image not uploaded");
+                    if (res?.data?.error == false) {
+                        setAttachDisable(false)
+                    }
+                    // setshoingLoader(false);
+                } catch (error) {
+                    console.log(" Image not uploaded");
 
-            //     }
-            // }
+                }
+            }
             setTimeout(() => {
                 setListImage(array2)
             }, 1000);
@@ -191,22 +198,24 @@ function AddTicket({ placeholder }) {
         const maped = listImage.map((ite) => {
             return ite.url
         })
-        const clone = { ...initialData, description: editor.current.value, attachments: maped, user_id: window.localStorage.getItem('userIdToken') }
-        // console.log(clone);
-        // try {
-        //     const res = await addTicket(clone)
-        //     if (res?.data?.error == false) {
-        //         toastSuccessMessage(res?.data?.message)
-        //         setTimeout(() => {
-        //             navigate('/list-tickets')
-        //         }, [2000])
-        //     }
-        //     if (res?.data?.error == true) {
-        //         toastSuccessMessage1(res?.data?.message)
-        //     }
-        // } catch (error) {
+        const clone = { ...initialData, description: editor.current.value, attachments: maped, user_id: window.localStorage.getItem('token') }
+        console.log(clone);
+        try {
+            const res = await axios.post(`${baseUrl}dmtDisputes/add_dispute`, clone, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            if (res?.data?.error == false) {
+                toastSuccessMessage(res?.data?.message)
+                setTimeout(() => {
+                    navigate('/list-tickets')
+                }, [2000])
+            }
+            if (res?.data?.error == true) {
+                toastSuccessMessage1(res?.data?.message)
+            }
+        } catch (error) {
 
-        // }
+        }
     }
 
 
@@ -240,12 +249,17 @@ function AddTicket({ placeholder }) {
     }, [defaultData?.serviceId])
 
     const [dataAll, setDataAll] = useState(null)
+    const STATIC_SUBJECT_TEXT = "I want to ";
     const dataGet = async (id) => {
         try {
             const res = await axios.get(`${baseUrl}order/getOrderById/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
             setDataAll(res?.data)
+            setInitialData(prev => ({
+                ...prev,
+                subject: `${STATIC_SUBJECT_TEXT}${res?.data[0]?.order_referenceNo || ""}`
+            }));
         } catch (error) {
 
         }
@@ -265,7 +279,7 @@ function AddTicket({ placeholder }) {
                 </div>
                 <div className="card">
                     <div className="card-header"><span>Open Ticket</span>
-                        <div>Order Id : <strong>{dataAll && dataAll[0]?.order_referenceNo}</strong></div>
+                        {params?.id ? <div>Order Id : <strong>{dataAll && dataAll[0]?.order_referenceNo}</strong></div> : ''}
                     </div>
                     <div className="card-body">
                         <form action="" method="post" name="frmReport" id="frmReport">
@@ -283,11 +297,11 @@ function AddTicket({ placeholder }) {
 
                                 <div className="form-group col-md-4">
                                     <label htmlFor="txtUserId">Name <span style={{ color: 'red' }}>*</span></label>
-                                    <input type="text" disabled name="name" id="account_no" placeholder="Enter Name" className="form-control" value={autoFillInitial.name} />
+                                    <input type="text" name="name" id="account_no" placeholder="Enter Name" className="form-control" value={autoFillInitial.name} />
                                 </div>
                                 <div className="form-group col-md-4">
                                     <label htmlFor="txtUserId">Email <span style={{ color: 'red' }}>*</span></label>
-                                    <input type="email" disabled name="email" id="account_no" placeholder="Enter email" className="form-control" value={autoFillInitial.email} />
+                                    <input type="email" name="email" id="account_no" placeholder="Enter email" className="form-control" value={autoFillInitial.email} />
                                 </div>
                                 <div className="form-group col-md-4">
                                     <label htmlFor="txtUserId">Phone <span style={{ color: 'red' }}>*</span></label>
@@ -361,17 +375,17 @@ function AddTicket({ placeholder }) {
                                 })} */}
                                 <div className="form-group col-md-4">
                                     <label>&nbsp;</label>
-                                    <button type="button" style={{ width: '100%' }} disabled={!initialData.subject || !editor.current.value || !initialData.priority || !initialData.type || !initialData.service_id} className={`btn ${!initialData.subject || !editor.current.value || !initialData.priority || !initialData.type || !initialData.service_id ? 'commonbotton_disable' : 'btn-primary'} mr-3`} onClick={submitData}>Submit</button>
+                                    <button type="button" style={{ width: '100%' }} disabled={!initialData.subject || !content || !initialData.priority || !initialData.type || !initialData.service_id} className={`btn ${!initialData.subject || !content || !initialData.priority || !initialData.type || !initialData.service_id ? 'commonbotton_disable' : 'btn-primary'} mr-3`} onClick={submitData}>Submit</button>
                                 </div>
 
-                                {/* {listImage && listImage?.map((item) => (
+                                {listImage && listImage?.map((item) => (
                                     <div className="col-lg-3 col-md-4 col-sm-6 img-shoe-set mb-3" key={item?.id} style={{ height: '155px', position: 'relative' }}>
-                                        <img src={`${baseUrlImage}${item?.url}`} alt="" style={{ height: '100%', width: "100%", objectFit: 'cover', borderRadius: '5px' }} />
+                                        <img src={`${item?.url}`} alt="" style={{ height: '100%', width: "100%", objectFit: 'cover', borderRadius: '5px' }} />
                                         <div className="crose-icon" style={{ position: 'absolute', top: '10px', right: '10px', cursor: 'pointer' }}>
                                             <RxCrossCircled onClick={() => { Remove(item.id) }} style={{ color: 'red', fontSize: '1.5rem' }} />
                                         </div>
                                     </div>
-                                ))} */}
+                                ))}
                             </div>
                         </form>
                     </div>

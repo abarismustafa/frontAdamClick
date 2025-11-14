@@ -337,8 +337,9 @@ function App() {
         <Route path="returns/rma/view/:id" element={<RmaReturnView />} />
         <Route path="thankyou" element={<ThankyouSucccessPage />} />
         <Route path="add-support-ticket/:id" element={<AddTicketPage />} />
+        <Route path="add-support-ticket" element={<AddTicketPage />} />
         <Route path='list-tickets' element={<ListTicketPage />} />
-        <Route path='user-replay' element={<UserReply />} />
+        <Route path='user-replay/:id' element={<UserReply />} />
       </Routes>
 
       <SocialMedias />

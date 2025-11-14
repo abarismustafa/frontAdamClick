@@ -38,6 +38,8 @@ import { useDispatch } from "react-redux";
 import { base_url } from "../../../../server";
 import Slider from "react-slick";
 import Rating from "../../../../shared/rating/Rating";
+import { FaChevronRight, FaCloudUploadAlt } from "react-icons/fa";
+import { toastSuccessMessage, toastSuccessMessageError } from "../../../../common/messageShow/MessageShow";
 
 function ProductDetailContent({
   changeImage,
@@ -364,7 +366,84 @@ function ProductDetailContent({
   };
   const navigate = useNavigate();
 
-  console.log(data?.variations[0]?.variant_slug);
+  console.log(data);
+
+  const [imageInitial, setImageInitial] = useState({
+    imageUrl: ''
+  })
+  const [loading, setLoading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
+  // console.log(imageInitial);
+
+
+  const handleChangeImage = async (e) => {
+    const { name, files } = e.target;
+    const file = files[0];
+
+    if (!file) return;
+
+
+    const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
+    if (!allowedTypes.includes(file.type)) {
+      // alert("Only JPG, PNG or PDF files are allowed!");
+      toastSuccessMessageError("Only JPG, PNG or PDF files are allowed!")
+      e.target.value = "";
+      return;
+    }
+
+    setLoading(true);
+    setUploaded(false);
+
+    const imageData = new FormData();
+    imageData.append("image", file);
+
+    try {
+      const res = await axios.post(`${baseUrl}/image/addImage`, imageData);
+
+      setImageInitial((prev) => ({
+        ...prev,
+        [name]: {
+          public_id: res?.data?.public_id || "",
+          url: res?.data?.url || "",
+        },
+      }));
+      setUploaded(true);
+      toastSuccessMessage("Upload Successful!")
+    } catch (error) {
+      // console.error("Image Upload Error:", error);
+      toastSuccessMessageError("Upload Failed!")
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  // const handleChangeImage = async (e) => {
+  //   const { name, files } = e.target;
+  //   const imageData = new FormData();
+  //   imageData.append('image', files[0]);
+  //   try {
+  //     const res = await axios.post(
+  //       `${baseUrl}/image/addImage`,
+  //       imageData
+  //     );
+  //     console.log(res?.data?.url);
+
+  //     setTimeout(() => {
+
+  //       setImageInitial((prev) => ({
+  //         ...prev,
+  //         [name]: {
+  //           public_id: res?.data?.public_id || "",
+  //           url: res?.data?.url || "",
+  //         },
+  //       }));
+  //     }, 1000);
+  //   } catch (error) {
+  //     console.error('Image Upload Error:', error);
+
+  //   }
+  // };
 
   return (
     <>
@@ -465,7 +544,7 @@ function ProductDetailContent({
             >
               <span> {t("Brand")} : &nbsp; </span>
               {/* <div style={{ maxWidth: "100px" }}> */}
-              {!data?.brand_id?.logo.url ? (
+              {!data?.brand_id?.logo?.url ? (
                 <span
                   style={{
                     color: "#242424",
@@ -474,11 +553,11 @@ function ProductDetailContent({
                   }}
                 >
                   {" "}
-                  {data.brand_id.name}{" "}
+                  {data?.brand_id?.name}{" "}
                 </span>
               ) : (
                 <img
-                  src={data?.brand_id?.logo.url}
+                  src={data?.brand_id?.logo?.url}
                   style={{ maxWidth: "100px" }}
                   className="w-50"
                 />
@@ -602,7 +681,7 @@ function ProductDetailContent({
                     <p
                       style={{
                         color: isServiceable ? "green" : "red",
-                        
+
                         fontSize: "12px",
                       }}
                     >
@@ -747,6 +826,20 @@ function ProductDetailContent({
                 </div>
               </div>
             )}
+            {/* <div className="productColorInfo mt-3">
+              <div className="titleText flex items-center gap-2">
+                <FaCloudUploadAlt />
+                <h6>Upload WPC Licence :</h6>
+                <input type="file" name="imageUrl" onChange={handleChangeImage} />
+                {loading && (
+                  <span style={{ fontSize: "12px", color: "blue" }}>
+                    Uploading...
+                  </span>
+                )}
+              </div>
+            </div> */}
+
+
             <div className="productCount">
               <div className="titleText">
                 <FiPackage />
@@ -761,6 +854,57 @@ function ProductDetailContent({
                 </div>
               </div>
             </div>
+
+            {data?.category_id[0]?.doc_required === true &&
+              <>
+                <div className="productColorInfo mt-3">
+                  <div className="titleText flex items-center gap-2">
+                    <FaCloudUploadAlt />
+                    <h6>Upload WPC Licence :</h6>
+                    <label
+                      htmlFor="fileUploadInput"
+                      style={{
+                        backgroundColor: uploaded ? "green" : "rgb(0 105 179)",
+                        color: "#fff",
+                        padding: "10px 20px",
+                        borderRadius: "6px",
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        fontWeight: "600",
+                        boxShadow: "0px 2px 4px rgba(0,0,0,0.2)",
+                        height: '29px'
+                      }}
+                    >
+                      {loading ? "Uploading..." : "Choose File"}
+                      <FaCloudUploadAlt style={{ marginTop: "2px" }} />
+                    </label>
+
+                    <input
+                      type="file"
+                      id="fileUploadInput"
+                      name="imageUrl"
+                      onChange={handleChangeImage}
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                </div>
+
+                <div className="productColorInfo mt-3">
+                  <div className="titleText flex items-center gap-2">
+                    <FaChevronRight />
+                    <h6>If you do not have WPC user Licence <Link to="">click HERE</Link> to apply.</h6>
+                  </div>
+                </div>
+                <div className="productColorInfo mt-3">
+                  <div className="titleText flex items-center gap-2">
+                    <FaChevronRight />
+                    <h6>If you want to know more about the WPC user Licences <Link to="">click HERE</Link> to apply.</h6>
+                  </div>
+                </div>
+              </>
+            }
           </div>
 
           <div className="product-details-desc">

@@ -8,10 +8,16 @@ import JoditEditor from 'jodit-react';
 import { ToastContainer, toast } from 'react-toastify';
 import { RxCrossCircled } from "react-icons/rx";
 import { FaCloudUploadAlt } from "react-icons/fa";
+import { base_url } from '../../../server';
+import axios from 'axios';
 
 function Replay({ id, ticketUser }) {
+    const token = window.localStorage.getItem("token");
+    const baseUrl = base_url();
     const editor = useRef(null);
     const [content, setContent] = useState('');
+    console.log(content);
+
     const [attachDisable, setAttachDisable] = useState(true)
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [listImage, setListImage] = useState([])
@@ -34,16 +40,19 @@ function Replay({ id, ticketUser }) {
 
 
     const dataDefault = async () => {
-        // try {
-        //     const res = await userValidate()
-        //     setAutoFillInitial({
-        //         email: res?.data?.email,
-        //         name: res?.data?.name,
-        //         phone: res?.data?.mobile
-        //     })
-        // } catch (error) {
+        try {
+            // const res = await userValidate()
+            const res = await axios.get(`${baseUrl}user/profile`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            setAutoFillInitial({
+                email: res?.data?.getaUser?.email,
+                name: `${res?.data?.getaUser?.firstname || ""} ${res?.data?.getaUser?.lastname || ""}`.trim(),
+                phone: res?.data?.getaUser?.mobile
+            })
+        } catch (error) {
 
-        // }
+        }
     }
 
     const imgs = new FormData();
@@ -68,26 +77,30 @@ function Replay({ id, ticketUser }) {
             const array = []
             const array2 = [...listImage]
 
-            // for (let ind = 0; ind < e.target.files?.length; ind++) {
-            //     try {
-            //         const element0 = e.target.files[ind];
-            //         imgs.set("image", element0);
+            for (let ind = 0; ind < e.target.files?.length; ind++) {
+                try {
+                    const element0 = e.target.files[ind];
+                    imgs.set("image", element0);
 
-            //         const res = await cloudImage(imgs)
-            //         console.log(res?.data?.error == false);
+                    // const res = await cloudImage(imgs)
+                    // console.log(res?.data?.error == false);
+                    const res = await axios.post(
+                        `${baseUrl}/image/addImage`,
+                        imgs
+                    );
 
-            //         const obj2 = { id: Math.random(), url: res?.data?.data?.url };
-            //         array2.push(obj2)
+                    const obj2 = { id: Math.random(), url: res?.data?.url };
+                    array2.push(obj2)
 
-            //         if (res?.data?.error == false) {
-            //             setAttachDisable(false)
-            //         }
-            //         // setshoingLoader(false);
-            //     } catch (error) {
-            //         console.log(" Image not uploaded");
+                    if (res?.data?.error == false) {
+                        setAttachDisable(false)
+                    }
+                    // setshoingLoader(false);
+                } catch (error) {
+                    console.log(" Image not uploaded");
 
-            //     }
-            // }
+                }
+            }
             setTimeout(() => {
                 setListImage(array2)
             }, 1000);
@@ -110,25 +123,35 @@ function Replay({ id, ticketUser }) {
 
 
     const submitData = async () => {
+        // debugger
+        const chatValue =
+            editor.current?.editor?.innerHTML || "";
+        console.log(chatValue);
+
         const maped = listImage.map((ite) => {
             return ite.url
         })
-        const clone = { ...initialdata, chat: editor.current.value, attachments: maped, dispute_id: id, user_id: window.localStorage.getItem('userIdToken') }
-        // try {
-        //     const res = await repayTicket(clone)
-        //     console.log(res);
-        //     // toastSuccessMessage
-        //     if (res?.data?.error == false) {
-        //         toastSuccessMessage(res?.data?.message)
-        //         ticketUser(0)
-        //         resetForm()
-        //     }
-        //     if (res?.data?.error == true) {
-        //         toastSuccessMessage1(res?.data?.message)
-        //     }
-        // } catch (error) {
+        const clone = { ...initialdata, chat: editor.current.value, attachments: maped, dispute_id: id, user_id: window.localStorage.getItem('token') }
+        console.log(clone);
 
-        // }
+        try {
+            // const res = await repayTicket(clone)
+            const res = await axios.post(`${baseUrl}dmtdisputeChat/add_dispute/public`, clone, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            // console.log(res);
+            // toastSuccessMessage
+            if (res?.data?.error == false) {
+                toastSuccessMessage(res?.data?.message)
+                ticketUser(0)
+                resetForm()
+            }
+            if (res?.data?.error == true) {
+                toastSuccessMessage1(res?.data?.message)
+            }
+        } catch (error) {
+
+        }
     }
 
     const resetForm = () => {
@@ -172,6 +195,17 @@ function Replay({ id, ticketUser }) {
 
     //     // setFileArray(clone.filter(item => item.id !== id));
     // }
+
+    const config = {
+        readonly: false,
+        height: 400,
+        defaultMode: "1",  // WYSIWYG mode
+        toolbarAdaptive: false,
+        style: {
+            color: "black !important",
+            background: "white !important",
+        },
+    };
     return (
         <>
             <div className='col-lg-12'>
@@ -197,6 +231,18 @@ function Replay({ id, ticketUser }) {
                                     </div>
                                     <div className="form-group col-md-12">
                                         <label htmlFor="txtUserId">Message <span style={{ color: 'red' }}>*</span></label>
+                                        {/* <JoditEditor
+                                            ref={editor}
+                                            // value={content}
+                                            config={config}
+                                            // onBlur={(newContent) => setContent(newContent)}
+                                            // config={config}
+                                            // tabIndex={1} // tabIndex of textarea
+                                            // onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                                            // onChange={newContent => setContent(newContent)}
+                                            onChange={() => { }}
+                                        /> */}
+
                                         <JoditEditor
                                             ref={editor}
                                             value={content}
@@ -222,14 +268,14 @@ function Replay({ id, ticketUser }) {
                                         <button type="button" className="btn btn-primary mr-3" style={{ width: '100%' }} onClick={submitData}>Submit</button>
                                     </div>
 
-                                    {/* {listImage && listImage?.map((item) => {
-                                        return <div className="col-lg-2 img-shoe-set" key={item?.id} style={{ height: '155px' }}>
-                                            <img src={`${baseUrlImage}${item?.url}`} alt="" style={{ height: '100%', width: "100%" }} />
+                                    {listImage && listImage?.map((item) => {
+                                        return <div className="col-lg-2 img-shoe-set" key={item?.id}>
+                                            <img src={`${item?.url}`} alt="" style={{ height: '100%', width: "100%" }} />
                                             <div className="crose-icon">
                                                 <RxCrossCircled onClick={() => { Remove(item.id) }} />
                                             </div>
                                         </div>
-                                    })} */}
+                                    })}
 
 
 
