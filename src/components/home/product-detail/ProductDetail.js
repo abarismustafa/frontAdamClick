@@ -50,6 +50,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { Spinner } from "react-bootstrap";
 import LoginAllPage from "../../../common/loginAllPage/LoginAllPage";
 import PdfCanvasViewer from "./PdfCanvasViewer";
+import { getCartToken, getCouponToken } from "../../../Utils/localStorage";
 
 function createMarkup(data) {
   return { __html: data };
@@ -366,8 +367,10 @@ function ProductDetail() {
   const [varientsval, setVariantsval] = useState(null);
 
   const navigate = useNavigate();
+  const [cartValueVa, setCartValueVa] = useState(null);
+  const [cartDetail, setcartDetail] = useState(null);
   const [count1, setCount1] = useState(0);
-  const BuyNowItem = (item) => {
+  const BuyNowItem = async (item) => {
     const isLogin = window.localStorage.getItem("isLogin") === "true";
 
     if (!isLogin) {
@@ -383,14 +386,33 @@ function ProductDetail() {
       seller_id: item.variations[count1]?.prices[0].seller_id?._id,
       sku: item.variations[count1]?.prices[0].sku,
     };
-    addToCart(payload);
-    setTimeout(() => {
-      navigate("/checkout");
-    }, 1000);
+    await addToCart(payload);
 
-    setTimeout(() => {
-      navigate("/checkout");
-    }, 1000);
+    const res = await axios.post(
+      `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+      }`,
+      { shipId: cartValueVa },
+      {
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+    console.log("resElse", res);
+    setcartDetail(res.data);
+    if (res?.status === 200) {
+      navigate(`/checkout/${res?.data?.abndnt}`);
+    }
+
+    // setTimeout(() => {
+    //   navigate("/checkout");
+    // }, 1000);
+
+    // setTimeout(() => {
+    //   navigate("/checkout");
+    // }, 1000);
   };
 
   const [
@@ -667,6 +689,7 @@ function ProductDetail() {
                   className="product-details-image col-lg-10 col-md-10 col-sm-10 col-xs-10"
                   style={!isMobile ? { zIndex: "10" } : { zIndex: "0" }}
                 >
+
                   {isMobile && (
                     <div className="mobileBanner">
                       <Slider {...settings} ref={sliderRef}>
@@ -973,9 +996,8 @@ function ProductDetail() {
                     {data?.description_tabs?.map((tab, index) => (
                       <li
                         key={tab._id}
-                        className={`tab-item ${
-                          activeTab === tab._id ? "active" : ""
-                        }`}
+                        className={`tab-item ${activeTab === tab._id ? "active" : ""
+                          }`}
                         onClick={() => handleTabClick(tab._id, index)}
                       >
                         {tab.title}
@@ -991,9 +1013,8 @@ function ProductDetail() {
                       key={tab._id}
                       id={tab._id}
                       ref={(el) => (sectionRefs.current[index] = el)}
-                      className={`tab-section ${
-                        activeTab === tab._id ? "visible" : ""
-                      }`}
+                      className={`tab-section ${activeTab === tab._id ? "visible" : ""
+                        }`}
                     >
                       <div
                         className="tab-inner"

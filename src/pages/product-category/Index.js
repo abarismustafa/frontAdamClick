@@ -253,7 +253,7 @@ function ProductCategoryPage() {
         withCredentials: true,
       });
       setCateData(res.data);
-    } catch (error) {}
+    } catch (error) { }
   };
   useEffect(() => {
     getcateData();
@@ -336,7 +336,9 @@ function ProductCategoryPage() {
                                     <span className="visually-hidden">Loading...</span>
                                 </div>
                             </div>} */}
-                <div className="subCategoriesCard">
+
+
+                {/* <div className="subCategoriesCard">
                   <div className="categoryWrapper">
                     <Slider {...settings}>
                     {categoriesDatas
@@ -368,7 +370,7 @@ function ProductCategoryPage() {
                       ))}
                       </Slider>
                   </div>
-                </div>
+                </div> */}
                 <div className="collectionFilter">
                   <div className="totalProducts">
                     <h6>
@@ -444,9 +446,8 @@ function ProductCategoryPage() {
                 </div>
 
                 <div
-                  className={`row featuredRow changeGrid ${
-                    listView ? "listView" : ""
-                  }`}
+                  className={`row featuredRow changeGrid ${listView ? "listView" : ""
+                    }`}
                 >
                   {data &&
                     data?.map((item, i) => {

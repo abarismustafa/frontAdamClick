@@ -9618,3 +9618,14 @@ tbody tr td .modle-modle .svg {
   opacity: 0.9;
   transform: scale(1.02);
 }
+
+
+.dataTables_info_page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.replay-accorddian .accordion-item .accordion-collapse .accordion-body {
+  background-color: white !important;
+}

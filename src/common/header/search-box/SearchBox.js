@@ -571,7 +571,10 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           </li>
                           <li>
                             <MdSell />{" "}
-                            <Link to="/support_ticket">
+                            {/* <Link to="/support_ticket">
+                              {t("Support Ticket")}
+                            </Link> */}
+                            <Link to="/list-tickets">
                               {t("Support Ticket")}
                             </Link>
                           </li>
@@ -1008,7 +1011,10 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           </li>
                           <li>
                             <MdSell />{" "}
-                            <Link to="/support_ticket">
+                            {/* <Link to="/support_ticket">
+                              {t("Support Ticket")}
+                            </Link> */}
+                            <Link to="/list-tickets">
                               {t("Support Ticket")}
                             </Link>
                           </li>

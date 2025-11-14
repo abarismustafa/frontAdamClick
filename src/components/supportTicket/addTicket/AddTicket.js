@@ -11,13 +11,17 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FaCloudUploadAlt } from "react-icons/fa";
 // import { baseUrl, baseUrlImage } from "../../../../baseUrl";
 import "../ticket.css"
+import axios from "axios";
+import { base_url } from "../../../server";
 function AddTicket({ placeholder }) {
+    const token = window.localStorage.getItem("token");
+    const baseUrl = base_url();
     const navigate = useNavigate()
 
-    const patam = useParams()
-    // console.log(patam);
+    const params = useParams()
+    // console.log(params);
     const [defaultData, setDefaultData] = useState()
-    console.log(defaultData?.serviceId);
+    // console.log(defaultData?.serviceId);
     const location = useLocation();
     // console.log(location.state);
     useEffect(() => {
@@ -34,7 +38,7 @@ function AddTicket({ placeholder }) {
     const [profileImage, setProfileImage] = useState()
     // console.log(profileImage);
     const [selectedFiles, setSelectedFiles] = useState([]);
-    console.log(selectedFiles);
+    // console.log(selectedFiles);
 
     const [listImage, setListImage] = useState([])
 
@@ -62,6 +66,9 @@ function AddTicket({ placeholder }) {
         attachments: []
     })
 
+    // console.log(initialData);
+
+
     const handleChange = (e) => {
         const clone = { ...initialData }
         const value = e.target.value
@@ -71,38 +78,50 @@ function AddTicket({ placeholder }) {
     }
 
     const depart = async () => {
-        // try {
-        //     const res = await department()
-        //     setDepartData(res?.data?.data);
-        // } catch (error) {
+        try {
+            // const res = await department()
+            const res = await axios.get(`${baseUrl}department/public`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setDepartData(res?.data?.data);
+        } catch (error) {
 
-        // }
+        }
     }
     const prioty = async () => {
-        // try {
-        //     const res = await dmtDisputePriority()
-        //     setPriotyData(res?.data?.data);
-        // } catch (error) {
+        try {
+            // const res = await dmtDisputePriority()
+            const res = await axios.get(`${baseUrl}dmtDisputePriority/public`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setPriotyData(res?.data?.data);
+        } catch (error) {
 
-        // }
+        }
     }
     const relatService = async () => {
-        // try {
-        //     const res = await relatedService()
-        //     const res2 = await userValidate()
-        //     // console.log(res2?.data.email);
-        //     setRelateData(res?.data?.data);
-        //     setAutoFillInitial({
-        //         email: res2?.data?.email,
-        //         name: res2?.data?.name,
-        //         phone: res2?.data?.mobile
-        //     })
+        try {
+            const res = await axios.get(`${baseUrl}service/public`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            // console.log(res);
+
+            const res2 = await axios.get(`${baseUrl}user/profile`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            // console.log(res2?.data.email);
+            setRelateData(res?.data?.data);
+            setAutoFillInitial({
+                email: res2?.data?.getaUser?.email,
+                name: `${res2?.data?.getaUser?.firstname || ""} ${res2?.data?.getaUser?.lastname || ""}`.trim(),
+                phone: res2?.data?.getaUser?.mobile
+            })
 
 
 
-        // } catch (error) {
+        } catch (error) {
 
-        // }
+        }
     }
 
 
@@ -130,26 +149,30 @@ function AddTicket({ placeholder }) {
             const array = []
             const array2 = [...listImage]
 
-            // for (let ind = 0; ind < e.target.files?.length; ind++) {
-            //     try {
-            //         const element0 = e.target.files[ind];
-            //         imgs.set("image", element0);
+            for (let ind = 0; ind < e.target.files?.length; ind++) {
+                try {
+                    const element0 = e.target.files[ind];
+                    imgs.set("image", element0);
 
-            //         const res = await cloudImage(imgs)
-            //         // console.log(res?.data?.error == false);
+                    // const res = await cloudImage(imgs)
+                    // console.log(res?.data?.error == false);
+                    const res = await axios.post(
+                        `${baseUrl}/image/addImage`,
+                        imgs
+                    );
 
-            //         const obj2 = { id: Math.random(), url: res?.data?.data?.url };
-            //         array2.push(obj2)
+                    const obj2 = { id: Math.random(), url: res?.data?.url };
+                    array2.push(obj2)
 
-            //         if (res?.data?.error == false) {
-            //             setAttachDisable(false)
-            //         }
-            //         // setshoingLoader(false);
-            //     } catch (error) {
-            //         console.log(" Image not uploaded");
+                    if (res?.data?.error == false) {
+                        setAttachDisable(false)
+                    }
+                    // setshoingLoader(false);
+                } catch (error) {
+                    console.log(" Image not uploaded");
 
-            //     }
-            // }
+                }
+            }
             setTimeout(() => {
                 setListImage(array2)
             }, 1000);
@@ -175,22 +198,24 @@ function AddTicket({ placeholder }) {
         const maped = listImage.map((ite) => {
             return ite.url
         })
-        const clone = { ...initialData, description: editor.current.value, attachments: maped, user_id: window.localStorage.getItem('userIdToken') }
-        // console.log(clone);
-        // try {
-        //     const res = await addTicket(clone)
-        //     if (res?.data?.error == false) {
-        //         toastSuccessMessage(res?.data?.message)
-        //         setTimeout(() => {
-        //             navigate('/list-tickets')
-        //         }, [2000])
-        //     }
-        //     if (res?.data?.error == true) {
-        //         toastSuccessMessage1(res?.data?.message)
-        //     }
-        // } catch (error) {
+        const clone = { ...initialData, description: editor.current.value, attachments: maped, user_id: window.localStorage.getItem('token') }
+        console.log(clone);
+        try {
+            const res = await axios.post(`${baseUrl}dmtDisputes/add_dispute`, clone, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            if (res?.data?.error == false) {
+                toastSuccessMessage(res?.data?.message)
+                setTimeout(() => {
+                    navigate('/list-tickets')
+                }, [2000])
+            }
+            if (res?.data?.error == true) {
+                toastSuccessMessage1(res?.data?.message)
+            }
+        } catch (error) {
 
-        // }
+        }
     }
 
 
@@ -220,8 +245,31 @@ function AddTicket({ placeholder }) {
     useEffect(() => {
 
         setInitialData({ ...initialData, service_id: defaultData?.serviceId })
-        console.log('kjbjk', defaultData?.serviceId);
+        // console.log('kjbjk', defaultData?.serviceId);
     }, [defaultData?.serviceId])
+
+    const [dataAll, setDataAll] = useState(null)
+    const STATIC_SUBJECT_TEXT = "I want to ";
+    const dataGet = async (id) => {
+        try {
+            const res = await axios.get(`${baseUrl}order/getOrderById/${id}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setDataAll(res?.data)
+            setInitialData(prev => ({
+                ...prev,
+                subject: `${STATIC_SUBJECT_TEXT}${res?.data[0]?.order_referenceNo || ""}`
+            }));
+        } catch (error) {
+
+        }
+    }
+
+    useEffect(() => {
+        if (params?.id) {
+            dataGet(params?.id)
+        }
+    }, [params?.id])
     return (
         <>
 
@@ -230,7 +278,9 @@ function AddTicket({ placeholder }) {
                     <h1>Add Ticket</h1>
                 </div>
                 <div className="card">
-                    <div className="card-header"><span>Open Ticket</span></div>
+                    <div className="card-header"><span>Open Ticket</span>
+                        {params?.id ? <div>Order Id : <strong>{dataAll && dataAll[0]?.order_referenceNo}</strong></div> : ''}
+                    </div>
                     <div className="card-body">
                         <form action="" method="post" name="frmReport" id="frmReport">
                             <input type="hidden" id="hidID" name="hidID" />
@@ -247,11 +297,11 @@ function AddTicket({ placeholder }) {
 
                                 <div className="form-group col-md-4">
                                     <label htmlFor="txtUserId">Name <span style={{ color: 'red' }}>*</span></label>
-                                    <input type="text" disabled name="name" id="account_no" placeholder="Enter Name" className="form-control" value={autoFillInitial.name} />
+                                    <input type="text" name="name" id="account_no" placeholder="Enter Name" className="form-control" value={autoFillInitial.name} />
                                 </div>
                                 <div className="form-group col-md-4">
                                     <label htmlFor="txtUserId">Email <span style={{ color: 'red' }}>*</span></label>
-                                    <input type="email" disabled name="email" id="account_no" placeholder="Enter email" className="form-control" value={autoFillInitial.email} />
+                                    <input type="email" name="email" id="account_no" placeholder="Enter email" className="form-control" value={autoFillInitial.email} />
                                 </div>
                                 <div className="form-group col-md-4">
                                     <label htmlFor="txtUserId">Phone <span style={{ color: 'red' }}>*</span></label>
@@ -325,17 +375,17 @@ function AddTicket({ placeholder }) {
                                 })} */}
                                 <div className="form-group col-md-4">
                                     <label>&nbsp;</label>
-                                    <button type="button" style={{ width: '100%' }} disabled={!initialData.subject || !editor.current.value || !initialData.priority || !initialData.type || !initialData.service_id} className={`btn ${!initialData.subject || !editor.current.value || !initialData.priority || !initialData.type || !initialData.service_id ? 'commonbotton_disable' : 'btn-primary'} mr-3`} onClick={submitData}>Submit</button>
+                                    <button type="button" style={{ width: '100%' }} disabled={!initialData.subject || !content || !initialData.priority || !initialData.type || !initialData.service_id} className={`btn ${!initialData.subject || !content || !initialData.priority || !initialData.type || !initialData.service_id ? 'commonbotton_disable' : 'btn-primary'} mr-3`} onClick={submitData}>Submit</button>
                                 </div>
 
-                                {/* {listImage && listImage?.map((item) => (
+                                {listImage && listImage?.map((item) => (
                                     <div className="col-lg-3 col-md-4 col-sm-6 img-shoe-set mb-3" key={item?.id} style={{ height: '155px', position: 'relative' }}>
-                                        <img src={`${baseUrlImage}${item?.url}`} alt="" style={{ height: '100%', width: "100%", objectFit: 'cover', borderRadius: '5px' }} />
+                                        <img src={`${item?.url}`} alt="" style={{ height: '100%', width: "100%", objectFit: 'cover', borderRadius: '5px' }} />
                                         <div className="crose-icon" style={{ position: 'absolute', top: '10px', right: '10px', cursor: 'pointer' }}>
                                             <RxCrossCircled onClick={() => { Remove(item.id) }} style={{ color: 'red', fontSize: '1.5rem' }} />
                                         </div>
                                     </div>
-                                ))} */}
+                                ))}
                             </div>
                         </form>
                     </div>

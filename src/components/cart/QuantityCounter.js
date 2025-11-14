@@ -78,7 +78,7 @@ export const QuantityCounter = ({ val, countValue, item = null }) => {
 
   return (
     <div>
-      {showError && (
+      {/* {showError && (
         <CustomToaster
           color={showTaoster.color}
           title={showTaoster?.name}
@@ -88,7 +88,7 @@ export const QuantityCounter = ({ val, countValue, item = null }) => {
           position="top-end"
           delay={10000}
         />
-      )}
+      )} */}
       <div className="quantity">
         <button type="button" className="minus" onClick={handleDec}>
           <AiOutlineMinus />
