@@ -894,13 +894,32 @@ function ProductDetailContent({
                 <div className="productColorInfo mt-3">
                   <div className="titleText flex items-center gap-2">
                     <FaChevronRight />
-                    <h6>If you do not have WPC user Licence <Link to="">click HERE</Link> to apply.</h6>
+                    <h6>
+                      If you do not have WPC user Licence{" "}
+                      <a
+                        href={data?.license?.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#007bff" }}
+                      >
+                        click HERE
+                      </a>{" "}
+                      to apply.
+                    </h6>
                   </div>
                 </div>
                 <div className="productColorInfo mt-3">
                   <div className="titleText flex items-center gap-2">
                     <FaChevronRight />
-                    <h6>If you want to know more about the WPC user Licences <Link to="">click HERE</Link> to apply.</h6>
+                    <h6>If you want to know more about the WPC user Licences
+                      <a
+                        href={data?.license?.documents?.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#007bff" }}
+                      >
+                        click HERE
+                      </a>{" "} to apply.</h6>
                   </div>
                 </div>
               </>

@@ -28,8 +28,6 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ModalQuatation from "./ModalQutation";
 
-
-
 // swiper -------------------------------//
 
 import "swiper/css";
@@ -639,8 +637,6 @@ function ProductDetail() {
 
   const isPdf = (url) => url?.toLowerCase().endsWith(".pdf");
 
-
-
   return (
     <>
       <Helmet>
@@ -742,7 +738,8 @@ function ProductDetail() {
                         style={{ zIndex: "9999999", position: "relative" }}
                         {...zoomImageProps}
                       />
-                    )}</div>
+                    )}
+                  </div>
                   {/* <div className="product-add-to-cart addToCart picture">
                     {isLogin === "true" ? (
                       <button
@@ -1038,19 +1035,14 @@ function ProductDetail() {
                           {tab?.docs?.map((doc, i) => (
                             <div
                               key={doc?._id}
-                              className="mb-4 shadow-sm border rounded overflow-hidden bg-white"
+                              className="mb-4 rounded overflow-hidden bg-white"
                               style={{
                                 borderRadius: "12px",
                               }}
                             >
                               {/* 🔹 Title on top */}
-                              <div
-                                className="p-2  bg-light border-bottom"
-                                style={{
-                                  backgroundColor: "#f8f9fa",
-                                }}
-                              >
-                                <strong className="text-dark">
+                              <div className="py-2">
+                                <strong className="text-dark text-capitalize">
                                   {doc?.title}
                                 </strong>
                               </div>
@@ -1147,8 +1139,6 @@ function ProductDetail() {
             centered />
         )} */}
       </section>
-
-
 
       <Review ids={params._id} dataproduct={data} />
       {/* <Review ids={window.localStorage.getItem('variant_id')} /> */}
