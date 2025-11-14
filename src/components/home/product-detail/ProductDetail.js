@@ -28,8 +28,6 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import ModalQuatation from "./ModalQutation";
 
-
-
 // swiper -------------------------------//
 
 import "swiper/css";
@@ -617,8 +615,6 @@ function ProductDetail() {
 
   const isPdf = (url) => url?.toLowerCase().endsWith(".pdf");
 
-
-
   return (
     <>
       <Helmet>
@@ -671,7 +667,6 @@ function ProductDetail() {
                   className="product-details-image col-lg-10 col-md-10 col-sm-10 col-xs-10"
                   style={!isMobile ? { zIndex: "10" } : { zIndex: "0" }}
                 >
-                  
                   {isMobile && (
                     <div className="mobileBanner">
                       <Slider {...settings} ref={sliderRef}>
@@ -715,12 +710,13 @@ function ProductDetail() {
                     </div>
                   )}
                   <div className="big">
-                  {!isMobile && zoomImageProps?.img && (
-                    <ReactImageZoom
-                      style={{ zIndex: "9999999", position: "relative" }}
-                      {...zoomImageProps}
-                    />
-                  )}</div>
+                    {!isMobile && zoomImageProps?.img && (
+                      <ReactImageZoom
+                        style={{ zIndex: "9999999", position: "relative" }}
+                        {...zoomImageProps}
+                      />
+                    )}
+                  </div>
                   {/* <div className="product-add-to-cart addToCart picture">
                     {isLogin === "true" ? (
                       <button
@@ -977,8 +973,9 @@ function ProductDetail() {
                     {data?.description_tabs?.map((tab, index) => (
                       <li
                         key={tab._id}
-                        className={`tab-item ${activeTab === tab._id ? "active" : ""
-                          }`}
+                        className={`tab-item ${
+                          activeTab === tab._id ? "active" : ""
+                        }`}
                         onClick={() => handleTabClick(tab._id, index)}
                       >
                         {tab.title}
@@ -994,8 +991,9 @@ function ProductDetail() {
                       key={tab._id}
                       id={tab._id}
                       ref={(el) => (sectionRefs.current[index] = el)}
-                      className={`tab-section ${activeTab === tab._id ? "visible" : ""
-                        }`}
+                      className={`tab-section ${
+                        activeTab === tab._id ? "visible" : ""
+                      }`}
                     >
                       <div
                         className="tab-inner"
@@ -1016,19 +1014,14 @@ function ProductDetail() {
                           {tab?.docs?.map((doc, i) => (
                             <div
                               key={doc?._id}
-                              className="mb-4 shadow-sm border rounded overflow-hidden bg-white"
+                              className="mb-4 rounded overflow-hidden bg-white"
                               style={{
                                 borderRadius: "12px",
                               }}
                             >
                               {/* 🔹 Title on top */}
-                              <div
-                                className="p-2  bg-light border-bottom"
-                                style={{
-                                  backgroundColor: "#f8f9fa",
-                                }}
-                              >
-                                <strong className="text-dark">
+                              <div className="py-2">
+                                <strong className="text-dark text-capitalize">
                                   {doc?.title}
                                 </strong>
                               </div>
@@ -1125,8 +1118,6 @@ function ProductDetail() {
             centered />
         )} */}
       </section>
-
-
 
       <Review ids={params._id} dataproduct={data} />
       {/* <Review ids={window.localStorage.getItem('variant_id')} /> */}
