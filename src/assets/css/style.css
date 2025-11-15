@@ -2495,6 +2495,17 @@ table.table.cartTablePage {
   box-shadow: 0 8px 6px -6px #555;
 }
 
+.product-add-to-cart.addToCart.picture button.disabled,
+.product-add-to-cart.addToCart.picture button[disabled] {
+  background: #bfbfbf !important;
+  border-color: #bfbfbf !important;
+  color: #fff !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+  pointer-events: none !important;
+}
+
 .productImageInfo h5 a {
   color: #454545;
   text-transform: capitalize;
@@ -4017,6 +4028,7 @@ button.btn.btn-primary.registerShop {
   bottom: 20px;
   z-index: 111;
   transition: .4s ease-in-out;
+  border: 1px solid #11476d;
 }
 
 /* Back to Top End*/
@@ -14720,9 +14732,11 @@ button.tableCommonBtn:hover span {
   color: var(--textColor);
   font-size: 16px;
 }
-.OTPVerification{
+
+.OTPVerification {
   color: var(--textColor);
 }
+
 .supportNumber p a {
   color: #0069b3;
   font-weight: 600;
@@ -14743,7 +14757,7 @@ button.tableCommonBtn:hover span {
 .searchIcons.mobile .supportNumberMobile a {
   color: #0069b3;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
   white-space: nowrap;
 }
 
@@ -14784,9 +14798,59 @@ button.tableCommonBtn:hover span {
   width: 70px;
   height: 70px;
 }
-.searchItem .logo button#menuButton {
-    padding: 0;
+
+.serviceItemIcon.category.subCategory img {
+  text-align: center;
 }
+
+.searchItem .logo button#menuButton {
+  padding: 0;
+}
+
+.tab-inner h2 {
+  margin-bottom: 10px;
+}
+
+.tab-inner p {
+  margin-bottom: 5px;
+  font-size: 16px;
+  text-align: justify;
+}
+
+.searchIconsItem .countWish svg {
+  font-size: 26px;
+}
+
+ul.child-list.mt-1 span.child-link.text-dark {
+  padding-left: 24px;
+}
+
+ul.subchild-list.ms-4.mt-1 a.sub-link.text-secondary {
+  padding-left: 10px;
+}
+
+.serviceItemText.subCategory a {
+  padding: 0;
+  border: 0;
+  transform: translateY(0px);
+  font-size: 13px;
+}
+
+.mediaQueryClass:hover .serviceItemText.subCategory a {
+  color: var(--textColor);
+  background-color: #fff;
+}
+
+.serviceItemIcon.category.subCategory {
+  text-align: center;
+}
+
+.categoryWrapper.subCategory {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+}
+
 /* RESPONSIVE CSS START */
 
 @media only screen and (max-width: 1120px) {
@@ -14866,19 +14930,39 @@ button.tableCommonBtn:hover span {
 @media only screen and (max-width: 991px) {
 
   /*  */
-  .searchIcons{
+  .searchItem .logo a img {
+    width: 150px;
+  }
+
+  .searchIcons {
     column-gap: 3px;
   }
+
   header.sticky.active .searchSec.customer {
     padding: 6px 0 0;
   }
+
   header.sticky .searchSecHeader {
-      padding: 20px 0 6px;
+    padding: 20px 0 6px;
     box-shadow: 0px 15px 10px -15px #6e6e6eb8;
   }
+
+  .searchIconsItem ul li a svg,
+  .searchIconsItem ul li .langIcon svg {
+    font-size: 19px;
+  }
+
+  .searchIconsItem .countWish svg {
+    font-size: 22px;
+  }
+
+  .product-details-area {
+    padding: 15px 0 0;
+  }
+
   /*  */
-  
-  
+
+
 
   .searchIcons.mobile .supportNumberMobile {
     display: block;
@@ -15297,23 +15381,27 @@ button.tableCommonBtn:hover span {
 @media only screen and (max-width: 767px) {
 
   /*  */
-  
+
   .productDescText h5 {
     text-transform: uppercase;
     font-size: 16px;
   }
-  .productDescText ul li{
+
+  .productDescText ul li {
     text-align: justify;
   }
-  body{
+
+  body {
     padding-top: 95px;
   }
+
   header.sticky {
-      z-index: 111;
-      position: fixed;
-      top: 0;
-      width: 100%;
+    z-index: 111;
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
+
   /*  */
   .pincodePart .check .checkBtn {
     font-size: 12px;
@@ -15336,7 +15424,7 @@ button.tableCommonBtn:hover span {
   }
 
   .socialMedia ul {
-    column-gap: 7px;
+    column-gap: 10px;
   }
 
   .recentPosts .recentItemInfo {
@@ -15550,9 +15638,11 @@ button.tableCommonBtn:hover span {
   .searchIconsItem ul {
     column-gap: 6px;
   }
-  .searchItem .logo{
+
+  .searchItem .logo {
     column-gap: 6px;
   }
+
   .commonButton {
     font-size: 12px;
     padding: 10px 20px;
@@ -15975,8 +16065,8 @@ button.tableCommonBtn:hover span {
 }
 
 .tab-section h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .commonButton {
@@ -16032,10 +16122,15 @@ button.tableCommonBtn:hover span {
 
   .tab-list {
     display: flex;
-    gap: 10px;
+    gap: 4px;
     width: 100%;
     overflow-x: auto;
     scrollbar-width: none;
+    background: #edf1f0;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #e5e7e7;
+    border-right: 0;
     /* For Firefox */
   }
 
@@ -16060,7 +16155,7 @@ button.tableCommonBtn:hover span {
 @media (max-width: 576px) {
   .tab-item {
     font-size: 14px;
-    padding: 8px 14px;
+    padding: 8px 16px;
   }
 
 }

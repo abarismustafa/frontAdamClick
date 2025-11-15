@@ -58,6 +58,8 @@ function TopHeader({ state, changeLange }) {
   });
   const { data: language } = useGetLanguageQuery();
   const { data: currency } = useGetCurrencyQuery();
+  window.localStorage.setItem("currencyCode", currency[0]?.code);
+  
   const [country, setCountry] = useState();
   const [selectCountry, setSeleDefCount] = useState();
   const [defLanguage, setdefLang] = useState();

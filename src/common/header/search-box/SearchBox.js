@@ -459,7 +459,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                         {/* <AiOutlineUser /> */}
                         {profileImg ? (
                           <img
-                            style={{ width: "16px", height: "16px" }}
+                            style={{ width: "20px", height: "20px" }}
                             src={
                               profileImg &&
                               profileImg != "" &&
@@ -474,7 +474,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           />
                         ) : (
                           <img
-                            style={{ width: "16px", height: "16px" }}
+                            style={{ width: "20px", height: "20px" }}
                             src={tempProfileImg}
                           />
                         )}
