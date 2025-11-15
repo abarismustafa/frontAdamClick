@@ -37,7 +37,7 @@ const OtpModal = ({ show, handleClose, handleLoginVerify, resendLoginOTP }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title style={{ color: "#b0247a", fontWeight: "600" }}>
+        <Modal.Title style={{ fontWeight: "600" }} className="OTPVerification">
           OTP Login Verification
         </Modal.Title>
       </Modal.Header>

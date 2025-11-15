@@ -5,23 +5,17 @@
 }
 
 header.sticky {
-    transform: translateY(0px);
     transition: .6s ease-in-out;
     background: #fff;
     position: relative;
-    z-index: 11;
-    /* position: fixed;
-    width: 100%; */
+    z-index: 111;
+    position: sticky;
+    top: 0;
+    width: 100%;
 }
 
 header.sticky.active {
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    z-index: 111;
-    transform: translateY(-1px);
     transition: .4s ease-in-out;
-    box-shadow: 0px 15px 10px -15px #6e6e6eb8;
 }
 
 .navbarArea {
@@ -131,10 +125,6 @@ div#offcanvasExample {
 }
 
 @media only screen and (max-width: 767px) {
-    header.sticky.active {
-        top: 0px;
-    }
-
     .searchItem .logo {
         width: 100%;
     }

@@ -763,3 +763,10 @@ table.cartTablePage .quantity button {
     color: #fff !important;
     border-color: #a51c63 !important;
 } */
+
+@media only screen and (max-width: 767px) {
+
+    .titleText h6 {
+        font-size: 12px;
+    }
+}

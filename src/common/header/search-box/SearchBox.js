@@ -338,7 +338,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
   return (
     <>
       <section
-        className={`searchSec`}
+        className={`searchSecHeader`}
         style={showMenu ? { height: "100vh" } : { height: "auto" }}
       >
         <div className={`d-flex mobileMenu ${showMenu ? "open" : ""}`}>
@@ -459,7 +459,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                         {/* <AiOutlineUser /> */}
                         {profileImg ? (
                           <img
-                            style={{ width: "20px", height: "20px" }}
+                            style={{ width: "16px", height: "16px" }}
                             src={
                               profileImg &&
                               profileImg != "" &&
@@ -474,7 +474,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           />
                         ) : (
                           <img
-                            style={{ width: "20px", height: "20px" }}
+                            style={{ width: "16px", height: "16px" }}
                             src={tempProfileImg}
                           />
                         )}
@@ -494,7 +494,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                             ? `${profileData?.getaUser.selectedBillingAddress.firstname} ${profileData?.getaUser.selectedBillingAddress.lastname}`
                             : profileData?.getaUser?.mobile || ""} */}
                           <MdOutlineArrowDropDown
-                            style={{ fontSize: "19px" }}
+                            style={{ fontSize: "15px" }}
                           />
                         </Link>
                         <ul className="dropdown-menu helll">
@@ -635,6 +635,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           onClick={() => {
                             handleLanguage("65111f1f78085e4cc5cce8ff");
                           }}
+                          className="langIcon"
                         >
                           <IoLanguageSharp />
                         </span>
@@ -643,6 +644,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           onClick={() => {
                             handleLanguage("65111f5278085e4cc5cce904");
                           }}
+                          className="langIcon"
                         >
                           <IoLanguageSharp />
                         </span>
@@ -690,7 +692,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                   </div>
                 </div>
               </div>
-              
+
               {show && (
                 <div className="treandingSec" id="DropShow" ref={handleRef}>
                   <div className="trendingItem">
@@ -1075,6 +1077,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           onClick={() => {
                             handleLanguage("65111f1f78085e4cc5cce8ff");
                           }}
+                          className="langIcon"
                         >
                           <IoLanguageSharp />
                         </span>
@@ -1083,6 +1086,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                           onClick={() => {
                             handleLanguage("65111f5278085e4cc5cce904");
                           }}
+                          className="langIcon"
                         >
                           <IoLanguageSharp />
                         </span>
