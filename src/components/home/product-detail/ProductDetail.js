@@ -389,7 +389,8 @@ function ProductDetail() {
     await addToCart(payload);
 
     const res = await axios.post(
-      `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${getCouponToken() || ""
+      `${baseUrl}cart/checkout?products=${getCartToken() || ""}&coupon=${
+        getCouponToken() || ""
       }`,
       { shipId: cartValueVa },
       {
@@ -689,7 +690,6 @@ function ProductDetail() {
                   className="product-details-image col-lg-10 col-md-10 col-sm-10 col-xs-10"
                   style={!isMobile ? { zIndex: "10" } : { zIndex: "0" }}
                 >
-
                   {isMobile && (
                     <div className="mobileBanner">
                       <Slider {...settings} ref={sliderRef}>
@@ -996,8 +996,9 @@ function ProductDetail() {
                     {data?.description_tabs?.map((tab, index) => (
                       <li
                         key={tab._id}
-                        className={`tab-item ${activeTab === tab._id ? "active" : ""
-                          }`}
+                        className={`tab-item ${
+                          activeTab === tab._id ? "active" : ""
+                        }`}
                         onClick={() => handleTabClick(tab._id, index)}
                       >
                         {tab.title}
@@ -1013,8 +1014,9 @@ function ProductDetail() {
                       key={tab._id}
                       id={tab._id}
                       ref={(el) => (sectionRefs.current[index] = el)}
-                      className={`tab-section ${activeTab === tab._id ? "visible" : ""
-                        }`}
+                      className={`tab-section ${
+                        activeTab === tab._id ? "visible" : ""
+                      }`}
                     >
                       <div
                         className="tab-inner"
@@ -1029,9 +1031,8 @@ function ProductDetail() {
                           style={{ maxHeight: "400px", width: "300px", marginRight: "10px" }}
                         />
                       ))} */}
-                      {tab?.docs?.length > 0 && (
+                      {/* {tab?.docs?.length > 0 && (
                         <div className="pdf-section mt-2">
-                          {/* <h5 className="fw-bold mb-3">Documents</h5> */}
                           {tab?.docs?.map((doc, i) => (
                             <div
                               key={doc?._id}
@@ -1040,16 +1041,51 @@ function ProductDetail() {
                                 borderRadius: "12px",
                               }}
                             >
-                              {/* 🔹 Title on top */}
+                              
                               <div className="py-2">
                                 <strong className="text-dark text-capitalize">
                                   {doc?.title}
                                 </strong>
                               </div>
 
-                              {/* 🔹 PDF Viewer */}
                               <iframe
                                 src={`${doc?.url}#toolbar=0&navpanes=0&scrollbar=0`}
+                                title={doc?.title}
+                                style={{
+                                  width: "100%",
+                                  height: "500px",
+                                  border: "none",
+                                  backgroundColor: "#fff",
+                                }}
+                              ></iframe>
+                            </div>
+                          ))}
+                        </div>
+                      )} */}
+                      {tab?.docs?.length > 0 && (
+                        <div className="pdf-section mt-2">
+                          {tab?.docs?.map((doc) => (
+                            <div
+                              key={doc?._id}
+                              className="mb-4 rounded overflow-hidden bg-white"
+                              style={{ borderRadius: "12px" }}
+                            >
+                              {/* Title */}
+                              <div className="py-2">
+                                <strong className="text-dark text-capitalize">
+                                  {doc?.title}
+                                </strong>
+                              </div>
+
+                              {/* PDF Viewer - mobile fallback using Google Docs */}
+                              <iframe
+                                src={
+                                  /Android|iPhone|iPad|iPod/i.test(
+                                    navigator.userAgent
+                                  )
+                                    ? `https://docs.google.com/viewer?url=${doc?.url}&embedded=true`
+                                    : `${doc?.url}#toolbar=0&navpanes=0&scrollbar=0`
+                                }
                                 title={doc?.title}
                                 style={{
                                   width: "100%",
