@@ -1,4 +1,3 @@
-
 import { BsFillCartFill } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { GrAdd } from "react-icons/gr";
@@ -41,7 +40,7 @@ function CatogaryItem({ item, i, handleShow, t }) {
     //     alert('Login First')
     //     return
     // }
-    const isLogin = window.localStorage.getItem('isLogin') === 'true';
+    const isLogin = window.localStorage.getItem("isLogin") === "true";
 
     if (!isLogin && !isAddTocard) {
       setIsModalOpen(true);
@@ -215,7 +214,6 @@ function CatogaryItem({ item, i, handleShow, t }) {
         </div>
       </div> */}
 
-
       {Array.isArray(item?.variations) &&
         item?.variations
           .filter((variation) => variation?.isActive)
@@ -307,8 +305,7 @@ function CatogaryItem({ item, i, handleShow, t }) {
 
                     <p>
                       <span className="currentPrice">
-                        Sale Price: ₹
-                        {/* {item?.country?.code}{" "} */}
+                        Sale Price: ₹{/* {item?.country?.code}{" "} */}
                         {variation?.prices?.sale_rate}
                       </span>
                     </p>
@@ -352,7 +349,6 @@ function CatogaryItem({ item, i, handleShow, t }) {
         onClose={() => setIsModalOpen(false)}
         BuyNowItem={BuyNowItem}
       />
-
     </>
   );
 }

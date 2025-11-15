@@ -16,6 +16,9 @@ const getCouponToken = () => {
 const getLoginDetails = () => {
   return window.localStorage.getItem("isLogin");
 };
+const getCurrencyCode = () => {
+  return window.localStorage.getItem("currencyCode");
+};
 
 export {
   getCountryCode,
@@ -23,4 +26,5 @@ export {
   getCartToken,
   getCouponToken,
   getLoginDetails,
+  getCurrencyCode,
 };

@@ -246,21 +246,27 @@ function ProductCategoryPage() {
     setFilterState(clone);
     getFilterdData(clone);
   };
+
   const [categoriesDatas, setCateData] = useState(null);
-  const getcateData = async () => {
+  const getcateData = async (id) => {
     try {
-      const res = await axios.get(`${baseUrl}category/public`, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        `${baseUrl}category/public/child`,
+        { ids: [id] },
+        {
+          withCredentials: true,
+        }
+      );
       setCateData(res.data);
-    } catch (error) { }
+    } catch (error) {}
   };
-  useEffect(() => {
-    getcateData();
-  }, []);
+  // useEffect(() => {
+  // getcateData();
+  // }, []);
+
   const settings = {
     speed: 500,
-    slidesToShow: 8, // Number of items to show on desktop
+    slidesToShow: 6, // Number of items to show on desktop
     slidesToScroll: 1,
     autoplay: true,
     arrows: false,
@@ -325,6 +331,7 @@ function ProductCategoryPage() {
               setFilterState={setFilterState}
               handleSliderChange={debouncedHandleSliderChange}
               defaultRangeValue={defaultRangeValue}
+              getcateData={getcateData}
             />
           </div>
           <div className="col-lg-9 col-md-8 col-sm-8">
@@ -337,26 +344,26 @@ function ProductCategoryPage() {
                                 </div>
                             </div>} */}
 
-
-                {/* <div className="subCategoriesCard">
-                  <div className="categoryWrapper">
-                    <Slider {...settings}>
+                <div className="subCategoriesCard">
+                  <div className="categoryWrapper subCategory">
+                    {/* <Slider {...settings}> */}
                     {categoriesDatas
                       ?.filter((item) => item.parent_id !== null)
                       .reverse()
-                      .map((item, i) => (
+                      .slice(0, 4)
+                      ?.map((item, i) => (
                         <div className="mediaQueryClass" key={i}>
                           <Link
                             to={`/product/category/${item.uid}/${item?.slug}`}
                           >
-                            <div className="serviceItemIcon category">
+                            <div className="serviceItemIcon category subCategory">
                               <img
                                 src={item?.icon?.url}
                                 alt="Product"
                                 className="img-fluid"
                               />
                             </div>
-                            <div className="serviceItemText d-none">
+                            <div className="serviceItemText subCategory">
                               <h5>
                                 <Link
                                   to={`/product/category/${item.uid}/${item?.slug}`}
@@ -368,9 +375,9 @@ function ProductCategoryPage() {
                           </Link>
                         </div>
                       ))}
-                      </Slider>
+                    {/* </Slider> */}
                   </div>
-                </div> */}
+                </div>
                 <div className="collectionFilter">
                   <div className="totalProducts">
                     <h6>
@@ -446,8 +453,9 @@ function ProductCategoryPage() {
                 </div>
 
                 <div
-                  className={`row featuredRow changeGrid ${listView ? "listView" : ""
-                    }`}
+                  className={`row featuredRow changeGrid ${
+                    listView ? "listView" : ""
+                  }`}
                 >
                   {data &&
                     data?.map((item, i) => {

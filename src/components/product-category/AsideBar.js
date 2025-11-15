@@ -16,7 +16,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { AiOutlineSearch } from "react-icons/ai";
 import { base_url } from "../../server";
-import { getCountryCode } from "../../Utils/localStorage";
+import { getCountryCode, getCurrencyCode } from "../../Utils/localStorage";
 let showCategoryItem = 5;
 function ProductsFilter({
   filterdValues,
@@ -27,6 +27,7 @@ function ProductsFilter({
   filterState,
   setFilterState,
   defaultRangeValue,
+  getcateData,
 }) {
   const [showCheckbox, setShowCheckbox] = useState("");
   const [categoryLoadMore, setCategoryLoadMore] = useState(showCategoryItem);
@@ -100,6 +101,8 @@ function ProductsFilter({
       setbrandError(true);
     }
   };
+
+ 
   const getData = async () => {
     const res = await axios.get(`${baseUrl}category/public`, {
       withCredentials: true,
@@ -124,6 +127,7 @@ function ProductsFilter({
       const isCheacked = item.uid === param.id;
       if (isCheacked) {
         id = item.uid;
+        getcateData(item._id)
       }
       return {
         name: item.name,
@@ -246,10 +250,10 @@ function ProductsFilter({
           </div> */}
           <div className="rangeNumber">
             <span className="minNum">
-              {t("Min")} :{getCountryCode()} {priceRange[0]}
+              {t("Min")} : {getCurrencyCode()} {priceRange[0]}
             </span>
             <span className="maxNum">
-              {t("Max")}: {getCountryCode()} {priceRange[1]}
+              {t("Max")} : {getCurrencyCode()} {priceRange[1]}
             </span>
           </div>
 
