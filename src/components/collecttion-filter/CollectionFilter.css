@@ -79,6 +79,7 @@
     .row.changeGrid.listView .featuredInfo{
         display: block;
     }
+    .totalProducts h6{font-size: 14px;}
 }
 
 @media (max-width: 480px) {

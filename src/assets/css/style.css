@@ -10627,7 +10627,7 @@ Product Details Area CSS
 .product-details-image .big div {
   text-align: center;
   border: 1px solid #edf1f0;
-  height: 77vh;
+  height: 71vh;
 }
 
 .product-details-image .big img {
@@ -14695,6 +14695,8 @@ button.tableCommonBtn:hover span {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
+  padding: 6px 0 0;
 }
 
 .supportNumber p {
@@ -14718,7 +14720,9 @@ button.tableCommonBtn:hover span {
   color: var(--textColor);
   font-size: 16px;
 }
-
+.OTPVerification{
+  color: var(--textColor);
+}
 .supportNumber p a {
   color: #0069b3;
   font-weight: 600;
@@ -14731,7 +14735,7 @@ button.tableCommonBtn:hover span {
 .searchIcons.mobile .supportNumberMobile {
   position: absolute;
   right: 0;
-  top: -13px;
+  top: -18px;
   display: none;
   line-height: 12px;
 }
@@ -14740,11 +14744,9 @@ button.tableCommonBtn:hover span {
   color: #0069b3;
   font-weight: 600;
   font-size: 12px;
+  white-space: nowrap;
 }
 
-header.sticky.active .searchSec {
-  padding: 8px 0;
-}
 
 .d-flex.align-items-center.justify-content-between.category-header {
   background: #0066b3;
@@ -14782,7 +14784,9 @@ header.sticky.active .searchSec {
   width: 70px;
   height: 70px;
 }
-
+.searchItem .logo button#menuButton {
+    padding: 0;
+}
 /* RESPONSIVE CSS START */
 
 @media only screen and (max-width: 1120px) {
@@ -14862,16 +14866,22 @@ header.sticky.active .searchSec {
 @media only screen and (max-width: 991px) {
 
   /*  */
-  header.sticky.active .searchSec.customer {
-    padding: 4px 0;
+  .searchIcons{
+    column-gap: 3px;
   }
+  header.sticky.active .searchSec.customer {
+    padding: 6px 0 0;
+  }
+  header.sticky .searchSecHeader {
+      padding: 20px 0 6px;
+    box-shadow: 0px 15px 10px -15px #6e6e6eb8;
+  }
+  /*  */
+  
+  
 
   .searchIcons.mobile .supportNumberMobile {
     display: block;
-  }
-
-  header.sticky.active .searchSec {
-    padding: 16px 0 4px;
   }
 
   .featuredImg {
@@ -14882,15 +14892,14 @@ header.sticky.active .searchSec {
     padding: 8px;
   }
 
-  /*  */
   .searchIcons.mobile .searchIconsItem ul li a span.count {
     display: flex;
     position: absolute;
     font-size: 10px;
     width: 12px;
     height: 12px;
-    right: -6px;
-    top: -4px;
+    right: -4px;
+    top: -8px;
   }
 
   .recentPosts .recentItemInfo {
@@ -14976,7 +14985,7 @@ header.sticky.active .searchSec {
   }
 
   .searchIconsItem ul {
-    column-gap: 15px;
+    column-gap: 8px;
   }
 
   .productDescText ul li {
@@ -14993,12 +15002,8 @@ header.sticky.active .searchSec {
     display: none;
   }
 
-  .sticky>.searchSec {
-    padding: 16px 0 8px;
-  }
 
   .searchSec {
-    padding: 5px 0 0;
     width: 100%;
   }
 
@@ -15252,7 +15257,7 @@ header.sticky.active .searchSec {
     height: 130px;
   }
 
-  .featuredInfo.bg-white.border {
+  .featuredInfo.bg-white.border.prime {
     margin-right: 8px;
     margin-bottom: 0;
   }
@@ -15291,6 +15296,24 @@ header.sticky.active .searchSec {
 
 @media only screen and (max-width: 767px) {
 
+  /*  */
+  
+  .productDescText h5 {
+    text-transform: uppercase;
+    font-size: 16px;
+  }
+  .productDescText ul li{
+    text-align: justify;
+  }
+  body{
+    padding-top: 95px;
+  }
+  header.sticky {
+      z-index: 111;
+      position: fixed;
+      top: 0;
+      width: 100%;
+  }
   /*  */
   .pincodePart .check .checkBtn {
     font-size: 12px;
@@ -15525,9 +15548,11 @@ header.sticky.active .searchSec {
   }
 
   .searchIconsItem ul {
-    column-gap: 10px;
+    column-gap: 6px;
   }
-
+  .searchItem .logo{
+    column-gap: 6px;
+  }
   .commonButton {
     font-size: 12px;
     padding: 10px 20px;
@@ -15930,9 +15955,9 @@ header.sticky.active .searchSec {
 }
 
 .tab-item.active {
-  background: #b72c7c;
+  background: var(--bgColor);
   color: #fff;
-  border-color: #b72c7c;
+  border-color: var(--textColor);
 }
 
 /* Content */

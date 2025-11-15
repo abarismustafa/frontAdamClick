@@ -306,7 +306,7 @@ function Footer() {
                   <div className="topIcon">
                     <FaMapMarkerAlt />
                     <span>
-                      <h3>{t("Location - 1")}</h3>
+                      <h3>{t("Location")}</h3>
                       {t("companyAddress")}
                     </span>
                   </div>
@@ -386,7 +386,7 @@ function Footer() {
               <div className="copyright-left">
                 <p>
                   {t("Copyright")} @ {currentYear} {t("Adamclick")}.{" "}
-                  {t("All rights reserved")}. |{t("Powered By")}:{" "}
+                  {t("All rights reserved")}. | {t("Powered By")}:{" "}
                   <a href="https://www.abarissoftech.com/" target="_blank">
                     {t("Abaris Softech")}{" "}
                   </a>

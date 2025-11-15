@@ -866,15 +866,17 @@ function ProductDetailContent({
                       style={{
                         backgroundColor: uploaded ? "green" : "rgb(0 105 179)",
                         color: "#fff",
-                        padding: "10px 20px",
+                        padding: "4px 14px",
                         borderRadius: "6px",
+                        fontSize: "13px",
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",
                         gap: "6px",
+                        whiteSpace: "nowrap",
                         fontWeight: "600",
                         boxShadow: "0px 2px 4px rgba(0,0,0,0.2)",
-                        height: '29px'
+                        
                       }}
                     >
                       {loading ? "Uploading..." : "Choose File"}

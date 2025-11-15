@@ -294,7 +294,7 @@ const PrimaryCategory = ({ pageTitle }) => {
                                   className="col-lg-4 col-md-4 col-sm-6 col-6"
                                   key={variation._id}
                                 >
-                                  <div className="featuredInfo bg-white border">
+                                  <div className="featuredInfo bg-white border prime">
                                     <div className="featuredImg">
                                       <Link
                                         to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
@@ -345,7 +345,7 @@ const PrimaryCategory = ({ pageTitle }) => {
                                   0;
                                 return (
                                   <div className="">
-                                    <div className="featuredInfo bg-white border">
+                                    <div className="featuredInfo bg-white border prime">
                                       <div className="featuredImg">
                                         <Link
                                           to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
