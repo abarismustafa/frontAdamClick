@@ -19,9 +19,9 @@ body {
   font-size: 16px;
 }
 
-/* .container-fluid {
-  padding: 0 60px !important;
-} */
+.container-fluid {
+  max-width: 1440px;
+}
 
 
 .couponsCard {
@@ -14905,7 +14905,7 @@ ul.subchild-list.ms-4.mt-1 a.sub-link.text-secondary {
 }
 
 .SelectImageSec.new {
-  height: auto;
+  /* height: auto; */
 }
 
 .selectImageInfo.new {
