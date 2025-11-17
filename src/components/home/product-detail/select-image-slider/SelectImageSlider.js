@@ -7,12 +7,14 @@ import { ImgesData } from "../../proImgs/ImgesData";
 function SelectImageSlider({ handleUniqueID, productData }) {
   return (
     <>
-      <div className="selectImageInfo">
+      <div className="selectImageInfo new">
+      {/* <div className="selectImageInfo "> */}
         {productData?.length > 1 && (
           <button type="button" className="slidePrev">
             <IoIosArrowUp />
           </button>
         )}
+        {/* <div className="selectImageSlider new"> */}
         <div className="selectImageSlider">
           {productData?.length === 1
             ? ImgesData.slice(5, 9).map((item, i) => {

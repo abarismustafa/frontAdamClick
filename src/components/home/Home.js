@@ -28,6 +28,7 @@ import DiscoverKeras from "./discover-keras/DiscoverKeras";
 import PrimaryCategory from "./primary-category/PrimaryCategory";
 import { t } from "i18next";
 import SimilarCategory from "./similar-category/SimilarCategory";
+
 function Home() {
   const productData = useContext(productItemHome);
   const baseUrl = base_url();
@@ -40,13 +41,16 @@ function Home() {
         withCredentials: true,
       });
       setData(res.data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     getata();
   }, []);
+
+ 
+
   return (
     <>
       <Banner />

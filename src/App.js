@@ -3,7 +3,7 @@ import Header from "./common/header/Header";
 import "./assets/css/media.css";
 import "./assets/css/style.css";
 // import "../src/Customer-Panal/custumerAssest/custumer_style.css"
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import { BsArrowUp } from "react-icons/bs";
 
@@ -88,6 +88,7 @@ import StatisticTrackerWrapper from "./StatisticTrackerWrapper";
 import AddTicketPage from "./pages/supportTicket/addTicket";
 import ListTicketPage from "./pages/supportTicket/listTicket";
 import UserReply from "./pages/supportTicket/userReplay/UserReply";
+import { pageView } from "./Utils/ga4";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -163,6 +164,12 @@ function App() {
       i18n.changeLanguage(preferredLanguage);
     }
   }, []);
+
+  const location = useLocation();
+  useEffect(() => {
+    pageView(location.pathname + location.search);
+  }, [location]);
+
   return (
     <>
       <Helmet>
@@ -220,8 +227,10 @@ function App() {
         />
         <Route path="/cart" element={<CartHome setShow={setShow} />} />
         <Route path="/checkout" element={<CheckoutPage setShow={setShow} />} />
-        <Route path="/checkout/:id" element={<CheckoutPage setShow={setShow} />} />
-
+        <Route
+          path="/checkout/:id"
+          element={<CheckoutPage setShow={setShow} />}
+        />
 
         <Route path="/reset" element={<ResetPage setShow={setShow} />} />
         <Route
@@ -338,8 +347,8 @@ function App() {
         <Route path="thankyou" element={<ThankyouSucccessPage />} />
         <Route path="add-support-ticket/:id" element={<AddTicketPage />} />
         <Route path="add-support-ticket" element={<AddTicketPage />} />
-        <Route path='list-tickets' element={<ListTicketPage />} />
-        <Route path='user-replay/:id' element={<UserReply />} />
+        <Route path="list-tickets" element={<ListTicketPage />} />
+        <Route path="user-replay/:id" element={<UserReply />} />
       </Routes>
 
       <SocialMedias />

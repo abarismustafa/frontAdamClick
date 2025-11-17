@@ -113,13 +113,15 @@ function Login() {
       alert(error.response.data.message);
     }
   };
-
+  const [mobileNumber, setMobileNumber] = useState("");
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     loginOTP({ mobile: loginForm.countryCode + loginForm.mobileNumber });
+    setMobileNumber({ mobile: loginForm.countryCode + loginForm.mobileNumber })
+    
     // loginFormStatus({ mobile: loginForm.countryCode + loginForm.mobileNumber });
   };
-
+  
   const getDeviceInfo = () => {
     const browser = navigator.userAgent;
     const platform = navigator.platform;
@@ -279,11 +281,12 @@ function Login() {
                       <option value="+11">+11</option>
                     </select>
                     <input
-                      type="number"
+                      type="tel"
                       placeholder={t("Mobile Number")}
                       className="form-control w-100"
                       autoComplete="off"
                       name="mobileNumber"
+                      maxLength="10"
                       onChange={handleChangeLogin}
                     />
                   </div>
@@ -338,6 +341,7 @@ function Login() {
                       <Spinner style={{ marginLeft: "7px" }} animation="border" />
                     )}
                   </button>
+                  
                 </form>
                 <div className="joinWith d-none">
                   <span>{t("or login with")}</span>
@@ -427,6 +431,7 @@ function Login() {
             show={show}
             handleLoginVerify={handleLoginVerify}
             resendLoginOTP={resendLoginOTP}
+            mobileNumber={mobileNumber}
             handleClose={() => setShow(false)}
           />
         </div>

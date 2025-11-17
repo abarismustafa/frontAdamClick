@@ -5,9 +5,6 @@ import { Link } from "react-router-dom";
 // import video2 from "../../../assets/img/video/video2.mp4";
 // import video3 from "../../../assets/img/video/video3.mp4";
 
-
-
-
 import { t } from "i18next";
 import { useTranslation } from "react-i18next";
 import Slider from "react-slick";
@@ -188,15 +185,13 @@ const primarySettings = {
 const PrimaryCategory = ({ pageTitle }) => {
   const baseUrl = base_url();
   const [catData, setCatData] = useState(null);
-  console.log(catData);
-
   const productCatget = async () => {
     try {
       const res = await axios.get(`${baseUrl}category/filter/categ`, {
         withCredentials: true,
       });
       setCatData(res?.data || []);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -250,144 +245,163 @@ const PrimaryCategory = ({ pageTitle }) => {
         <div className="sectionPD">
           <div className="container">
             <div className="row">
-              {catData?.map((category) => (
-                <React.Fragment key={category._id}>
-                  <div className="col-lg-12" key={category._id}>
-                    <div className="fisherman-content special text-start">
-                      {/* <h6>{t("Primary Category")}</h6> */}
-                      <h3>{t(`${category.categoryName}`)}</h3>
-                    </div>
-                  </div>
-
-                  <div className="col-lg-4 col-md-5 col-sm-6 col-6">
-                    <div className="categoryVideo">
-                      {category.banner?.url && (
-                        <div className="mb-3 h-100">
-                          <img
-                            src={category.banner.url}
-                            alt={category.categoryName}
-                            className="img-fluid rounded"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="col-lg-8 col-md-7 col-sm-6 col-6">
-                    <div className="wiseProducts">
-                      <div className="categoryWrapper ">
-                        <div className="desktop row">
-                          {category.list?.map((product) =>
-                            product.variations?.map((variation) => {
-                              const image =
-                                variation.mainImage_url?.url ||
-                                variation.images?.[0]?.url ||
-                                product.mainImage_url?.url;
-                              const price =
-                                variation.prices?.sale_rate ||
-                                variation.prices?.mrp ||
-                                product.prices?.sale_rate ||
-                                0;
-                              return (
-                                // <React.Fragment key={item._id}>
-                                <div
-                                  className="col-lg-4 col-md-4 col-sm-6 col-6"
-                                  key={variation._id}
-                                >
-                                  <div className="featuredInfo bg-white border prime">
-                                    <div className="featuredImg">
-                                      <Link
-                                        to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
-                                      >
-                                        <img
-                                          src={image}
-                                          alt={variation.name || product.name}
-                                          className="img-fluid"
-                                        />
-                                      </Link>
-                                    </div>
-                                    <div className="featuredContent text-center primary">
-                                      {/* <Rating /> */}
-                                      <h5 className="mb-2">
-                                        {t(`${variation.name || product.name}`)}
-                                      </h5>
-                                      <span>
-                                        MRP :{" "}
-                                        <span className="text-decoration-line-through">
-                                          {" "}
-                                          ₹{variation?.prices[0]?.mrp}
-                                        </span>
-                                      </span>
-                                      <p className="mb-0">
-                                        Sale Price : ₹
-                                        {variation?.prices[0]?.sale_rate}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                                // </React.Fragment>
-                              );
-                            })
-                          )}
-                        </div>
-                        <div className="mobile row">
-                          <Slider {...primarySettings}>
-                            {category.list?.map((product) =>
-                              product.variations?.map((variation) => {
-                                const image =
-                                  variation.mainImage_url?.url ||
-                                  variation.images?.[0]?.url ||
-                                  product.mainImage_url?.url;
-                                const price =
-                                  variation.prices?.sale_rate ||
-                                  variation.prices?.mrp ||
-                                  product.prices?.sale_rate ||
-                                  0;
-                                return (
-                                  <div className="">
-                                    <div className="featuredInfo bg-white border prime">
-                                      <div className="featuredImg">
-                                        <Link
-                                          to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
-                                        >
-                                          <img
-                                            src={image}
-                                            alt={variation.name || product.name}
-                                            className="img-fluid"
-                                          />
-                                        </Link>
-                                      </div>
-                                      <div className="featuredContent text-center primary">
-                                        {/* <Rating /> */}
-                                        <h5 className="mb-2">
-                                          {t(
-                                            `${variation.name || product.name}`
-                                          )}{" "}
-                                        </h5>
-                                        <span>
-                                          MRP :{" "}
-                                          <span className="text-decoration-line-through">
-                                            {" "}
-                                            ₹{variation?.prices[0]?.mrp}
-                                          </span>
-                                        </span>
-                                        <p className="mb-0">
-                                          Sale Price : ₹
-                                          {variation?.prices[0]?.sale_rate}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                );
-                              })
-                            )}
-                          </Slider>
+              {catData?.map(
+                (category) => (
+                  console.log("category", category),
+                  (
+                    <React.Fragment key={category._id}>
+                      <div className="col-lg-12" key={category._id}>
+                        <div className="fisherman-content special text-start">
+                          {/* <h6>{t("Primary Category")}</h6> */}
+                          <h3>{t(`${category.categoryName}`)}</h3>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </React.Fragment>
-              ))}
+
+                      <div className="col-lg-4 col-md-5 col-sm-6 col-6">
+                        <div className="categoryVideo">
+                          {category.banner?.url && (
+                            <div className="mb-3 h-100">
+                              <Link
+                                to={`/product/category/${category.categoryUid}/${category?.categoryUidSlug}`}
+                              >
+                                <img
+                                  src={category.banner.url}
+                                  alt={category.categoryName}
+                                  className="img-fluid rounded"
+                                />
+                              </Link>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="col-lg-8 col-md-7 col-sm-6 col-6">
+                        <div className="wiseProducts">
+                          <div className="categoryWrapper ">
+                            <div className="desktop row">
+                              {category.list?.map((product) =>
+                                product.variations?.map((variation) => {
+                                  const image =
+                                    variation.mainImage_url?.url ||
+                                    variation.images?.[0]?.url ||
+                                    product.mainImage_url?.url;
+                                  const price =
+                                    variation.prices?.sale_rate ||
+                                    variation.prices?.mrp ||
+                                    product.prices?.sale_rate ||
+                                    0;
+                                  return (
+                                    // <React.Fragment key={item._id}>
+                                    <div
+                                      className="col-lg-4 col-md-4 col-sm-6 col-6"
+                                      key={variation._id}
+                                    >
+                                      <div className="featuredInfo bg-white border prime">
+                                        <div className="featuredImg">
+                                          <Link
+                                            to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
+                                          >
+                                            <img
+                                              src={image}
+                                              alt={
+                                                variation.name || product.name
+                                              }
+                                              className="img-fluid"
+                                            />
+                                          </Link>
+                                        </div>
+                                        <div className="featuredContent text-center primary">
+                                          {/* <Rating /> */}
+                                          <h5 className="mb-2">
+                                            {t(
+                                              `${
+                                                variation.name || product.name
+                                              }`
+                                            )}
+                                          </h5>
+                                          <span>
+                                            MRP :{" "}
+                                            <span className="text-decoration-line-through">
+                                              {" "}
+                                              ₹{variation?.prices[0]?.mrp}
+                                            </span>
+                                          </span>
+                                          <p className="mb-0">
+                                            Sale Price : ₹
+                                            {variation?.prices[0]?.sale_rate}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    // </React.Fragment>
+                                  );
+                                })
+                              )}
+                            </div>
+                            <div className="mobile row">
+                              <Slider {...primarySettings}>
+                                {category.list?.map((product) =>
+                                  product.variations?.map((variation) => {
+                                    const image =
+                                      variation.mainImage_url?.url ||
+                                      variation.images?.[0]?.url ||
+                                      product.mainImage_url?.url;
+                                    const price =
+                                      variation.prices?.sale_rate ||
+                                      variation.prices?.mrp ||
+                                      product.prices?.sale_rate ||
+                                      0;
+                                    return (
+                                      <div className="">
+                                        <div className="featuredInfo bg-white border prime">
+                                          <div className="featuredImg">
+                                            <Link
+                                              to={`/product/${product?.uid}/${product.slug}/${variation?.variant_slug}`}
+                                            >
+                                              <img
+                                                src={image}
+                                                alt={
+                                                  variation.name || product.name
+                                                }
+                                                className="img-fluid"
+                                              />
+                                            </Link>
+                                          </div>
+                                          <div className="featuredContent text-center primary">
+                                            {/* <Rating /> */}
+                                            <h5 className="mb-2">
+                                              {t(
+                                                `${
+                                                  variation.name || product.name
+                                                }`
+                                              )}{" "}
+                                            </h5>
+                                            <span>
+                                              MRP :{" "}
+                                              <span className="text-decoration-line-through">
+                                                {" "}
+                                                ₹{variation?.prices[0]?.mrp}
+                                              </span>
+                                            </span>
+                                            <p className="mb-0">
+                                              Sale Price : ₹
+                                              {variation?.prices[0]?.sale_rate}
+                                            </p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    );
+                                  })
+                                )}
+                              </Slider>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </React.Fragment>
+                  )
+                )
+              )}
             </div>
           </div>
         </div>
