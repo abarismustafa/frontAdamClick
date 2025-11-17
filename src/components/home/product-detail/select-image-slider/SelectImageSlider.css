@@ -62,7 +62,7 @@
     .selectImageInfo, .productSliderItem{
         padding: 0;
     }
-    .productSliderItem img {
+    .productSliderItem img, .selectImageInfo.new .productSliderItem img {
         border: 0;
         border-right: 1px solid #edf1f0;
     }

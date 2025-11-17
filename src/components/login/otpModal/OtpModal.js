@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
+import { FaRegEdit } from "react-icons/fa";
 
-const OtpModal = ({ show, handleClose, handleLoginVerify, resendLoginOTP }) => {
+const OtpModal = ({ show, handleClose, handleLoginVerify, resendLoginOTP, mobileNumber }) => {
   const [otp, setOtp] = useState(Array(4).fill(""));
 
   // Handle input change
@@ -32,8 +33,6 @@ const OtpModal = ({ show, handleClose, handleLoginVerify, resendLoginOTP }) => {
     handleLoginVerify(finalOtp);
   };
 
-  
-
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
@@ -57,11 +56,17 @@ const OtpModal = ({ show, handleClose, handleLoginVerify, resendLoginOTP }) => {
             />
           ))}
         </div>
+        <div className="editNumber">
+          <p>{mobileNumber.mobile}</p>
+          <span onClick={handleClose}>
+            <FaRegEdit /> <span className="changeNum"> Change Mobile No.</span>
+          </span>
+        </div>
         <Button variant="primary" className="w-100" onClick={handleSubmit}>
           Submit
         </Button>
-        <div className="resendOTP">
-            <span onClick={()=> resendLoginOTP()}>Resend OTP</span>
+        <div className="resendOTP ">
+          <span onClick={() => resendLoginOTP()}>Resend OTP</span>
         </div>
       </Modal.Body>
     </Modal>

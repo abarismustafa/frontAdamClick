@@ -39,7 +39,10 @@ import { base_url } from "../../../../server";
 import Slider from "react-slick";
 import Rating from "../../../../shared/rating/Rating";
 import { FaChevronRight, FaCloudUploadAlt } from "react-icons/fa";
-import { toastSuccessMessage, toastSuccessMessageError } from "../../../../common/messageShow/MessageShow";
+import {
+  toastSuccessMessage,
+  toastSuccessMessageError,
+} from "../../../../common/messageShow/MessageShow";
 
 function ProductDetailContent({
   changeImage,
@@ -72,7 +75,6 @@ function ProductDetailContent({
   ];
 
   console.log(data?.wish);
-
 
   const settingsForSpecial = {
     speed: 500,
@@ -130,7 +132,6 @@ function ProductDetailContent({
   const [setWishList, { data: wishData, isSuccess, isError: wisherr }] =
     useSetWishListMutation();
 
-
   const [str, setStr] = useState(null);
   const [showTaoster, setShowToaster] = useState({
     show: false,
@@ -165,11 +166,11 @@ function ProductDetailContent({
       setShowToaster({ show: true, message: "Login First !", color: "danger" });
       return;
     }
-    const variantId = data?.variations?.[0]?.variant_slug || '';
+    const variantId = data?.variations?.[0]?.variant_slug || "";
     const paylode = {
       userid: window.localStorage.getItem("user_id"),
       productid: data?.uid,
-      varientid: variantId
+      varientid: variantId,
     };
     setWishList({ data: paylode, token: token });
   };
@@ -369,12 +370,11 @@ function ProductDetailContent({
   console.log(data);
 
   const [imageInitial, setImageInitial] = useState({
-    imageUrl: ''
-  })
+    imageUrl: "",
+  });
   const [loading, setLoading] = useState(false);
   const [uploaded, setUploaded] = useState(false);
   // console.log(imageInitial);
-
 
   const handleChangeImage = async (e) => {
     const { name, files } = e.target;
@@ -382,11 +382,10 @@ function ProductDetailContent({
 
     if (!file) return;
 
-
     const allowedTypes = ["image/jpeg", "image/png", "application/pdf"];
     if (!allowedTypes.includes(file.type)) {
       // alert("Only JPG, PNG or PDF files are allowed!");
-      toastSuccessMessageError("Only JPG, PNG or PDF files are allowed!")
+      toastSuccessMessageError("Only JPG, PNG or PDF files are allowed!");
       e.target.value = "";
       return;
     }
@@ -408,15 +407,14 @@ function ProductDetailContent({
         },
       }));
       setUploaded(true);
-      toastSuccessMessage("Upload Successful!")
+      toastSuccessMessage("Upload Successful!");
     } catch (error) {
       // console.error("Image Upload Error:", error);
-      toastSuccessMessageError("Upload Failed!")
+      toastSuccessMessageError("Upload Failed!");
     } finally {
       setLoading(false);
     }
   };
-
 
   // const handleChangeImage = async (e) => {
   //   const { name, files } = e.target;
@@ -839,7 +837,6 @@ function ProductDetailContent({
               </div>
             </div> */}
 
-
             <div className="productCount">
               <div className="titleText">
                 <FiPackage />
@@ -855,7 +852,7 @@ function ProductDetailContent({
               </div>
             </div>
 
-            {data?.category_id[0]?.doc_required === true &&
+            {data?.category_id[0]?.doc_required === true && (
               <>
                 <div className="productColorInfo mt-3">
                   <div className="titleText flex items-center gap-2">
@@ -876,7 +873,6 @@ function ProductDetailContent({
                         whiteSpace: "nowrap",
                         fontWeight: "600",
                         boxShadow: "0px 2px 4px rgba(0,0,0,0.2)",
-                        
                       }}
                     >
                       {loading ? "Uploading..." : "Choose File"}
@@ -913,19 +909,21 @@ function ProductDetailContent({
                 <div className="productColorInfo mt-3">
                   <div className="titleText flex items-center gap-2">
                     <FaChevronRight />
-                    <h6>If you want to know more about the WPC user Licences
+                    <h6>
+                      If you want to know more about the WPC user Licences
                       <a
                         href={data?.license?.documents?.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: "#007bff" }}
+                        style={{ color: "#007bff", marginLeft: "4px" }}
                       >
-                        click HERE
-                      </a>{" "} to apply.</h6>
+                        {" "}click HERE
+                      </a>{" "}
+                    </h6>
                   </div>
                 </div>
               </>
-            }
+            )}
           </div>
 
           <div className="product-details-desc">

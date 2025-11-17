@@ -31,7 +31,6 @@ if (domain.includes('https://test.baofengradios.co.in')) { //boffeng
   document.documentElement.style.setProperty('--textColor', '#0069b3');
   document.documentElement.style.setProperty('--borderColor', '#0069b3');
 }
-console.log("domain", domain);
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

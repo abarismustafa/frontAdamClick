@@ -589,6 +589,7 @@ function ProductDetail() {
     sectionRefs.current[index]?.scrollIntoView({
       behavior: "smooth",
       block: "start",
+      block: "nearest",
     });
 
     setTimeout(() => {
@@ -633,10 +634,38 @@ function ProductDetail() {
   //     isClickScrolling.current = false;
   //   }, 1000);
   // };
-
-  console.log(data);
+  // useEffect(() => {
+  //   ReactGA.event({
+  //     category: "product detail",
+  //     action: "click on product detail",
+  //     label: "product detail page",
+  //     value: "1",
+  //   });
+  // }, []);
 
   const isPdf = (url) => url?.toLowerCase().endsWith(".pdf");
+
+  const containerRef = useRef(null);
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = containerRef.current;
+      const sidebar = sidebarRef.current;
+      if (!container || !sidebar) return;
+
+      const rect = container.getBoundingClientRect();
+
+      if (rect.top <= 100 && rect.bottom > sidebar.offsetHeight) {
+        sidebar.classList.add("fixed");
+      } else {
+        sidebar.classList.remove("fixed");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
@@ -674,7 +703,8 @@ function ProductDetail() {
         <div className="container-fluid">
           <div className="row">
             <div className="col-lg-6 col-md-6">
-              <div className="SelectImageSec row">
+              <div className="SelectImageSec new row">
+              {/* <div className="SelectImageSec row"> */}
                 {!isMobile && (
                   <div className="SelectImg col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     {data && (
@@ -781,66 +811,72 @@ function ProductDetail() {
                       {t("Buy it now")}
                     </button>
                   </div> */}
+                  <div className="addToCartButtons">
+                    <div className="product-add-to-cart addToCart picture">
+                      {(() => {
+                        const rawStatus =
+                          data?.variations?.[0]?.display_status || "";
+                        const status = rawStatus
+                          .replace(/\u00A0/g, " ")
+                          .trim()
+                          .toLowerCase()
+                          .replace(/[-_]/g, " ");
 
-                  <div className="product-add-to-cart addToCart picture">
-                    {(() => {
-                      const rawStatus =
-                        data?.variations?.[0]?.display_status || "";
-                      const status = rawStatus
-                        .replace(/\u00A0/g, " ")
-                        .trim()
-                        .toLowerCase()
-                        .replace(/[-_]/g, " ");
+                        const isDisabled =
+                          status.includes("coming soon") ||
+                          status.includes("out of stock") ||
+                          isAddCartLoading;
 
-                      const isDisabled =
-                        status.includes("coming soon") ||
-                        status.includes("out of stock") ||
-                        isAddCartLoading;
+                        console.log("STATUS CHECK:", {
+                          rawStatus,
+                          parsed: status,
+                          isDisabled,
+                        });
 
-                      console.log("STATUS CHECK:", {
-                        rawStatus,
-                        parsed: status,
-                        isDisabled,
-                      });
+                        return (
+                          <>
+                            <button
+                              type="button"
+                              className={classnames(
+                                "default-btn cart btn-row",
+                                {
+                                  disabled: isDisabled,
+                                }
+                              )}
+                              disabled={isDisabled}
+                              onClick={() => {
+                                if (!isDisabled)
+                                  handleAddCart(data?.product?.uid);
+                              }}
+                            >
+                              <FiShoppingCart className="svg-icon" />
+                              {t("Add to Cart")}
+                              {isAddCartLoading && (
+                                <Spinner
+                                  animation="border"
+                                  className="spinner"
+                                />
+                              )}
+                            </button>
 
-                      return (
-                        <>
-                          <button
-                            type="button"
-                            className={classnames("default-btn cart btn-row", {
-                              disabled: isDisabled,
-                            })}
-                            disabled={isDisabled}
-                            onClick={() => {
-                              if (!isDisabled)
-                                handleAddCart(data?.product?.uid);
-                            }}
-                          >
-                            <FiShoppingCart className="svg-icon" />
-                            {t("Add to Cart")}
-                            {isAddCartLoading && (
-                              <Spinner animation="border" className="spinner" />
-                            )}
-                          </button>
-
-                          <button
-                            type="button"
-                            className={classnames("default-btn cart", {
-                              disabled: isDisabled,
-                            })}
-                            disabled={isDisabled}
-                            onClick={() => {
-                              if (!isDisabled) BuyNowItem(data);
-                            }}
-                          >
-                            <BsFillCartFill />
-                            {t("Buy it now")}
-                          </button>
-                        </>
-                      );
-                    })()}
+                            <button
+                              type="button"
+                              className={classnames("default-btn cart", {
+                                disabled: isDisabled,
+                              })}
+                              disabled={isDisabled}
+                              onClick={() => {
+                                if (!isDisabled) BuyNowItem(data);
+                              }}
+                            >
+                              <BsFillCartFill />
+                              {t("Buy it now")}
+                            </button>
+                          </>
+                        );
+                      })()}
+                    </div>
                   </div>
-
                   <div className="shareProductSec button d-none">
                     <div className="titleText">
                       <BsShareFill />
@@ -989,9 +1025,9 @@ function ProductDetail() {
             </div>
 
             <div className="col-lg-12">
-              <div className="product-tabs-container">
+              <div className="product-tabs-container" ref={containerRef}>
                 {/* Sidebar */}
-                <div className="sidebar">
+                <div className="sidebar" ref={sidebarRef}>
                   <ul className="tab-list">
                     {data?.description_tabs?.map((tab, index) => (
                       <li

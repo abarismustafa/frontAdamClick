@@ -58,7 +58,7 @@ function TopHeader({ state, changeLange }) {
   });
   const { data: language } = useGetLanguageQuery();
   const { data: currency } = useGetCurrencyQuery();
-  window.localStorage.setItem("currencyCode", currency[0]?.code);
+  // window.localStorage.setItem("currencyCode", currency[0]?.code);
   
   const [country, setCountry] = useState();
   const [selectCountry, setSeleDefCount] = useState();
@@ -125,11 +125,9 @@ function TopHeader({ state, changeLange }) {
   const onchengeHandle = (e) => {
     if (e.target.id === "languId") {
       const obj = { userid: user_id, language: e.target.value };
-
       changeLang(obj);
     } else {
       const obj2 = { userid: user_id, currency: e.target.value };
-
       changeCurr(obj2);
     }
   };
@@ -210,7 +208,6 @@ function TopHeader({ state, changeLange }) {
   // };
 
   const [valcur, setvalcur] = useState(null);
-
   const getData2 = async () => {
     const res = await axios.get(`${baseUrl}language`);
     setvalcur(res.data);

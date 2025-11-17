@@ -373,6 +373,7 @@ function SearchBox({ val, setCartLengLogout, setUpdatedProductsblack }) {
                   <FaBars />
                 </span>
               </button>
+              
 
               <Link to="/">
                 <img

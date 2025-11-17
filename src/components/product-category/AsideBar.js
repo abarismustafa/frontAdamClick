@@ -250,10 +250,12 @@ function ProductsFilter({
           </div> */}
           <div className="rangeNumber">
             <span className="minNum">
-              {t("Min")} : {getCurrencyCode()} {priceRange[0]}
+              {/* {t("Min")} : {getCurrencyCode()} {priceRange[0]}*/}
+              {t("Min")} : ₹ {priceRange[0]}
             </span>
             <span className="maxNum">
-              {t("Max")} : {getCurrencyCode()} {priceRange[1]}
+               {/* {t("Max")} : {getCurrencyCode()} {priceRange[1]}*/}
+              {t("Max")} : ₹ {priceRange[1]}
             </span>
           </div>
 
