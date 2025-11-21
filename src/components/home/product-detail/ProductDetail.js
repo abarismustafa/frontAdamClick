@@ -700,7 +700,7 @@ function ProductDetail() {
             <span className="visually-hidden">Loading...</span>
           </div>      
         </div>} */}
-        <div className="container-fluid">
+        <div className="container-fluid" >
           <div className="row">
             <div className="col-lg-6 col-md-6">
               <div className="SelectImageSec new row">

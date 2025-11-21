@@ -127,7 +127,7 @@ function ProductsCategory() {
   const { t, i18n } = useTranslation();
   return (
     <>
-      <section className="serviceList sectionPD">
+      <section className="serviceList sectionPD pt-1">
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-md-12 col-sm-12">

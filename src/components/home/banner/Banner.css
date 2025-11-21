@@ -45,9 +45,28 @@
     height: 500px !important;
 }
 
-.bannerItemFigure {
-    padding: 70px 0;
-    
+.bannerItemFigure.text {
+    position: relative;
+}
+
+.bannerItemFigure.text .bannerContent {
+    width: 40%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+    bottom: 30px;
+}
+
+.bannerItemFigureNew {
+    max-height: 470px;
+    height: 100%;
+}
+
+.bannerItemFigureNew img {
+    object-fit: contain;
+    width: 100%;
 }
 
 .bannerItemFigure .bannerContent {
@@ -62,11 +81,8 @@
     left: 0;
     top: 0;
     background: #0e0e0e;
-    /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #171717, #ffffff00);
-    /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #171717, #ffffff00);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     z-index: 1;
     content: "";
 }
@@ -137,27 +153,35 @@
 }
 
 @media only screen and (max-width: 991px) {
+    .bannerItemFigureNew img {
+        height: auto;
+    }
+
     .bannerItemFigure .bannerContent h2 {
         font-size: 40px;
         line-height: 40px;
     }
-    .bannerItemFigure{
+
+    .bannerItemFigure {
         background-position: center;
     }
 }
 
 @media only screen and (max-width: 600px) {
     .bannerItemFigure .bannerContent {
-        
+
         visibility: hidden;
     }
+
     .bannerItemFigure .bannerContent h2 {
         font-size: 28px;
         line-height: 30px;
     }
-    .bannerItemFigure{
+
+    .bannerItemFigure {
         padding: 20px 0;
     }
+
     .bannerItemFigure .bannerContent p {
         line-height: 20px;
         height: 40px;

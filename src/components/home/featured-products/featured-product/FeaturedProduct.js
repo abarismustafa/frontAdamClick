@@ -215,8 +215,8 @@ function FeaturedProduct({ isLoading, data, error, handleShow, isPopular }) {
                     </div>
                     <div className="featuredContent">
                       <h5>
-                        <Link to={`/product/${item?.uid}/${item.slug}`}>
-                          {item.name}
+                        <Link to={`/product/${item?.uid}/${item?.slug}`}>
+                          {item?.name}
                         </Link>
                       </h5>
 
