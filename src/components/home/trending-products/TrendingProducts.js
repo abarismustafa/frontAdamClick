@@ -60,7 +60,7 @@ function TrendingProducts() {
   const { data, isLoading, error } = useGetTrendingProductQuery();
 
   const [ourTrendingData, setOurTrendingData] = useState(null);
-  console.log("ourTrendingData", ourTrendingData);
+  // console.log("ourTrendingData", ourTrendingData);
 
   const baseUrl = base_url();
   const getTrendingData = async () => {

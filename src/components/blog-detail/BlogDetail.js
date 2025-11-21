@@ -17,59 +17,57 @@ import { useTranslation } from "react-i18next";
 // import blog5 from "../../assets/img/serviceList/f454dq2nqgkt45dcladv.png";
 // import blog6 from "../../assets/img/serviceList/jo1im9jkpkbst0of9sti.png";
 
-
-
 const cosmeticBlogCategories = [
   {
     id: 1,
     name: "Makeup",
-    description: "blogDesc1"
+    description: "blogDesc1",
   },
   {
     id: 2,
     name: "Skincare",
-    description: "blogDesc2"
+    description: "blogDesc2",
   },
   {
     id: 3,
     name: "Beauty Tips & Hacks",
-    description: "blogDesc3"
+    description: "blogDesc3",
   },
   {
     id: 4,
     name: "Product Reviews",
-    description: "blogDesc4"
+    description: "blogDesc4",
   },
   {
     id: 5,
     name: "Hair Care",
-    description: "blogDesc5"
+    description: "blogDesc5",
   },
   {
     id: 6,
     name: "Natural & Organic Beauty",
-    description: "blogDesc6"
+    description: "blogDesc6",
   },
   {
     id: 7,
     name: "Trends & News",
-    description: "blogDesc7"
+    description: "blogDesc7",
   },
   {
     id: 8,
     name: "DIY Beauty",
-    description: "blogDesc8"
+    description: "blogDesc8",
   },
   {
     id: 9,
     name: "Travel Beauty",
-    description: "blogDesc9"
+    description: "blogDesc9",
   },
   {
     id: 10,
     name: "Ingredients & Science",
-    description: "blogDesc10"
-  }
+    description: "blogDesc10",
+  },
 ];
 
 function BlogDetail() {
@@ -79,7 +77,6 @@ function BlogDetail() {
   const [isLoading, setisLoading] = useState(false);
 
   // console.log(data?.banner);
-
 
   const token = window.localStorage.getItem("token");
   const baseUrl = base_url();
@@ -101,7 +98,6 @@ function BlogDetail() {
     }
   };
 
-
   const { t } = useTranslation();
   const [blogData, setBlogData] = useState(cosmeticBlogCategories);
   const filterData = blogData.find((item) => {
@@ -110,7 +106,7 @@ function BlogDetail() {
     return item.id == params.id;
   });
 
-  const [reviewData, setReviewData] = useState(null)
+  const [reviewData, setReviewData] = useState(null);
   const resviewCommet = async () => {
     try {
       const res = await axios.get(`${baseUrl}reviews/blogs/${params._id}`, {
@@ -121,34 +117,25 @@ function BlogDetail() {
         },
       });
       if (res?.status == 200) {
-        setReviewData(res?.data)
+        setReviewData(res?.data);
       }
       // console.log(res);
-
-    } catch (error) {
-
-    }
-  }
+    } catch (error) {}
+  };
 
   useEffect(() => {
     getData();
-    resviewCommet()
+    resviewCommet();
   }, [params.id]);
 
-
+  console.log("blog data", data);
 
   return (
     <>
       <Helmet>
         <title>Blog Detail | adamclick</title>
-        <meta
-          name="keyword"
-          content="adamclick"
-        />
-        <meta
-          name="description"
-          content="adamclick"
-        />
+        <meta name="keyword" content="adamclick" />
+        <meta name="description" content="adamclick" />
       </Helmet>
       <Breadcrumb title="Blog Detail" t={t} />
       <section className="blogDetailSec sectionPD">
@@ -165,16 +152,27 @@ function BlogDetail() {
               <div className="blogDetailInfo">
                 <div className="blogDetailContent">
                   <figure className="currentBlogImg">
-                    <img
-                      src={data?.banner?.url}
-                      alt="Blog"
-                      className="img-fluid"
-                    />
+                    {data?.big_banner ? (
+                      <img
+                        src={data?.big_banner?.url}
+                        alt="Blog"
+                        className="img-fluid"
+                      />
+                    ) : (
+                      <img
+                        src={data?.banner?.url}
+                        alt="Blog"
+                        className="img-fluid"
+                      />
+                    )}
                   </figure>
                   <h4>{t(`${data?.title}`)}</h4>
                   <p>{t(`${filterData?.description}`)}</p>
                 </div>
-                <BlogUsersComment reviewData={reviewData} resviewCommet={resviewCommet} />
+                <BlogUsersComment
+                  reviewData={reviewData}
+                  resviewCommet={resviewCommet}
+                />
                 <BlogCommentForm data={data} resviewCommet={resviewCommet} />
               </div>
             </div>

@@ -13164,9 +13164,10 @@ h5 {
 .featuredInfo {
   margin-bottom: 30px;
   transition: .4s ease-in-out;
-  background: #edf1f0;
+  background: #fff;
   border-radius: 20px;
-  padding: 4px;
+  padding: 0px;
+  border: 1px solid #eeeeee;
 }
 
 
@@ -14235,11 +14236,13 @@ header.sticky.active .mobileMenu {
   margin-bottom: 24px;
 }
 
+.categoryBanner a {
+  width: 100%;
+}
 .categoryBanner a img {
   border-radius: 20px;
   height: 160px;
-  object-fit: contain;
-  width: 100vh;
+  width: 100%;
   transition: .4s ease-in-out;
   filter: grayscale(1);
 }
@@ -14929,6 +14932,71 @@ ul.subchild-list.ms-4.mt-1 a.sub-link.text-secondary {
   border-bottom: 0;
 }
 
+.paymentMethodList {
+  display: flex;
+  column-gap: 10px;
+  flex-wrap: wrap;
+}
+
+.form-check.paymentGatCheck {
+  background: #fbfbfb;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+}
+
+.form-check.paymentGatCheck label {
+  font-size: 16px;
+}
+
+.form-check.paymentGatCheck .form-check-input {
+  margin-left: 0;
+  margin-top: 0;
+}
+
+.paymentGatImg {
+  width: 28px;
+  margin-right: 10px;
+}
+
+.checkoutBody {
+  padding: 20px;
+  border: 1px solid #ebf0e0;
+}
+
+.blogDetailContent h4,
+.blogDetailContent p,
+.recentContent h6 a,
+.productDescText ul li,
+.tab-inner p,
+.discoverCard p {
+  text-align: justify;
+}
+.row.primaryRow{
+  margin-bottom: 30px;
+}
+
+.fisherman-content.special.linkk {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fisherman-content.special.linkk h3 {
+    margin: 0;
+}
+
+.fisherman-content.special.linkk h3 a {
+    color: var(--textColor);
+}
+
+section {
+    max-width: 1400px;
+    margin: auto;
+}
 /* RESPONSIVE CSS START */
 
 @media only screen and (max-width: 1120px) {
@@ -15007,7 +15075,8 @@ ul.subchild-list.ms-4.mt-1 a.sub-link.text-secondary {
 
 @media only screen and (max-width: 991px) {
 
-  /*  */
+  
+
   .SelectImageSec {
     height: 93vh;
   }
@@ -15015,8 +15084,6 @@ ul.subchild-list.ms-4.mt-1 a.sub-link.text-secondary {
   .sidebar {
     transition: all 0.3s ease;
   }
-
-  /*  */
 
   .searchItem .logo a img {
     width: 150px;
@@ -16647,7 +16714,7 @@ ul.subchild-list.ms-4.mt-1 a.sub-link.text-secondary {
   justify-content: center;
   overflow: hidden;
   background: #fff;
-  border-radius: 16px;
+  border-radius: 25px;
 }
 
 .featuredImg img {
@@ -16733,7 +16800,7 @@ ul.subchild-list.ms-4.mt-1 a.sub-link.text-secondary {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  background: #fafafa;
+  background: #fff;
   overflow: hidden;
 
 }

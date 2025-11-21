@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useRazorpay } from "react-razorpay";
 import "react-toastify/dist/ReactToastify.css";
 
-import logo from "../../assets/img/logo.png";
+import { load } from "@cashfreepayments/cashfree-js";
 
 import {
   setCartCalc,
@@ -47,7 +47,7 @@ import { RiSecurePaymentLine } from "react-icons/ri";
 import { toast, ToastContainer } from "react-toastify";
 
 function Checkout() {
-  const params = useParams()
+  const params = useParams();
   const Razorpay = useRazorpay();
   const handlePayment = useCallback(
     async (data) => {
@@ -71,13 +71,13 @@ function Checkout() {
           amount: data?.data?.Total, // Amount in paise (500 INR)
           // amount: payableAmount * 100,
           currency: "INR",
-          name: "ADAMCLICK",
+          name: "Baofeng",
           description: "  Transaction",
           image: "https://your-logo-url.com", // Optional logo URL
           order_id: data?.data?.order?.id,
           handler: (response) => {
             console.log(response);
-            checkoutApi(response)
+            checkoutApi(response);
             // alert(`Payment ID: ${response.razorpay_payment_id}`);
           },
           prefill: {
@@ -129,10 +129,9 @@ function Checkout() {
 
   // new
 
-
-  const [diliveryAdd, setDiliveryAdd] = useState([])
-  const [billingAddres, setBillingAddres] = useState([])
-  console.log(billingAddres[0]);
+  const [diliveryAdd, setDiliveryAdd] = useState([]);
+  const [billingAddres, setBillingAddres] = useState([]);
+  console.log("message", billingAddres[0]);
 
   const userid = window.localStorage.getItem("user_id");
   const isLogin = window.localStorage.getItem("isLogin");
@@ -185,7 +184,7 @@ function Checkout() {
           }
         );
         setcartDetail(res.data);
-      } catch (error) { }
+      } catch (error) {}
     } else {
       try {
         // const res = await axios.post(
@@ -204,7 +203,7 @@ function Checkout() {
           }
         );
         setcartDetail(res.data);
-      } catch (error) { }
+      } catch (error) {}
     }
   };
   const [showTaoster, setShowToaster] = useState({
@@ -246,15 +245,13 @@ function Checkout() {
     bdeliveryType: "home",
     bemail: "",
     bmobile: "",
-    user_gst: ""
+    user_gst: "",
     // userid: window.localStorage.getItem('user_id')
   });
 
   console.log(formData);
 
-
   // console.log(formData);
-
 
   const [validationBill, setvalidationBill] = useState({
     country: false,
@@ -286,7 +283,6 @@ function Checkout() {
         mobile: formData.bmobile,
         user_gst: "",
 
-
         userid: window.localStorage.getItem("user_id"),
       };
       editAdd({
@@ -294,10 +290,10 @@ function Checkout() {
         token: window.localStorage.getItem("token"),
       });
     } else {
-      // AddBillAdd({
-      //   data: { ...formData, selectedBillingAddress: true },
-      //   token: window.localStorage.getItem("token"),
-      // });
+      AddBillAdd({
+        data: { ...formData, selectedBillingAddress: true },
+        token: window.localStorage.getItem("token"),
+      });
 
       try {
         const res = await AddBillAdd({
@@ -305,8 +301,7 @@ function Checkout() {
           token: window.localStorage.getItem("token"),
         }).unwrap(); // unwrap() se promise resolve hota hai
 
-        console.log("Bill address added:", res);
-        getDiliveryAddres()
+        getDiliveryAddres();
         setAddresListData(null);
         setFormData({
           btype: "both",
@@ -335,14 +330,12 @@ function Checkout() {
     }
   };
 
-
-  const [addresListData, setAddresListData] = useState(null)
+  const [addresListData, setAddresListData] = useState(null);
   // console.log(addresListData);
 
   const addresUpdateGetdata = (item) => {
     if (item?._id) {
-      setAddresListData(item)
-
+      setAddresListData(item);
 
       const clone = {
         btype: item?.type,
@@ -360,25 +353,28 @@ function Checkout() {
         bdeliveryType: item?.deliveryType,
         bemail: item?.email,
         bmobile: item?.phone,
-        user_gst: item?.user_gst
-      }
+        user_gst: item?.user_gst,
+      };
 
-      setFormData(clone)
-      setNewAddress(true)
+      setFormData(clone);
+      setNewAddress(true);
     }
-
-  }
+  };
 
   const addresUpdate = async () => {
     try {
-      const res = await axios.put(`${baseUrl}user/register/billAddress-new/${addresListData?._id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      const res = await axios.put(
+        `${baseUrl}user/register/billAddress-new/${addresListData?._id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (res?.data?.statusCode == 200) {
-        alert(res?.data?.message)
-        getDiliveryAddres()
+        alert(res?.data?.message);
+        getDiliveryAddres();
         setAddresListData(null);
         setNewAddress(false);
         setFormData({
@@ -400,38 +396,68 @@ function Checkout() {
           user_gst: "",
         });
       } else {
-        alert('server side error')
+        alert("server side error");
       }
-    } catch (error) {
-
-    }
-  }
-
-
-
+    } catch (error) {}
+  };
 
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [selectedData, setSelectedData] = useState(null);
   // console.log(selectedData);
-
 
   useEffect(() => {
     if (diliveryAdd.length > 0) {
       const firstItem = diliveryAdd[0];
       setSelectedAddressId(String(firstItem._id));
       setSelectedData(firstItem);
-      const clone = { ...formData, btype: firstItem?.type, bcountry: firstItem?.country, bstate: firstItem?.state, bcity: firstItem?.city, bzip: firstItem?.zip, baddressLine1: firstItem?.addressLine1, baddressLine2: "", blandmark: firstItem?.landmark, bprovince: firstItem?.province, bfirstname: firstItem?.firstname, blastname: firstItem?.lastname, bcompany: firstItem?.company, bdeliveryType: firstItem?.deliveryType, bemail: firstItem?.email, bmobile: firstItem?.phone, user_gst: firstItem?.user_gst, }
-      setFormData(clone)
+      const clone = {
+        ...formData,
+        btype: firstItem?.type,
+        bcountry: firstItem?.country,
+        bstate: firstItem?.state,
+        bcity: firstItem?.city,
+        bzip: firstItem?.zip,
+        baddressLine1: firstItem?.addressLine1,
+        baddressLine2: "",
+        blandmark: firstItem?.landmark,
+        bprovince: firstItem?.province,
+        bfirstname: firstItem?.firstname,
+        blastname: firstItem?.lastname,
+        bcompany: firstItem?.company,
+        bdeliveryType: firstItem?.deliveryType,
+        bemail: firstItem?.email,
+        bmobile: firstItem?.phone,
+        user_gst: firstItem?.user_gst,
+      };
+      setFormData(clone);
     }
   }, [diliveryAdd]);
 
   const handleSelect = (item) => {
     setSelectedAddressId(String(item?._id));
     setSelectedData(item);
-    const clone = { ...formData, btype: item?.type, bcountry: item?.country, bstate: item?.state, bcity: item?.city, bzip: item?.zip, baddressLine1: item?.addressLine1, baddressLine2: "", blandmark: item?.landmark, bprovince: item?.province, bfirstname: item?.firstname, blastname: item?.lastname, bcompany: item?.company, bdeliveryType: item?.deliveryType, bemail: item?.email, bmobile: item?.phone, user_gst: item?.user_gst, }
+    const clone = {
+      ...formData,
+      btype: item?.type,
+      bcountry: item?.country,
+      bstate: item?.state,
+      bcity: item?.city,
+      bzip: item?.zip,
+      baddressLine1: item?.addressLine1,
+      baddressLine2: "",
+      blandmark: item?.landmark,
+      bprovince: item?.province,
+      bfirstname: item?.firstname,
+      blastname: item?.lastname,
+      bcompany: item?.company,
+      bdeliveryType: item?.deliveryType,
+      bemail: item?.email,
+      bmobile: item?.phone,
+      user_gst: item?.user_gst,
+    };
     // console.log('lkjl', clone);
     // console.log(item);
-    setFormData(clone)
+    setFormData(clone);
   };
 
   const getDiliveryAddres = async () => {
@@ -442,12 +468,13 @@ function Checkout() {
           Authorization: `Bearer ${token}`,
         },
       });
-
+      console.log("resBillingAddress response", resBillingAddress);
+      
       if (resBillingAddress?.status === 200) {
         const activeAddresses = resBillingAddress?.data?.address?.filter(
           (item) => item?.active === true
         );
-        console.log(activeAddresses);
+        console.log("activeAddresses", activeAddresses);
 
         setBillingAddres(activeAddresses);
       }
@@ -459,21 +486,14 @@ function Checkout() {
         },
       });
       if (resShipping?.status == 200) {
-        setDiliveryAdd(resShipping?.data?.address)
+        setDiliveryAdd(resShipping?.data?.address);
       }
-    } catch (error) {
-
-    }
-  }
+    } catch (error) {}
+  };
 
   useEffect(() => {
-    getDiliveryAddres()
-  }, [])
-
-
-
-
-
+    getDiliveryAddres();
+  }, []);
 
   const [uiShow, setUiShow] = useState(false);
   const [messageShow, setMessageShow] = useState("");
@@ -565,7 +585,7 @@ function Checkout() {
         },
       });
       setData(res.data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -625,17 +645,17 @@ function Checkout() {
     getDisCoupons({ value: val, id: window.localStorage.getItem("user_id") });
   };
 
-  const cashDelevery = () => {
-    seShowPayment(false);
-  };
+  // const cashDelevery = () => {
+  //   seShowPayment(false);
+  // };
 
   const [data1, setData1] = useState();
 
   const getPayments1 = async () => {
     try {
-      const res = await axios.get(`${baseUrl}africanConfig/available`);
+      const res = await axios.get(`${baseUrl}paymentGate/public`);
       setData1(res.data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -770,7 +790,6 @@ function Checkout() {
 
   const notify = () => toast("Please Add Delivery address");
   // notify()
-
 
   const [contactDetailValid, setcontactDetailValid] = useState(false);
   const handlePlaceOffline = (e) => {
@@ -909,9 +928,12 @@ function Checkout() {
     // }
     e.preventDefault();
     if (!billingAddres[0] || billingAddres[0]?.active !== true) {
+      
       alert("Please fill billing address before placing order!");
       return;
     }
+    
+    
     const paylode = {
       // billAddress: formData,
       // shipping_Address: shippingAdd,
@@ -947,7 +969,7 @@ function Checkout() {
       setCount(0);
       shippingSelectionActive(res?.data[0]?._id);
       setCartValueVa(res.data[0]?._id);
-    } catch (error) { }
+    } catch (error) {}
   };
   useEffect(() => {
     shippingSelection();
@@ -967,7 +989,7 @@ function Checkout() {
         withCredentials: true,
       });
       shippingSelectionActive();
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const [timeslot, setTimeslot] = useState(null);
@@ -1014,13 +1036,11 @@ function Checkout() {
     timeSlotGet();
   }, []);
 
-
   const [showSuccessModal, setSuccessModal] = useState(false);
-  const [checkoutData, setCheckoutData] = useState(null)
+  const [checkoutData, setCheckoutData] = useState(null);
   const handlePaymentSelect = (mode) => {
     setPaymentMode((prev) => (prev === mode ? "" : mode));
   };
-
 
   // const isPlaceOrderEnabled =
   //   cartDetail?.cart?.products?.length > 0 && paymentMode !== "";
@@ -1028,21 +1048,23 @@ function Checkout() {
     cartDetail?.cart?.products?.length > 0 &&
     paymentMode !== "" &&
     diliveryAdd?.length > 0;
-  diliveryAdd?.some((item) => item?.btype === "shipping" || item?.btype === "billing");
+  diliveryAdd?.some(
+    (item) => item?.btype === "shipping" || item?.btype === "billing"
+  );
 
   useEffect(() => {
     if (plaecedData?.error == false) {
       // console.log('plaecedData', plaecedData);
-      handlePayment(plaecedData)
+      handlePayment(plaecedData);
     }
-  }, [plaecedData])
+  }, [plaecedData]);
 
   useEffect(() => {
     if (plaecedData?.statusCode == 200) {
       setSuccessModal(true);
       navigate("/thankyou", { state: { placedData: plaecedData } });
     }
-  }, [plaecedData])
+  }, [plaecedData]);
 
   useEffect(() => {
     if (diliveryAdd?.length <= 0) {
@@ -1052,25 +1074,24 @@ function Checkout() {
     }
   }, [diliveryAdd]);
 
-
   const checkoutApi = async (data) => {
-    const clone = { ...plaecedData?.data, razorpay_order_id: data?.razorpay_order_id, razorpay_payment_id: data?.razorpay_payment_id, razorpay_signature: data?.razorpay_signature }
+    const clone = {
+      ...plaecedData?.data,
+      razorpay_order_id: data?.razorpay_order_id,
+      razorpay_payment_id: data?.razorpay_payment_id,
+      razorpay_signature: data?.razorpay_signature,
+    };
     try {
       const token = window.localStorage.getItem("token");
-      const res = await axios.post(`${baseUrl}paymentGate/razorpay`, clone, {
+      const res = await axios.post(`${baseUrl}paymentGate/razorpay-nw`, clone, {
         headers: { Authorization: `Bearer ${token}` },
-      })
+      });
       if (res?.data?.statusCode == 201) {
         setSuccessModal(true);
-        setCheckoutData(res)
+        setCheckoutData(res);
       }
-    } catch (error) {
-
-    }
-  }
-
-
-
+    } catch (error) {}
+  };
 
   // useEffect(() => {
   //   const callAbndtUpdate = async () => {
@@ -1112,7 +1133,6 @@ function Checkout() {
   //   }
   // }, [data, diliveryAdd]);
 
-
   useEffect(() => {
     let timer;
     let userInteracted = false;
@@ -1124,21 +1144,23 @@ function Checkout() {
         });
 
         const latestAddress =
-          diliveryAdd?.length > 0
-            ? diliveryAdd[0]
-            : data?.address || null;
+          diliveryAdd?.length > 0 ? diliveryAdd[0] : data?.address || null;
 
         const payload = {
           ...getRes?.data?.cart,
           shippingAddress_save: latestAddress,
         };
 
-        const putRes = await axios.put(`${baseUrl}abndt/${params?.id}`, payload, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const putRes = await axios.put(
+          `${baseUrl}abndt/${params?.id}`,
+          payload,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         console.log("✅ Abandoned checkout updated successfully:", putRes.data);
       } catch (error) {
@@ -1179,18 +1201,73 @@ function Checkout() {
     };
   }, [data, diliveryAdd]);
 
+  // const [payementModee, setpaymentModee] = useState("COD");
+  const verifyPayment = async (data) => {
+    const clone = {
+      orderId: data,
+    };
+    try {
+      const res = await axios.post(
+        `${baseUrl}paymentGate/checkout-cashf`,
+        clone,
+        {
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log("cashfree res", res);
+
+      if (res?.data?.statusCode == 201) {
+        setSuccessModal(true);
+        setCheckoutData(res);
+      }
+    } catch (error) {
+      console.log("Cashfree payment error", error);
+    }
+  };
+
+  const handleCashFree = async (data) => {
+    try {
+      const cashfree = await load({ mode: "sandbox" });
+      const checkoutOptions = {
+        paymentSessionId: data?.data?.paymentSessionId,
+        redirectTarget: "_modal",
+      };
+      cashfree.checkout(checkoutOptions).then((res) => {
+        console.log("payment initialized", res);
+
+        verifyPayment(data?.data?.orderId);
+      });
+    } catch (error) {
+      console.log("payment error", error);
+    }
+  };
+
+  useEffect(() => {
+    if (plaecedData?.error == false && plaecedData?.data.method == "Razorpay") {
+      handlePayment(plaecedData);
+    } else if (
+      plaecedData?.error == false &&
+      plaecedData?.data.method == "CashFree"
+    ) {
+      handleCashFree(plaecedData);
+    }
+  }, [plaecedData]);
+
+  const cashDelevery = (e) => {
+    seShowPayment(false);
+    setPaymentMode(e?.target?.value);
+  };
+
   return (
     <>
       <Helmet>
-        <title>Checkout | Landvistafarms</title>
-        <meta
-          name="keyword"
-          content="mamastycoon, mamastycoon, mamastycoon, mamastycoon, Nutrition"
-        />
-        <meta
-          name="description"
-          content="Buy LandvistafarmsProducts and Machinery Online at mamastycoon. We Offering broad range of Seeds, Plant Nutrition, Plant Protection and Agri Implements."
-        />
+        <title>Checkout | Bofeng</title>
+        <meta name="keyword" content="Bofeng" />
+        <meta name="description" content="Bofeng" />
       </Helmet>
       <section className="checkoutSec mt-4 mb-4">
         <div className="container">
@@ -1239,8 +1316,9 @@ function Checkout() {
                       </label>
                       <input
                         type="number"
-                        className={`form-control ${contactDetailValid && "cusvalidate"
-                          }`}
+                        className={`form-control ${
+                          contactDetailValid && "cusvalidate"
+                        }`}
                         name="bcountry"
                         placeholder="Mobile No"
                         value={contactDetail}
@@ -1262,54 +1340,65 @@ function Checkout() {
               )}
             </div>
 
-
-
-
-
             <div className="col-lg-7">
               <div className="allAddedAddress mt-2">
                 <h6>Delivery Address</h6>
                 <div className="addressList">
+                  {diliveryAdd &&
+                    diliveryAdd?.map((item) => {
+                      const isSelected =
+                        String(item?._id) === String(selectedAddressId);
 
-                  {diliveryAdd && diliveryAdd?.map((item) => {
-                    const isSelected = String(item?._id) === String(selectedAddressId);
+                      // console.log(isSelected);
+                      return (
+                        <div className="addressListItem" key={item?._id}>
+                          <div className="form-check">
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="radioDefault"
+                              id={`radio-${item._id}`}
+                              checked={isSelected}
+                              onChange={() => handleSelect(item)}
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="radioDefault1"
+                            >
+                              <h6>
+                                <span>
+                                  {item?.firstname} {item?.lastname}
+                                </span>{" "}
+                                <strong>
+                                  {item?.deliveryType
+                                    ? item?.deliveryType
+                                    : "Home"}
+                                </strong>{" "}
+                                <span>{item?.phone}</span>{" "}
+                              </h6>
+                              <p>
+                                {item?.addressLine1}
+                                <strong> {item?.zip}</strong>
+                              </p>
 
-                    // console.log(isSelected);
-                    return <div className="addressListItem" key={item?._id}>
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="radio"
-                          name="radioDefault"
-                          id={`radio-${item._id}`}
-                          checked={isSelected}
-                          onChange={() => handleSelect(item)}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="radioDefault1"
-                        >
-                          <h6>
-                            <span>{item?.firstname} {item?.lastname}</span> <strong>{item?.deliveryType ? item?.deliveryType : 'Home'}</strong>{" "}
-                            <span>{item?.phone}</span>{" "}
-                          </h6>
-                          <p>
-                            {item?.addressLine1}
-                            <strong> {item?.zip}</strong>
-                          </p>
-
-                          {isSelected && (
-                            <div className="deliveryHere">
-                              <button className="btn btn-warning">Deliver Here</button>
-                            </div>
-                          )}
-                        </label>
-                      </div>
-                      <div className="listaddress-edit" onClick={() => addresUpdateGetdata(item)}>
-                        Edit
-                      </div>
-                    </div>
-                  })}
+                              {isSelected && (
+                                <div className="deliveryHere">
+                                  <button className="btn btn-warning">
+                                    Deliver Here
+                                  </button>
+                                </div>
+                              )}
+                            </label>
+                          </div>
+                          <div
+                            className="listaddress-edit"
+                            onClick={() => addresUpdateGetdata(item)}
+                          >
+                            Edit
+                          </div>
+                        </div>
+                      );
+                    })}
 
                   {/* <div className="addressListItem">
                     <div className="form-check">
@@ -1373,12 +1462,6 @@ function Checkout() {
                 </div>
               </div>
 
-
-
-
-
-
-
               <div className="addNewAddress">
                 <button
                   className="commonButton"
@@ -1390,7 +1473,7 @@ function Checkout() {
 
               {newAddress && (
                 <div className="checkoutBody">
-                  <div className="billingDetails" >
+                  <div className="billingDetails">
                     <h5>{t("Add New Address")}</h5>
 
                     <CustomToaster
@@ -1403,9 +1486,18 @@ function Checkout() {
                       delay={3000}
                     />
 
-                    <form className="row needs-validation" novalidate id="shippingAddressForm">
+                    <form
+                      className="row needs-validation"
+                      novalidate
+                      id="shippingAddressForm"
+                    >
                       <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
-                        <label className="form-label form-label-high">{t("Delivery Type")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span></label>
+                        <label className="form-label form-label-high">
+                          {t("Delivery Type")}{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
+                        </label>
                         <div className="d-flex gap-3">
                           <label className="form-check-label">
                             <input
@@ -1445,7 +1537,12 @@ function Checkout() {
                         </div>
                       </div>
                       <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
-                        <label className="form-label form-label-high">{t("Address Type")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span></label>
+                        <label className="form-label form-label-high">
+                          {t("Address Type")}{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
+                        </label>
 
                         {/* <div className="d-flex gap-3">
                           <label className="form-check-label">
@@ -1514,7 +1611,9 @@ function Checkout() {
                               type="radio"
                               name="btype"
                               value="both"
-                              checked={formData?.btype === "both" || !formData?.btype}
+                              checked={
+                                formData?.btype === "both" || !formData?.btype
+                              }
                               onChange={handleChange}
                               className="form-check-input me-2"
                             />
@@ -1523,7 +1622,9 @@ function Checkout() {
                         </div>
 
                         {validationBill?.bdeliveryType && (
-                          <span style={{ color: "red" }}>Enter a Delivery Type</span>
+                          <span style={{ color: "red" }}>
+                            Enter a Delivery Type
+                          </span>
                         )}
                       </div>
                       {/* <div className="mb-3 col-lg-12">
@@ -1555,12 +1656,16 @@ function Checkout() {
                           htmlFor="exampleInputEmail1"
                           className="form-label"
                         >
-                          {t("First Name")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span>
+                          {t("First Name")}{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
                         </label>
                         <input
                           type="text"
-                          className={`form-control ${validationBill?.firstName && "cusvalidate"
-                            }`}
+                          className={`form-control ${
+                            validationBill?.firstName && "cusvalidate"
+                          }`}
                           name="bfirstname"
                           placeholder="Enter First Name"
                           value={formData?.bfirstname}
@@ -1568,7 +1673,9 @@ function Checkout() {
                           aria-describedby="emailHelp"
                         />
                         {validationBill?.firstName && (
-                          <span style={{ color: "red" }}>Enter a First Name</span>
+                          <span style={{ color: "red" }}>
+                            Enter a First Name
+                          </span>
                         )}
                       </div>
                       <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
@@ -1576,12 +1683,16 @@ function Checkout() {
                           htmlFor="exampleInputEmail1"
                           className="form-label"
                         >
-                          {t("Last Name")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span>
+                          {t("Last Name")}{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
                         </label>
                         <input
                           type="text"
-                          className={`form-control ${validationBill?.lastName && "cusvalidate"
-                            }`}
+                          className={`form-control ${
+                            validationBill?.lastName && "cusvalidate"
+                          }`}
                           name="blastname"
                           value={formData?.blastname}
                           placeholder="Enter Last Name"
@@ -1589,7 +1700,9 @@ function Checkout() {
                           aria-describedby="emailHelp"
                         />
                         {validationBill?.lastName && (
-                          <span style={{ color: "red" }}>Enter a Last Name</span>
+                          <span style={{ color: "red" }}>
+                            Enter a Last Name
+                          </span>
                         )}
                       </div>
                       <div className="mb-3 col-12">
@@ -1598,11 +1711,14 @@ function Checkout() {
                           className="form-label"
                         >
                           {t("Full Address")}{" "}
-                          <span style={{ color: 'red', fontWeight: 'bold' }}>*</span>
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
                         </label>
                         <textarea
-                          className={`form-control ${validationBill?.fullAddress && "cusvalidate"
-                            }`}
+                          className={`form-control ${
+                            validationBill?.fullAddress && "cusvalidate"
+                          }`}
                           name="baddressLine1"
                           placeholder="Full Address (Area and Street)"
                           value={formData?.baddressLine1}
@@ -1620,12 +1736,15 @@ function Checkout() {
                           className="form-label"
                         >
                           {t("Pincode")}{" "}
-                          <span style={{ color: 'red', fontWeight: 'bold' }}>*</span>
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
                         </label>
                         <input
                           type="text"
-                          className={`form-control ${validationBill?.bzip && "cusvalidate"
-                            }`}
+                          className={`form-control ${
+                            validationBill?.bzip && "cusvalidate"
+                          }`}
                           id="exampleInputEmail10"
                           required
                           name="bzip"
@@ -1655,12 +1774,16 @@ function Checkout() {
                           htmlFor="exampleInputEmail1"
                           className="form-label"
                         >
-                          {t("City")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span>
+                          {t("City")}{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
                         </label>
                         <input
                           type="text"
-                          className={`form-control ${validationBill?.city && "cusvalidate"
-                            }`}
+                          className={`form-control ${
+                            validationBill?.city && "cusvalidate"
+                          }`}
                           name="bcity"
                           placeholder="City"
                           value={formData?.bcity}
@@ -1677,12 +1800,16 @@ function Checkout() {
                           htmlFor="exampleInputEmail10"
                           className="form-label"
                         >
-                          {t("State")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span>
+                          {t("State")}{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
                         </label>
                         <input
                           type="text"
-                          className={`form-control ${validationBill?.bstate && "cusvalidate"
-                            }`}
+                          className={`form-control ${
+                            validationBill?.bstate && "cusvalidate"
+                          }`}
                           id="exampleInputEmail10"
                           required
                           name="bstate"
@@ -1696,19 +1823,21 @@ function Checkout() {
                         )}
                       </div>
 
-
-
                       <div className="mb-3 col-lg-6 col-md-6 col-sm-6">
                         <label
                           htmlFor="exampleInputEmail10"
                           className="form-label"
                         >
-                          {t("Country")} <span style={{ color: 'red', fontWeight: 'bold' }}>*</span>
+                          {t("Country")}{" "}
+                          <span style={{ color: "red", fontWeight: "bold" }}>
+                            *
+                          </span>
                         </label>
                         <input
                           type="text"
-                          className={`form-control ${validationBill?.country && "cusvalidate"
-                            }`}
+                          className={`form-control ${
+                            validationBill?.country && "cusvalidate"
+                          }`}
                           id="exampleInputEmail10"
                           required
                           name="bcountry"
@@ -1808,11 +1937,11 @@ function Checkout() {
                         className="btn btn-primary"
                         style={{ margin: "10px 0" }}
                         onClick={addresUpdate}
-                      // disabled={buttonDisabled}
+                        // disabled={buttonDisabled}
                       >
                         {t("Update Address")}
                       </button>
-
+                    ) : (
                       // <button
                       //   type="button"
                       //   className="btn btn-primary"
@@ -1823,14 +1952,22 @@ function Checkout() {
                       //   {t("Save Address")}
                       // </button>
 
-                    ) : (
                       <button
                         type="button"
                         className="btn btn-primary"
                         style={{ margin: "10px 0" }}
                         onClick={updateAddress}
                         // disabled={buttonDisabled}
-                        disabled={!formData?.bfirstname || !formData?.blastname || !formData?.baddressLine1 || !formData?.bzip || !formData?.bcity || !formData?.bcountry || !formData?.bstate || buttonDisabled}
+                        disabled={
+                          !formData?.bfirstname ||
+                          !formData?.blastname ||
+                          !formData?.baddressLine1 ||
+                          !formData?.bzip ||
+                          !formData?.bcity ||
+                          !formData?.bcountry ||
+                          !formData?.bstate ||
+                          buttonDisabled
+                        }
                       >
                         {t("Save Address")}
                       </button>
@@ -2061,7 +2198,6 @@ function Checkout() {
                     </form>
                   </div>
                 </div>
-
               )}
               <div className="time-slot d-none">
                 <div className="head-time">
@@ -2202,8 +2338,9 @@ function Checkout() {
                             onClick={() => {
                               changeIndex(i, item);
                             }}
-                            className={`wrapperDiv ${count == i && "activeNum"
-                              }`}
+                            className={`wrapperDiv ${
+                              count == i && "activeNum"
+                            }`}
                           >
                             <div className="selectPay">
                               <div className="form-check">
@@ -2250,19 +2387,28 @@ function Checkout() {
                       <div className="subTotal">
                         <h6>{t("IGST")}</h6>
                         <p>
-                          {currencySymbol} {cartDetail?.cart?.igst?.toFixed(2) ? cartDetail?.cart?.igst?.toFixed(2) : cartDetail?.cart?.tax?.toFixed(2)}
+                          {currencySymbol}{" "}
+                          {cartDetail?.cart?.igst?.toFixed(2)
+                            ? cartDetail?.cart?.igst?.toFixed(2)
+                            : cartDetail?.cart?.tax?.toFixed(2)}
                         </p>
                       </div>
                       <div className="subTotal">
                         <h6>{t("SGST")}</h6>
                         <p>
-                          {currencySymbol} {cartDetail?.cart?.sgst ? cartDetail?.cart?.sgst : '0'}
+                          {currencySymbol}{" "}
+                          {cartDetail?.cart?.sgst
+                            ? cartDetail?.cart?.sgst
+                            : "0"}
                         </p>
                       </div>
                       <div className="subTotal">
                         <h6>{t("CGST")}</h6>
                         <p>
-                          {currencySymbol} {cartDetail?.cart?.cgst ? cartDetail?.cart?.cgst : "0"}
+                          {currencySymbol}{" "}
+                          {cartDetail?.cart?.cgst
+                            ? cartDetail?.cart?.cgst
+                            : "0"}
                         </p>
                       </div>
                       {/* <div className="subTotal">
@@ -2407,39 +2553,81 @@ function Checkout() {
 
                     <div className="paymentMethods">
                       <h4 className="mt-2 mb-3">Payment </h4>
-                      <div className="paymentOp">
+                      <div className="paymentMethodList">
+                        {data1?.map((item) => {
+                          return (
+                            <div
+                              className="form-check paymentGatCheck"
+                              key={item?._id}
+                            >
+                              <input
+                                className="form-check-input"
+                                type="radio"
+                                name="flexRadioDefault"
+                                value={item?.paymentGat_method}
+                                checked={
+                                  paymentMode === item?.paymentGat_method
+                                }
+                                id={item?.paymentGat_method}
+                                onClick={cashDelevery}
+                              />
+                              <label
+                                className="form-check-label"
+                                htmlFor={item?.paymentGat_method}
+                              >
+                                <img
+                                  src={item?.log_url}
+                                  alt={item?.paymentGat_method}
+                                  title={item?.paymentGat_method}
+                                  className="paymentGatImg"
+                                />
+                                {item?.paymentGat_method}
+                              </label>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="paymentOp d-none">
                         <div className="form-group">
                           <button
                             // className={`btn ${paymentMode === "COD" ? "btn-primary" : "btn-outline-primary"}`}
-                            className={`commonButton btn bg-white ${paymentMode === "COD" ? "active" : ""
-                              }`}
+                            className={`commonButton btn bg-white ${
+                              paymentMode === "COD" ? "active" : ""
+                            }`}
                             type="button"
                             onClick={() => handlePaymentSelect("COD")}
                           >
-                            <RiSecurePaymentLine /> <span>Cash on Delivery</span>
+                            <RiSecurePaymentLine />{" "}
+                            <span>Cash on Delivery</span>
                           </button>
                         </div>
 
                         <div className="form-group d-none">
                           <button
                             // className={`btn ${paymentMode === "Card" ? "btn-secondary" : "btn-outline-secondary"}`}
-                            className={`commonButton btn bg-white ${paymentMode === "Razorpay" ? "active" : ""
-                              }`}
-
+                            className={`commonButton btn bg-white ${
+                              paymentMode === "Razorpay" ? "active" : ""
+                            }`}
                             type="button"
                             onClick={() => handlePaymentSelect("Card")}
                           >
-                            <RiSecurePaymentLine /> <span>Card on Delivery</span>
+                            <RiSecurePaymentLine />{" "}
+                            <span>Card on Delivery</span>
                           </button>
                         </div>
 
                         <div className="form-group">
                           <button
-                            className={`btn ${paymentMode === "Razorpay" ? "btn-warning" : "btn-outline-warning"}`}
+                            className={`btn ${
+                              paymentMode === "Razorpay"
+                                ? "btn-warning"
+                                : "btn-outline-warning"
+                            }`}
                             type="button"
                             onClick={() => handlePaymentSelect("Razorpay")}
                           >
-                            <RiSecurePaymentLine /> <span>Credit Card & Netbanking</span>
+                            <RiSecurePaymentLine />{" "}
+                            <span>Credit Card & Netbanking</span>
                           </button>
                         </div>
                       </div>
@@ -2522,8 +2710,9 @@ function Checkout() {
                       {isLogin == "true" ? (
                         <button
                           type="button"
-                          className={`btn btn-primary commonButton ${isPlaceOrderEnabled ? "enabled" : "disabled"
-                            }`}
+                          className={`btn btn-primary commonButton ${
+                            isPlaceOrderEnabled ? "enabled" : "disabled"
+                          }`}
                           // className="commonButton w-100 d-flex justify-content-center"
                           onClick={handlePlace}
                           // disabled={!cartDetail?.cart?.products?.length || !paymentMode}
@@ -2550,15 +2739,14 @@ function Checkout() {
         </div>
       </section>
 
-
       {showSuccessModal && (
         <SussessMsg
           plaecedData={
             plaecedData?.statusCode === 200
               ? plaecedData
-              : (checkoutData?.data?.statusCode === 201
-                ? checkoutData?.data
-                : '')
+              : checkoutData?.data?.statusCode === 201
+              ? checkoutData?.data
+              : ""
           }
           // plaecedData={
           //   plaecedData

@@ -58,7 +58,7 @@ const DiscoverKeras = () => {
       const res = await axios.get(`${baseUrl}blogs`);
       // console.log(res?.data);
       setBlogData(res?.data);
-    } catch (error) { }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const DiscoverKeras = () => {
               <div className="fisherman-content d-flex justify-content-between align-items-center">
                 {/* <h6>{t("Post From Blogs")}</h6> */}
                 <h3>{t("Our Latest News Update")}</h3>
-                <Link to="/blog" className="btn btn-primary">
+                <Link to="/blog" className="commonButton">
                   View All
                 </Link>
               </div>
@@ -109,21 +109,23 @@ const DiscoverKeras = () => {
                   >
                     <div className="discoverCard">
                       <div className="figure gg">
-                        <img
-                          src={item?.banner?.url}
-                          alt={item.title}
-                          className="img-fluid"
-                          title={item.title}
-                        />
+                        <Link to={`/blog-detail/${item.uid}/${item?._id}`}>
+                          <img
+                            src={item?.banner?.url}
+                            alt={item.title}
+                            className="img-fluid"
+                            title={item.title}
+                          />
+                        </Link>
                       </div>
                       <div className="text">
-                        <Link to={`/blog-detail/${item.uid}`}>
-                          <span>{t(`${item.title}`)}</span>
+                        <Link to={`/blog-detail/${item.uid}/${item?._id}`}>
+                          <h5>{t(`${item.title}`)}</h5>
                         </Link>
 
-                        <h5
+                        <p
                           dangerouslySetInnerHTML={{ __html: item.description }}
-                        ></h5>
+                        ></p>
                         <p>
                           {new Date(item.updatedAt).toLocaleString("en-GB", {
                             day: "2-digit",
